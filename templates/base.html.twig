@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 {#        {% block stylesheets %}#}
 {#            {{ encore_entry_link_tags('app') }}#}
@@ -18,9 +19,232 @@
         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
         <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+        <!-- Web Font -->
+        <link
+                href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+                rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+        <!-- ========================= CSS here ========================= -->
+        <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{asset('client/assets/css/LineIcons.2.0.css')}}" />
+        <link rel="stylesheet" href="{{ asset('client/assets/css/animate.css') }}" />
+        <link rel="stylesheet" href="{{ asset('client/assets/css/tiny-slider.css') }}" />
+        <link rel="stylesheet" href="{{asset('client/assets/css/glightbox.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('client/assets/css/main.css')}}" />
+
     </head>
     <body>
+
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="preloader-inner">
+                <div class="preloader-icon">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <!-- /End Preloader -->
+
+        <!-- Start Header Area -->
+        <header class="header navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="nav-inner">
+                            <nav class="navbar navbar-expand-lg">
+                                <a class="navbar-brand" href="{{ path('app_index') }}">
+                                    <img src="{{asset('client/assets/images/logo/logo.svg')}}" alt="Logo">
+                                </a>
+                                <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="toggler-icon"></span>
+                                    <span class="toggler-icon"></span>
+                                    <span class="toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                    <ul id="nav" class="navbar-nav ms-auto">
+                                        <li class="nav-item">
+                                            <a class=" active dd-menu collapsed" href="javascript:void(0)"
+                                               data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
+                                               aria-controls="navbarSupportedContent" aria-expanded="false"
+                                               aria-label="Toggle navigation">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ path('app_project_list') }}" aria-label="Toggle navigation">Projets</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class=" dd-menu collapsed" href="javascript:void(0)"
+                                               data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
+                                               aria-controls="navbarSupportedContent" aria-expanded="false"
+                                               aria-label="Toggle navigation">Categories</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class=" dd-menu collapsed" href="javascript:void(0)"
+                                               data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
+                                               aria-controls="navbarSupportedContent" aria-expanded="false"
+                                               aria-label="Toggle navigation">Carte projet</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class=" dd-menu collapsed" href="javascript:void(0)"
+                                               data-bs-toggle="collapse" data-bs-target="#submenu-1-5"
+                                               aria-controls="navbarSupportedContent" aria-expanded="false"
+                                               aria-label="Toggle navigation">A propos</a>
+                                            <ul class="sub-menu collapse" id="submenu-1-5">
+                                                <li class="nav-item"><a href="javascript:void(0)">Qui sommes nous?</a>
+                                                </li>
+                                                <li class="nav-item"><a href="javascript:void(0)">Contact</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div> <!-- navbar collapse -->
+                                <div class="login-button">
+                                    <ul>
+                                        <li>
+                                            <a href="{{ path('login') }}"><i class="lni lni-enter"></i> Login</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{path('app_register')}}"><i class="lni lni-user"></i> Register</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                    <div class="button header-button">
+                                        <a href="javascript:void(0)" class="btn">Ajouter un projet</a>
+                                    </div>
+                            </nav> <!-- navbar -->
+                        </div>
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </header>
+        <!-- End Header Area -->
         {% block body %}{% endblock %}
+
+        <!-- Start Footer Area -->
+        <footer class="footer">
+            <!-- Start Footer Top -->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer mobile-app">
+                                <h3>Mobile Apps</h3>
+                                <div class="app-button">
+                                    <a href="javascript:void(0)" class="btn">
+                                        <i class="lni lni-play-store"></i>
+                                        <span class="text">
+                                        <span class="small-text">Get It On</span>
+                                        Google Play
+                                    </span>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn">
+                                        <i class="lni lni-apple"></i>
+                                        <span class="text">
+                                        <span class="small-text">Get It On</span>
+                                        App Store
+                                    </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-link">
+                                <h3>Locations</h3>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">Chicago</a></li>
+                                            <li><a href="javascript:void(0)">New York City</a></li>
+                                            <li><a href="javascript:void(0)">San Francisco</a></li>
+                                            <li><a href="javascript:void(0)">Washington</a></li>
+                                            <li><a href="javascript:void(0)">Boston</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12">
+                                        <ul>
+                                            <li><a href="javascript:void(0)">Los Angeles</a></li>
+                                            <li><a href="javascript:void(0)">Seattle</a></li>
+                                            <li><a href="javascript:void(0)">Las Vegas</a></li>
+                                            <li><a href="javascript:void(0)">San Diego</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-link">
+                                <h3>Quick Links</h3>
+                                <ul>
+                                    <li><a href="javascript:void(0)">About Us</a></li>
+                                    <li><a href="javascript:void(0)">How It's Works</a></li>
+                                    <li><a href="javascript:void(0)">Login</a></li>
+                                    <li><a href="javascript:void(0)">Signup</a></li>
+                                    <li><a href="javascript:void(0)">Help & Support</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-contact">
+                                <h3>Contact</h3>
+                                <ul>
+                                    <li>23 New Design Str, Lorem Upsum 10<br> Hudson Yards, USA</li>
+                                    <li>Tel. +(123) 1800-567-8990 <br> Mail. support@classigrids.com</li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ End Footer Middle -->
+            <!-- Start Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="inner">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content">
+                                    <ul class="footer-bottom-links">
+                                        <li><a href="javascript:void(0)">Terms of use</a></li>
+                                        <li><a href="javascript:void(0)"> Privacy Policy</a></li>
+                                        <li><a href="javascript:void(0)">Advanced Search</a></li>
+                                        <li><a href="javascript:void(0)">Site Map</a></li>
+                                        <li><a href="javascript:void(0)">Information</a></li>
+                                    </ul>
+                                    <p class="copyright-text">Designed and Developed by <a href="https://graygrids.com/"
+                                                                                           rel="nofollow" target="_blank">GrayGrids</a>
+                                    </p>
+                                    <ul class="footer-social">
+                                        <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Middle -->
+        </footer>
+        <!--/ End Footer Area -->
+
+        <!-- ========================= scroll-top ========================= -->
+        <a href="#" class="scroll-top btn-hover">
+            <i class="lni lni-chevron-up"></i>
+        </a>
 
 
         <!-- Flashy depends on jQuery -->
@@ -29,5 +253,43 @@
         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
         <!-- Include Flashy default partial -->
         {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+        <!-- ========================= JS here ========================= -->
+        <script src="{{ asset('client/assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{asset('client/assets/js/wow.min.js')}}"></script>
+        <script src="{{asset('client/assets/js/tiny-slider.js')}}"></script>
+        <script src="{{asset('client/assets/js/glightbox.min.js')}}"></script>
+        <script src="{{asset('client/assets/js/main.js')}}"></script>
+        <script type="text/javascript">
+            //========= Category Slider
+            tns({
+                container: '.category-slider',
+                items: 3,
+                slideBy: 'page',
+                autoplay: false,
+                mouseDrag: true,
+                gutter: 0,
+                nav: false,
+                controls: true,
+                controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    540: {
+                        items: 2,
+                    },
+                    768: {
+                        items: 4,
+                    },
+                    992: {
+                        items: 5,
+                    },
+                    1170: {
+                        items: 6,
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
