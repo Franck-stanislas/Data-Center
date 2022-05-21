@@ -12,8 +12,22 @@
 {#        {% block javascripts %}#}
 {#            {{ encore_entry_script_tags('app') }}#}
 {#        {% endblock %}#}
+
+        <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+        <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+        <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
     </head>
     <body>
         {% block body %}{% endblock %}
+
+
+        <!-- Flashy depends on jQuery -->
+        <script src="//code.jquery.com/jquery.js"></script>
+        <!-- Load Flashy default JavaScript -->
+        <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+        <!-- Include Flashy default partial -->
+        {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
     </body>
 </html>
