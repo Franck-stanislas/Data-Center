@@ -15,7 +15,9 @@ class FinancementType extends AbstractType
         $builder
             ->add('nom_financement', TextType::class, [
                 'label' => false,
-                'class' => 'form-control form-control-sm col-12',
+                'attr' => [
+                    'class' => 'form-control form-control-sm col-12',
+                ]
             ])
         ;
     }
