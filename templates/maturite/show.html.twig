@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maturite{% endblock %}
+
+{% block body %}
+    <h1>Maturite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ maturite.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_maturite</th>
+                <td>{{ maturite.nomMaturite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_maturite_index') }}">back to list</a>
+
+    <a href="{{ path('app_maturite_edit', {'id': maturite.id}) }}">edit</a>
+
+    {{ include('maturite/_delete_form.html.twig') }}
+{% endblock %}

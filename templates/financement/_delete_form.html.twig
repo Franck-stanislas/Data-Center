@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_financement_delete', {'id': financement.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette élément?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ financement.id) }}">
+    <button class="btn btn-sm" style="margin-left:10%;  margin-top: -55px">
+        <i class='btn bx bx-trash bx-sm text-danger' ></i>
+    </button>
+</form>

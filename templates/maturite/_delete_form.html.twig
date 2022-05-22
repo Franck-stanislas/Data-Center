@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_maturite_delete', {'id': maturite.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette élément?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ maturite.id) }}">
+    <button class="btn btn-sm">
+        <i class='btn bx bx-trash bx-sm text-danger' style="margin-top: -20px;"></i>
+    </button>
+</form>

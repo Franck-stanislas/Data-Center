@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Maturite;
+use App\Form\MaturiteType;
+use App\Repository\MaturiteRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('admin/maturite')]
+class MaturiteController extends AbstractController
+{
+    public function __construct(FlashyNotifier $flashy)
+    {
+        $this->flashy = $flashy;
+    }
+
+    #[Route('/', name: 'app_maturite_index', methods: ['GET'])]
+    public function index(MaturiteRepository $maturiteRepository): Response
+    {
+        return $this->render('maturite/index.html.twig', [
+            'maturites' => $maturiteRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/new', name: 'app_maturite_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, MaturiteRepository $maturiteRepository): Response
+    {
+        $maturite = new Maturite();
+        $form = $this->createForm(MaturiteType::class, $maturite);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $maturiteRepository->add($maturite, true);
+            $this->flashy->success('Nouvelle maturité ajoutée');
+            return $this->redirectToRoute('app_maturite_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('maturite/new.html.twig', [
+            'maturite' => $maturite,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_maturite_show', methods: ['GET'])]
+    public function show(Maturite $maturite): Response
+    {
+        return $this->render('maturite/show.html.twig', [
+            'maturite' => $maturite,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_maturite_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Maturite $maturite, MaturiteRepository $maturiteRepository): Response
+    {
+        $form = $this->createForm(MaturiteType::class, $maturite);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $maturiteRepository->add($maturite, true);
+            $this->flashy->success('Nouvelle maturité mis à jour');
+            return $this->redirectToRoute('app_maturite_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('maturite/edit.html.twig', [
+            'maturite' => $maturite,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_maturite_delete', methods: ['POST'])]
+    public function delete(Request $request, Maturite $maturite, MaturiteRepository $maturiteRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$maturite->getId(), $request->request->get('_token'))) {
+            $maturiteRepository->remove($maturite, true);
+            $this->flashy->success(' Maturité supprimée');
+        }
+
+        return $this->redirectToRoute('app_maturite_index', [], Response::HTTP_SEE_OTHER);
+    }
+}

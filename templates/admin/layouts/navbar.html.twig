@@ -127,6 +127,109 @@
                     </ul>
                 </div>
             </li>
+
+            <li class="nav-item">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                      data-bs-toggle="collapse" data-bs-target="#submenu-maturite">
+                    <span>
+                        <span class="sidebar-icon">
+                            <svg class="icon icon-xs me-2 text-white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm11-6h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 6h-4V5h4v4zm-9 4H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm-1 6H5v-4h4v4zm8-6c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4s-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2s2 .897 2 2s-.897 2-2 2z"/></svg>
+                        </span>
+                        <span class="sidebar-text">Maturité</span>
+                    </span>
+                    <span class="link-arrow">
+                        <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                </span>
+                <div class="multi-level collapse " role="list" id="submenu-maturite" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ path('app_maturite_new')}}">
+                                <span class="sidebar-text">New</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ path('app_maturite_index')}}">
+                                <span class="sidebar-text">List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                      data-bs-toggle="collapse" data-bs-target="#submenu-financement">
+                    <span>
+                        <span class="sidebar-icon">
+                            <i class='bx bxs-bank text-white'></i>
+                        </span>
+                        <span class="sidebar-text">Financement</span>
+                    </span>
+                    <span class="link-arrow">
+                        <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                </span>
+                <div class="multi-level collapse " role="list" id="submenu-financement" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ path('app_financement_new')}}">
+                                <span class="sidebar-text">New</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ path('app_financement_index')}}">
+                                <span class="sidebar-text">List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                      data-bs-toggle="collapse" data-bs-target="#submenu-statut">
+                    <span>
+                        <span class="sidebar-icon">
+                            <i class='bx bx-info-circle text-white'></i>
+                        </span>
+                        <span class="sidebar-text">Statut de projet</span>
+                    </span>
+                    <span class="link-arrow">
+                        <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                </span>
+                <div class="multi-level collapse " role="list" id="submenu-statut" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ path('app_statut_new')}}">
+                                <span class="sidebar-text">New</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ path('app_statut_index')}}">
+                                <span class="sidebar-text">List</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
             <li class="nav-item">
                 <a href="../../pages/dashboard/dashboard.html" class="nav-link">
