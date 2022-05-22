@@ -75,4 +75,10 @@ class CategorieController extends AbstractController
 
         return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    /* return all catergories */
+    public function getCategories(CategorieRepository $categorieRepository): Response
+    {
+        return $this->json($categorieRepository->findAll());
+    }
 }
