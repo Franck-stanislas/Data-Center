@@ -179,6 +179,14 @@ const App = () => {
                     </div>
                 </div>
             </form>}
+
+            <div className="d-flex justify-content-center">
+                <div className="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setStep((step) => step - 1)}>Prev</button>
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setStep((step) => step + 1)}>Next</button>
+                </div>
+            </div>
+
         </>
     );
 };
