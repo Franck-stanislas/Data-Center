@@ -15,91 +15,38 @@ class Departement
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $code_dept;
-
     #[ORM\Column(type: 'string', length: 255)]
-    private $nom_dept;
+    private $nom;
 
-    #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'code_dept')]
+    #[ORM\ManyToOne(targetEntity: Region::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $code_region;
-
-    #[ORM\OneToMany(mappedBy: 'code_dept', targetEntity: Arrondissement::class)]
-    private $code_cec;
-
-    public function __construct()
-    {
-        $this->code_cec = new ArrayCollection();
-    }
+    private $region;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCodeDept(): ?int
+    public function getNom(): ?string
     {
-        return $this->code_dept;
+        return $this->nom;
     }
 
-    public function setCodeDept(int $code_dept): self
+    public function setNom(string $nom): self
     {
-        $this->code_dept = $code_dept;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getNomDept(): ?string
+    public function getRegion(): ?Region
     {
-        return $this->nom_dept;
+        return $this->region;
     }
 
-    public function setNomDept(string $nom_dept): self
+    public function setRegion(?Region $region): self
     {
-        $this->nom_dept = $nom_dept;
-
-        return $this;
-    }
-
-    public function getCodeRegion(): ?Region
-    {
-        return $this->code_region;
-    }
-
-    public function setCodeRegion(?Region $code_region): self
-    {
-        $this->code_region = $code_region;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Arrondissement>
-     */
-    public function getCodeCec(): Collection
-    {
-        return $this->code_cec;
-    }
-
-    public function addCodeCec(Arrondissement $codeCec): self
-    {
-        if (!$this->code_cec->contains($codeCec)) {
-            $this->code_cec[] = $codeCec;
-            $codeCec->setCodeDept($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCodeCec(Arrondissement $codeCec): self
-    {
-        if ($this->code_cec->removeElement($codeCec)) {
-            // set the owning side to null (unless already changed)
-            if ($codeCec->getCodeDept() === $this) {
-                $codeCec->setCodeDept(null);
-            }
-        }
+        $this->region = $region;
 
         return $this;
     }

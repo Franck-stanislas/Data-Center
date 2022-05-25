@@ -1,4 +1,31 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="col-12 col-xl-8">
+    <div class="card card-body border-0 shadow mb-4">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Nom de la catégorie</label>
+                    {{ form_widget(form.nom_categorie) }}
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Image</label>
+                    {{ form_widget(form.imageFile) }}
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button class="btn btn-gray-800 mt-2 me-5 animate-up-2" type="submit">
+                <i class='bx bx-save me-1'></i>
+                {{ button_label|default('Enregistrer') }}
+            </button>
+            <a href="{{ path('app_financement_index') }} " class="btn btn-gray-800 mt-2 animate-up-2">
+                <i class='bx bx-arrow-back me-1'></i> Retour à la liste
+            </a>
+
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+

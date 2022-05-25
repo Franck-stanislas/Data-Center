@@ -4,6 +4,7 @@ import axios from "axios";
 const Localisation = () => {
 
     const [regions, setRegions] = useState([]);
+    const [departements, setDepartements] = useState([]);
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/regions')
@@ -15,16 +16,26 @@ const Localisation = () => {
         });
     }, []);
 
+    useEffect(() => {
+        axios.get('https://127.0.0.1:8000/api/departements')
+            .then(response => {
+                setDepartements(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <form className="container">
-            {JSON.stringify(regions)}
+            {JSON.stringify(departements)}
             <div className="d-block mt-4 mb-md-0">
                 <p className="mb-0">Origine du projet.</p>
 
                 <div className="mb-4 mt-2">
                     <label className="my-1 me-2" htmlFor="country">Region</label>
                     <select className="form-select" id="country" aria-label="Default select example">
-                        <option selected="">Open this select menu</option>
+                        <option selected="">Veuillez choisir une region</option>
                         {regions.map(region => (
                             <option key={region.id} value={region.id}>{region.nom}</option>
                         ))}
@@ -33,10 +44,10 @@ const Localisation = () => {
                 <div className="mb-4 mt-2">
                     <label className="my-1 me-2" htmlFor="country">Département</label>
                     <select className="form-select" id="country" aria-label="Default select example">
-                        <option selected="">Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option selected=""> Choisir un département</option>
+                        {departements.map(departement => (
+                            <option key={departement.id} value={departement.id}>{departement.nom}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="mb-4 mt-2">

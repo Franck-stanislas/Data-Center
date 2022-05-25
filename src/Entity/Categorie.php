@@ -24,7 +24,7 @@ class Categorie
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      */
     #[Vich\UploadableField(mapping: 'categorie_image', fileNameProperty: 'imageName')]
-    #[Assert\Image(maxSize:"8M", maxSizeMessage:"La taille de l'image est trop grande. Taille maximal accordée est {{limit}} {{suffix}} ")]
+    #[Assert\Image(maxSize:"8M")]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

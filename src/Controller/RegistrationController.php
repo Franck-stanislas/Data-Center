@@ -48,16 +48,16 @@ class RegistrationController extends AbstractController
             $this->flashy->success('Le compte a bien été créer!');
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('datacenter@gmail.com', 'MINDDEVEL Data Center'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
+//            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+//                (new TemplatedEmail())
+//                    ->from(new Address('datacenter@gmail.com', 'MINDDEVEL Data Center'))
+//                    ->to($user->getEmail())
+//                    ->subject('Please Confirm your Email')
+//                    ->htmlTemplate('registration/confirmation_email.html.twig')
+//            );
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register.html.twig', [

@@ -67,10 +67,10 @@
                                 <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                     <ul id="nav" class="navbar-nav ms-auto">
                                         <li class="nav-item">
-                                            <a class=" active dd-menu collapsed" href="javascript:void(0)"
+                                            <a class=" active dd-menu collapsed" href="{{ path('app_index')}}"
                                                data-bs-toggle="collapse" data-bs-target="#submenu-1-1"
                                                aria-controls="navbarSupportedContent" aria-expanded="false"
-                                               aria-label="Toggle navigation">Home</a>
+                                               aria-label="Toggle navigation">Accueil</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="{{ path('app_project_list') }}" aria-label="Toggle navigation">Projets</a>
@@ -93,7 +93,7 @@
                                             <a class=" dd-menu collapsed" href="javascript:void(0)"
                                                data-bs-toggle="collapse" data-bs-target="#submenu-1-5"
                                                aria-controls="navbarSupportedContent" aria-expanded="false"
-                                               aria-label="Toggle navigation">A propos</a>
+                                               aria-label="Toggle navigation" >A propos</a>
                                             <ul class="sub-menu collapse" id="submenu-1-5">
                                                 <li class="nav-item"><a href="javascript:void(0)">Qui sommes nous?</a>
                                                 </li>
@@ -133,20 +133,13 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer mobile-app">
-                                <h3>Mobile Apps</h3>
+                                <h3>Centre de Données du <br> Ministère de la Décentralisation et du Développement Local</h3>
                                 <div class="app-button">
-                                    <a href="javascript:void(0)" class="btn">
-                                        <i class="lni lni-play-store"></i>
+                                    <a href=" https://www.google.com/maps/search/lonkak+yaounde+sous+prefecture/@3.8789854,11.5087975,15z" class="btn">
+                                        <i><img src="{{ asset('client/assets/images/logo/logo1.svg')}}" alt=""></i>
                                         <span class="text">
-                                        <span class="small-text">Get It On</span>
-                                        Google Play
-                                    </span>
-                                    </a>
-                                    <a href="javascript:void(0)" class="btn">
-                                        <i class="lni lni-apple"></i>
-                                        <span class="text">
-                                        <span class="small-text">Get It On</span>
-                                        App Store
+                                        <span class="small-text">DATA CENTER</span>
+                                        MINDDEVEL
                                     </span>
                                     </a>
                                 </div>
@@ -156,23 +149,12 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
-                                <h3>Locations</h3>
+                                <h3>Travaillez Avec Nous</h3>
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="col-lg-12 col-md-12 col-12">
                                         <ul>
-                                            <li><a href="javascript:void(0)">Chicago</a></li>
-                                            <li><a href="javascript:void(0)">New York City</a></li>
-                                            <li><a href="javascript:void(0)">San Francisco</a></li>
-                                            <li><a href="javascript:void(0)">Washington</a></li>
-                                            <li><a href="javascript:void(0)">Boston</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-12">
-                                        <ul>
-                                            <li><a href="javascript:void(0)">Los Angeles</a></li>
-                                            <li><a href="javascript:void(0)">Seattle</a></li>
-                                            <li><a href="javascript:void(0)">Las Vegas</a></li>
-                                            <li><a href="javascript:void(0)">San Diego</a></li>
+                                            <li><a href=" https://www.minddevel.gov.cm/index.php/marches/">Consultez nos marchés</a></li>
+                                            <li><a href="javascript:void(0)">Appel d'offres et conditions générales</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -182,24 +164,23 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
-                                <h3>Quick Links</h3>
+                                <h3>Liens Rapides</h3>
                                 <ul>
-                                    <li><a href="javascript:void(0)">About Us</a></li>
-                                    <li><a href="javascript:void(0)">How It's Works</a></li>
-                                    <li><a href="javascript:void(0)">Login</a></li>
-                                    <li><a href="javascript:void(0)">Signup</a></li>
-                                    <li><a href="javascript:void(0)">Help & Support</a></li>
+                                    <li><a href="javascript:void(0)">A Propos</a></li>
+                                    <li><a href="{{ path('login') }}">Connexion</a></li>
+                                    <li><a href="{{  path('app_register') }}">S'inscrire</a></li>
                                 </ul>
                             </div>
                             <!-- End Single Widget -->
                         </div>
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
-                            <div class="single-footer f-contact">
+                            <div class="single-footer f-link">
                                 <h3>Contact</h3>
                                 <ul>
-                                    <li>23 New Design Str, Lorem Upsum 10<br> Hudson Yards, USA</li>
-                                    <li>Tel. +(123) 1800-567-8990 <br> Mail. support@classigrids.com</li>
+                                    <li class="text-white">Carrefour Nlongkak<br> Yaoundé, CAMEROUN</li>
+                                    <li class="text-white"><a href="tel:(+237) 222 213 99"> Téléphone : (+237) 222 213 992</a> </li>
+                                    <li><a href="mailto:contact@minddevel.gov.cm" class="text-decoration-none ">Email : contact@minddevel.gov.cm</a></li>
                                 </ul>
                             </div>
                             <!-- End Single Widget -->
@@ -215,22 +196,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="content">
-                                    <ul class="footer-bottom-links">
-                                        <li><a href="javascript:void(0)">Terms of use</a></li>
-                                        <li><a href="javascript:void(0)"> Privacy Policy</a></li>
-                                        <li><a href="javascript:void(0)">Advanced Search</a></li>
-                                        <li><a href="javascript:void(0)">Site Map</a></li>
-                                        <li><a href="javascript:void(0)">Information</a></li>
-                                    </ul>
-                                    <p class="copyright-text">Designed and Developed by <a href="https://graygrids.com/"
-                                                                                           rel="nofollow" target="_blank">GrayGrids</a>
+                                    <p class="copyright-text">Designé and Developpé par
+                                        <a href="https://www.minddevel.gov.cm" rel="nofollow" target="_blank">MINDDEVEL</a>
                                     </p>
-                                    <ul class="footer-social">
-                                        <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                        <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                                        <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                        <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>

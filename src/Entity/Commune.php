@@ -6,15 +6,12 @@ use App\Repository\CommuneRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommuneRepository::class)]
-class Commune
+class   Commune
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
-    #[ORM\Column(type: 'integer')]
-    private $code_cec;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $localite;
@@ -25,29 +22,17 @@ class Commune
     #[ORM\Column(type: 'string', length: 255)]
     private $code;
 
-    #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'code_cec')]
+    #[ORM\ManyToOne(targetEntity: Region::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $code_region;
+    private $region;
 
-    #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'code_cec')]
+    #[ORM\ManyToOne(targetEntity: Arrondissement::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $code_ctd;
+    private $arrondissement;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCodeCec(): ?int
-    {
-        return $this->code_cec;
-    }
-
-    public function setCodeCec(int $code_cec): self
-    {
-        $this->code_cec = $code_cec;
-
-        return $this;
     }
 
     public function getLocalite(): ?string
@@ -86,26 +71,26 @@ class Commune
         return $this;
     }
 
-    public function getCodeRegion(): ?Region
+    public function getRegion(): ?Region
     {
-        return $this->code_region;
+        return $this->region;
     }
 
-    public function setCodeRegion(?Region $code_region): self
+    public function setRegion(?Region $region): self
     {
-        $this->code_region = $code_region;
+        $this->region = $region;
 
         return $this;
     }
 
-    public function getCodeCtd(): ?Arrondissement
+    public function getArrondissement(): ?Arrondissement
     {
-        return $this->code_ctd;
+        return $this->arrondissement;
     }
 
-    public function setCodeCtd(?Arrondissement $code_ctd): self
+    public function setArrondissement(?Arrondissement $arrondissement): self
     {
-        $this->code_ctd = $code_ctd;
+        $this->arrondissement = $arrondissement;
 
         return $this;
     }

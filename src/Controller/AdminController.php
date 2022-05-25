@@ -14,11 +14,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 // *
 // * @IsGranted("ROLE_ADMIN")
 // */
+#[Route('/admin')]
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/', name: 'admin')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
+    }
+
+    #[Route('/profil', name: 'app_profil')]
+    public function profil(): Response
+    {
+        return $this->render('admin/profil.html.twig');
     }
 }

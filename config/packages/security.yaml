@@ -43,9 +43,8 @@ security:
                 interval: '15 minutes'
             logout:
                 path: app_logout
-
                 # where to redirect after logout
-                target: home
+                target: login
             remember_me:
                 secret: '%kernel.secret%' # required
                 lifetime: 604800

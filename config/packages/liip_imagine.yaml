@@ -19,3 +19,5 @@ liip_imagine:
                     mode: outbound
                     upscale: true
 
+    twig:
+        mode: lazy

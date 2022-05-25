@@ -4,7 +4,8 @@
 
 {% block body %}
 <main class="content">
-    {% include 'admin/layouts/admin.menu.html.twig' %}
+    {{ include ('admin/layouts/admin.menu.html.twig') }}
+    {{ include('admin/layouts/navbar.html.twig')}}
     <div id="root"></div>
 </main>
 {% endblock %}
