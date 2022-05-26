@@ -22,7 +22,7 @@ class CategorieType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'allow_delete' => true,
-                'delete_label' => '...',
+                'delete_label' => 'Supprimer?',
                 'download_uri' => false,
                 'imagine_pattern' => 'squared_thumbnail_medium'
             ])

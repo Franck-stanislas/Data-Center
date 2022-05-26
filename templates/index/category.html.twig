@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Categorie de projets' %}
+
+{% block body %}
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Catégorie</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="{{ path('app_index') }}">Home</a></li>
+                        <li>Liste de catégories</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="category-page section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-12">
+                    <div class="category-grid-list">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="category-grid-topbar">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <h3 class="title">Affiché 1-9 sur {{categorie|length}} catégories trouvé</h3>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                    <button class="nav-link" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="false"><i class="lni lni-grid-alt"></i></button>
+                                                    <button class="nav-link active" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="true"><i class="lni lni-list"></i></button>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if categorie|length > 0 %}
+                                    <div class="tab-content" id="nav-tabContent">
+                                    {% for row in categorie|batch(9) %}
+                                        <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                                            <div class="row">
+                                                {% for categorie in row %}
+                                                <div class="col-lg-4 col-md-6 col-12">
+                                                    <div class="single-item-grid">
+                                                        <div class="image">
+                                                            <a href="#">
+    {#                                                            <img src="{{ asset('client/assets/images/items-grid/img1.jpg')}}" alt="#">#}
+                                                                <img src="{{(categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('uploads/categorie/placeholer.png')) | imagine_filter('squared_thumbnail_small')}}" alt="{{ categorie.imageName }}">
+                                                            </a>
+                                                            <i class=" cross-badge lni lni-bolt"></i>
+                                                        </div>
+                                                        <div class="content">
+                                                            <h3 class="title">
+                                                                <a href="#">{{ categorie.nomCategorie }}</a>
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="pagination left">
+                                                        <ul class="pagination-list">
+                                                            {{ knp_pagination_render(categorie) }}
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+                                        <div class="row">
+                                            {% for categorie in row%}
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                <div class="single-item-grid">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-lg-5 col-md-7 col-12">
+                                                            <div class="image">
+                                                                <a href="#"><img src="{{(categorie.imageName ? vich_uploader_asset(categorie) : asset('uploads/categorie/placeholer.png')) | imagine_filter('squared_thumbnail_small')}}" alt="{{ categorie.imageName }}"></a>
+                                                                <i class=" cross-badge lni lni-bolt"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-7 col-md-5 col-12">
+                                                            <div class="content">
+                                                                <h3 class="title">
+                                                                    <a href="#">{{ categorie.nomCategorie }}</a>
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+
+                                                <div class="pagination left">
+                                                    <ul class="pagination-list">
+                                                        {{ knp_pagination_render(categorie) }}
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

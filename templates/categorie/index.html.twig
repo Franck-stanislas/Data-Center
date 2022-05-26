@@ -51,7 +51,8 @@
                                 <td>{{ categorie.id }}</td>
                                 <td>{{ categorie.nomCategorie }}</td>
                                 <td>
-                                    <img src="{{ vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ categorie.nomCategorie }}">
+                                    <img src="{{(categorie.imageName ? vich_uploader_asset(categorie) : asset('uploads/categorie/placeholer.png')) | imagine_filter('squared_thumbnail_small')}}" class="card-img-top img-thumbnail" height="80" alt="{{ categorie.imageName }}">
+{#                                    <img src="{{ vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ categorie.nomCategorie }}">#}
                                 </td>
                                 <td>
                                     <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="me-3" >

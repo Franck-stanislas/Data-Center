@@ -9,7 +9,7 @@ liip_imagine:
                 thumbnail:
                     size: [300, 300]
                     mode: outbound
-                    upscale: true
+                    allow_upscale: true
 
         squared_thumbnail_small:
             data_loader: doctrine_phpcr
@@ -17,7 +17,7 @@ liip_imagine:
                 thumbnail:
                     size: [ 200, 200 ]
                     mode: outbound
-                    upscale: true
+                    allow_upscale: true
 
     twig:
         mode: lazy

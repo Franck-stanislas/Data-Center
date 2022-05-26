@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
 class Categorie
 {
@@ -30,7 +31,7 @@ class Categorie
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageName;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime', nullable:true)]
     private ?\DateTimeInterface $updatedAt = null;
 
 
