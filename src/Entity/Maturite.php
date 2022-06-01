@@ -21,9 +21,13 @@ class Maturite
     #[ORM\OneToMany(mappedBy: 'id_maturite', targetEntity: EltMaturite::class)]
     private $eltMaturites;
 
+    #[ORM\OneToMany(mappedBy: 'maturite', targetEntity: Projet::class)]
+    private $projet;
+
     public function __construct()
     {
         $this->eltMaturites = new ArrayCollection();
+        $this->projet = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,36 @@ class Maturite
             // set the owning side to null (unless already changed)
             if ($eltMaturite->getIdMaturite() === $this) {
                 $eltMaturite->setIdMaturite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjet(): Collection
+    {
+        return $this->projet;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projet->contains($projet)) {
+            $this->projet[] = $projet;
+            $projet->setMaturite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projet->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getMaturite() === $this) {
+                $projet->setMaturite(null);
             }
         }
 

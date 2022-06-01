@@ -6,10 +6,17 @@ use App\Entity\Maturite;
 use App\Form\MaturiteType;
 use App\Repository\MaturiteRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * Require ROLE_ADMIN for all the actions of this controller
+ *
+ * @IsGranted("ROLE_ADMIN")
+ */
 
 #[Route('admin/maturite')]
 class MaturiteController extends AbstractController
@@ -22,6 +29,11 @@ class MaturiteController extends AbstractController
     #[Route('/', name: 'app_maturite_index', methods: ['GET'])]
     public function index(MaturiteRepository $maturiteRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         return $this->render('maturite/index.html.twig', [
             'maturites' => $maturiteRepository->findAll(),
         ]);
@@ -30,6 +42,11 @@ class MaturiteController extends AbstractController
     #[Route('/new', name: 'app_maturite_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MaturiteRepository $maturiteRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         $maturite = new Maturite();
         $form = $this->createForm(MaturiteType::class, $maturite);
         $form->handleRequest($request);
@@ -49,6 +66,11 @@ class MaturiteController extends AbstractController
     #[Route('/{id}', name: 'app_maturite_show', methods: ['GET'])]
     public function show(Maturite $maturite): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         return $this->render('maturite/show.html.twig', [
             'maturite' => $maturite,
         ]);
@@ -57,6 +79,11 @@ class MaturiteController extends AbstractController
     #[Route('/{id}/edit', name: 'app_maturite_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Maturite $maturite, MaturiteRepository $maturiteRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         $form = $this->createForm(MaturiteType::class, $maturite);
         $form->handleRequest($request);
 
@@ -75,6 +102,11 @@ class MaturiteController extends AbstractController
     #[Route('/{id}', name: 'app_maturite_delete', methods: ['POST'])]
     public function delete(Request $request, Maturite $maturite, MaturiteRepository $maturiteRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$maturite->getId(), $request->request->get('_token'))) {
             $maturiteRepository->remove($maturite, true);
             $this->flashy->success(' Maturité supprimée');

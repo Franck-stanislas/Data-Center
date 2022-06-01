@@ -18,13 +18,17 @@ class Arrondissement
     #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
-    #[ORM\ManyToOne(targetEntity: Departement::class)]
+    #[ORM\ManyToOne(targetEntity: Departement::class, inversedBy: 'arrondissements')]
     #[ORM\JoinColumn(nullable: false)]
-    private $dept;
+    private $departement;
 
-    #[ORM\ManyToOne(targetEntity: Region::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $region;
+    #[ORM\OneToMany(mappedBy: 'arrondissement', targetEntity: Commune::class)]
+    private $communes;
+
+    public function __construct()
+    {
+        $this->communes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -43,26 +47,44 @@ class Arrondissement
         return $this;
     }
 
-    public function getDept(): ?Departement
+    public function getDepartement(): ?Departement
     {
-        return $this->dept;
+        return $this->departement;
     }
 
-    public function setDept(?Departement $dept): self
+    public function setDepartement(?Departement $departement): self
     {
-        $this->dept = $dept;
+        $this->departement = $departement;
 
         return $this;
     }
 
-    public function getRegion(): ?Region
+    /**
+     * @return Collection<int, Commune>
+     */
+    public function getCommunes(): Collection
     {
-        return $this->region;
+        return $this->communes;
     }
 
-    public function setRegion(?Region $region): self
+    public function addCommune(Commune $commune): self
     {
-        $this->region = $region;
+        if (!$this->communes->contains($commune)) {
+            $this->communes[] = $commune;
+            $commune->setArrondissement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommune(Commune $commune): self
+    {
+        if ($this->communes->removeElement($commune)) {
+            // set the owning side to null (unless already changed)
+            if ($commune->getArrondissement() === $this) {
+                $commune->setArrondissement(null);
+            }
+        }
 
         return $this;
     }

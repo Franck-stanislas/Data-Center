@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -33,6 +35,14 @@ class Categorie
 
     #[ORM\Column(type: 'datetime', nullable:true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'secteur', targetEntity: Projet::class, orphanRemoval: true)]
+    private $projet;
+
+    public function __construct()
+    {
+        $this->projet = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -79,6 +89,36 @@ class Categorie
     public function setImageName(?string $imageName): self
     {
         $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjet(): Collection
+    {
+        return $this->projet;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projet->contains($projet)) {
+            $this->projet[] = $projet;
+            $projet->setSecteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projet->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getSecteur() === $this) {
+                $projet->setSecteur(null);
+            }
+        }
 
         return $this;
     }

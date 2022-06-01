@@ -18,9 +18,17 @@ class Departement
     #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
-    #[ORM\ManyToOne(targetEntity: Region::class)]
+    #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'departements')]
     #[ORM\JoinColumn(nullable: false)]
     private $region;
+
+    #[ORM\OneToMany(mappedBy: 'departement', targetEntity: Arrondissement::class)]
+    private $arrondissements;
+
+    public function __construct()
+    {
+        $this->arrondissements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -47,6 +55,36 @@ class Departement
     public function setRegion(?Region $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Arrondissement>
+     */
+    public function getArrondissements(): Collection
+    {
+        return $this->arrondissements;
+    }
+
+    public function addArrondissement(Arrondissement $arrondissement): self
+    {
+        if (!$this->arrondissements->contains($arrondissement)) {
+            $this->arrondissements[] = $arrondissement;
+            $arrondissement->setDepartement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArrondissement(Arrondissement $arrondissement): self
+    {
+        if ($this->arrondissements->removeElement($arrondissement)) {
+            // set the owning side to null (unless already changed)
+            if ($arrondissement->getDepartement() === $this) {
+                $arrondissement->setDepartement(null);
+            }
+        }
 
         return $this;
     }

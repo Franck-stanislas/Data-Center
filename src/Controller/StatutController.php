@@ -6,10 +6,17 @@ use App\Entity\Statut;
 use App\Form\StatutType;
 use App\Repository\StatutRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * Require ROLE_ADMIN for all the actions of this controller
+ *
+ * @IsGranted("ROLE_ADMIN")
+ */
 
 #[Route('admin/statut')]
 class StatutController extends AbstractController
@@ -22,6 +29,11 @@ class StatutController extends AbstractController
     #[Route('/', name: 'app_statut_index', methods: ['GET'])]
     public function index(StatutRepository $statutRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         return $this->render('statut/index.html.twig', [
             'statuts' => $statutRepository->findAll(),
         ]);
@@ -30,6 +42,11 @@ class StatutController extends AbstractController
     #[Route('/new', name: 'app_statut_new', methods: ['GET', 'POST'])]
     public function new(Request $request, StatutRepository $statutRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         $statut = new Statut();
         $form = $this->createForm(StatutType::class, $statut);
         $form->handleRequest($request);
@@ -49,6 +66,11 @@ class StatutController extends AbstractController
     #[Route('/{id}', name: 'app_statut_show', methods: ['GET'])]
     public function show(Statut $statut): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         return $this->render('statut/show.html.twig', [
             'statut' => $statut,
         ]);
@@ -57,6 +79,11 @@ class StatutController extends AbstractController
     #[Route('/{id}/edit', name: 'app_statut_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Statut $statut, StatutRepository $statutRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         $form = $this->createForm(StatutType::class, $statut);
         $form->handleRequest($request);
 
@@ -75,6 +102,11 @@ class StatutController extends AbstractController
     #[Route('/{id}', name: 'app_statut_delete', methods: ['POST'])]
     public function delete(Request $request, Statut $statut, StatutRepository $statutRepository): Response
     {
+        if(! $this->getUser()){
+            $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
+            return $this->redirectToRoute('login');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$statut->getId(), $request->request->get('_token'))) {
             $statutRepository->remove($statut, true);
             $this->flashy->success('Statut supprimé');

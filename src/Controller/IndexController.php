@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CategorieRepository;
+use App\Repository\StatutRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,15 +14,21 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(): Response
+    public function index(CategorieRepository $categorieRepository, StatutRepository $statut): Response
     {
-        return $this->render('index/index.html.twig');
+        return $this->render('index/index.html.twig', [
+            'categories' => $categorieRepository->findAll(),
+            'statuts' => $statut->findAll(),
+        ]);
     }
 
     #[Route('/list-project', name: 'app_project_list')]
-    public function listProject(): Response
+    public function listProject(CategorieRepository $categorieRepository, StatutRepository $statut): Response
     {
-        return $this->render('index/list-project.html.twig');
+        return $this->render('index/list-project.html.twig', [
+            'categories' => $categorieRepository->findAll(),
+            'statuts' => $statut->findAll(),
+        ]);
     }
 
     #[Route('/category', name: 'app_project_category')]

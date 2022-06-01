@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommuneRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommuneRepository::class)]
@@ -22,13 +24,16 @@ class   Commune
     #[ORM\Column(type: 'string', length: 255)]
     private $code;
 
-    #[ORM\ManyToOne(targetEntity: Region::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private $region;
-
-    #[ORM\ManyToOne(targetEntity: Arrondissement::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'communes')]
     private $arrondissement;
+
+    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'commune')]
+    private $projets;
+
+    public function __construct()
+    {
+        $this->projets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -71,18 +76,6 @@ class   Commune
         return $this;
     }
 
-    public function getRegion(): ?Region
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?Region $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
     public function getArrondissement(): ?Arrondissement
     {
         return $this->arrondissement;
@@ -91,6 +84,33 @@ class   Commune
     public function setArrondissement(?Arrondissement $arrondissement): self
     {
         $this->arrondissement = $arrondissement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjets(): Collection
+    {
+        return $this->projets;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->addCommune($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projets->removeElement($projet)) {
+            $projet->removeCommune($this);
+        }
 
         return $this;
     }
