@@ -1,12 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
 const OtherInfo = () => {
+
+    const [statuts, setStatuts] = useState(false);
+
+    useEffect(() => {
+        axios.get('https://127.0.0.1:8000/api/status')
+            .then(response => {
+                setStatuts(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
+
     return (
         <form className="container">
             <div className="d-block mt-4 mb-md-0">
                 <p className="mb-4">Autres informations.</p>
 
                 <div className="row container">
+                    {statuts.map(statut => (
+                        <div className="form-check col-lg-4 col-sm-6">
+                            <input className="form-check-input" type="radio" value="" id="nom" />
+                            <label className="form-check-label" htmlFor="defaultCheck10">
+                                Idée de projet
+                            </label>
+                        </div>
+                    ))}
                     <div className="form-check col-lg-4 col-sm-6">
                         <input className="form-check-input" type="checkbox" value="" id="defaultCheck10" />
                         <label className="form-check-label" htmlFor="defaultCheck10">

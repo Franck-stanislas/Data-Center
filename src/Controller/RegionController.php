@@ -10,6 +10,7 @@ use App\Repository\CategorieRepository;
 use App\Repository\CommuneRepository;
 use App\Repository\DepartementRepository;
 use App\Repository\RegionRepository;
+use App\Repository\StatutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,5 +49,23 @@ class RegionController extends AbstractController
 
         return $this->json($communes, 200);
     }
+
+    #[Route('/categories', name:'categorie_list', methods: ['GET'])]
+    public function showCategorie(CategorieRepository $categorieRepository): Response
+    {
+        $categories = $categorieRepository->findAll();
+
+        return $this->json($categories, 200);
+    }
+
+    #[Route('/status', name:'status_list', methods: ['GET'])]
+    public function showStatus(StatutRepository $statutRepository): Response
+    {
+        $statuts = $statutRepository->findAll();
+
+        return $this->json($statuts, 200);
+    }
+
+
 
 }
