@@ -8,12 +8,12 @@ const Localisation = () => {
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/regions')
-        .then(response => {
-            setRegions(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(response => {
+                setRegions(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }, []);
 
     useEffect(() => {
@@ -26,6 +26,17 @@ const Localisation = () => {
             });
     }, []);
 
+    const handleRegionChange = (event) => {
+        const value = event.target.value;
+        axios.get(`https://127.0.0.1:8000/api/regions/${value}/departements`)
+            .then(response => {
+                setDepartements(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     return (
         <form className="container">
             {JSON.stringify(departements)}
@@ -34,7 +45,8 @@ const Localisation = () => {
 
                 <div className="mb-4 mt-2">
                     <label className="my-1 me-2" htmlFor="country">Region</label>
-                    <select className="form-select" id="country" aria-label="Default select example">
+                    <select className="form-select" id="country" aria-label="Default select example"
+                            onChange={handleRegionChange}>
                         <option selected="">Veuillez choisir une region</option>
                         {regions.map(region => (
                             <option key={region.id} value={region.id}>{region.nom}</option>
