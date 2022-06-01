@@ -6,6 +6,7 @@ use App\Repository\CommuneRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: CommuneRepository::class)]
 class   Commune
@@ -24,10 +25,10 @@ class   Commune
     #[ORM\Column(type: 'string', length: 255)]
     private $code;
 
-    #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'communes')]
+    #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'communes'), Ignore]
     private $arrondissement;
 
-    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'commune')]
+    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'commune'), Ignore]
     private $projets;
 
     public function __construct()

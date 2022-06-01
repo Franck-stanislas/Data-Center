@@ -13,6 +13,7 @@ use App\Repository\RegionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 #[Route('/api')]
 class RegionController extends AbstractController
@@ -26,25 +27,24 @@ class RegionController extends AbstractController
     }
 
     #[Route('/regions/{region<[0-9]+>}/departements', name:'departement_list', methods: ['GET'])]
-    public function showDepartement(DepartementRepository $departementRepository, Region $region): Response
+    public function showDepartement(Region $region): Response
     {
-        $departements = $departementRepository->findBy (['region_id'=>$region->getId()]);
+        $departements = $region->getDepartements();
 
         return $this->json($departements, 200);
     }
 
     #[Route('/departements/{departement<[0-9]+>}/arrondissements', name:'arrondissement_list', methods: ['GET'])]
-    public function showArrondissement(ArrondissementRepository $arrondissementRepository, Departement $departement): Response
+    public function showArrondissement(Departement $departement): Response
     {
-        $arrondissements = $arrondissementRepository->findBy(['id' => $departement->getId()]);
-
+        $arrondissements = $departement->getArrondissements();
         return $this->json($arrondissements, 200);
     }
 
     #[Route('/arrondissements/{arrondissement<[0-9]+>}/communes', name:'commune_list', methods: ['GET'])]
-    public function showCommune(CommuneRepository $communeRepository, Arrondissement $arrondissement): Response
+    public function showCommune(Arrondissement $arrondissement): Response
     {
-        $communes = $communeRepository->findBy(['id' => $arrondissement->getId()]);
+        $communes = $arrondissement->getCommunes();
 
         return $this->json($communes, 200);
     }

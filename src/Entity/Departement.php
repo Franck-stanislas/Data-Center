@@ -6,6 +6,7 @@ use App\Repository\DepartementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: DepartementRepository::class)]
 class Departement
@@ -22,7 +23,7 @@ class Departement
     #[ORM\JoinColumn(nullable: false)]
     private $region;
 
-    #[ORM\OneToMany(mappedBy: 'departement', targetEntity: Arrondissement::class)]
+    #[ORM\OneToMany(mappedBy: 'departement', targetEntity: Arrondissement::class), Ignore]
     private $arrondissements;
 
     public function __construct()
