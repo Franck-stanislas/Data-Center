@@ -20,6 +20,9 @@ class EltMaturite
     #[ORM\JoinColumn(nullable: true)]
     private $id_maturite;
 
+    #[ORM\ManyToOne(targetEntity: Projet::class, inversedBy: 'eltsMaturite')]
+    private $projet;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class EltMaturite
     public function setIdMaturite(?Maturite $id_maturite): self
     {
         $this->id_maturite = $id_maturite;
+
+        return $this;
+    }
+
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(?Projet $projet): self
+    {
+        $this->projet = $projet;
 
         return $this;
     }

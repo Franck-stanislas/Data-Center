@@ -46,9 +46,13 @@ class Projet
     #[ORM\ManyToMany(targetEntity: Commune::class, inversedBy: 'projets')]
     private $commune;
 
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: EltMaturite::class)]
+    private $eltsMaturite;
+
     public function __construct()
     {
         $this->commune = new ArrayCollection();
+        $this->eltsMaturite = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,6 +176,36 @@ class Projet
     public function removeCommune(Commune $commune): self
     {
         $this->commune->removeElement($commune);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EltMaturite>
+     */
+    public function getEltsMaturite(): Collection
+    {
+        return $this->eltsMaturite;
+    }
+
+    public function addEltsMaturite(EltMaturite $eltsMaturite): self
+    {
+        if (!$this->eltsMaturite->contains($eltsMaturite)) {
+            $this->eltsMaturite[] = $eltsMaturite;
+            $eltsMaturite->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEltsMaturite(EltMaturite $eltsMaturite): self
+    {
+        if ($this->eltsMaturite->removeElement($eltsMaturite)) {
+            // set the owning side to null (unless already changed)
+            if ($eltsMaturite->getProjet() === $this) {
+                $eltsMaturite->setProjet(null);
+            }
+        }
 
         return $this;
     }

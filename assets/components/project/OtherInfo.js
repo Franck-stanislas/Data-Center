@@ -3,7 +3,58 @@ import axios from "axios";
 
 const OtherInfo = () => {
 
-    const [statuts, setStatuts] = useState(false);
+    const [statuts, setStatuts] = useState([]);
+    const [maturites, setMaturites] = useState([]);
+    const [elements, setElements] = useState([]);
+    const [financements, setFinancements] = useState([]);
+    const [type, setType] = useState("");
+    const [infos, setInfos] = useState({
+        maturite: null,
+        status: '',
+        eltsMaturite: [],
+        statuts: [],
+        financements: [],
+    });
+
+    const handleChange = (e) => {
+        // check if is checkbox input
+        if(e.target.type === "checkbox") {
+            const { value, checked } = e.target;
+            if (checked) {
+                setInfos((prevState) => ({
+                    ...prevState,
+                    [e.target.name]: [...prevState[e.target.name], value],
+                }));
+            }
+            else {
+                setInfos((prevState) => ({
+                    ...prevState,
+                    [e.target.name]: prevState[e.target.name].filter((elt) => elt !== value),
+                }));
+            }
+        } else {
+            setInfos((prevState) => ({
+                ...prevState,
+                [e.target.name]: e.target.value
+            }));
+        }
+    }
+
+    const handleChangeMaturite = (e) => {
+        const [id, type] = e.target.value.split('-');
+        axios.get(`https://127.0.0.1:8000/api/maturite/${id}/elts`)
+            .then(response => {
+                setElements(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        setInfos((prevState) => ({
+            ...prevState,
+            maturite: id
+        }));
+        setType(type);
+    }
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/status')
@@ -15,68 +66,78 @@ const OtherInfo = () => {
             });
     }, []);
 
+    useEffect(() => {
+        axios.get('https://127.0.0.1:8000/api/maturite')
+            .then(response => {
+                setMaturites(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get('https://127.0.0.1:8000/api/financements')
+            .then(response => {
+                setFinancements(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
 
     return (
         <form className="container">
             <div className="d-block mt-4 mb-md-0">
                 <p className="mb-4">Autres informations.</p>
-
+                {JSON.stringify(infos)}
                 <div className="row container">
-                    {statuts.map(statut => (
-                        <div className="form-check col-lg-4 col-sm-6">
-                            <input className="form-check-input" type="radio" value="" id="nom" />
-                            <label className="form-check-label" htmlFor="defaultCheck10">
-                                Idée de projet
+                    {maturites.map(maturite => (
+                        <div className="form-check col-lg-4 col-sm-6" key={maturite.id}>
+                            <input className="form-check-input" type="radio" id={maturite.id} value={`${maturite.id}-${maturite.type}`} name="maturite" onChange={handleChangeMaturite} />
+                            <label className="form-check-label" htmlFor={maturite.id}>
+                                {maturite.nomMaturite}
                             </label>
                         </div>
                     ))}
-                    <div className="form-check col-lg-4 col-sm-6">
-                        <input className="form-check-input" type="checkbox" value="" id="defaultCheck10" />
-                        <label className="form-check-label" htmlFor="defaultCheck10">
-                            Idée de projet
-                        </label>
-                    </div>
-                    <div className="form-check col-lg-4 col-sm-6">
-                        <input className="form-check-input" type="checkbox" value="" id="defaultCheck10" />
-                        <label className="form-check-label" htmlFor="defaultCheck10">
-                            En cours de maturité
-                        </label>
-                    </div>
-                    <div className="form-check col-lg-4 col-sm-6">
-                        <input className="form-check-input" type="checkbox" value="" id="defaultCheck10" />
-                        <label className="form-check-label" htmlFor="defaultCheck10">
-                            Mature
-                        </label>
-                    </div>
                 </div>
 
-                <div className="mb-4 mt-2">
-                    <label className="my-1 me-2" htmlFor="country">Intitulé</label>
-                    <input type="text" className="form-control" id="email"/>
-                </div>
-                <div className="mb-4 mt-2">
-                    <label className="my-1 me-2" htmlFor="country">Secteur</label>
-                    <select className="form-select" id="country" aria-label="Default select example">
-                        <option selected="">Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div className="mb-4 mt-2">
-                    <label className="my-1 me-2" htmlFor="country">Objectis</label>
-                    <textarea className="form-control" placeholder="Enter your message..." id="textarea"
-                              rows="4"></textarea>
-                </div>
-                <div className="mb-4 mt-2">
-                    <label className="my-1 me-2" htmlFor="country">Resultats attendus</label>
-                    <textarea className="form-control" placeholder="Enter your message..." id="textarea"
-                              rows="4"></textarea>
-                </div>
-                <div className="mb-4 mt-2">
-                    <label className="my-1 me-2" htmlFor="country">Coût estimatif</label>
-                    <input type="number" className="form-control" id="email"/>
-                </div>
+                {(type === 'mature' || type === 'encours') && <>
+                    <p className="mb-4">Elts de maturite.</p>
+                    <div className="row container">
+                        {elements.map(elt => (
+                            <div className="form-check col-lg-4 col-sm-6" key={elt.id}>
+                                <input className="form-check-input" type="checkbox" id={elt.id} value={elt.id} name="eltsMaturite" onChange={handleChange} />
+                                <label className="form-check-label" htmlFor={elt.id}>
+                                    {elt.nom}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="mb-4">Status.</p>
+                    <div className="row container">
+                        {statuts.map(statut => (
+                            <div className="form-check col-lg-4 col-sm-6" key={statut.id}>
+                                <input className="form-check-input" type="checkbox" id={statut.id} value={statut.id} name="status" onChange={handleChange} />
+                                <label className="form-check-label" htmlFor={statut.id}>
+                                    {statut.nom}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                    <p className="mb-4">Financement.</p>
+                    <div className="row container">
+                        {financements.map(financement => (
+                            <div className="form-check col-lg-4 col-sm-6" key={financement.id}>
+                                <input className="form-check-input" type="checkbox" id={financement.id} value={financement.id} name="financements" onChange={handleChange} />
+                                <label className="form-check-label" htmlFor={financement.id}>
+                                    {financement.nomFinancement}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </>}
             </div>
         </form>
     );

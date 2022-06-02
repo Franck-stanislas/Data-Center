@@ -72,4 +72,5 @@ class Statut
 
         return $this;
     }
+
 }

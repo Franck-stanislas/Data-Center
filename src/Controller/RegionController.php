@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Arrondissement;
 use App\Entity\Departement;
+use App\Entity\Maturite;
 use App\Entity\Region;
 use App\Repository\ArrondissementRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\CommuneRepository;
 use App\Repository\DepartementRepository;
+use App\Repository\FinancementRepository;
+use App\Repository\MaturiteRepository;
 use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,6 +68,32 @@ class RegionController extends AbstractController
 
         return $this->json($statuts, 200);
     }
+
+    #[Route('/maturite', name:'maturite_list', methods: ['GET'])]
+    public function showMaturite(MaturiteRepository $maturiteRepository): Response
+    {
+        $maturites = $maturiteRepository->findAll();
+
+        return $this->json($maturites, 200);
+    }
+
+    #[Route('/maturite/{maturite<[0-9]+>}/elts', name:'maturite_elts', methods: ['GET'])]
+    public function showMaturiteElts(Maturite $maturite): Response
+    {
+        $elts = $maturite->getEltMaturites();
+
+        return $this->json($elts, 200);
+    }
+
+    #[Route('/financements', name:'financement_list', methods: ['GET'])]
+    public function showFinancements(FinancementRepository $financementRepository): Response
+    {
+        $financements = $financementRepository->findAll();
+
+        return $this->json($financements, 200);
+    }
+
+
 
 
 
