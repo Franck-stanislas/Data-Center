@@ -39,20 +39,21 @@ class Projet
     #[ORM\JoinColumn(nullable: false)]
     private $statut;
 
-    #[ORM\ManyToOne(targetEntity: Financement::class, inversedBy: 'financement_projet')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $financement;
+    #[ORM\ManyToMany(targetEntity: EltMaturite::class, inversedBy: 'projets')]
+    private $eltsMaturite;
 
-    #[ORM\ManyToMany(targetEntity: Commune::class, inversedBy: 'projets')]
+    #[ORM\ManyToOne(targetEntity: Commune::class, inversedBy: 'projets')]
+    #[ORM\JoinColumn(nullable: false)]
     private $commune;
 
-    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: EltMaturite::class)]
-    private $eltsMaturite;
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Financement::class)]
+    private $financements;
+
 
     public function __construct()
     {
-        $this->commune = new ArrayCollection();
         $this->eltsMaturite = new ArrayCollection();
+        $this->financements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,41 +145,6 @@ class Projet
         return $this;
     }
 
-    public function getFinancement(): ?Financement
-    {
-        return $this->financement;
-    }
-
-    public function setFinancement(?Financement $financement): self
-    {
-        $this->financement = $financement;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commune>
-     */
-    public function getCommune(): Collection
-    {
-        return $this->commune;
-    }
-
-    public function addCommune(Commune $commune): self
-    {
-        if (!$this->commune->contains($commune)) {
-            $this->commune[] = $commune;
-        }
-
-        return $this;
-    }
-
-    public function removeCommune(Commune $commune): self
-    {
-        $this->commune->removeElement($commune);
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, EltMaturite>
@@ -192,7 +158,6 @@ class Projet
     {
         if (!$this->eltsMaturite->contains($eltsMaturite)) {
             $this->eltsMaturite[] = $eltsMaturite;
-            $eltsMaturite->setProjet($this);
         }
 
         return $this;
@@ -200,10 +165,47 @@ class Projet
 
     public function removeEltsMaturite(EltMaturite $eltsMaturite): self
     {
-        if ($this->eltsMaturite->removeElement($eltsMaturite)) {
+        $this->eltsMaturite->removeElement($eltsMaturite);
+
+        return $this;
+    }
+
+    public function getCommune(): ?Commune
+    {
+        return $this->commune;
+    }
+
+    public function setCommune(?Commune $commune): self
+    {
+        $this->commune = $commune;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Financement>
+     */
+    public function getFinancements(): Collection
+    {
+        return $this->financements;
+    }
+
+    public function addFinancement(Financement $financement): self
+    {
+        if (!$this->financements->contains($financement)) {
+            $this->financements[] = $financement;
+            $financement->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFinancement(Financement $financement): self
+    {
+        if ($this->financements->removeElement($financement)) {
             // set the owning side to null (unless already changed)
-            if ($eltsMaturite->getProjet() === $this) {
-                $eltsMaturite->setProjet(null);
+            if ($financement->getProjet() === $this) {
+                $financement->setProjet(null);
             }
         }
 
