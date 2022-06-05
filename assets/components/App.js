@@ -3,9 +3,22 @@ import {Stepper} from '@mantine/core';
 import Localisation from "./project/Localisation";
 import ProjectInfo from "./project/ProjectInfo";
 import OtherInfo from "./project/OtherInfo";
+import axios from "axios";
 
 const App = () => {
     const [step, setStep] = useState(0);
+    const [project, setProject] = useState({});
+
+    const save = () => {
+        alert("save");
+        axios.post('https://127.0.0.1:8000/api/project/save', project)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
     return (
         <>
@@ -51,16 +64,17 @@ const App = () => {
                 />
             </Stepper>
 
-            {step === 0 && <Localisation/>}
+            {step === 0 && <Localisation setProject={setProject}/>}
 
-            {step === 1 && <ProjectInfo/>}
+            {step === 1 && <ProjectInfo setProject={setProject}/>}
 
-            {step === 2 && <OtherInfo/>}
+            {step === 2 && <OtherInfo setProject={setProject} />}
 
             <div className="d-flex justify-content-center">
                 <div className="btn-group" role="group" aria-label="Basic outlined example">
-                    <button type="button" className="btn btn-outline-primary" onClick={() => setStep((step) => step - 1)}>Prev</button>
-                    <button type="button" className="btn btn-outline-primary" onClick={() => setStep((step) => step + 1)}>Next</button>
+                    <button type="button" className="btn btn-outline-primary" onClick={() => setStep((step) => step === 0 ? step : step - 1)}>Prev</button>
+                    {step !== 2 && <button type="button" className="btn btn-outline-primary" onClick={() => setStep((step) => step === 2 ? step : step + 1)}>Next</button>}
+                    {step === 2 && <button type="button" className="btn btn-outline-secondary" onClick={save}>Save</button>}
                 </div>
             </div>
 

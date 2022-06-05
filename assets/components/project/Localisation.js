@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-const Localisation = () => {
+const Localisation = ({setProject}) => {
 
     const [regions, setRegions] = useState([]);
     const [departements, setDepartements] = useState([]);
@@ -51,6 +51,11 @@ const Localisation = () => {
             });
     }
 
+    const handleCommuneChange = (event) => {
+        const value = event.target.value;
+        setProject((project) => ({...project, commune: +value}));
+    }
+
 
     return (<form className="container">
         <div className="d-block mt-4 mb-md-0">
@@ -84,7 +89,7 @@ const Localisation = () => {
             </div>
             <div className="mb-4 mt-2">
                 <label className="my-1 me-2" htmlFor="country">Commune</label>
-                <select className="form-select" id="country" aria-label="Default select example">
+                <select className="form-select" id="country" aria-label="Default select example" onChange={handleCommuneChange}>
                     <option selected="">Choisir une commune</option>
                     {communes.map(commune => (
                         <option key={commune.id} value={commune.id}>{commune.libelle}</option>))}

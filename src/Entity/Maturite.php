@@ -28,10 +28,14 @@ class Maturite
     #[ORM\Column(type: 'string', length: 255)]
     private $type;
 
+    #[ORM\ManyToMany(targetEntity: Financement::class, inversedBy: 'maturites'), Ignore]
+    private $financements;
+
     public function __construct()
     {
         $this->eltMaturites = new ArrayCollection();
         $this->projet = new ArrayCollection();
+        $this->financements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,18 +68,6 @@ class Maturite
         if (!$this->eltMaturites->contains($eltMaturite)) {
             $this->eltMaturites[] = $eltMaturite;
             $eltMaturite->setIdMaturite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEltMaturite(EltMaturite $eltMaturite): self
-    {
-        if ($this->eltMaturites->removeElement($eltMaturite)) {
-            // set the owning side to null (unless already changed)
-            if ($eltMaturite->getIdMaturite() === $this) {
-                $eltMaturite->setIdMaturite(null);
-            }
         }
 
         return $this;
@@ -119,6 +111,30 @@ class Maturite
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Financement>
+     */
+    public function getFinancements(): Collection
+    {
+        return $this->financements;
+    }
+
+    public function addFinancement(Financement $financement): self
+    {
+        if (!$this->financements->contains($financement)) {
+            $this->financements[] = $financement;
+        }
+
+        return $this;
+    }
+
+    public function removeFinancement(Financement $financement): self
+    {
+        $this->financements->removeElement($financement);
 
         return $this;
     }

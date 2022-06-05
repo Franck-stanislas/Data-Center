@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-const OtherInfo = () => {
+const OtherInfo = (props) => {
 
     const [statuts, setStatuts] = useState([]);
     const [maturites, setMaturites] = useState([]);
@@ -23,19 +23,19 @@ const OtherInfo = () => {
             if (checked) {
                 setInfos((prevState) => ({
                     ...prevState,
-                    [e.target.name]: [...prevState[e.target.name], value],
+                    [e.target.name]: [...prevState[e.target.name], +value],
                 }));
             }
             else {
                 setInfos((prevState) => ({
                     ...prevState,
-                    [e.target.name]: prevState[e.target.name].filter((elt) => elt !== value),
+                    [e.target.name]: prevState[e.target.name].filter((elt) => elt !== +value),
                 }));
             }
         } else {
             setInfos((prevState) => ({
                 ...prevState,
-                [e.target.name]: e.target.value
+                [e.target.name]: +e.target.value
             }));
         }
     }
@@ -49,12 +49,24 @@ const OtherInfo = () => {
             .catch(error => {
                 console.log(error);
             });
+
+        axios.get(`https://127.0.0.1:8000/api/maturite/${id}/financements`)
+            .then(response => {
+                setFinancements(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
         setInfos((prevState) => ({
             ...prevState,
-            maturite: id
+            maturite: +id
         }));
         setType(type);
     }
+
+    useEffect(() => {
+        props.setProject((prevProject) => ({...prevProject, ...infos}));
+    }, [infos])
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/status')
@@ -70,16 +82,6 @@ const OtherInfo = () => {
         axios.get('https://127.0.0.1:8000/api/maturite')
             .then(response => {
                 setMaturites(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }, []);
-
-    useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/financements')
-            .then(response => {
-                setFinancements(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -151,6 +153,21 @@ const OtherInfo = () => {
                         ))}
                     </div>
                 </>}
+
+                {(type === 'idee') && <>
+                    <p className="mb-4">Financement.</p>
+                    <div className="row container">
+                        {financements.map(financement => (
+                            <div className="form-check col-lg-4 col-sm-6" key={financement.id}>
+                                <input className="form-check-input" type="checkbox" id={financement.id} value={financement.id} name="financements" onChange={handleChange} />
+                                <label className="form-check-label" htmlFor={financement.id}>
+                                    {financement.nomFinancement}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </>}
+
             </div>
         </form>
     );

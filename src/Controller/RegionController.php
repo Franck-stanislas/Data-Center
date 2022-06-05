@@ -5,16 +5,21 @@ namespace App\Controller;
 use App\Entity\Arrondissement;
 use App\Entity\Departement;
 use App\Entity\Maturite;
+use App\Entity\Projet;
 use App\Entity\Region;
 use App\Repository\ArrondissementRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\CommuneRepository;
 use App\Repository\DepartementRepository;
+use App\Repository\EltMaturiteRepository;
 use App\Repository\FinancementRepository;
 use App\Repository\MaturiteRepository;
+use App\Repository\ProjetRepository;
 use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -22,6 +27,10 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 #[Route('/api')]
 class RegionController extends AbstractController
 {
+    public function __construct(FlashyNotifier $flashy)
+    {
+        $this->flashy = $flashy;
+    }
 
     #[Route('/regions', name:'region_list', methods: ['GET'])]
     public function list(RegionRepository $regionRepository): Response
@@ -85,12 +94,45 @@ class RegionController extends AbstractController
         return $this->json($elts, 200);
     }
 
-    #[Route('/financements', name:'financement_list', methods: ['GET'])]
-    public function showFinancements(FinancementRepository $financementRepository): Response
+    #[Route('/maturite/{maturite<[0-9]+>}/financements', name:'financement_list', methods: ['GET'])]
+    public function showFinancements(Maturite $maturite): Response
     {
-        $financements = $financementRepository->findAll();
+        $financements = $maturite->getFinancements();
 
         return $this->json($financements, 200);
+    }
+
+    #[Route('/project/save', name:'project_save', methods: ['POST'])]
+    public function saveProject(
+        ProjetRepository $projectRepository,
+        CommuneRepository $communeRepository,
+        CategorieRepository $categorieRepository,
+        StatutRepository $statutRepository,
+        MaturiteRepository $maturiteRepository,
+        FinancementRepository $financementRepository,
+        EltMaturiteRepository $eltMaturiteRepository,
+        Request $request): Response {
+        // get data of request
+        $data = json_decode($request->getContent(), true);
+        $projet = new Projet();
+        $projet->setCommune($communeRepository->find($data['commune']));
+        $projet->setSecteur($categorieRepository->find($data['secteur']));
+        $projet->setCouts($data['couts']);
+        $projet->setResultats($data['resultats']);
+        $projet->setObjectifs($data['objectifs']);
+        $projet->setInstitule($data['institule']);
+        $projet->setMaturite($maturiteRepository->find($data['maturite']));
+        $projet->setStatut($statutRepository->find($data['status'][0]));
+        foreach ($data['financements'] as $financement) {
+            $projet->addFinancement($financementRepository->find($financement));
+        }
+        foreach ($data['eltsMaturite'] as $maturite) {
+            $projet->addEltsMaturite($eltMaturiteRepository->find($maturite));
+        }
+        // save project
+        $projectRepository->add($projet, true);
+        $this->flashy->success('Nouvelle maturité ajoutée');
+        return $this->json("ok", 200);
     }
 
 

@@ -1,22 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-const ProjectInfo = () => {
+const ProjectInfo = (props) => {
 
     const [project, setProject] = useState({
         institule: '',
         secteur: '',
         couts: 0,
         resultats: '',
-        objectifs: '',
-
-
+        objectifs: ''
     });
     const [categories, setCategories] = useState([]);
 
     const handleChange = (e) => {
-        setProject((prevState) => ({...prevState, [e.target.id]: e.target.value}));
+        setProject((prevState) => ({...prevState, [e.target.id]: e.target.value}), );
     }
+
+    useEffect(() => {
+        props.setProject((prevProject) => ({...prevProject, ...project, secteur: +project.secteur, couts: +project.couts}));
+    }, [project])
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/categories')

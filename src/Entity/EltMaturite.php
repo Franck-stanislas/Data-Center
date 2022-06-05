@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EltMaturiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EltMaturiteRepository::class)]
@@ -20,8 +22,13 @@ class EltMaturite
     #[ORM\JoinColumn(nullable: true)]
     private $id_maturite;
 
-    #[ORM\ManyToOne(targetEntity: Projet::class, inversedBy: 'eltsMaturite')]
-    private $projet;
+    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'eltsMaturite')]
+    private $projets;
+
+    public function __construct()
+    {
+        $this->projets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,14 +59,29 @@ class EltMaturite
         return $this;
     }
 
-    public function getProjet(): ?Projet
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjets(): Collection
     {
-        return $this->projet;
+        return $this->projets;
     }
 
-    public function setProjet(?Projet $projet): self
+    public function addProjet(Projet $projet): self
     {
-        $this->projet = $projet;
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->addEltsMaturite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projets->removeElement($projet)) {
+            $projet->removeEltsMaturite($this);
+        }
 
         return $this;
     }

@@ -28,13 +28,14 @@ class   Commune
     #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'communes'), Ignore]
     private $arrondissement;
 
-    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'commune'), Ignore]
+    #[ORM\OneToMany(mappedBy: 'commune', targetEntity: Projet::class)]
     private $projets;
 
     public function __construct()
     {
         $this->projets = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -101,7 +102,7 @@ class   Commune
     {
         if (!$this->projets->contains($projet)) {
             $this->projets[] = $projet;
-            $projet->addCommune($this);
+            $projet->setCommune($this);
         }
 
         return $this;
@@ -110,7 +111,10 @@ class   Commune
     public function removeProjet(Projet $projet): self
     {
         if ($this->projets->removeElement($projet)) {
-            $projet->removeCommune($this);
+            // set the owning side to null (unless already changed)
+            if ($projet->getCommune() === $this) {
+                $projet->setCommune(null);
+            }
         }
 
         return $this;

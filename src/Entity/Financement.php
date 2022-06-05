@@ -6,6 +6,7 @@ use App\Repository\FinancementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: FinancementRepository::class)]
 class Financement
@@ -18,12 +19,15 @@ class Financement
     #[ORM\Column(type: 'string', length: 255)]
     private $nom_financement;
 
-    #[ORM\OneToMany(mappedBy: 'financement', targetEntity: Projet::class)]
+    #[ORM\ManyToMany(targetEntity: Maturite::class, mappedBy: 'financements'), Ignore]
+    private $maturites;
+
+    #[ORM\ManyToOne(targetEntity: Projet::class, inversedBy: 'financements')]
     private $projet;
 
     public function __construct()
     {
-        $this->projet = new ArrayCollection();
+        $this->maturites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,32 +47,42 @@ class Financement
         return $this;
     }
 
+
     /**
-     * @return Collection<int, Projet>
+     * @return Collection<int, Maturite>
      */
-    public function getProjet(): Collection
+    public function getMaturites(): Collection
     {
-        return $this->projet;
+        return $this->maturites;
     }
 
-    public function addProjet(Projet $projet): self
+    public function addMaturite(Maturite $maturite): self
     {
-        if (!$this->projet->contains($projet)) {
-            $this->projet[] = $projet;
-            $projet->setFinancement($this);
+        if (!$this->maturites->contains($maturite)) {
+            $this->maturites[] = $maturite;
+            $maturite->addFinancement($this);
         }
 
         return $this;
     }
 
-    public function removeProjet(Projet $projet): self
+    public function removeMaturite(Maturite $maturite): self
     {
-        if ($this->projet->removeElement($projet)) {
-            // set the owning side to null (unless already changed)
-            if ($projet->getFinancement() === $this) {
-                $projet->setFinancement(null);
-            }
+        if ($this->maturites->removeElement($maturite)) {
+            $maturite->removeFinancement($this);
         }
+
+        return $this;
+    }
+
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(?Projet $projet): self
+    {
+        $this->projet = $projet;
 
         return $this;
     }
