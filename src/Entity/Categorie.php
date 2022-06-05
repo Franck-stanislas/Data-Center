@@ -27,7 +27,7 @@ class Categorie
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      */
     #[Vich\UploadableField(mapping: 'categorie_image', fileNameProperty: 'imageName')]
-    #[Assert\Image(maxSize:"8M")]
+    #[Assert\Image(maxSize:"8M", mimeTypes: ['image/*'], mimeTypesMessage: "Mauvais type de fichier, format pris en charge  PNG|JPEG|JPG|*")]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -38,6 +38,16 @@ class Categorie
 
     #[ORM\OneToMany(mappedBy: 'secteur', targetEntity: Projet::class, orphanRemoval: true)]
     private $projet;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     */
+    #[Vich\UploadableField(mapping: 'icone', fileNameProperty: 'iconeName')]
+    #[Assert\Image(maxSize:"1M", mimeTypes: ['image/svg+xml'], mimeTypesMessage: 'Veuilllez choisir une image SVG')]
+    private ?File $iconeFile = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $iconeName;
 
     public function __construct()
     {
@@ -81,6 +91,26 @@ class Categorie
     {
         return $this->imageFile;
     }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $iconeFile
+     */
+    public function setIconeFile(?File $iconeFile = null): void
+    {
+        $this->iconeFile = $iconeFile;
+
+        if (null !== $iconeFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getIconeFile(): ?File
+    {
+        return $this->iconeFile;
+    }
+
     public function getImageName(): ?string
     {
         return $this->imageName;
@@ -119,6 +149,18 @@ class Categorie
                 $projet->setSecteur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIconeName(): ?string
+    {
+        return $this->iconeName;
+    }
+
+    public function setIconeName(?string $iconeName): self
+    {
+        $this->iconeName = $iconeName;
 
         return $this;
     }

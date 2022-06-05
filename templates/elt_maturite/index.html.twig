@@ -23,7 +23,7 @@
                     <h1 class="h4"> Elément de maturité </h1>
                 </div>
                 <div>
-                    <a href="{{ path('app_financement_new') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">
+                    <a href="{{ path('app_elt_maturite_new') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         Ajouter un élément de maturité
                     </a>
@@ -49,6 +49,7 @@
                             <tr>
                                 <td>{{ elt_maturite.id }}</td>
                                 <td>{{ elt_maturite.nom }}</td>
+{#                                <td>{{ elt_maturite.idMaturite }}</td>#}
                                 <td>
                                     <a href="{{ path('app_elt_maturite_edit', {'id': elt_maturite.id}) }}" class="me-3">
                                         <i class='bx bx-pencil bx-sm text-success'></i>

@@ -5,7 +5,14 @@
             <div class="col-md-6 mb-3">
                 <div>
                     <label for="first_name">Nom de l'élément</label>
-                    {{ form_widget(form) }}
+                    {{ form_widget(form.nom) }}
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Maturité de l'élément</label>
+                    {{ form_widget(form.idMaturite) }}
                 </div>
             </div>
         </div>

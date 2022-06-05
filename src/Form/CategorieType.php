@@ -26,6 +26,14 @@ class CategorieType extends AbstractType
                 'download_uri' => false,
                 'imagine_pattern' => 'squared_thumbnail_medium'
             ])
+            ->add('iconeFile', VichImageType::class,[
+                'label' =>  false,
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer?',
+                'download_uri' => false,
+                'imagine_pattern' => 'squared_thumbnail_medium'
+            ])
         ;
     }
 

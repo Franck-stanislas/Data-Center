@@ -51,21 +51,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-{#                                <div class="col-lg-3 col-md-3 col-12 p-0">#}
-{#                                    <div class="search-input">#}
-{#                                        <label for="location"><i class="lni lni-map-marker theme-color"></i></label>#}
-{#                                        <select name="location" id="location">#}
-{#                                            <option value="none" selected disabled>Locations</option>#}
-{#                                            <option value="none">New York</option>#}
-{#                                            <option value="none">California</option>#}
-{#                                            <option value="none">Washington</option>#}
-{#                                            <option value="none">Birmingham</option>#}
-{#                                            <option value="none">Chicago</option>#}
-{#                                            <option value="none">Phoenix</option>#}
-{#                                        </select>#}
-{#                                    </div>#}
-{#                                </div>#}
                                 <div class="col-lg-2 col-md-2 col-12 p-0">
                                     <div class="search-btn button">
                                         <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
@@ -92,21 +77,12 @@
                             <!-- Start Single Category -->
                             <a href="{{ path('app_project_category') }}" class="single-cat">
                                 <div class="icon">
-                                    <img src="{{asset('client/assets/images/categories/education.svg')}}" alt="#">
+                                    <img src="{{ vich_uploader_asset(categorie, 'iconeFile') }}" alt="{{ categorie.iconeName }}">
 
                                 </div>
                                 <h3>{{ categorie.nomCategorie}}</h3>
                                 <h5 class="total">0</h5>
                             </a>
-                            <!-- End Single Category -->
-                            <!-- Start Single Category -->
-{#                            <a href="category.html" class="single-cat">#}
-{#                                <div class="icon">#}
-{#                                    <img src="{{asset('client/assets/images/categories/education.svg')}}" alt="#">#}
-{#                                </div>#}
-{#                                <h3>Education</h3>#}
-{#                                <h5 class="total">42</h5>#}
-{#                            </a>#}
                             <!-- End Single Category -->
                             {% endfor%}
                         </div>

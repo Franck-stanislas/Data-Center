@@ -20,6 +20,13 @@ class MaturiteType extends AbstractType
                     'placeholder' => "Entrer le nom de la maturité"
                 ],
             ])
+            ->add('type', TextType::class,[
+                'label'=> false,
+                'attr' => [
+                    'class' => 'form-control form-control-sm col-12',
+                    'placeholder' => "Entrer le type de la maturité"
+                ]
+            ])
         ;
     }
 

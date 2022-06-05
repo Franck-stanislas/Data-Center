@@ -91,7 +91,6 @@ const OtherInfo = () => {
         <form className="container">
             <div className="d-block mt-4 mb-md-0">
                 <p className="mb-4">Autres informations.</p>
-                {JSON.stringify(infos)}
                 <div className="row container">
                     {maturites.map(maturite => (
                         <div className="form-check col-lg-4 col-sm-6" key={maturite.id}>
@@ -103,8 +102,22 @@ const OtherInfo = () => {
                     ))}
                 </div>
 
+                {(type === 'idee') && <>
+                    <p className="mb-4">Financement.</p>
+                    <div className="row container">
+                        {financements.map(financement => (
+                            <div className="form-check col-lg-4 col-sm-6" key={financement.id}>
+                                <input className="form-check-input" type="checkbox" id={financement.id} value={financement.id} name="financements" onChange={handleChange} />
+                                <label className="form-check-label" htmlFor={financement.id}>
+                                    {financement.nomFinancement}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </>}
+
                 {(type === 'mature' || type === 'encours') && <>
-                    <p className="mb-4">Elts de maturite.</p>
+                    <p className="mb-4">Elémentts de maturité.</p>
                     <div className="row container">
                         {elements.map(elt => (
                             <div className="form-check col-lg-4 col-sm-6" key={elt.id}>
