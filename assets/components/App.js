@@ -10,7 +10,6 @@ const App = () => {
     const [project, setProject] = useState({});
 
     const save = () => {
-        alert("save");
         axios.post('https://127.0.0.1:8000/api/project/save', project)
             .then(res => {
                 console.log(res);

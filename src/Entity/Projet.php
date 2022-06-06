@@ -6,6 +6,7 @@ use App\Repository\ProjetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
@@ -27,33 +28,32 @@ class Projet
     #[ORM\Column(type: 'float')]
     private $couts;
 
-    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'secteur_projet')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'secteur_projet'), Ignore]
+    #[ORM\JoinColumn(nullable: true)]
     private $secteur;
 
     #[ORM\ManyToOne(targetEntity: Maturite::class, inversedBy: 'maturite_projet')]
     #[ORM\JoinColumn(nullable: false)]
     private $maturite;
 
-    #[ORM\ManyToOne(targetEntity: Statut::class, inversedBy: 'statut_projet')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Statut::class, inversedBy: 'statut_projet'), Ignore]
+    #[ORM\JoinColumn(nullable: true)]
     private $statut;
 
     #[ORM\ManyToMany(targetEntity: EltMaturite::class, inversedBy: 'projets')]
     private $eltsMaturite;
 
-    #[ORM\ManyToOne(targetEntity: Commune::class, inversedBy: 'projets')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $commune;
+    #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'projets')]
+    private $arrondissement;
 
-    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Financement::class)]
-    private $financements;
+    #[ORM\ManyToMany(targetEntity: Financement::class, inversedBy: 'projets'), Ignore]
+    private $financement;
 
 
     public function __construct()
     {
         $this->eltsMaturite = new ArrayCollection();
-        $this->financements = new ArrayCollection();
+        $this->financement = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,14 +170,14 @@ class Projet
         return $this;
     }
 
-    public function getCommune(): ?Commune
+    public function getArrondissement(): ?Arrondissement
     {
-        return $this->commune;
+        return $this->arrondissement;
     }
 
-    public function setCommune(?Commune $commune): self
+    public function setArrondissement(?Arrondissement $arrondissement): self
     {
-        $this->commune = $commune;
+        $this->arrondissement = $arrondissement;
 
         return $this;
     }
@@ -185,16 +185,15 @@ class Projet
     /**
      * @return Collection<int, Financement>
      */
-    public function getFinancements(): Collection
+    public function getFinancement(): Collection
     {
-        return $this->financements;
+        return $this->financement;
     }
 
     public function addFinancement(Financement $financement): self
     {
-        if (!$this->financements->contains($financement)) {
-            $this->financements[] = $financement;
-            $financement->setProjet($this);
+        if (!$this->financement->contains($financement)) {
+            $this->financement[] = $financement;
         }
 
         return $this;
@@ -202,12 +201,7 @@ class Projet
 
     public function removeFinancement(Financement $financement): self
     {
-        if ($this->financements->removeElement($financement)) {
-            // set the owning side to null (unless already changed)
-            if ($financement->getProjet() === $this) {
-                $financement->setProjet(null);
-            }
-        }
+        $this->financement->removeElement($financement);
 
         return $this;
     }

@@ -5,7 +5,7 @@ const Localisation = ({setProject}) => {
 
     const [regions, setRegions] = useState([]);
     const [departements, setDepartements] = useState([]);
-    const [communes, setCommunes] = useState([]);
+    // const [communes, setCommunes] = useState([]);
     const [arrondissements, setArrondissements] = useState([]);
 
     useEffect(() => {
@@ -42,19 +42,13 @@ const Localisation = ({setProject}) => {
 
     const handleArrondissementChange = (event) => {
         const value = event.target.value;
-        axios.get(`https://127.0.0.1:8000/api/arrondissements/${value}/communes`)
-            .then(response => {
-                setCommunes(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        setProject((project) => ({...project, arrondissement: +value}));
     }
 
-    const handleCommuneChange = (event) => {
-        const value = event.target.value;
-        setProject((project) => ({...project, commune: +value}));
-    }
+    // const handleCommuneChange = (event) => {
+    //     const value = event.target.value;
+    //     setProject((project) => ({...project, commune: +value}));
+    // }
 
 
     return (<form className="container">
@@ -87,14 +81,14 @@ const Localisation = ({setProject}) => {
                         <option key={arrondissement.id} value={arrondissement.id}>{arrondissement.nom}</option>))}
                 </select>
             </div>
-            <div className="mb-4 mt-2">
-                <label className="my-1 me-2" htmlFor="country">Commune</label>
-                <select className="form-select" id="country" aria-label="Default select example" onChange={handleCommuneChange}>
-                    <option selected="">Choisir une commune</option>
-                    {communes.map(commune => (
-                        <option key={commune.id} value={commune.id}>{commune.libelle}</option>))}
-                </select>
-            </div>
+            {/*<div className="mb-4 mt-2">*/}
+            {/*    <label className="my-1 me-2" htmlFor="country">Commune</label>*/}
+            {/*    <select className="form-select" id="country" aria-label="Default select example" onChange={handleCommuneChange}>*/}
+            {/*        <option selected="">Choisir une commune</option>*/}
+            {/*        {communes.map(commune => (*/}
+            {/*            <option key={commune.id} value={commune.id}>{commune.libelle}</option>))}*/}
+            {/*    </select>*/}
+            {/*</div>*/}
         </div>
     </form>);
 };

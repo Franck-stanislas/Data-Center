@@ -22,12 +22,13 @@ class Financement
     #[ORM\ManyToMany(targetEntity: Maturite::class, mappedBy: 'financements'), Ignore]
     private $maturites;
 
-    #[ORM\ManyToOne(targetEntity: Projet::class, inversedBy: 'financements')]
-    private $projet;
+    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'financement'), Ignore]
+    private $projets;
 
     public function __construct()
     {
         $this->maturites = new ArrayCollection();
+        $this->projets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,14 +76,29 @@ class Financement
         return $this;
     }
 
-    public function getProjet(): ?Projet
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjets(): Collection
     {
-        return $this->projet;
+        return $this->projets;
     }
 
-    public function setProjet(?Projet $projet): self
+    public function addProjet(Projet $projet): self
     {
-        $this->projet = $projet;
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->addFinancement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projets->removeElement($projet)) {
+            $projet->removeFinancement($this);
+        }
 
         return $this;
     }

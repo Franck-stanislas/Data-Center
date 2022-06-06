@@ -105,7 +105,7 @@ class RegionController extends AbstractController
     #[Route('/project/save', name:'project_save', methods: ['POST'])]
     public function saveProject(
         ProjetRepository $projectRepository,
-        CommuneRepository $communeRepository,
+        ArrondissementRepository $arrondissementRepository,
         CategorieRepository $categorieRepository,
         StatutRepository $statutRepository,
         MaturiteRepository $maturiteRepository,
@@ -115,14 +115,14 @@ class RegionController extends AbstractController
         // get data of request
         $data = json_decode($request->getContent(), true);
         $projet = new Projet();
-        $projet->setCommune($communeRepository->find($data['commune']));
+        $projet->setArrondissement($arrondissementRepository->find($data['arrondissement']));
         $projet->setSecteur($categorieRepository->find($data['secteur']));
         $projet->setCouts($data['couts']);
         $projet->setResultats($data['resultats']);
         $projet->setObjectifs($data['objectifs']);
         $projet->setInstitule($data['institule']);
         $projet->setMaturite($maturiteRepository->find($data['maturite']));
-        $projet->setStatut($statutRepository->find($data['status'][0]));
+        $projet->setStatut($statutRepository->find($data['status']));
         foreach ($data['financements'] as $financement) {
             $projet->addFinancement($financementRepository->find($financement));
         }
@@ -132,6 +132,7 @@ class RegionController extends AbstractController
         // save project
         $projectRepository->add($projet, true);
         $this->flashy->success('Nouvelle maturité ajoutée');
+        $this->redirectToRoute('admin');
         return $this->json("ok", 200);
     }
 

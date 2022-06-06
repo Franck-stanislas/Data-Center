@@ -28,7 +28,7 @@ class   Commune
     #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'communes'), Ignore]
     private $arrondissement;
 
-    #[ORM\OneToMany(mappedBy: 'commune', targetEntity: Projet::class)]
+    #[ORM\OneToMany(mappedBy: 'commune', targetEntity: Projet::class), Ignore]
     private $projets;
 
     public function __construct()

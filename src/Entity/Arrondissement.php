@@ -22,13 +22,18 @@ class Arrondissement
     #[ORM\JoinColumn(nullable: false)]
     private $departement;
 
-    #[ORM\OneToMany(mappedBy: 'arrondissement', targetEntity: Commune::class)]
-    private $communes;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $ville;
+
+    #[ORM\OneToMany(mappedBy: 'arrondissement', targetEntity: Projet::class)]
+    private $projets;
 
     public function __construct()
     {
-        $this->communes = new ArrayCollection();
+        $this->projets = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -59,30 +64,42 @@ class Arrondissement
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commune>
-     */
-    public function getCommunes(): Collection
+    public function getVille(): ?string
     {
-        return $this->communes;
+        return $this->ville;
     }
 
-    public function addCommune(Commune $commune): self
+    public function setVille(string $ville): self
     {
-        if (!$this->communes->contains($commune)) {
-            $this->communes[] = $commune;
-            $commune->setArrondissement($this);
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjets(): Collection
+    {
+        return $this->projets;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->setArrondissement($this);
         }
 
         return $this;
     }
 
-    public function removeCommune(Commune $commune): self
+    public function removeProjet(Projet $projet): self
     {
-        if ($this->communes->removeElement($commune)) {
+        if ($this->projets->removeElement($projet)) {
             // set the owning side to null (unless already changed)
-            if ($commune->getArrondissement() === $this) {
-                $commune->setArrondissement(null);
+            if ($projet->getArrondissement() === $this) {
+                $projet->setArrondissement(null);
             }
         }
 

@@ -104,20 +104,6 @@ const OtherInfo = (props) => {
                     ))}
                 </div>
 
-                {(type === 'idee') && <>
-                    <p className="mb-4">Financement.</p>
-                    <div className="row container">
-                        {financements.map(financement => (
-                            <div className="form-check col-lg-4 col-sm-6" key={financement.id}>
-                                <input className="form-check-input" type="checkbox" id={financement.id} value={financement.id} name="financements" onChange={handleChange} />
-                                <label className="form-check-label" htmlFor={financement.id}>
-                                    {financement.nomFinancement}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-                </>}
-
                 {(type === 'mature' || type === 'encours') && <>
                     <p className="mb-4">Elémentts de maturité.</p>
                     <div className="row container">
@@ -134,7 +120,7 @@ const OtherInfo = (props) => {
                     <div className="row container">
                         {statuts.map(statut => (
                             <div className="form-check col-lg-4 col-sm-6" key={statut.id}>
-                                <input className="form-check-input" type="checkbox" id={statut.id} value={statut.id} name="status" onChange={handleChange} />
+                                <input className="form-check-input" type="radio" id={statut.id} value={statut.id} name="status" onChange={handleChange} />
                                 <label className="form-check-label" htmlFor={statut.id}>
                                     {statut.nom}
                                 </label>

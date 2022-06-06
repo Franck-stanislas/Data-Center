@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use App\Repository\ProjetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -33,10 +35,7 @@ class Categorie
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $imageName;
 
-    #[ORM\Column(type: 'datetime', nullable:true)]
-    private ?\DateTimeInterface $updatedAt = null;
-
-    #[ORM\OneToMany(mappedBy: 'secteur', targetEntity: Projet::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'secteur', targetEntity: Projet::class, orphanRemoval: true), Ignore]
     private $projet;
 
     /**
@@ -83,7 +82,7 @@ class Categorie
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            // $this->updatedAt = new \DateTimeImmutable();
         }
     }
 
@@ -164,4 +163,14 @@ class Categorie
 
         return $this;
     }
+
+//    public function getProjetNumber(ProjetRepository $projetRepository):float{
+//
+//        $total = 0;
+//        foreach($this->getProjet() as $id=>$quantite){
+//            $quantite = $projetRepository->find($id);
+//            $total += $quantite;
+//        }
+//        return $total;
+//    }
 }

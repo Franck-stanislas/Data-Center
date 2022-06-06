@@ -22,7 +22,7 @@ class Maturite
     #[ORM\OneToMany(mappedBy: 'id_maturite', targetEntity: EltMaturite::class), Ignore]
     private $eltMaturites;
 
-    #[ORM\OneToMany(mappedBy: 'maturite', targetEntity: Projet::class)]
+    #[ORM\OneToMany(mappedBy: 'maturite', targetEntity: Projet::class), Ignore]
     private $projet;
 
     #[ORM\Column(type: 'string', length: 255)]
