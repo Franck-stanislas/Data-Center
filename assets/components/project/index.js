@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
-import {Stepper} from '@mantine/core';
-import Localisation from "./project/Localisation";
-import ProjectInfo from "./project/ProjectInfo";
-import OtherInfo from "./project/OtherInfo";
 import axios from "axios";
+import {Stepper} from "@mantine/core";
+import Localisation from "./Localisation";
+import ProjectInfo from "./ProjectInfo";
+import OtherInfo from "./OtherInfo";
 
-const App = () => {
+const Project = () => {
+    const [step, setStep] = useState(0);
+    const [project, setProject] = useState({});
 
     const save = () => {
+        alert("save");
         axios.post('https://127.0.0.1:8000/api/project/save', project)
             .then(res => {
                 console.log(res);
@@ -79,4 +82,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Project;

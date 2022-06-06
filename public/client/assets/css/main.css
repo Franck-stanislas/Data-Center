@@ -42,6 +42,17 @@ html {
   scroll-behavior: smooth;
 }
 
+#marker {
+  background: gray;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%)
+}
+
+#marker-text {
+  color: white;
+}
+
 body {
   font-family: "Jost", sans-serif;
   font-weight: normal;

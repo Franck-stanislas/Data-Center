@@ -40,7 +40,7 @@ class Projet
     #[ORM\JoinColumn(nullable: true)]
     private $statut;
 
-    #[ORM\ManyToMany(targetEntity: EltMaturite::class, inversedBy: 'projets')]
+    #[ORM\ManyToMany(targetEntity: EltMaturite::class, inversedBy: 'projets'), Ignore]
     private $eltsMaturite;
 
     #[ORM\ManyToOne(targetEntity: Arrondissement::class, inversedBy: 'projets')]
@@ -48,7 +48,6 @@ class Projet
 
     #[ORM\ManyToMany(targetEntity: Financement::class, inversedBy: 'projets'), Ignore]
     private $financement;
-
 
     public function __construct()
     {
