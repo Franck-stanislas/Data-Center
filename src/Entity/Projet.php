@@ -6,6 +6,7 @@ use App\Repository\ProjetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
@@ -39,14 +40,14 @@ class Projet
     #[ORM\JoinColumn(nullable: false)]
     private $statut;
 
-    #[ORM\ManyToMany(targetEntity: EltMaturite::class, inversedBy: 'projets')]
+    #[ORM\ManyToMany(targetEntity: EltMaturite::class, inversedBy: 'projets'), Ignore]
     private $eltsMaturite;
 
     #[ORM\ManyToOne(targetEntity: Commune::class, inversedBy: 'projets')]
     #[ORM\JoinColumn(nullable: false)]
     private $commune;
 
-    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Financement::class)]
+    #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Financement::class), Ignore]
     private $financements;
 
 

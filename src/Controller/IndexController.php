@@ -42,4 +42,10 @@ class IndexController extends AbstractController
         ) ;
         return $this->render('index/category.html.twig', compact('categorie'));
     }
+
+    #[Route('/carte-projet', name: 'app_project_map')]
+    public function mapProject(CategorieRepository $categorieRepository, StatutRepository $statut): Response
+    {
+        return $this->render('index/carte.html.twig');
+    }
 }

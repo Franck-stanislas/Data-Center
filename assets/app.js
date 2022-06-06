@@ -13,6 +13,11 @@ import './bootstrap';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from "./components/App";
+import Project from "./components/project";
+import Carte from "./components/carte";
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+if(window.location.href.includes("/carte-projet")){
+    ReactDOM.render(<Carte/>, document.getElementById('root-carte-project'));
+}else{
+    ReactDOM.render(<Project/>, document.getElementById('root'));
+}
