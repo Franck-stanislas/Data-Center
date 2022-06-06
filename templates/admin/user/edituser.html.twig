@@ -1,0 +1,18 @@
+{% extends 'admin/admin.base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <main class="content">
+
+        {% include 'admin/layouts/admin.menu.html.twig' %}
+
+        {{include('admin/layouts/navbar.html.twig')}}
+
+
+        <h1>Modifier un utilisateur</h1>
+        {{ form(userForm) }}
+
+        {{include('admin/layouts/footer.html.twig')}}
+    </main>
+{% endblock %}

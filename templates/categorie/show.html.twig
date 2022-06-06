@@ -18,7 +18,13 @@
             <tr>
                 <th>ImageName</th>
                 <td>
-                    <img src="{{ vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ categorie.nomCategorie }}">
+                    <img src="{{ vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_small') }}" alt="{{ categorie.nomCategorie }}" width="50" height="50">
+                </td>
+            </tr>
+            <tr>
+                <th>Icone</th>
+                <td>
+                    <img src="{{ vich_uploader_asset(categorie, 'iconeFile') | imagine_filter('squared_thumbnail_small') }}" alt="{{ categorie.iconeName }}" width="50" height="50">
                 </td>
             </tr>
         </tbody>

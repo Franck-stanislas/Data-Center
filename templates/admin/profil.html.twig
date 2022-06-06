@@ -9,6 +9,7 @@
 
         {{include('admin/layouts/navbar.html.twig')}}
             <div class="row mt-6">
+                {% if app.user%}
                 <div class="col-12 col-xl-8">
                     <div class="card card-body border-0 shadow mb-4">
                         <h2 class="h5 mb-4">Informations Générales</h2>
@@ -17,13 +18,13 @@
                                 <div class="col-md-6 mb-3">
                                     <div>
                                         <label for="first_name">Nom</label>
-                                        <input class="form-control" id="first_name" type="text" placeholder="Enter your first name" required>
+                                        <input class="form-control" id="first_name" type="text" value="{{ app.user.firstName}}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div>
                                         <label for="last_name">Prénom</label>
-                                        <input class="form-control" id="last_name" type="text" placeholder="Also your last name" required>
+                                        <input class="form-control" id="last_name" type="text" value="{{ app.user.lastName}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -31,13 +32,13 @@
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input class="form-control" id="email" type="email" placeholder="name@company.com" required>
+                                        <input class="form-control" id="email" type="email" value="{{ app.user.email}}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label for="phone">Téléphone</label>
-                                        <input class="form-control" id="phone" type="number" placeholder="+12-345 678 910" required>
+                                        <input class="form-control" id="phone" type="number" value="{{ app.user.phone}}" required>
                                     </div>
                                 </div>
 
@@ -53,19 +54,25 @@
                     <div class="row">
                         <div class="col-12 mb-4">
                             <div class="card shadow border-0 text-center p-0">
-                                <div class="profile-cover rounded-top" data-background="{{ asset('assets/img/profile-cover.jpg')}}"></div>
+                                <div class="profile-cover rounded-top" data-background="{{ app.user.photo}}"></div>
                                 <div class="card-body pb-0">
-                                    <img src="{{ asset('assets/img/team/profile-picture-1.jpg')}}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
-                                    <h4 class="h3">Stan Franck</h4>
-                                    <h5 class="fw-normal">Junior Software Engineer</h5>
+                                    <img src="{{app.user.photo ? vich_uploader_asset(app.user.photo, 'image') : asset('image/avatar.png') }}" class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
+                                    <h4 class="h3">{{ app.user.fullName }}</h4>
+                                    <h5 class="fw-normal">
+                                        {% for role in app.user.roles %}
+                                            {% if role == "ROLE_USER" %}
+                                                Utilisateur
+                                            {% elseif role == "ROLE_ADMIN" %}
+                                                Administrateur
+                                            {% endif %}
+                                        {% endfor %}
+                                    </h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif%}
             </div>
-
-           {{include('admin/layouts/footer.html.twig')}}
-    </main>
 {% endblock %}
 

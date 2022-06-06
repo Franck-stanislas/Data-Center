@@ -6,8 +6,22 @@ vich_uploader:
 
     mappings:
         categorie_image:
-            uri_prefix: /uploads/categories
+            uri_prefix: uploads/categorie
             upload_destination: '%kernel.project_dir%/public/uploads/categorie'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+        icone:
+            uri_prefix: uploads/categorie/icone
+            upload_destination: '%kernel.project_dir%/public/uploads/categorie/icone'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        user_profil:
+            uri_prefix: uploads/user/profil
+            upload_destination: '%kernel.project_dir%/public/uploads/user/profil'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
         projets:

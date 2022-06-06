@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <nav>
-                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <div class="nav nav-tab s" id="nav-tab" role="tablist">
                                                     <button class="nav-link" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="false"><i class="lni lni-grid-alt"></i></button>
                                                     <button class="nav-link active" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="true"><i class="lni lni-list"></i></button>
                                                 </div>
@@ -56,9 +56,9 @@
                                                         <div class="image">
                                                             <a href="#">
     {#                                                            <img src="{{ asset('client/assets/images/items-grid/img1.jpg')}}" alt="#">#}
-                                                                <img src="{{(categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('uploads/categorie/placeholer.png')) | imagine_filter('squared_thumbnail_small')}}" alt="{{ categorie.imageName }}">
+{#                                                                <img src="{{vich_uploader_asset(categorie, 'imageFile')}}" width="200" height="200" alt="">#}
+                                                                <img src="{{ (categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('image/placeholder.png')) }}" alt="{{ categorie.imageName }}" class="thumbnail" height="200" width="200">
                                                             </a>
-                                                            <i class=" cross-badge lni lni-bolt"></i>
                                                         </div>
                                                         <div class="content">
                                                             <h3 class="title">
