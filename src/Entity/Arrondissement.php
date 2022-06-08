@@ -6,6 +6,7 @@ use App\Repository\ArrondissementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: ArrondissementRepository::class)]
 class Arrondissement
@@ -18,7 +19,7 @@ class Arrondissement
     #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
-    #[ORM\ManyToOne(targetEntity: Departement::class, inversedBy: 'arrondissements')]
+    #[ORM\ManyToOne(targetEntity: Departement::class, inversedBy: 'arrondissements'), Ignore]
     #[ORM\JoinColumn(nullable: false)]
     private $departement;
 
@@ -26,7 +27,7 @@ class Arrondissement
     #[ORM\Column(type: 'string', length: 255)]
     private $ville;
 
-    #[ORM\OneToMany(mappedBy: 'arrondissement', targetEntity: Projet::class)]
+    #[ORM\OneToMany(mappedBy: 'arrondissement', targetEntity: Projet::class), Ignore]
     private $projets;
 
     public function __construct()

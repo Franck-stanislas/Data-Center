@@ -131,7 +131,7 @@ class RegionController extends AbstractController
         }
         // save project
         $projectRepository->add($projet, true);
-        $this->flashy->success('Nouvelle maturité ajoutée');
+        $this->flashy->success('Projet enregistré');
         $this->redirectToRoute('admin');
         return $this->json("ok", 200);
     }

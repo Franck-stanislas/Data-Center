@@ -5434,6 +5434,65 @@ blockquote .shape {
   border-color: transparent;
 }
 
+
+.list-nav1 ul {
+  padding: 0px 30px;
+}
+
+.list-nav1 ul li {
+  display: inline-block;
+  margin-right: 7px;
+  margin-bottom: 8px;
+}
+
+.list-nav1 ul li:last-child {
+  margin: 0;
+}
+
+.list-nav1 ul li a {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 8px 12px 8px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+}
+
+.list-nav1 ul li a span {
+  display: inline-block;
+  border: 1px solid #eee;
+  font-size: 11px;
+  margin-left: 3px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.list-nav1 ul li a:hover {
+  color: #fff;
+  background: #5830E0;
+  border-color: transparent;
+}
+
+.list-nav1 ul li a:hover span {
+  color: #5830E0;
+  background: #fff;
+  border-color: transparent;
+}
+
+.list-nav1 ul li.active a {
+  color: #fff;
+  background: #5830E0;
+  border-color: transparent;
+}
+
+.list-nav1 ul li.active a span {
+  color: #5830E0;
+  background: #fff;
+  border-color: transparent;
+}
+
+
 /* My Items */
 .my-items {
   padding: 0 30px;

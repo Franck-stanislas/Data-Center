@@ -6,6 +6,7 @@ use App\Entity\Users;
 use App\Form\AddUserType;
 use App\Form\EditUserType;
 use App\Repository\ProjetRepository;
+use App\Repository\StatutRepository;
 use App\Repository\UsersRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/', name: 'admin')]
-    public function index(ProjetRepository $projetRepository, UsersRepository $usersRepository): Response
+    public function index(ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
     {
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
@@ -32,7 +33,8 @@ class AdminController extends AbstractController
         }
         return $this->render('admin/index.html.twig',[
             'projets' => $projetRepository->findAll(),
-            'users' => $usersRepository->findAll()
+            'users' => $usersRepository->findAll(),
+            'statuts' => $statutRepository->findAll()
         ]);
     }
 

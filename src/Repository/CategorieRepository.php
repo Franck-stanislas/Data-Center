@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Categorie;
+use App\Entity\Projet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,6 +41,16 @@ class CategorieRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneByProjet(Projet $projet): array
+    {
+        return $this->createQueryBuilder('categorie')
+            -> join('categorie.projet', 'projet')
+            ->andWhere('projet = :projet')
+            ->setParameter('projet', $projet)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 //    /**
 //     * @return Categorie[] Returns an array of Categorie objects
 //     */

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -58,6 +60,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'datetime', nullable:true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Projet::class)]
+    private $projets;
+
+    public function __construct()
+    {
+        $this->projets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -210,6 +220,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjets(): Collection
+    {
+        return $this->projets;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projets->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getUser() === $this) {
+                $projet->setUser(null);
+            }
+        }
 
         return $this;
     }

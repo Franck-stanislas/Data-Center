@@ -9,21 +9,36 @@
 
         {{include('admin/layouts/navbar.html.twig')}}
 
-        <div class="py-4">
-            <div class="dropdown">
-                <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                    Nouvelle tache
-                </button>
-                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
-                        Nouvel investisseur
-                    </a>
-                    <a class="dropdown-item d-flex align-items-center" href="#">
-                        <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
-                        Nouveau projet
-                    </a>
+        <div class="py-5">
+            <div class="d-flex justify-content-between w-100 flex-wrap">
+                <div class="mb-3 mb-lg-0 dropdown">
+                    <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        Nouvelle tache
+                    </button>
+                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                        <a class="dropdown-item d-flex align-items-center" href="{{path('new_user')}}">
+                            <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
+                            Nouvel investisseur
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="{{path('app_projet_new')}}">
+                            <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
+                            Nouveau projet
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    {% if statuts|length > 0%}
+                        {% for statut in statuts%}
+                            <button type="button" class="btn btn-secondary btn-sm">
+                                {{ statut.nom }}
+                                <h5 style="font-size: 13px; padding: 1px 10px; font-weight: 600; text-align: center; background: #f9f9f9; border: 1px solid #eee; border-radius: 5px; color: #081828; display: inline-block ; -webkit-transition: all 0.4s ease; transition: all 0.4s ease;">
+                                    {{ statut.projet.count }}
+                                </h5>
+                            </button>
+                        {%endfor%}
+                    {% endif%}
+
                 </div>
             </div>
         </div>
@@ -37,22 +52,14 @@
                                     <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="h5">Visiteurs</h2>
+                                    <h2 class="h5">Compte utilisateur</h2>
                                     <h3 class="fw-extrabold mb-1">{{ users|length }}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-7 px-xl-0">
                                 <div class="d-none d-sm-block">
-                                    <h2 class="h6 text-gray-400 mb-0">Visiteurs</h2>
+                                    <h2 class="h6 text-gray-400 mb-0">Compte utilisateur</h2>
                                     <h3 class="fw-extrabold mb-2">{{ users|length }}</h3>
-                                </div>
-                                <div class="small d-flex mt-1">
-                                    <div>
-                                        Depuis le dernier mois
-                                        <svg class="icon icon-xs text-success" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"></path>
-                                        </svg>
-                                        <span class="text-success fw-bolder">22%</span></div>
                                 </div>
                             </div>
                         </div>
@@ -77,9 +84,6 @@
                                     <h2 class="h6 text-gray-400 mb-0">Investisseurs</h2>
                                     <h3 class="fw-extrabold mb-2">43k</h3>
                                 </div>
-                                <div class="small d-flex mt-1">
-                                    <div>Depuis le mois dernier <svg class="icon icon-xs text-danger" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg><span class="text-danger fw-bolder">2%</span></div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,23 +98,22 @@
                                     <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5"> Taux de projet</h2>
-                                    <h3 class="mb-1">50.88%</h3>
+                                    <h2 class="fw-extrabold h5"> Nombre de projet</h2>
+                                    <h3 class="mb-1">{{ projets|length }}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-7 px-xl-0">
                                 <div class="d-none d-sm-block">
-                                    <h2 class="h6 text-gray-400 mb-0"> Taux de projet </h2>
-                                    <h3 class="fw-extrabold mb-2">50.88%</h3>
-                                </div>
-                                <div class="small d-flex mt-1">
-                                    <div>Depuis la derniere année <svg class="icon icon-xs text-success" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg><span class="text-success fw-bolder">4%</span></div>
+                                    <h2 class="h6 text-gray-400 mb-0"> Projets enregistrés </h2>
+                                    <h3 class="fw-extrabold mb-2">{{ projets|length }}</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+{#            Diagramme#}
             <div class="col-12 mb-4">
                 <div class="card bg-yellow-100 border-0 shadow">
                     <div class="card-header d-sm-flex flex-row align-items-center flex-0">
@@ -174,13 +177,15 @@
                                     <td>
                                         {{ projet.secteur.nomCategorie }}
                                     </td>
-                                    <td >
-                                        <span class="text-break">
+                                    <td style="white-space: break-spaces;">
+                                        <div style="width:100%; max-height:300px; overflow:auto">
                                             {{ projet.objectifs }}
-                                        </span>
+                                        </div>
                                     </td>
-                                    <td>
-                                        {{ projet.resultats }}
+                                    <td style="white-space: break-spaces;">
+                                        <div style="width:100%; max-height:300px; overflow:auto">
+                                            {{ projet.resultats }}
+                                        </div>
                                     </td>
                                     <td>
                                         {{ projet.couts }}
@@ -197,11 +202,13 @@
 
                                     </td>
                                     <td>
-                                        {{ projet.statut.nom }}
+                                        {% if projet.statut%}
+                                            {{ projet.statut.nom }}
+                                        {%endif%}
                                     </td>
                                     <td>
                                         <ol>
-                                            {% for financement in projet.financements %}
+                                            {% for financement in projet.maturite.financements %}
                                                 <li>
                                                     {{ financement.nomFinancement }}
                                                 </li>
@@ -216,7 +223,7 @@
                             {% endfor %}
                         {% else%}
                             <tr>
-                                <td class="text-error">Aucun projet enregistré</td>
+                                <td colspan="9" class="text-center text-danger">Aucun projet enregistré</td>
                             </tr>
                         {% endif%}
                         </tbody>

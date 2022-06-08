@@ -19,10 +19,10 @@ class Projet
     #[ORM\Column(type: 'string', length: 255)]
     private $institule;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $objectifs;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $resultats;
 
     #[ORM\Column(type: 'float')]
@@ -48,6 +48,10 @@ class Projet
 
     #[ORM\ManyToMany(targetEntity: Financement::class, inversedBy: 'projets'), Ignore]
     private $financement;
+
+    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'projets')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $user;
 
     public function __construct()
     {
@@ -201,6 +205,18 @@ class Projet
     public function removeFinancement(Financement $financement): self
     {
         $this->financement->removeElement($financement);
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

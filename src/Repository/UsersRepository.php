@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Projet;
 use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -54,6 +55,17 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         $user->setPassword($newHashedPassword);
 
         $this->add($user, true);
+    }
+
+    public function findOneUserByProjet(Projet $projet): array
+    {
+        return $this->createQueryBuilder('users')
+            -> join('users.projets', 'projet')
+            ->andWhere('projet = :projet')
+            ->setParameter('projet', $projet)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
 //    /**

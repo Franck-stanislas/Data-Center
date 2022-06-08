@@ -7,12 +7,11 @@ liip_imagine:
         squared_thumbnail_medium:
             filters:
                 thumbnail:
-                    size: [300, 300]
+                    size: [200, 200]
                     mode: outbound
                     allow_upscale: true
 
         squared_thumbnail_small:
-            data_loader: doctrine_phpcr
             filters:
                 thumbnail:
                     size: [ 80, 80 ]

@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Projet;
 use App\Repository\CategorieRepository;
+use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\StatutRepository;
+use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,21 +18,46 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
-    public function index(CategorieRepository $categorieRepository, StatutRepository $statut): Response
+    public function index(Request $request, CategorieRepository $categorieRepository, MaturiteRepository $maturiteRepository, ProjetRepository $projetRepository, PaginatorInterface $paginator): Response
     {
+        $projets = $projetRepository->findAll();
+
+        $projet = $paginator->paginate(
+            $projets,
+            $request->query->getInt('page', 1),9
+        ) ;
         return $this->render('index/index.html.twig', [
             'categories' => $categorieRepository->findAll(),
-            'statuts' => $statut->findAll(),
+            'maturites' => $maturiteRepository->findAll(),
+            'projets' => $projet
         ]);
     }
 
-    #[Route('/list-project', name: 'app_project_list')]
-    public function listProject(CategorieRepository $categorieRepository, StatutRepository $statut, ProjetRepository $projetRepository): Response
+    #[Route('/projets', name: 'app_project_list')]
+    public function listProject(Request $request, CategorieRepository $categorieRepository, StatutRepository $statut, ProjetRepository $projetRepository, MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
     {
+        $projet = $projetRepository->findAll();
+
+        $projets = $paginator->paginate(
+            $projet,
+            $request->query->getInt('page', 1),9
+        ) ;
+
         return $this->render('index/list-project.html.twig', [
             'categories' => $categorieRepository->findAll(),
             'statuts' => $statut->findAll(),
-            'projets' => $projetRepository->findAll()
+            'projets' => $projets,
+            'maturites' => $maturiteRepository->findAll()
+        ]);
+    }
+
+    #[Route('/projet/{id}/details', name: 'app_project_detail', methods: ['GET'])]
+    public function detailProject(Projet $projet, CategorieRepository $categorieRepository, UsersRepository $usersRepository): Response
+    {
+        return $this->render('index/detail-project.html.twig', [
+            'projet' => $projet,
+            'categories' => $categorieRepository->findOneByProjet($projet),
+            'users' => $usersRepository->findOneUserByProjet($projet)
         ]);
     }
 
