@@ -15,7 +15,7 @@
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{{ path('app_index') }}">Home</a></li>
-                        <li>Liste de projet</li>
+                        <li>Liste des projets</li>
                     </ul>
                 </div>
             </div>
@@ -38,7 +38,7 @@
 
                         <div class="single-widget">
                             <h3>Toutes les categories</h3>
-                            <ul class="list">
+                            <ul class="list" id="cat-filter">
                                 {% if categories|length > 0%}
                                     {% for categorie in categories%}
                                         <li>
@@ -48,17 +48,17 @@
                                 {% endif%}
                             </ul>
                         </div>
-
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-8 col-12">
+
+                <div class="col-lg-6 col-md-4 col-12">
                     <div class="category-grid-list">
                         <div class="row">
                             <div class="col-12">
                                 <div class="category-grid-topbar mb-4">
                                     {% if statuts|length > 0%}
-                                        <h3 class="mt-3" style="font-size: 18px; font-weight: 600; display: block;">Maturité du projet</h3>
-                                        <nav class="list-nav1 mt-4">
+                                        <h3 class="ml-3 mt-3" style=" margin-left: 45px; font-size: 18px; font-weight: 600; display: block;">Maturité du projet</h3>
+                                        <nav class="list-nav1 ">
                                             <ul>
                                                 {% for maturite in maturites%}
                                                     <li class="active m-3"><a href="javascript:void(0)">{{ maturite.nomMaturite }} <span>{{maturite.projet |length}}</span></a></li>
@@ -84,35 +84,35 @@
                                 </div>
                                 {% if projets|length > 0%}
                                     <div class="tab-content" id="nav-tabContent">
-                                        {% for row in projets|batch(9)%}
+                                        {% for row in projets|batch(6)%}
                                             <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
                                                 <div class="row">
                                                     {% for projet in row%}
-                                                        <div class="col-lg-4 col-md-6 col-12">
-                                                                <div class="single-item-grid">
-                                                                    <div class="content">
-                                                                        <a href="javascript:void(0)" class="tag">
-                                                                            {{ projet.secteur.nomCategorie }}
+                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                            <div class="single-item-grid">
+                                                                <div class="content">
+                                                                    <a href="javascript:void(0)" class="tag">
+                                                                        {{ projet.secteur.nomCategorie }}
+                                                                    </a>
+                                                                    <h3 class="title">
+                                                                        <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule }}</a>
+                                                                    </h3>
+                                                                    <p class="location">
+                                                                        <a href="javascript:void(0)">
+                                                                            <i class="lni lni-map-marker"></i>
+                                                                            {{projet.arrondissement.ville}}
                                                                         </a>
-                                                                        <h3 class="title">
-                                                                            <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule }}</a>
-                                                                        </h3>
-                                                                        <p class="location">
-                                                                            <a href="javascript:void(0)">
-                                                                                <i class="lni lni-map-marker"></i>
-                                                                                {{projet.arrondissement.ville}}
-                                                                            </a>
-                                                                        </p>
-                                                                        <ul class="info">
-                                                                            <span>Estimation du cout</span><br>
-                                                                            <li class="price">{{ projet.couts }} FCFA</li>
-
-                                                                        </ul>
-                                                                    </div>
+                                                                    </p>
+                                                                    <ul class="info">
+                                                                        <span>Estimation du cout</span><br>
+                                                                        <li class="price">{{ projet.couts }} FCFA</li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     {% endfor %}
-                                                    <div class="row">
+                                                </div>
+                                                <div class="row">
                                                         <div class="col-12">
                                                             <div class="pagination left">
                                                                 <ul class="pagination-list">
@@ -121,52 +121,51 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </div>
                                             <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-                                            <div class="row">
-                                                {% for projet in row%}
-                                                    <div class="col-lg-12 col-md-12 col-12">
-                                                        <div class="single-item-grid">
-                                                            <div class="row align-items-center">
-                                                                <div class="col-lg-7 col-md-5 col-12">
-                                                                    <div class="content">
-                                                                        <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie }}</a>
-                                                                        <div class="d-inline-flex justify-content-between">
-                                                                            <h3 class="title me-5">
-                                                                                <a href=" {{ path('app_project_detail', {'id':projet.id}) }} ">{{projet.institule}}</a>
-                                                                            </h3>
-                                                                            <p class="location me-5">
-                                                                                <a href="javascript:void(0)">
-                                                                                    <i class="lni lni-map-marker"></i>
-                                                                                    {{projet.arrondissement.ville}}
-                                                                                </a>
-                                                                            </p>
-                                                                            <ul class="info">
-                                                                                <span>Estimation du cout</span>
-                                                                                <li class="price">{{ projet.couts }} FCFA</li>
-                                                                            </ul>
-                                                                        </div>
+                                                <div class="row">
+                                                    {% for projet in row%}
+                                                        <div class="col-lg-12 col-md-12 col-12">
+                                                            <div class="single-item-grid">
+                                                                <div class="row align-items-center">
+                                                                    <div class="col-lg-12 col-md-5 col-12">
+                                                                        <div class="content">
+                                                                            <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie }}</a>
+                                                                            <div class="d-inline-flex justify-content-between">
+                                                                                <h3 class="title me-5">
+                                                                                    <a href=" {{ path('app_project_detail', {'id':projet.id}) }} ">{{projet.institule}}</a>
+                                                                                </h3>
+                                                                                <p class="location me-5">
+                                                                                    <a href="javascript:void(0)">
+                                                                                        <i class="lni lni-map-marker"></i>
+                                                                                        {{projet.arrondissement.ville}}
+                                                                                    </a>
+                                                                                </p>
+                                                                                <ul class="info">
+                                                                                    <span>Estimation du cout</span>
+                                                                                    <li class="price">{{ projet.couts }} FCFA</li>
+                                                                                </ul>
+                                                                            </div>
 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="pagination left">
+                                                            <ul class="pagination-list">
+                                                                {{ knp_pagination_render(projets) }}
+                                                            </ul>
                                                         </div>
 
                                                     </div>
-                                                    {% endfor %}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="pagination left">
-                                                        <ul class="pagination-list">
-                                                            {{ knp_pagination_render(projets) }}
-                                                        </ul>
-                                                    </div>
-
                                                 </div>
                                             </div>
-                                        </div>
                                         {%endfor%}
                                     </div>
                                 {% else%}
@@ -176,7 +175,21 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div class="category-sidebar">
+                        <div class="single-widget">
+                            <h3>Filtres</h3>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 {% endblock %}
+
+{%block javascripts%}
+    <script src="{{asset('client/assets/js/filter.js')}}"></script>
+{% endblock%}

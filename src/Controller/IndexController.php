@@ -20,7 +20,7 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(Request $request, CategorieRepository $categorieRepository, MaturiteRepository $maturiteRepository, ProjetRepository $projetRepository, PaginatorInterface $paginator): Response
     {
-        $projets = $projetRepository->findAll();
+        $projets = $projetRepository->findAll(['id' => 'desc']);
 
         $projet = $paginator->paginate(
             $projets,
@@ -40,7 +40,7 @@ class IndexController extends AbstractController
 
         $projets = $paginator->paginate(
             $projet,
-            $request->query->getInt('page', 1),9
+            $request->query->getInt('page', 1),6
         ) ;
 
         return $this->render('index/list-project.html.twig', [

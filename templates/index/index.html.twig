@@ -116,7 +116,7 @@
                                                 <div class="top-content">
                                                     <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie }}</a>
                                                     <h3 class="title">
-                                                        <a href="item-details.html">{{ projet.institule }}</a>
+                                                        <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule }}</a>
                                                     </h3>
                                                     <ul class="info-list">
                                                         <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville}}</a></li>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig'%}
 
-{% block title 'detail-projet'%}
+{% block title 'Details'%}
 {% block body%}
 
     <div class="breadcrumbs">
@@ -30,7 +30,7 @@
                             <main id="gallery">
                                 <div class="main-img">
                                     {% for categorie in categories %}
-                                        <img src="{{vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_medium')}}" id="current" alt="{{projet.secteur.imageName}}">
+                                        <img src="{{vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_medium')}}" id="current" alt="{{projet.secteur.imageName}}" width="auto" height="auto">
                                     {% endfor%}
                                 </div>
 {#                                <div class="images">#}
@@ -99,12 +99,13 @@
                         <div class="single-block tags">
                             <h3>Autres infos</h3>
                             <ul>
-                                {% if projet.maturite.eltMaturites%}
+                                {% if projet.maturite.eltMaturites|length > 0%}
+                                    <span class="mb-2">Elements de maturite disponibles</span> <br>
                                     {% for elt in projet.maturite.eltMaturites%}
                                         <li><a href="javascript:void(0)">{{ elt.nom }}</a></li>
                                     {% endfor%}
                                 {% else%}
-                                    <li><a href="javascript:void(0)">Aucunes informations pour le moment</a></li>
+                                    <li> <span class="">Aucunes informations pour le moment</span></li>
                                 {% endif%}
                             </ul>
                         </div>
