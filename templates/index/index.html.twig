@@ -75,7 +75,7 @@
                         <div class="category-slider">
                             {% for categorie in categories%}
                             <!-- Start Single Category -->
-                            <a href="{{ path('app_project_category') }}" class="single-cat">
+                            <a href="{{ path('app_category_detail', {'id':categorie.id}) }}" class="single-cat">
                                 <div class="icon">
                                     <img src="{{ vich_uploader_asset(categorie, 'iconeFile') }}" alt="{{ categorie.iconeName }}">
 

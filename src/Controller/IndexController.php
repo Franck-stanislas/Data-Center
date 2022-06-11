@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Projet;
 use App\Repository\CategorieRepository;
 use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
+use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
 use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,7 +22,7 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(Request $request, CategorieRepository $categorieRepository, MaturiteRepository $maturiteRepository, ProjetRepository $projetRepository, PaginatorInterface $paginator): Response
     {
-        $projets = $projetRepository->findAll(['id' => 'desc']);
+        $projets = $projetRepository->findAll(array('id'=>'DESC'));
 
         $projet = $paginator->paginate(
             $projets,
@@ -72,6 +74,24 @@ class IndexController extends AbstractController
         ) ;
         return $this->render('index/category.html.twig', compact('categorie'));
     }
+
+    #[Route('/category/{id}/projets', name: 'app_category_detail', methods: ['GET'])]
+    public function projetsCategory( Categorie $categorie, ProjetRepository $projetRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+
+        $projet = $projetRepository->findProjetByCategory($categorie);
+
+        $projets = $paginator->paginate(
+            $projet,
+            $request->query->getInt('page', 1),9
+        ) ;
+
+        return $this->render('index/category-project.html.twig', [
+            'projets' => $projets,
+            'categorie' => $categorie
+        ]);
+    }
+
 
     #[Route('/carte-projet', name: 'app_project_map')]
     public function mapProject(CategorieRepository $categorieRepository, StatutRepository $statut): Response

@@ -171,10 +171,10 @@ d.addEventListener("DOMContentLoaded", function(event) {
 
     //Chartist
 
-    if(d.querySelector('.ct-chart-sales-value')) {
+    if(d.querySelector('.test')) {
         //Chart 5
-          new Chartist.Line('.ct-chart-sales-value', {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          new Chartist.Line('.test', {
+            labels: ['ADAMOUA', 'CENTRE', 'EST', 'EXTREME-NORD', 'LITTORAL', 'EXTREME-NORD', 'NORD-OUEST', 'OUEST', 'SUD-OUEST', 'SUD'],
             series: [
                 [0, 10, 30, 40, 80, 60, 100]
             ]
@@ -201,12 +201,13 @@ d.addEventListener("DOMContentLoaded", function(event) {
         });
     }
 
-    if(d.querySelector('.ct-chart-ranking')) {
-        var chart = new Chartist.Bar('.ct-chart-ranking', {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    if(d.querySelector('.ct-chart-sales-value')) {
+        var projectByRegions = d.querySelector('.ct-chart-sales-value').getAttribute('data-countByRegions');
+        console.log(projectByRegions);
+        var chart = new Chartist.Bar('.ct-chart-sales-value', {
+            labels: ['ADAMOUA', 'CENTRE', 'EST', 'EXTREME-NORD', 'LITTORAL', 'EXTREME-NORD', 'NORD-OUEST', 'OUEST', 'SUD-OUEST', 'SUD'],
             series: [
-              [1, 5, 2, 5, 4, 3],
-              [2, 3, 4, 8, 1, 2],
+              [1, 5, 2, 5, 4, 3, 12, 43, 53, 67],
             ]
           }, {
             low: 0,

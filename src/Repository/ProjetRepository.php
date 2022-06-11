@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\Categorie;
+use App\Entity\Commune;
 use App\Entity\Projet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,7 +39,6 @@ class ProjetRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
 
     // find count projects grouped by arrondissement joined with departement and region
    public function findCountProjetsByArrondissement(): array

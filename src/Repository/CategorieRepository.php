@@ -41,6 +41,7 @@ class CategorieRepository extends ServiceEntityRepository
         }
     }
 
+    // Get one projet by categorie
     public function findOneByProjet(Projet $projet): array
     {
         return $this->createQueryBuilder('categorie')
@@ -51,6 +52,9 @@ class CategorieRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+
+
 //    /**
 //     * @return Categorie[] Returns an array of Categorie objects
 //     */

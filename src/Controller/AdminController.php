@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Projet;
 use App\Entity\Users;
 use App\Form\AddUserType;
 use App\Form\EditUserType;
 use App\Repository\ProjetRepository;
+use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
 use App\Repository\UsersRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
@@ -25,16 +27,41 @@ class AdminController extends AbstractController
     }
 
     #[Route('/', name: 'admin')]
-    public function index(ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
+    public function index(Projet $projet, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, RegionRepository $regionRepository): Response
     {
+        dd("fuck");
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
             return $this->redirectToRoute('login');
         }
+
+        /*$projectsByArrondissements = $projetRepository->findCountProjetsByArrondissement();
+        $allRegions = array_map(function ($region) {
+            return $region->getNom();
+        }, $regionRepository->findAll());
+
+        $regions = [];
+        foreach ($projectsByArrondissements as $project) {
+            // count projects by region
+            $region = $project['region'];
+            $count = $project['count'];
+            if (!isset($regions[$region])) {
+                $regions[$region] = $count;
+            } else {
+                $regions[$region] += $count;
+            }
+        }
+        foreach ($allRegions as $region) {
+            if (!isset($regions[$region])) {
+                $regions[$region] = 0;
+            }
+        }*/
+
         return $this->render('admin/index.html.twig',[
-            'projets' => $projetRepository->findAll(),
-            'users' => $usersRepository->findAll(),
-            'statuts' => $statutRepository->findAll()
+            //'projets' => $projetRepository->findAll(),
+            //'users' => $usersRepository->findAll(),
+            //'statuts' => $statutRepository->findAll(),
+            //'countByRegion' => $regions,
         ]);
     }
 
