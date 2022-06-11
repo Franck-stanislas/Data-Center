@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 use App\Entity\Categorie;
-use App\Entity\Commune;
 use App\Entity\Projet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,19 +45,6 @@ class ProjetRepository extends ServiceEntityRepository
             -> join('projet.secteur', 'secteur')
             ->andWhere('secteur = :category')
             ->setParameter('category', $categorie)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    public function findProjetByCommune(Projet $projet):array
-    {
-        return $this->createQueryBuilder('projets')
-            -> join('projets.arrondissement', 'arrondissement')
-            ->join('arrondissement.departement', 'departement')
-            ->join('departement.region', 'region')
-            ->andWhere('region = :projet')
-            ->setParameter('projet', $projet)
             ->getQuery()
             ->getResult()
             ;
