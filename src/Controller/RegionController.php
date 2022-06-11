@@ -22,10 +22,12 @@ use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -143,12 +145,51 @@ class RegionController extends AbstractController
         return $this->json("ok", 200);
     }
 
+    // get all projects with
+
     // get all projects
     #[Route('/projects', name:'project_list', methods: ['GET'])]
-    public function listProject(ProjetRepository $projectRepository): Response
+    public function listProject(ProjetRepository $projectRepository, RegionRepository $regionRepository): Response
     {
+
+        $projectsByArrondissements = $projectRepository->findCountProjetsByArrondissement();
+        $allRegions = array_map(function ($region) {
+            return $region->getNom();
+        }, $regionRepository->findAll());
+
+        $regions = [];
+        foreach ($projectsByArrondissements as $project) {
+            // count projects by region
+            $region = $project['region'];
+            $count = $project['count'];
+            if (!isset($regions[$region])) {
+                $regions[$region] = $count;
+            } else {
+                $regions[$region] += $count;
+            }
+        }
+        foreach ($allRegions as $region) {
+            if (!isset($regions[$region])) {
+                $regions[$region] = 0;
+            }
+        }
+
         $projects = $projectRepository->findAll();
-        /*$encoder = new JsonEncoder();
+
+        // serialize projects
+        $encoders = [new JsonEncoder()];
+        $defaultContext = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return null;
+            },
+        ];
+        $normalizers = [new ObjectNormalizer(null, null, null, null, null, null, $defaultContext)];
+        $serializer = new Serializer($normalizers);
+        $result = $serializer->normalize($projects, null, [AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true]);
+
+        dd($result);
+
+        $encoder = new JsonEncoder();
         $defaultContext = [
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
                 return $object->getId();
@@ -158,8 +199,7 @@ class RegionController extends AbstractController
 
         $serializer = new Serializer([$normalizer], [$encoder]);
 
-        dd($serializer->serialize($projects, 'json'));*/
-        dd($projects);
+        dd($serializer->serialize($projects, 'json'));
 
         return $this->json($projects, 200);
     }

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
-class Projet implements \JsonSerializable
+class Projet
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -219,10 +219,5 @@ class Projet implements \JsonSerializable
         $this->user = $user;
 
         return $this;
-    }
-
-    public function jsonSerialize()
-    {
-        return get_object_vars($this);
     }
 }

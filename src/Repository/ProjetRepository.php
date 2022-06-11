@@ -39,6 +39,21 @@ class ProjetRepository extends ServiceEntityRepository
         }
     }
 
+
+    // find count projects grouped by arrondissement joined with departement and region
+   public function findCountProjetsByArrondissement(): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('COUNT(p.id) as count, a.nom as arrondissement, d.nom as departement, r.nom as region')
+            ->join('p.arrondissement', 'a')
+            ->join('a.departement', 'd')
+            ->join('d.region', 'r')
+            ->groupBy('a.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Projet[] Returns an array of Projet objects
 //     */

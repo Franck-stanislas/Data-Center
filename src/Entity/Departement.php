@@ -19,7 +19,7 @@ class Departement
     #[ORM\Column(type: 'string', length: 255)]
     private $nom;
 
-    #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'departements')]
+    #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'departements'), Ignore]
     #[ORM\JoinColumn(nullable: false)]
     private $region;
 
