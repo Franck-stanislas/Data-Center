@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Projet;
 use App\Entity\Users;
 use App\Form\AddUserType;
 use App\Form\EditUserType;
@@ -25,12 +26,16 @@ class AdminController extends AbstractController
     }
 
     #[Route('/', name: 'admin')]
-    public function index(ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
+    public function index(Projet $projet, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
     {
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
             return $this->redirectToRoute('login');
         }
+
+        $projets = $projetRepository->findProjetByCommune($projet);
+        dd($projet);
+
         return $this->render('admin/index.html.twig',[
             'projets' => $projetRepository->findAll(),
             'users' => $usersRepository->findAll(),

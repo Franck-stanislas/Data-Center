@@ -54,7 +54,7 @@
                                                 <div class="col-lg-4 col-md-6 col-12">
                                                     <div class="single-item-grid">
                                                         <div class="image">
-                                                            <a href="#">
+                                                            <a href="{{ path('app_category_detail', {'id':categorie.id}) }}">
     {#                                                            <img src="{{ asset('client/assets/images/items-grid/img1.jpg')}}" alt="#">#}
 {#                                                                <img src="{{vich_uploader_asset(categorie, 'imageFile')}}" width="200" height="200" alt="">#}
                                                                 <img src="{{ (categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('image/placeholder.png')) }}" alt="{{ categorie.imageName }}" class="thumbnail" height="200" width="200">
@@ -62,7 +62,7 @@
                                                         </div>
                                                         <div class="content">
                                                             <h3 class="title">
-                                                                <a href="#">{{ categorie.nomCategorie }}</a>
+                                                                <a href="{{ path('app_category_detail', {'id':categorie.id}) }}">{{ categorie.nomCategorie }}</a>
                                                             </h3>
                                                         </div>
                                                     </div>
