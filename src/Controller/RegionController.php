@@ -17,11 +17,13 @@ use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
+use App\Repository\UsersRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 #[Route('/api')]
@@ -111,6 +113,7 @@ class RegionController extends AbstractController
         MaturiteRepository $maturiteRepository,
         FinancementRepository $financementRepository,
         EltMaturiteRepository $eltMaturiteRepository,
+        Security $security,
         Request $request): Response {
         // get data of request
         $data = json_decode($request->getContent(), true);
@@ -123,6 +126,7 @@ class RegionController extends AbstractController
         $projet->setInstitule($data['institule']);
         $projet->setMaturite($maturiteRepository->find($data['maturite']));
         $projet->setStatut($statutRepository->find($data['status']));
+        $projet->setUser($security->getUser());
         foreach ($data['financements'] as $financement) {
             $projet->addFinancement($financementRepository->find($financement));
         }

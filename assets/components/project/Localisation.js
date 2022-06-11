@@ -81,10 +81,6 @@ const Localisation = ({setProject}) => {
                         <option key={arrondissement.id} value={arrondissement.id}>{arrondissement.nom}</option>))}
                 </select>
             </div>
-            <div className="mb-4 mt-2">
-                <label className="my-1 me-2" htmlFor="country">Localisation</label>
-                <button>Ouvrir la carte </button>
-            </div>
 
             {/*<div className="mb-4 mt-2">*/}
             {/*    <label className="my-1 me-2" htmlFor="country">Commune</label>*/}
