@@ -201,45 +201,47 @@ d.addEventListener("DOMContentLoaded", function(event) {
         });
     }
 
-    if(d.querySelector('.ct-chart-sales-value')) {
-        var projectByRegions = d.querySelector('.ct-chart-sales-value').getAttribute('data-countByRegions');
-        console.log(projectByRegions);
-        var chart = new Chartist.Bar('.ct-chart-sales-value', {
-            labels: ['ADAMOUA', 'CENTRE', 'EST', 'EXTREME-NORD', 'LITTORAL', 'EXTREME-NORD', 'NORD-OUEST', 'OUEST', 'SUD-OUEST', 'SUD'],
-            series: [
-              [1, 5, 2, 5, 4, 3, 12, 43, 53, 67],
-            ]
-          }, {
-            low: 0,
-            showArea: true,
-            plugins: [
-              Chartist.plugins.tooltip()
-            ],
-            axisX: {
-                // On the x-axis start means top and end means bottom
-                position: 'end'
-            },
-            axisY: {
-                // On the y-axis start means left and end means right
-                showGrid: false,
-                showLabel: false,
-                offset: 0
-            }
-            });
-          
-          chart.on('draw', function(data) {
-            if(data.type === 'line' || data.type === 'area') {
-              data.element.animate({
-                d: {
-                  begin: 2000 * data.index,
-                  dur: 2000,
-                  from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                  to: data.path.clone().stringify(),
-                  easing: Chartist.Svg.Easing.easeOutQuint
+    if(d.querySelector('.ct-chart-projects-mounths')) {
+        setTimeout(function() {
+            var projectByRegions = JSON.parse(d.querySelector('.ct-chart-projects-mounths').getAttribute('data-countByRegions'));
+            console.log(Object.keys(projectByRegions))
+            var chart = new Chartist.Bar('.ct-chart-projects-mounths', {
+                labels: Object.keys(projectByRegions),
+                series: [
+                    Object.values(projectByRegions),
+                ]
+            }, {
+                low: 0,
+                showArea: true,
+                plugins: [
+                    Chartist.plugins.tooltip()
+                ],
+                axisX: {
+                    // On the x-axis start means top and end means bottom
+                    position: 'end'
+                },
+                axisY: {
+                    // On the y-axis start means left and end means right
+                    showGrid: false,
+                    showLabel: false,
+                    offset: 0
                 }
-              });
-            }
-        });
+            });
+
+            chart.on('draw', function(data) {
+                if(data.type === 'line' || data.type === 'area') {
+                    data.element.animate({
+                        d: {
+                            begin: 2000 * data.index,
+                            dur: 2000,
+                            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                            to: data.path.clone().stringify(),
+                            easing: Chartist.Svg.Easing.easeOutQuint
+                        }
+                    });
+                }
+            });
+        }, 2000);
     }
 
     if(d.querySelector('.ct-chart-traffic-share')) {

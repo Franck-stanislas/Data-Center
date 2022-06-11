@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Projet;
 use App\Entity\Users;
 use App\Form\AddUserType;
 use App\Form\EditUserType;
@@ -27,15 +26,13 @@ class AdminController extends AbstractController
     }
 
     #[Route('/', name: 'admin')]
-    public function index(Projet $projet, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, RegionRepository $regionRepository): Response
+    public function index(ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, RegionRepository $regionRepository): Response
     {
-        dd("fuck");
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
             return $this->redirectToRoute('login');
         }
-
-        /*$projectsByArrondissements = $projetRepository->findCountProjetsByArrondissement();
+        $projectsByArrondissements = $projetRepository->findCountProjetsByArrondissement();
         $allRegions = array_map(function ($region) {
             return $region->getNom();
         }, $regionRepository->findAll());
@@ -55,13 +52,13 @@ class AdminController extends AbstractController
             if (!isset($regions[$region])) {
                 $regions[$region] = 0;
             }
-        }*/
+        }
 
         return $this->render('admin/index.html.twig',[
-            //'projets' => $projetRepository->findAll(),
-            //'users' => $usersRepository->findAll(),
-            //'statuts' => $statutRepository->findAll(),
-            //'countByRegion' => $regions,
+            'projets' => $projetRepository->findAll(),
+            'users' => $usersRepository->findAll(),
+            'statuts' => $statutRepository->findAll(),
+            'countByRegion' => $regions,
         ]);
     }
 
