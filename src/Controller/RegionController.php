@@ -24,7 +24,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 #[Route('/api')]
 class RegionController extends AbstractController
@@ -140,8 +143,26 @@ class RegionController extends AbstractController
         return $this->json("ok", 200);
     }
 
+    // get all projects
+    #[Route('/projects', name:'project_list', methods: ['GET'])]
+    public function listProject(ProjetRepository $projectRepository): Response
+    {
+        $projects = $projectRepository->findAll();
+        /*$encoder = new JsonEncoder();
+        $defaultContext = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            },
+        ];
+        $normalizer = new ObjectNormalizer(null, null, null, null, null, null, $defaultContext);
 
+        $serializer = new Serializer([$normalizer], [$encoder]);
 
+        dd($serializer->serialize($projects, 'json'));*/
+        dd($projects);
+
+        return $this->json($projects, 200);
+    }
 
 
 }
