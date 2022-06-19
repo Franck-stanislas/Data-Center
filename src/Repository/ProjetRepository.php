@@ -3,8 +3,12 @@
 namespace App\Repository;
 use App\Entity\Categorie;
 use App\Entity\Projet;
+use App\Entity\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
  * @extends ServiceEntityRepository<Projet>
@@ -39,8 +43,23 @@ class ProjetRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllByIdDesc(){
+        return $this->findBy( [], array('id' => 'DESC'));
+    }
+
+    public function findProjetByCategory(Categorie $categorie): array
+    {
+        return $this->createQueryBuilder('projet')
+            -> join('projet.secteur', 'secteur')
+            ->andWhere('secteur = :category')
+            ->setParameter('category', $categorie)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // find count projects grouped by arrondissement joined with departement and region
-   public function findCountProjetsByArrondissement(): array
+    public function findCountProjetsByArrondissement(): array
     {
         $query = $this->createQueryBuilder('p')
             ->select('COUNT(p.id) as count, a.nom as arrondissement, d.nom as departement, r.nom as region')
@@ -52,6 +71,41 @@ class ProjetRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+
+    /**
+     * Recupere les projets en lien avec la recherche
+//     * @return PaginationInterface
+     */
+    public function findSearch(SearchData $search)
+    {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->select('c', 'm', 'p')
+            ->join('p.secteur', 'c')
+            ->join('p.maturite', 'm');
+
+        if (!empty($search->mot)){
+            $query = $query
+                ->andWhere('p.institule LIKE :mot OR p.objectifs LIKE :mot OR p.resultats LIKE :mot')
+                ->setParameter('mot', "{$search->mot}%");
+        }
+
+        if (!empty($search->categories)){
+            $query = $query
+                ->andWhere('c.id IN (:categories)')
+                ->setParameter('categories' , $search->categories);
+        }
+
+        if (!empty($search->maturites)){
+            $query = $query
+                ->andWhere('m.id IN (:maturites)')
+                ->setParameter('maturites' , $search->maturites);
+        }
+
+        return $query;
+    }
+
 
 //    /**
 //     * @return Projet[] Returns an array of Projet objects

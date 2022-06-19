@@ -72,8 +72,19 @@ class AdminController extends AbstractController
         return $this->render('admin/profil.html.twig');
     }
 
+    #[Route('/projets', name:'projet_list')]
+    public function listProject(ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
+    {
+//        dd($projetRepository->findAll());
+        return $this->render('admin/projects/list.html.twig',[
+            'projets' => $projetRepository->findAll(),
+            'users' => $usersRepository->findAll(),
+            'statuts' => $statutRepository->findAll()
+        ]);
+    }
 
-    #[Route("/utilisateurs", name:"utilisateurs")]
+
+    #[Route("/users", name:"utilisateurs")]
     public function usersList(UsersRepository $users)
     {
 
@@ -82,7 +93,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route("/utilisateurs/new", name:"new_user" , methods: ['GET', 'POST'])]
+    #[Route("/user/new", name:"new_user" , methods: ['GET', 'POST'])]
     public function usersAdd( UsersRepository $users, Request $request, UserPasswordHasherInterface $passwordHasher) : Response
     {
         $user = new Users();
@@ -118,7 +129,7 @@ class AdminController extends AbstractController
     }
 
 
-    #[Route("/utilisateurs/modifier/{id}", name:"modifier_utilisateur")]
+    #[Route("/user/{id}/update", name:"modifier_utilisateur")]
 
     public function editUser(Users $user, UsersRepository $usersRepository, Request $request)
     {

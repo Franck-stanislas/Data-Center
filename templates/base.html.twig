@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
         <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.45.0/maps/maps.css'>
         <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.45.0/maps/css-styles/routing.css'/>
@@ -37,6 +37,10 @@
         <link rel="stylesheet" href="{{ asset('client/assets/css/tiny-slider.css') }}" />
         <link rel="stylesheet" href="{{asset('client/assets/css/glightbox.min.css')}}" />
         <link rel="stylesheet" href="{{asset('client/assets/css/main.css')}}" />
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet" />
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+        <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 
     </head>
     <body>
@@ -59,8 +63,9 @@
                     <div class="col-lg-12">
                         <div class="nav-inner">
                             <nav class="navbar navbar-expand-lg">
-                                <a class="navbar-brand" href="{{ path('app_index') }}">
-                                    <img src="{{asset('client/assets/images/logo/logo.svg')}}" alt="Logo">
+                                <a class="navbar-brand" href="{{ path('app_index') }}" style="color: #f5821e; text-decoration: none">
+{#                                    <img src="{{asset('client/assets/images/logo/logo.svg')}}" alt="Logo">#}
+                                    Banque de donnees
                                 </a>
                                 <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -82,7 +87,7 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="{{ app.request.attributes.get('_route') == 'app_carte' ? 'active' : '' }} dd-menu collapsed" href="{{ path('app_project_map') }}">Carte projet</a>
+                                            <a class="{{ (app.request.attributes.get('_route') == 'app_carte' or app.request.attributes.get('_route') == 'app_project_map') ? 'active' : '' }} dd-menu collapsed" href="{{ path('app_project_map') }}">Carte projet</a>
                                         </li>
 
                                         <li class="nav-item">
@@ -156,13 +161,13 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer mobile-app">
-                                <h3>Centre de Données du <br> Ministère de la Décentralisation et du Développement Local</h3>
+                                <h3>Banque de Données du <br> Ministère de la Décentralisation et du Développement Local</h3>
                                 <div class="app-button">
                                     <a href=" https://www.google.com/maps/search/lonkak+yaounde+sous+prefecture/@3.8789854,11.5087975,15z" class="btn">
                                         <i><img src="{{ asset('client/assets/images/logo/logo1.svg')}}" alt=""></i>
                                         <span class="text">
-                                        <span class="small-text">DATA CENTER</span>
-                                        MINDDEVEL
+                                        <span class="small-text text-center">BANQUE DE DONNEES DES CTD</span>
+
                                     </span>
                                     </a>
                                 </div>
@@ -238,9 +243,7 @@
         </a>
 
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+
 
         <!-- Flashy depends on jQuery -->
         <script src="//code.jquery.com/jquery.js"></script>
@@ -248,6 +251,9 @@
         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
         <!-- Include Flashy default partial -->
         {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 
         <!-- ========================= JS here ========================= -->
         <script src="{{ asset('client/assets/js/bootstrap.min.js') }}"></script>
@@ -285,6 +291,7 @@
                     }
                 }
             });
+
         </script>
     </body>
 </html>

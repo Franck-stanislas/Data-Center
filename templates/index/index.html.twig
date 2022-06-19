@@ -12,11 +12,9 @@
                     <div class="hero-text text-center">
                         <!-- Start Hero Text -->
                         <div class="section-heading">
-                            <h2 class="wow fadeInUp" data-wow-delay=".3s">MINDDEVEL DATA CENTER</h2>
+                            <h2 class="wow fadeInUp" data-wow-delay=".3s">BANQUE DE DONNEES DES CTD</h2>
                             <p class="wow fadeInUp" data-wow-delay=".5s">
-                                Plateforme conçue enfin de permettre aux différentes <br> communes de renseigner leur projets de developpement
-
-                                et de faciliter <br> les investisseurs dans leur choix d'investissement selon le secteur  et la localité de developpement.
+                                Plateforme d'enregistement des projets de developpement des CTD <br> et de publication à l'endroit des potentiels investisseurs.
                             </p>
                         </div>
                         <!-- End Search Form -->
@@ -26,7 +24,7 @@
                                 <div class="col-lg-4 col-md-4 col-12 p-0">
                                     <div class="search-input">
                                         <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                        <input type="text" name="keyword" id="keyword" placeholder="Project keyword">
+                                        <input type="text" name="keyword" id="keyword" placeholder="Mot clé">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 p-0">
@@ -53,7 +51,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12 p-0">
                                     <div class="search-btn button">
-                                        <button class="btn"><i class="lni lni-search-alt"></i> Search</button>
+                                        <button class="btn"><i class="lni lni-search-alt"></i> Chercher </button>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +98,7 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h2 class="wow fadeInUp" data-wow-delay=".4s">Recents Projets</h2>
-                        <p class="wow fadeInUp" data-wow-delay=".6s">Liste de tous les projets de developpement du territoire camerounais.</p>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Recents projets de developpement repertoriés du territoire camerounais.</p>
                     </div>
                 </div>
             </div>
@@ -114,7 +112,7 @@
                                         <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                             <div class="content">
                                                 <div class="top-content">
-                                                    <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie }}</a>
+                                                    <a href="{{ path('app_category_detail', {'id':projet.secteur.id}) }}" class="tag">{{ projet.secteur.nomCategorie }}</a>
                                                     <h3 class="title">
                                                         <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule }}</a>
                                                     </h3>
@@ -132,15 +130,15 @@
                                     </div>
                             {% endfor%}
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="pagination right">
-                                        <ul class="pagination-list">
-                                            {{ knp_pagination_render(projets) }}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+{#                            <div class="row">#}
+{#                                <div class="col-12">#}
+{#                                    <div class="pagination right">#}
+{#                                        <ul class="pagination-list">#}
+{#                                            {{ knp_pagination_render(projets) }}#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
                         </div>
                     </div>
                 {% endfor%}

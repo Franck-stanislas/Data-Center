@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Categorie;
 use App\Entity\Projet;
+use App\Entity\SearchData;
+use App\Form\SearchForm;
 use App\Repository\CategorieRepository;
 use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
@@ -12,6 +14,7 @@ use App\Repository\StatutRepository;
 use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,16 +25,25 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(Request $request, CategorieRepository $categorieRepository, MaturiteRepository $maturiteRepository, ProjetRepository $projetRepository, PaginatorInterface $paginator): Response
     {
-        $projets = $projetRepository->findAll(array('id'=>'DESC'));
-
+        $projets = $projetRepository->findAllByIdDesc();
         $projet = $paginator->paginate(
             $projets,
             $request->query->getInt('page', 1),9
         ) ;
+
+        $data = new SearchData();
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+
+        $projetSearch = $projetRepository->findSearch($data);
+
+
         return $this->render('index/index.html.twig', [
             'categories' => $categorieRepository->findAll(),
             'maturites' => $maturiteRepository->findAll(),
-            'projets' => $projet
+            'projets' => $projet,
+            'search' => $projetSearch,
+            'form' => $form->createView()
         ]);
     }
 
@@ -62,6 +74,17 @@ class IndexController extends AbstractController
             'users' => $usersRepository->findOneUserByProjet($projet)
         ]);
     }
+
+//    #[Route('/search?value={value}&maturite={maturite}&secteur={secteur}')]
+//    public function search(Request $request, $value, $maturite, $secteur ): Response{
+//        $form = $this->createForm(SearchType::class, null, ['method' => 'GET']);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()){
+//            $value = $form->getData()->getTitle();
+//            $search = $this->get
+//        }
+//    }
 
     #[Route('/category', name: 'app_project_category')]
     public function categoryProject(Request $request, CategorieRepository $categorieRepository, PaginatorInterface $paginator): Response
@@ -96,6 +119,7 @@ class IndexController extends AbstractController
     #[Route('/carte-projet', name: 'app_project_map')]
     public function mapProject(CategorieRepository $categorieRepository, StatutRepository $statut): Response
     {
+
         return $this->render('index/carte.html.twig');
     }
 }

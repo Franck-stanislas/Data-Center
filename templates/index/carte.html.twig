@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Categorie de projets' %}
+{% block title 'Carte de projets' %}
 
 {% block body %}
 
-    <div class="breadcrumbs">
+
+    <div class="breadcrumbs" style="height: 200px!important;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
@@ -22,9 +23,32 @@
         </div>
     </div>
 
-    <section class="category-page section">
+    <section class="category-page section" style="margin-bottom: 200px; height: 300px">
+        <div id="map" class="map" style="overflow: visible!important;"></div>
         <div class="container">
-            <div id="root-carte-project"></div>
+            <div class="row">
+                <div class="col-12 col-md-12 col-xs-12 col-lg-12">
+
+                </div>
+            </div>
         </div>
+
+
     </section>
+
+    {% block javascripts %}
+        <script type="text/javascript">
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYXJ0aHVyYmlsb2EiLCJhIjoiY2wyeWV4d2JhMHcxaDNicWxwamxveGg3OCJ9.5uB0e9657YHenHp8HOzopA';
+
+            const centre = [13, 6]
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/light-v10',
+                center: centre,
+                zoom: 5,
+                scrollZoom: false
+            });
+
+        </script>
+    {% endblock %}
 {% endblock %}
