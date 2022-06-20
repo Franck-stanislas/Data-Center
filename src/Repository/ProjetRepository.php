@@ -72,6 +72,18 @@ class ProjetRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    // find all by relation maturites
+    public function findAllByMaturites(array $maturites): array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.maturite', 'maturite')
+            ->andWhere('maturite IN (:maturites)')
+            ->setParameter('maturites', $maturites)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
     /**
      * Recupere les projets en lien avec la recherche

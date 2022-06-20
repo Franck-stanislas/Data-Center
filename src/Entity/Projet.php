@@ -28,7 +28,7 @@ class Projet
     #[ORM\Column(type: 'float')]
     private $couts;
 
-    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'secteur_projet'), Ignore]
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'secteur_projet')]
     #[ORM\JoinColumn(nullable: true)]
     private $secteur;
 
