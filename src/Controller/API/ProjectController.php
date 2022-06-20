@@ -23,32 +23,56 @@ class ProjectController extends AbstractController
         MaturiteRepository $maturiteRepository,
         PaginatorInterface $paginator
     ): Response {
-        $data = json_decode($request->getContent(), true);
-        if($data) {
-            dd($data['maturites']);
-            $projet = $projetRepository->findAllByMaturites($data['maturites']);
-            $projets = $paginator->paginate(
-                $projet,
-                $data['page'] ?: 1,
-                4
-            );
-        } else {
-            $projet = $projetRepository->findAll();
-            $projets = $paginator->paginate(
-                $projet,
-                1,
-                4
-            );
-        }
+        $projet = $projetRepository->findAll();
+        $projets = $paginator->paginate(
+            $projet,
+            1,
+            4
+        );
 
         return $this->json([
-            "totalCount" => $projets->getTotalItemCount(),
+            "totalCount" => count($projet),
             "currentPage" => $projets->getCurrentPageNumber(),
             "numItemsPerPage" => $projets->getItemNumberPerPage(),
             "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
             "products" => $projets->getItems(),
             "categories" => $categorieRepository->findAllWithProjectsCount(),
             "maturites" => $maturiteRepository->findAllWithProjetsCount()
+        ], 200);
+    }
+
+    #[Route('/filters', name: 'api_filters_projects', methods: ['POST'])]
+    public function filterProjects(
+        Request $request,
+        ProjetRepository $projetRepository,
+        CategorieRepository $categorieRepository,
+        MaturiteRepository $maturiteRepository,
+        PaginatorInterface $paginator
+    ): Response {
+        $projet = $projetRepository->findAll();
+        $projets = $paginator->paginate(
+            $projet,
+            1,
+            4
+        );
+        $data = json_decode($request->getContent(), true);
+        if(!empty($data)) {
+            $projet = $projetRepository->findAllByFilters($data['activesMaturites'], $data['activesCategories'], $data['search']);
+            $projets = $paginator->paginate(
+                $projet,
+                $data['page'] ?: 1,
+                4
+            );
+        }
+
+        return $this->json([
+            "totalCount" => count($projet),
+            "currentPage" => $projets->getCurrentPageNumber(),
+            "numItemsPerPage" => $projets->getItemNumberPerPage(),
+            "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
+            "products" => $projets->getItems(),
+            "categories" => $categorieRepository->findAllByMaturitesWithProjectsCount($data['activesMaturites']),
+            "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories'])
         ], 200);
     }
 }

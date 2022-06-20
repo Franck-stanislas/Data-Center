@@ -74,12 +74,28 @@ class ProjetRepository extends ServiceEntityRepository
     }
 
     // find all by relation maturites
-    public function findAllByMaturites(array $maturites): array
+    public function findAllByFilters(array $maturites, array $categories, string $search): array
     {
-        return $this->createQueryBuilder('p')
-            ->join('p.maturite', 'maturite')
-            ->andWhere('maturite IN (:maturites)')
-            ->setParameter('maturites', $maturites)
+        if(empty($maturites) && empty($categories) && empty($search)) return $this->findAll();
+
+        $query = $this->createQueryBuilder('p');
+        if($search) {
+            $query->where('p.institule LIKE :mot OR p.objectifs LIKE :mot OR p.resultats LIKE :mot')
+                ->setParameter('mot', "%{$search}%");
+        }
+        if($maturites) {
+            $query
+                ->join('p.maturite', 'maturite')
+                ->andWhere('maturite IN (:maturites)')
+                ->setParameter('maturites', $maturites);
+        }
+        if($categories) {
+            $query
+                ->join('p.secteur', 'secteur')
+                ->andWhere('secteur IN (:secteurs)')
+                ->setParameter('secteurs', $categories);
+        }
+        return $query
             ->getQuery()
             ->getResult()
             ;

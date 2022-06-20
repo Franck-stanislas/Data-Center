@@ -51,6 +51,21 @@ class MaturiteRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findAllByCategoriesWithProjetsCount(array $categories): array  {
+        if(empty($categories)) return $this->findAllWithProjetsCount();
+
+        $query = $this->createQueryBuilder('m')
+            ->select('m.id, m.nom_maturite, COUNT(p.id) AS projetCount')
+            ->join('m.projet', 'p')
+            ->join('p.secteur', 's')
+            ->where('s.id IN (:categories)')
+            ->setParameter('categories', $categories)
+            ->groupBy('m.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 
 //    /**
 //     * @return Maturite[] Returns an array of Maturite objects
