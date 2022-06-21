@@ -6,6 +6,7 @@ use App\Entity\Maturite;
 use App\Repository\CategorieRepository;
 use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
+use App\Repository\RegionRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +58,14 @@ class ProjectController extends AbstractController
         );
         $data = json_decode($request->getContent(), true);
         if(!empty($data)) {
-            $projet = $projetRepository->findAllByFilters($data['activesMaturites'], $data['activesCategories'], $data['search']);
+            $projet = $projetRepository->findAllByFilters(
+                $data['activesMaturites'],
+                $data['activesCategories'],
+                $data['search'],
+                (int) $data['region'] ?: null,
+                (int) $data['departement'] ?: null,
+                (int) $data['arrondissement'] ?: null
+            );
             $projets = $paginator->paginate(
                 $projet,
                 $data['page'] ?: 1,
@@ -74,5 +82,44 @@ class ProjectController extends AbstractController
             "categories" => $categorieRepository->findAllByMaturitesWithProjectsCount($data['activesMaturites']),
             "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories'])
         ], 200);
+    }
+
+    #[Route('/by-region', name: 'api_projects_region', methods: ['GET'])]
+    public function getProjectsCountByRegion(ProjetRepository $projetRepository, RegionRepository $regionRepository): Response {
+        $projectsByArrondissements = $projetRepository->findCountProjetsByArrondissementApi();
+        $allRegions = array_map(function ($region) {
+            return $region->getNom();
+        }, $regionRepository->findAll());
+
+        $regions = [];
+        foreach ($projectsByArrondissements as $project) {
+            // count projects by region
+            $region = $project['region'];
+            $count = $project['count'];
+            $lat = $project['lat'];
+            $lon = $project['lon'];
+            if (!isset($regions[$region])) {
+                $regions[$region] = [
+                    "count" => $count,
+                    "lat" => $lat,
+                    "lon" => $lon,
+                    "region" => $region
+                ];
+            } else {
+                $regions[$region] = [
+                    "count" => $regions[$region]["count"] + $count,
+                    "lat" => $lat,
+                    "lon" => $lon,
+                    "region" => $region
+                ];
+            }
+        }
+        foreach ($allRegions as $region) {
+            if (!isset($regions[$region])) {
+                $regions[$region]["count"] = 0;
+            }
+        }
+
+        return $this->json($regions);
     }
 }

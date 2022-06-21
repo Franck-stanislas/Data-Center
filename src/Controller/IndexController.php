@@ -82,10 +82,12 @@ class IndexController extends AbstractController
     #[Route('/projet/{id}/details', name: 'app_project_detail', methods: ['GET'])]
     public function detailProject(Projet $projet, CategorieRepository $categorieRepository, UsersRepository $usersRepository): Response
     {
+        $mapUrl = 'https://maps.google.com/maps?q='. urlencode($projet->getArrondissement()->getVille() . ', Cameroon') . '&t=&z=13&ie=UTF8&iwloc=&output=embed';
         return $this->render('index/detail-project.html.twig', [
             'projet' => $projet,
             'categories' => $categorieRepository->findOneByProjet($projet),
-            'users' => $usersRepository->findOneUserByProjet($projet)
+            'users' => $usersRepository->findOneUserByProjet($projet),
+            'mapUrl' => $mapUrl
         ]);
     }
 

@@ -73,10 +73,37 @@ class ProjetRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    // find all by relation maturites
-    public function findAllByFilters(array $maturites, array $categories, string $search): array
+    public function findCountProjetsByArrondissementApi(): array
     {
-        if(empty($maturites) && empty($categories) && empty($search)) return $this->findAll();
+        $query = $this->createQueryBuilder('p')
+            ->select('COUNT(p.id) as count, a.nom as arrondissement, d.nom as departement, r.nom as region, r.lat as lat, r.lon as lon')
+            ->join('p.arrondissement', 'a')
+            ->join('a.departement', 'd')
+            ->join('d.region', 'r')
+            ->groupBy('a.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    // find all by relation maturites
+    public function findAllByFilters(
+        array $maturites,
+        array $categories,
+        string $search,
+        int|null $region,
+        int|null $departement,
+        int|null $arrondissement
+    ): array
+    {
+        if(
+            empty($maturites)
+            && empty($categories)
+            && empty($search)
+            && empty($region)
+            && empty($departement)
+            && empty($arrondissement)
+        ) return $this->findAll();
 
         $query = $this->createQueryBuilder('p');
         if($search) {
@@ -94,6 +121,24 @@ class ProjetRepository extends ServiceEntityRepository
                 ->join('p.secteur', 'secteur')
                 ->andWhere('secteur IN (:secteurs)')
                 ->setParameter('secteurs', $categories);
+        }
+        if($region) {
+            $query
+                ->join('p.arrondissement', 'arrondissement')
+                ->join('arrondissement.departement', 'departement')
+                ->join('departement.region', 'region')
+                ->andWhere('region.id = (:rId)')
+                ->setParameter('rId', $region);
+            if($departement) {
+                $query
+                    ->andWhere('departement.id = (:dId)')
+                    ->setParameter('dId', $departement);
+            }
+            if($arrondissement) {
+                $query
+                    ->andWhere('arrondissement.id = (:aId)')
+                    ->setParameter('aId', $arrondissement);
+            }
         }
         return $query
             ->getQuery()

@@ -17,6 +17,12 @@ const ProjectList = () => {
     const [isFirstLoad, setIsFirstLoad] = useState(true);
     const [searchInput, setSearchInput] = useState("");
     const [search, setSearch] = useState("");
+    const [regions, setRegions] = useState([]);
+    const [departements, setDepartements] = useState([]);
+    const [arrondissements, setArrondissements] = useState([]);
+    const [region, setRegion] = useState("");
+    const [departement, setDepartement] = useState("");
+    const [arrondissement, setArrondissement] = useState("");
 
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/projects/get-all')
@@ -33,12 +39,49 @@ const ProjectList = () => {
             .catch(error => {
                 console.log(error);
             });
+        axios.get('https://127.0.0.1:8000/api/regions')
+            .then(response => {
+                setRegions(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }, []);
 
     useEffect(() => {
         setSearchValue(searchInput);
         return () => {};
     }, [searchInput]);
+
+    const handleRegionChange = (event) => {
+        const value = event.target.value;
+        setRegion(value);
+        setArrondissement(null)
+        axios.get(`https://127.0.0.1:8000/api/regions/${value}/departements`)
+            .then(response => {
+                setDepartements(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    const handleDepartementChange = (event) => {
+        const value = event.target.value;
+        setDepartement(value);
+        axios.get(`https://127.0.0.1:8000/api/departements/${value}/arrondissements`)
+            .then(response => {
+                setArrondissements(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    const handleArrondissementChange = (event) => {
+        const value = event.target.value;
+        setArrondissement(value);
+    }
 
 
     const handleChangeActiveMaturites = (idMaturite) => {
@@ -73,7 +116,8 @@ const ProjectList = () => {
                 page: currentPage,
                 activesMaturites,
                 activesCategories,
-                search
+                search,
+                region, departement, arrondissement
             })
                 .then(response => {
                     setProjets(response.data.products);
@@ -85,7 +129,7 @@ const ProjectList = () => {
                     console.log(err);
                 });
         }
-    }, [currentPage, activesMaturites, activesCategories, search])
+    }, [currentPage, activesMaturites, activesCategories, search, region, departement, arrondissement])
 
     return (
         <>
@@ -117,6 +161,37 @@ const ProjectList = () => {
                                     <form action="#">
                                         <input type="text" placeholder="Rechercher Ici..." value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                                         <button type="submit"><i className="lni lni-search-alt"/></button>
+                                    </form>
+                                </div>
+
+                                <div className="single-widget">
+                                    <h3>Localisation</h3>
+                                    <form>
+                                    <ul className="list" id="cat-filter">
+                                        <div className="form-group mb-2">
+                                            <label htmlFor="region">Region</label>
+                                            <select name="region" id="region" className="form-control" value={region} onChange={handleRegionChange}>
+                                                <option selected="">Veuillez choisir une region</option>
+                                                {regions.map(region => (<option key={region.id} value={region.id}>{region.nom}</option>))}
+                                            </select>
+                                        </div>
+                                        <div className="form-group mb-2">
+                                            <label htmlFor="departement">Département</label>
+                                            <select name="departement" id="departement" className="form-control" value={departement} onChange={handleDepartementChange}>
+                                                <option selected=""> Choisir un département</option>
+                                                {departements.map(departement => (
+                                                    <option key={departement.id} value={departement.id}>{departement.nom}</option>))}
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="arrondissement">Arrondissement</label>
+                                            <select name="arrondissement" id="arrondissement" className="form-control" value={arrondissement} onChange={handleArrondissementChange}>
+                                                <option selected="">Choisir un arrondissement</option>
+                                                {arrondissements.map(arrondissement => (
+                                                    <option key={arrondissement.id} value={arrondissement.id}>{arrondissement.nom}</option>))}
+                                            </select>
+                                        </div>
+                                    </ul>
                                     </form>
                                 </div>
 
