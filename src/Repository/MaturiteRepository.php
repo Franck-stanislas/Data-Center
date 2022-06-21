@@ -39,6 +39,19 @@ class MaturiteRepository extends ServiceEntityRepository
         }
     }
 
+    // return name and count relation with all maturite
+    public function findAllWithProjetsCount(): array
+    {
+        $query = $this->createQueryBuilder('m')
+            ->select('m.id, m.nom_maturite, COUNT(p.id) AS projetCount')
+            ->leftJoin('m.projet', 'p')
+            ->groupBy('m.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+
 //    /**
 //     * @return Maturite[] Returns an array of Maturite objects
 //     */

@@ -41,6 +41,16 @@ class CategorieRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllWithProjectsCount(): array {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.id, c.nom_categorie, COUNT(p.id) AS projetCount')
+            ->leftJoin('c.projet', 'p')
+            ->groupBy('c.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
     // Get one projet by categorie
     public function findOneByProjet(Projet $projet): array
     {

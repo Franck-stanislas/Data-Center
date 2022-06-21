@@ -73,6 +73,12 @@ class IndexController extends AbstractController
         ]);
     }
 
+    #[Route('/projects-list', name: 'app_projects_list')]
+    public function listProjects(): Response
+    {
+        return $this->render('index/list-projects.html.twig');
+    }
+
     #[Route('/projet/{id}/details', name: 'app_project_detail', methods: ['GET'])]
     public function detailProject(Projet $projet, CategorieRepository $categorieRepository, UsersRepository $usersRepository): Response
     {
