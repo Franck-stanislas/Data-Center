@@ -59,6 +59,24 @@ class Projet
     #[ORM\Column(type: 'float', nullable: true)]
     private $lat;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $caracteristique;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $marche;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $supply;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $atouts;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $valeurAjouter;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $eligibilite;
+
     public function __construct()
     {
         $this->eltsMaturite = new ArrayCollection();
@@ -247,6 +265,78 @@ class Projet
     public function setLat(?float $lat): self
     {
         $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getCaracteristique(): ?string
+    {
+        return $this->caracteristique;
+    }
+
+    public function setCaracteristique(?string $caracteristique): self
+    {
+        $this->caracteristique = $caracteristique;
+
+        return $this;
+    }
+
+    public function getMarche(): ?string
+    {
+        return $this->marche;
+    }
+
+    public function setMarche(?string $marche): self
+    {
+        $this->marche = $marche;
+
+        return $this;
+    }
+
+    public function getSupply(): ?string
+    {
+        return $this->supply;
+    }
+
+    public function setSupply(?string $supply): self
+    {
+        $this->supply = $supply;
+
+        return $this;
+    }
+
+    public function getAtouts(): ?string
+    {
+        return $this->atouts;
+    }
+
+    public function setAtouts(?string $atouts): self
+    {
+        $this->atouts = $atouts;
+
+        return $this;
+    }
+
+    public function getValeurAjouter(): ?string
+    {
+        return $this->valeurAjouter;
+    }
+
+    public function setValeurAjouter(?string $valeurAjouter): self
+    {
+        $this->valeurAjouter = $valeurAjouter;
+
+        return $this;
+    }
+
+    public function getEligibilite(): ?string
+    {
+        return $this->eligibilite;
+    }
+
+    public function setEligibilite(?string $eligibilite): self
+    {
+        $this->eligibilite = $eligibilite;
 
         return $this;
     }

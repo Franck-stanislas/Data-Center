@@ -31,11 +31,11 @@ class AddUserType extends AbstractType
             ])
             ->add('roles',ChoiceType::class, [
                 'choices' => [
-                    'Utilisateur communale' => 'ROLE_USER',
-                    'Administrateur' => 'ROLE_ADMIN'
+                    'Utilisateur communale' => 'ROLE_ADMIN',
+                    'Administrateur' => 'ROLE_SUPER_ADMIN'
                 ],
                 'expanded' => true,
-                'multiple' => true,
+                'multiple' => false,
                 'label' => false
             ])
             ->add('password', TextType::class,[

@@ -122,8 +122,14 @@
                             <th class="border-0">Intitulé</th>
                             <th class="border-0">Secteur</th>
                             <th class="border-0">Objectifs</th>
+                            <th class="border-0">Caractéristique</th>
+                            <th class="border-0">Marchés cibles</th>
+                            <th class="border-0">Supply Chain</th>
+                            <th class="border-0">Facteurs et atouts géographique</th>
                             <th class="border-0">Résultat attendus</th>
                             <th class="border-0">Couts estimatif</th>
+                            <th class="border-0">Valeur ajoutées</th>
+                            <th class="border-0">Eligibilité au bénéfice</th>
                             <th class="border-0">Maturité du projet</th>
                             <th class="border-0">Eléments de maturation</th>
                             <th class="border-0">Statut du projet</th>
@@ -150,11 +156,29 @@
 
                                     </td>
                                     <td >
+                                        {{ projet.caracteristique [:50]}}
+                                    </td>
+                                    <td >
+                                        {{ projet.marche }}
+                                    </td>
+                                    <td >
+                                        {{ projet.supply}}
+                                    </td>
+                                    <td >
+                                        {{ projet.atouts [:50]}}
+                                    </td>
+                                    <td >
                                         {{ projet.resultats [:50]}}
 
                                     </td>
                                     <td>
                                         {{ projet.couts }}
+                                    </td>
+                                    <td >
+                                        {{ projet.valeurAjouter [:50]}}
+                                    </td>
+                                    <td >
+                                        {{ projet.eligibilite [:50]}}
                                     </td>
                                     <td>
                                         {{ projet.maturite.nomMaturite }}

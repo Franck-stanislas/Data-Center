@@ -4,6 +4,7 @@ namespace App\Form;
 use App\Entity\SearchData;
 use App\Entity\Categorie;
 use App\Entity\Maturite;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,26 +20,35 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Mot clé'
+                    'placeholder' => 'Mot clé',
                 ]
             ])
             ->add('maturites', EntityType::class, [
-                'label' => false,
-                'mapped' => false,
-                'required' => false,
                 'class' => Maturite::class,
+//                'mapped' => false,
+                'placeholder' =>'Choisir Maturité',
                 'choice_label' => 'nom_maturite',
-                'expanded' => true,
-                'multiple' => true
+                'required' => false,
+                'expanded' => false,
+                'multiple' => false,
+//                'choice_value' => function (?Maturite $entity) {
+//                    return $entity ? $entity->getNomMaturite() : '';
+//                },
+
             ])
             ->add('categories', EntityType::class, [
                 'label' => false,
-                'mapped' => false,
+//                'mapped' => false,
                 'required' => false,
                 'class' => Categorie::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom_categorie', 'ASC');
+                },
                 'choice_label' => 'nom_categorie',
-                'expanded' => true,
-                'multiple' => true
+                'placeholder' =>'Choisir categorie',
+                'expanded' => false,
+                'multiple' => false
             ])
         ;
     }

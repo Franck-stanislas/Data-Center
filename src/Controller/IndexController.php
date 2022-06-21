@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Maturite;
 use App\Entity\Projet;
 use App\Entity\SearchData;
 use App\Form\SearchForm;
@@ -32,17 +33,24 @@ class IndexController extends AbstractController
         ) ;
 
         $data = new SearchData();
+
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-        $projetSearch = $projetRepository->findSearch($data);
+            $search = $projetRepository->findSearch($data);
+            $projetSearch = $paginator->paginate(
+                $search,
+                $request->query->getInt('page', 1),9
+            ) ;
+            return $this->render('index/projectSearch.html.twig', compact('projetSearch'));
 
+        }
 
         return $this->render('index/index.html.twig', [
             'categories' => $categorieRepository->findAll(),
             'maturites' => $maturiteRepository->findAll(),
             'projets' => $projet,
-            'search' => $projetSearch,
             'form' => $form->createView()
         ]);
     }
@@ -74,17 +82,6 @@ class IndexController extends AbstractController
             'users' => $usersRepository->findOneUserByProjet($projet)
         ]);
     }
-
-//    #[Route('/search?value={value}&maturite={maturite}&secteur={secteur}')]
-//    public function search(Request $request, $value, $maturite, $secteur ): Response{
-//        $form = $this->createForm(SearchType::class, null, ['method' => 'GET']);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()){
-//            $value = $form->getData()->getTitle();
-//            $search = $this->get
-//        }
-//    }
 
     #[Route('/category', name: 'app_project_category')]
     public function categoryProject(Request $request, CategorieRepository $categorieRepository, PaginatorInterface $paginator): Response

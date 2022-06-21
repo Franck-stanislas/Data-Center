@@ -18,13 +18,13 @@ class EltMaturiteType extends AbstractType
             ->add('idMaturite',EntityType::class,[
                 'class' => Maturite::class,
                 'mapped' => false,
-                'placeholder' => 'Sélectionnez la maturité lié à l\'élément',
+//                'placeholder' => 'Sélectionnez la maturité lié à l\'élément',
                'choice_label' => null,
                 'multiple' => false,
                 'expanded' => false,
-                'choice_value' => function (?Maturite $entity) {
-                    return $entity ? $entity->getNomMaturite() : '';
-                },
+//                'choice_value' => function (?Maturite $entity) {
+//                    return $entity ? $entity->getNomMaturite() : '';
+//                },
 
 
             ])

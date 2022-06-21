@@ -7,51 +7,21 @@ use App\Entity\Maturite;
 class SearchData
 {
     /*
-     * @var string
+     * @var string|null
+     *
      */
     public $mot = '';
 
     /**
-    * @var Category[]
+     * @var Maturite
      */
-    public $categories = [];
+    public $maturites;
 
     /**
-     * @var Maturite[]
+     * @var Categorie
      */
-    public $maturites = [];
+    public $categories;
 
-    /**
-     * @return Category[]
-     */
-    public function getCategories(): array
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param Category[] $categories
-     */
-    public function setCategories(array $categories): void
-    {
-        $this->categories = $categories;
-    }
-
-    /**
-     * @return Maturite[]
-     */
-    public function getMaturites(): array
-    {
-        return $this->maturites;
-    }
-
-    /**
-     * @param Maturite[] $maturites
-     */
-    public function setMaturites(array $maturites): void
-    {
-        $this->maturites = $maturites;
-    }
 
     /**
      * @return string
@@ -69,6 +39,35 @@ class SearchData
         $this->mot = $mot;
     }
 
+    /**
+     * @return \App\Entity\Maturite
+     */
+    public function getMaturite(): \App\Entity\Maturite
+    {
+        return $this->maturite;
+    }
 
+    /**
+     * @param \App\Entity\Maturite $maturite
+     */
+    public function setMaturite(\App\Entity\Maturite $maturite): void
+    {
+        $this->maturite = $maturite;
+    }
 
+    /**
+     * @return Categorie
+     */
+    public function getCategorie(): Categorie
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param Categorie $categorie
+     */
+    public function setCategorie(Categorie $categorie): void
+    {
+        $this->categorie = $categorie;
+    }
 }

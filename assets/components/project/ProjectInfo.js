@@ -8,7 +8,13 @@ const ProjectInfo = (props) => {
         secteur: '',
         couts: 0,
         resultats: '',
-        objectifs: ''
+        objectifs: '',
+        caracteristique: '',
+        marche: '',
+        supply: '',
+        atouts: '',
+        valeur_ajouter: '',
+        eligibilite: ''
     });
     const [categories, setCategories] = useState([]);
 
@@ -39,6 +45,26 @@ const ProjectInfo = (props) => {
                     <input type="text" className="form-control" id="institule" value={project.institule} onChange={handleChange}/>
                 </div>
                 <div className="mb-4 mt-2">
+                    <label className="my-1 me-2" htmlFor="institule">Caracteristique de l'activité</label>
+                    <textarea rows="4" className="form-control" id="caracteristique" value={project.caracteristique} onChange={handleChange}> </textarea>
+                </div>
+
+                <div className="mb-4 mt-2">
+                    <label className="my-1 me-2" htmlFor="institule">Marchés cibles</label>
+                    <input type="text" className="form-control" id="marche" value={project.marche} onChange={handleChange}/>
+                </div>
+
+                <div className="mb-4 mt-2">
+                    <label className="my-1 me-2" htmlFor="supply">Supply Chain</label>
+                    <textarea rows="4" className="form-control" id="supply" value={project.supply} onChange={handleChange}></textarea>
+                </div>
+
+                <div className="mb-4 mt-2">
+                    <label className="my-1 me-2" htmlFor="atouts">Facteurs et atouts géographiques de production</label>
+                    <input rows="4" className="form-control" id="atouts" value={project.atouts} onChange={handleChange}/>
+                </div>
+
+                <div className="mb-4 mt-2">
                     <label className="my-1 me-2" htmlFor="secteur">Secteur</label>
                     <select className="form-select" id="secteur" aria-label="" onChange={handleChange}>
                         <option selected="">Choisir une categorie</option>
@@ -52,6 +78,19 @@ const ProjectInfo = (props) => {
                     <textarea className="form-control" placeholder="Enter your objectifs..." id="objectifs" value={project.objectifs} onChange={handleChange}
                               rows="4"></textarea>
                 </div>
+
+                <div className="mb-4 mt-2">
+                    <label className="my-1 me-2" htmlFor="valeur_ajouter">Position sur le complexe des chaines de valeur ajoutée</label>
+                    <textarea className="form-control"  rows="4" id="valeur_ajouter" value={project.valeur_ajouter} onChange={handleChange}></textarea>
+                </div>
+
+                <div className="mb-4 mt-2">
+                    <label className="my-1 me-2" htmlFor="eligibilite">Eligibilité au bénéfice des appuis et
+                        arrangement de l’environnement institutionnel</label>
+                    <textarea className="form-control" placeholder="Entrer vos données..." id="eligibilite" value={project.eligibilite} onChange={handleChange}
+                              rows="4"></textarea>
+                </div>
+
                 <div className="mb-4 mt-2">
                     <label className="my-1 me-2" htmlFor="resultats">Resultats attendus</label>
                     <textarea className="form-control" placeholder="Enter your message..." id="resultats" value={project.resultats} onChange={handleChange}

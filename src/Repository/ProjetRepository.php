@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 use App\Entity\Categorie;
+use App\Entity\Maturite;
 use App\Entity\Projet;
 use App\Entity\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -79,31 +80,29 @@ class ProjetRepository extends ServiceEntityRepository
      */
     public function findSearch(SearchData $search)
     {
-        $query = $this
-            ->createQueryBuilder('p')
-            ->select('c', 'm', 'p')
-            ->join('p.secteur', 'c')
-            ->join('p.maturite', 'm');
-
-        if (!empty($search->mot)){
-            $query = $query
-                ->andWhere('p.institule LIKE :mot OR p.objectifs LIKE :mot OR p.resultats LIKE :mot')
-                ->setParameter('mot', "{$search->mot}%");
+        $query =  $this
+            ->createQueryBuilder('p');
+        if(!empty($search->mot)) {
+            $query
+                ->where('p.institule LIKE :mot OR p.objectifs LIKE :mot OR p.resultats LIKE :mot')
+                ->setParameter('mot', "%{$search->mot}%");
+        }
+        if(!empty($search->maturites)) {
+            $query
+                ->join('p.maturite','m')
+                ->andWhere('m.id = :mId')
+                ->setParameter('mId', $search->maturites->getId());
+        }
+        if(!empty($search->categories)) {
+            $query
+                ->join('p.secteur','c')
+                ->andWhere('c.id = :sId')
+                ->setParameter('sId', $search->categories->getId());
         }
 
-        if (!empty($search->categories)){
-            $query = $query
-                ->andWhere('c.id IN (:categories)')
-                ->setParameter('categories' , $search->categories);
-        }
-
-        if (!empty($search->maturites)){
-            $query = $query
-                ->andWhere('m.id IN (:maturites)')
-                ->setParameter('maturites' , $search->maturites);
-        }
-
-        return $query;
+        return $query
+            ->getQuery()
+            ->getResult();
     }
 
 

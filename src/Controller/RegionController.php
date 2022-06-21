@@ -129,6 +129,12 @@ class RegionController extends AbstractController
         $projet->setResultats($data['resultats']);
         $projet->setObjectifs($data['objectifs']);
         $projet->setInstitule($data['institule']);
+        $projet->setCaracteristique($data['caracteristique']);
+        $projet->setMarche($data['marche']);
+        $projet->setSupply($data['supply']);
+        $projet->setAtouts($data['atouts']);
+        $projet->setValeurAjouter($data['valeur_ajouter']);
+        $projet->setEligibilite($data['eligibilite']);
         $projet->setMaturite($maturiteRepository->find($data['maturite']));
         $projet->setStatut($statutRepository->find($data['status']));
         $projet->setUser($security->getUser());

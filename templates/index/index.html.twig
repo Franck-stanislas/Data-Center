@@ -17,36 +17,29 @@
                                 Plateforme d'enregistement des projets de developpement des CTD <br> et de publication à l'endroit des potentiels investisseurs.
                             </p>
                         </div>
-                        <!-- End Search Form -->
+                        <!-- End Hero Text -->
+
                         <!-- Start Search Form -->
+                        {{ form_start(form)}}
                         <div class="search-form wow fadeInUp" data-wow-delay=".7s">
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12 p-0">
                                     <div class="search-input">
                                         <label for="keyword"><i class="lni lni-search-alt theme-color"></i></label>
-                                        <input type="text" name="keyword" id="keyword" placeholder="Mot clé">
+{#                                        <input type="text" name="keyword" id="keyword" placeholder="Mot clé">#}
+                                   {{form_widget(form.mot)}}
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 p-0">
                                     <div class="search-input">
                                         <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
-                                        <select name="category" id="category">
-                                            <option value="none" selected disabled>Maturité du projet</option>
-                                            {% for maturite in maturites%}
-                                                <option value="{{ maturite.nomMaturite }}">{{ maturite.nomMaturite }}</option>
-                                            {% endfor%}
-                                        </select>
+                                        {{form_widget(form.maturites)}}
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 p-0">
                                     <div class="search-input">
                                         <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
-                                        <select name="category" id="category">
-                                            <option value="none" selected disabled>Categories</option>
-                                            {% for categorie in categories%}
-                                                <option value="{{ categorie.nomCategorie }}">{{ categorie.nomCategorie }}</option>
-                                            {% endfor%}
-                                        </select>
+                                        {{form_widget(form.categories, { 'id': 'location' })}}
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12 p-0">
@@ -56,6 +49,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{ form_end(form)}}
                         <!-- End Search Form -->
                     </div>
                 </div>
