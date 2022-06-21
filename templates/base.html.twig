@@ -80,7 +80,7 @@
                                             <a class=" {{ app.request.attributes.get('_route') == 'app_index' ? 'active' : '' }} dd-menu collapsed" href="{{ path('app_index')}}">Accueil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="{{ app.request.attributes.get('_route') == 'app_project_list' ? 'active' : '' }}" href="{{ path('app_project_list') }}">Projets</a>
+                                            <a class="{{ app.request.attributes.get('_route') == 'app_projects_list' ? 'active' : '' }}" href="{{ path('app_projects_list') }}">Projets</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="{{ (app.request.attributes.get('_route') == 'app_project_category' or app.request.attributes.get('_route') =='app_category_detail') ? 'active' : '' }} dd-menu collapsed" href="{{ path('app_project_category') }}">Categories</a>
