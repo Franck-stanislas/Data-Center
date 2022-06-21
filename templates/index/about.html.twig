@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'A propos' %}
+
+{% block body %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Qui sommes nous?</h1>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <ul class="breadcrumb-nav">
+                        <li><a href="{{path('app_index')}}">Accueil</a></li>
+                        <li>A propos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="about-us section">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
+                        <img src="{{asset('client/assets/images/hero/logo-minddevel.jpg')}}" alt="#">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+
+                    <div class="content-right wow fadeInRight" data-wow-delay=".5s">
+
+                        <span class="sub-heading">A Propos</span>
+                        <h2 style="font-size: 25px!important;">CONNAITRE LE MINDDEVEL</h2>
+                        <p class="text-left">Crée à la faveur du Décret Présidentiel N°2018/190 du 02 mars 2018, modifiant et
+                            complétant certaines dispositions du décret n°2011/408 du 09
+                            décembre 2011 portant organisation du Gouvernement..</p><br>
+
+                        <h4 >MISSIONS DANS LE DOMAINE DE LA DECENTRALISATION</h4>
+                        <p>
+                            <ul>
+                            <li>
+                                Elaboration de la législation et de la réglementation relatives à l’organisation et au fonctionnement des Collectivités Territoriales Décentralisées
+                            </li>
+                            <li> Evaluation et suivi de la mise en œuvre de la décentralisation ;</li>
+                            <li>Suivi et contrôle des Collectivités Territoriales Décentralisées ;</li>
+                            <li>Application de la législation et de la réglementation sur l’état civil ;</li>
+                            <li>Sous l’autorité du Président de la République, de l’exercice de la tutelle de l’Etat sur les Collectivités Territoriales Décentralisées.</li>
+                        </ul>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="client-logo-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s" style="font-size: 25px!important;">Organismes Sous Tutelles Et Partenaires</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="client-logo-wrapper">
+                <div class="client-logo-carousel d-flex align-items-center justify-content-between">
+                    <div class="client-logo">
+                        <img src="{{asset('image/feicom.png')}}" alt="#">
+                    </div>
+                    <div class="client-logo">
+                        <img src="{{asset('image/CEFAM.png')}}" alt="#">
+                    </div>
+                    <div class="client-logo">
+                        <img src="{{asset('image/giz.jpg')}}" alt="#">
+                    </div>
+                    <div class="client-logo">
+                        <img src="{{asset('image/bunec.jpg')}}" alt="#">
+                    </div>
+                    <div class="client-logo">
+                        <img src="{{asset('image/PNDP.jpg')}}" alt="#">
+                    </div>
+                    <div class="client-logo">
+                        <img src="{{asset('image/cvuc.jpg')}}" alt="#">
+                    </div>
+                    <div class="client-logo">
+                        <img src="{{asset('image/nasla.jpg')}}" alt="#">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

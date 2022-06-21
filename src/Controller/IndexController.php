@@ -3,19 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
-use App\Entity\Maturite;
 use App\Entity\Projet;
 use App\Entity\SearchData;
 use App\Form\SearchForm;
 use App\Repository\CategorieRepository;
 use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
-use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
 use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,11 +36,13 @@ class IndexController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $search = $projetRepository->findSearch($data);
+            $projetSearchCount = count($search);
+
             $projetSearch = $paginator->paginate(
                 $search,
                 $request->query->getInt('page', 1),9
             ) ;
-            return $this->render('index/projectSearch.html.twig', compact('projetSearch'));
+            return $this->render('index/projectSearch.html.twig', compact('projetSearch', 'projetSearchCount'));
 
         }
 
@@ -93,12 +92,13 @@ class IndexController extends AbstractController
     public function categoryProject(Request $request, CategorieRepository $categorieRepository, PaginatorInterface $paginator): Response
     {
         $categories = $categorieRepository->findAll();
+        $categorieCount = count($categories);
 
         $categorie = $paginator->paginate(
             $categories,
             $request->query->getInt('page', 1),9
         ) ;
-        return $this->render('index/category.html.twig', compact('categorie'));
+        return $this->render('index/category.html.twig', compact('categorie', 'categorieCount'));
     }
 
     #[Route('/category/{id}/projets', name: 'app_category_detail', methods: ['GET'])]
@@ -122,7 +122,12 @@ class IndexController extends AbstractController
     #[Route('/carte-projet', name: 'app_project_map')]
     public function mapProject(CategorieRepository $categorieRepository, StatutRepository $statut): Response
     {
-
         return $this->render('index/carte.html.twig');
+    }
+
+    #[Route('/about', name: 'app_project_about')]
+    public function about():Response
+    {
+        return $this->render('index/about.html.twig');
     }
 }

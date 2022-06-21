@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 #[Route('/admin')]
-#[Auth]
 class AdminController extends AbstractController
 {
     public function __construct(FlashyNotifier $flashy)
