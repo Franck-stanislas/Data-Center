@@ -6,6 +6,7 @@ use App\Entity\Maturite;
 use App\Repository\CategorieRepository;
 use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
+use App\Repository\RegionRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,26 +24,15 @@ class ProjectController extends AbstractController
         MaturiteRepository $maturiteRepository,
         PaginatorInterface $paginator
     ): Response {
-        $data = json_decode($request->getContent(), true);
-        if($data) {
-            dd($data['maturites']);
-            $projet = $projetRepository->findAllByMaturites($data['maturites']);
-            $projets = $paginator->paginate(
-                $projet,
-                $data['page'] ?: 1,
-                4
-            );
-        } else {
-            $projet = $projetRepository->findAll();
-            $projets = $paginator->paginate(
-                $projet,
-                1,
-                4
-            );
-        }
+        $projet = $projetRepository->findAll();
+        $projets = $paginator->paginate(
+            $projet,
+            1,
+            4
+        );
 
         return $this->json([
-            "totalCount" => $projets->getTotalItemCount(),
+            "totalCount" => count($projet),
             "currentPage" => $projets->getCurrentPageNumber(),
             "numItemsPerPage" => $projets->getItemNumberPerPage(),
             "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
@@ -50,5 +40,86 @@ class ProjectController extends AbstractController
             "categories" => $categorieRepository->findAllWithProjectsCount(),
             "maturites" => $maturiteRepository->findAllWithProjetsCount()
         ], 200);
+    }
+
+    #[Route('/filters', name: 'api_filters_projects', methods: ['POST'])]
+    public function filterProjects(
+        Request $request,
+        ProjetRepository $projetRepository,
+        CategorieRepository $categorieRepository,
+        MaturiteRepository $maturiteRepository,
+        PaginatorInterface $paginator
+    ): Response {
+        $projet = $projetRepository->findAll();
+        $projets = $paginator->paginate(
+            $projet,
+            1,
+            4
+        );
+        $data = json_decode($request->getContent(), true);
+        if(!empty($data)) {
+            $projet = $projetRepository->findAllByFilters(
+                $data['activesMaturites'],
+                $data['activesCategories'],
+                $data['search'],
+                (int) $data['region'] ?: null,
+                (int) $data['departement'] ?: null,
+                (int) $data['arrondissement'] ?: null
+            );
+            $projets = $paginator->paginate(
+                $projet,
+                $data['page'] ?: 1,
+                4
+            );
+        }
+
+        return $this->json([
+            "totalCount" => count($projet),
+            "currentPage" => $projets->getCurrentPageNumber(),
+            "numItemsPerPage" => $projets->getItemNumberPerPage(),
+            "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
+            "products" => $projets->getItems(),
+            "categories" => $categorieRepository->findAllByMaturitesWithProjectsCount($data['activesMaturites']),
+            "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories'])
+        ], 200);
+    }
+
+    #[Route('/by-region', name: 'api_projects_region', methods: ['GET'])]
+    public function getProjectsCountByRegion(ProjetRepository $projetRepository, RegionRepository $regionRepository): Response {
+        $projectsByArrondissements = $projetRepository->findCountProjetsByArrondissementApi();
+        $allRegions = array_map(function ($region) {
+            return $region->getNom();
+        }, $regionRepository->findAll());
+
+        $regions = [];
+        foreach ($projectsByArrondissements as $project) {
+            // count projects by region
+            $region = $project['region'];
+            $count = $project['count'];
+            $lat = $project['lat'];
+            $lon = $project['lon'];
+            if (!isset($regions[$region])) {
+                $regions[$region] = [
+                    "count" => $count,
+                    "lat" => $lat,
+                    "lon" => $lon,
+                    "region" => $region
+                ];
+            } else {
+                $regions[$region] = [
+                    "count" => $regions[$region]["count"] + $count,
+                    "lat" => $lat,
+                    "lon" => $lon,
+                    "region" => $region
+                ];
+            }
+        }
+        foreach ($allRegions as $region) {
+            if (!isset($regions[$region])) {
+                $regions[$region]["count"] = 0;
+            }
+        }
+
+        return $this->json($regions);
     }
 }

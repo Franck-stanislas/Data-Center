@@ -25,6 +25,12 @@ class Region
     #[ORM\OneToMany(mappedBy: 'region', targetEntity: Departement::class), Ignore]
     private $departements;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $lat;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $lon;
+
     public function __construct()
     {
         $this->departements = new ArrayCollection();
@@ -85,6 +91,30 @@ class Region
                 $departement->setRegion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLon(): ?float
+    {
+        return $this->lon;
+    }
+
+    public function setLon(?float $lon): self
+    {
+        $this->lon = $lon;
 
         return $this;
     }
