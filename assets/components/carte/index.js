@@ -35,7 +35,7 @@ const Carte = () => {
             {regions && Object.values(regions).filter(region => region.lat).map((region, index) => (
                 <Marker position={[region.lat, region.lon]}>
                     <Popup>
-                        {region.region} <br /> Nombre de projets : {region.count}.
+                        Region : {region.region} <br /> Nombre de projet : {region.count}.
                     </Popup>
                 </Marker>
             ))}

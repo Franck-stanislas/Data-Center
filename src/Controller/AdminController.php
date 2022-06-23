@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Financement;
+use App\Entity\Statut;
 use App\Entity\Users;
 use App\Form\AddUserType;
 use App\Form\EditUserType;
+use App\Repository\FinancementRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
@@ -26,7 +29,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/', name: 'admin')]
-    public function index(ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, RegionRepository $regionRepository): Response
+    public function index(FinancementRepository $financement, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, RegionRepository $regionRepository): Response
     {
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
@@ -59,6 +62,7 @@ class AdminController extends AbstractController
             'users' => $usersRepository->findAll(),
             'statuts' => $statutRepository->findAll(),
             'countByRegion' => $regions,
+            'financements' =>$financement->findAll()
         ]);
     }
 
@@ -73,13 +77,38 @@ class AdminController extends AbstractController
     }
 
     #[Route('/projets', name:'projet_list')]
-    public function listProject(ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
+    public function listProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
     {
 //        dd($projetRepository->findAll());
         return $this->render('admin/projects/list.html.twig',[
             'projets' => $projetRepository->findAll(),
             'users' => $usersRepository->findAll(),
-            'statuts' => $statutRepository->findAll()
+            'statuts' => $statutRepository->findAll(),
+            'financements' => $financementRepository->findAll()
+        ]);
+    }
+
+    #[Route('/statut/{id}', name:'projet_list_parameter')]
+    public function listProjectByStatutParameter(FinancementRepository $financementRepository, Statut $statut, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
+    {
+        $projet = $projetRepository->findAllByStatutParameter($statut);
+        return $this->render('admin/projects/list.html.twig',[
+            'projets' => $projet,
+            'users' => $usersRepository->findAll(),
+            'statuts' => $statutRepository->findAll(),
+            'financements' => $financementRepository->findAll()
+        ]);
+    }
+
+    #[Route('/financement/{id}', name:'projet_list_financement')]
+    public function listProjectByFinancementParameter(FinancementRepository $financementRepository, Financement $financement, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
+    {
+        $projet = $projetRepository->findAllByFinancementParameter($financement);
+        return $this->render('admin/projects/list.html.twig',[
+            'projets' => $projet,
+            'users' => $usersRepository->findAll(),
+            'statuts' => $statutRepository->findAll(),
+            'financements' => $financementRepository->findAll()
         ]);
     }
 

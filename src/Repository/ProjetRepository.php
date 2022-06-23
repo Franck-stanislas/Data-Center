@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 use App\Entity\Categorie;
+use App\Entity\Financement;
 use App\Entity\Maturite;
 use App\Entity\Projet;
 use App\Entity\SearchData;
+use App\Entity\Statut;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -54,6 +56,30 @@ class ProjetRepository extends ServiceEntityRepository
             -> join('projet.secteur', 'secteur')
             ->andWhere('secteur = :category')
             ->setParameter('category', $categorie)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    // find projet by parameter of statut
+    public function findAllByStatutParameter(Statut $statut):array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.statut', 's')
+            ->andWhere('s = :statut')
+            ->setParameter('statut', $statut)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    // find projet by parameter of financement
+    public function findAllByFinancementParameter(Financement $financement):array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.financement', 'f')
+            ->andWhere('f = :financement')
+            ->setParameter('financement', $financement)
             ->getQuery()
             ->getResult()
             ;
@@ -149,7 +175,6 @@ class ProjetRepository extends ServiceEntityRepository
 
     /**
      * Recupere les projets en lien avec la recherche
-//     * @return PaginationInterface
      */
     public function findSearch(SearchData $search)
     {

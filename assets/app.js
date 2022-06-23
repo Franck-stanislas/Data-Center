@@ -27,5 +27,5 @@ if(document.getElementById('root-carte-project')) {
 }
 
 if(document.getElementById('root')) {
-    ReactDOM.render(<Project/>, document.getElementById('root-carte-project'));
+    ReactDOM.render(<Project/>, document.getElementById('root'));
 }

@@ -77,48 +77,39 @@
                             <p>
                                 {{ projet.objectifs}}
                             </p>
-{#                            <ul>#}
-{#                                <li>Model: Apple MacBook Pro 13.3-Inch MYDA2</li>#}
-{#                                <li>Apple M1 chip with 8-core CPU and 8-core GPU</li>#}
-{#                                <li>8GB RAM</li>#}
-{#                                <li>256GB SSD</li>#}
-{#                                <li>13.3-inch 2560x1600 LED-backlit Retina Display</li>#}
-{#                            </ul>#}
-{#                            <p>The generated Lorem Ipsum is therefore always free from repetition, injected humour, or#}
-{#                                non-characteristic words etc.</p>#}
                         </div>
 
                         <div class="single-block description">
                             <h3>Caractéristique de l'activité</h3>
-                            <p>
+                            <p class="text-start">
                                 {{ projet.caracteristique}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>Marché cibles</h3>
-                            <p>
+                            <p class="text-start">
                                 {{ projet.marche}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>Supply Chain</h3>
-                            <p>
+                            <p class="text-start">
                                 {{ projet.supply}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>Facteurs et atouts géographiques de production</h3>
-                            <p>
+                            <p class="text-start">
                                 {{ projet.atouts}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>Position sur le complexe des chaines de valeur ajoutée</h3>
-                            <p>
+                            <p class="text-start">
                                 {{ projet.valeurAjouter}}
                             </p>
                         </div>
@@ -128,14 +119,14 @@
                                 arrangement de l’environnement
                                 institutionnel
                             </h3>
-                            <p>
+                            <p class="text-start">
                                 {{ projet.eligibilite}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>Impact économique</h3>
-                            <p>
+                            <p class="text-start">
                                 {{ projet.resultats}}
                             </p>
                         </div>
@@ -163,14 +154,14 @@
                                 <h3>Publié par</h3>
                                 <div class="content">
                                     {% for user in users%}
-                                        <img src="{{user.photo ? vich_uploader_asset(photo) : asset('image/avatar.png') }}" alt="{{user.firstName}}">
+                                        <img src="{{user.photo ? vich_uploader_asset(user, 'image') : asset('image/avatar.png') }}" alt="{{user.firstName}}">
                                         <h4>{{user.firstName}}</h4>
                                         <span>
                                             {% for role in user.roles %}
-                                                {% if role == "ROLE_USER" %}
-                                                    Utilisateur
-                                                {% elseif role == "ROLE_ADMIN" %}
-                                                    Administrateur
+                                                {% if role == "ROLE_COMMUNALE" %}
+                                                    Utilisateur Communale
+                                                {% elseif role == "ROLE_SUPER_ADMIN" %}
+                                                    Super Administrateur
                                                 {% endif %}
                                             {% endfor %}
                                         </span>

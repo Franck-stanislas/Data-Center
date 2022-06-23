@@ -41,7 +41,9 @@
                                     <div class="row d-block d-xl-flex align-items-center">
                                         <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                             <div class="icon-shape icon-shape-info rounded me-4 me-sm-0">
-                                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="#1769aa" d="M2 28h28v2H2zm25-17a1 1 0 0 0 1-1V7a1 1 0 0 0-.66-.94l-11-4a1 1 0 0 0-.68 0l-11 4A1 1 0 0 0 4 7v3a1 1 0 0 0 1 1h1v13H4v2h24v-2h-2V11zM6 7.7l10-3.64L26 7.7V9H6zM18 24h-4V11h4zM8 11h4v13H8zm16 13h-4V11h4z"/></svg>
+                                                <a href="{{ path('projet_list_parameter', {'id':statut.id})}}">
+                                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="#1769aa" d="M2 28h28v2H2zm25-17a1 1 0 0 0 1-1V7a1 1 0 0 0-.66-.94l-11-4a1 1 0 0 0-.68 0l-11 4A1 1 0 0 0 4 7v3a1 1 0 0 0 1 1h1v13H4v2h24v-2h-2V11zM6 7.7l10-3.64L26 7.7V9H6zM18 24h-4V11h4zM8 11h4v13H8zm16 13h-4V11h4z"/></svg>
+                                                </a>
                                             </div>
                                             <div class="d-sm-none">
                                                 <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
@@ -65,7 +67,9 @@
                                     <div class="row d-block d-xl-flex align-items-center">
                                         <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                             <div class="icon-shape icon-shape-purple rounded me-4 me-sm-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 512"><path fill="#3d4faf" d="m512.1 191l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4c-11.8-4.4-22.6-10.7-32.1-18.6c-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3c-2-12-2.1-24.6 0-37.1c1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7c9.5-7.9 20.4-14.2 32.1-18.6c5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0L552 6.3c3-5.3 9.4-7.5 15.1-5.4c11.8 4.4 22.6 10.7 32.1 18.6c4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3c2 12 2.1 24.6 0 37.1c-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7c-9.5 7.9-20.4 14.2-32.1 18.6c-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zm-10.5-58.8c38.5 29.6 82.4-14.3 52.8-52.8c-38.5-29.7-82.4 14.3-52.8 52.8zM386.3 286.1l33.7 16.8c10.1 5.8 14.5 18.1 10.5 29.1c-8.9 24.2-26.4 46.4-42.6 65.8c-7.4 8.9-20.2 11.1-30.3 5.3l-29.1-16.8c-16 13.7-34.6 24.6-54.9 31.7v33.6c0 11.6-8.3 21.6-19.7 23.6c-24.6 4.2-50.4 4.4-75.9 0c-11.5-2-20-11.9-20-23.6V418c-20.3-7.2-38.9-18-54.9-31.7L74 403c-10 5.8-22.9 3.6-30.3-5.3c-16.2-19.4-33.3-41.6-42.2-65.7c-4-10.9.4-23.2 10.5-29.1l33.3-16.8c-3.9-20.9-3.9-42.4 0-63.4L12 205.8c-10.1-5.8-14.6-18.1-10.5-29c8.9-24.2 26-46.4 42.2-65.8c7.4-8.9 20.2-11.1 30.3-5.3l29.1 16.8c16-13.7 34.6-24.6 54.9-31.7V57.1c0-11.5 8.2-21.5 19.6-23.5c24.6-4.2 50.5-4.4 76-.1c11.5 2 20 11.9 20 23.6v33.6c20.3 7.2 38.9 18 54.9 31.7l29.1-16.8c10-5.8 22.9-3.6 30.3 5.3c16.2 19.4 33.2 41.6 42.1 65.8c4 10.9.1 23.2-10 29.1l-33.7 16.8c3.9 21 3.9 42.5 0 63.5zm-117.6 21.1c59.2-77-28.7-164.9-105.7-105.7c-59.2 77 28.7 164.9 105.7 105.7zm243.4 182.7l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4c-11.8-4.4-22.6-10.7-32.1-18.6c-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3c-2-12-2.1-24.6 0-37.1c1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7c9.5-7.9 20.4-14.2 32.1-18.6c5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0l8.2-14.3c3-5.3 9.4-7.5 15.1-5.4c11.8 4.4 22.6 10.7 32.1 18.6c4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3c2 12 2.1 24.6 0 37.1c-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7c-9.5 7.9-20.4 14.2-32.1 18.6c-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zM501.6 431c38.5 29.6 82.4-14.3 52.8-52.8c-38.5-29.6-82.4 14.3-52.8 52.8z"/></svg>
+                                                <a href="{{ path('projet_list_parameter', {'id':statut.id})}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 640 512"><path fill="#3d4faf" d="m512.1 191l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4c-11.8-4.4-22.6-10.7-32.1-18.6c-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3c-2-12-2.1-24.6 0-37.1c1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7c9.5-7.9 20.4-14.2 32.1-18.6c5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0L552 6.3c3-5.3 9.4-7.5 15.1-5.4c11.8 4.4 22.6 10.7 32.1 18.6c4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3c2 12 2.1 24.6 0 37.1c-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7c-9.5 7.9-20.4 14.2-32.1 18.6c-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zm-10.5-58.8c38.5 29.6 82.4-14.3 52.8-52.8c-38.5-29.7-82.4 14.3-52.8 52.8zM386.3 286.1l33.7 16.8c10.1 5.8 14.5 18.1 10.5 29.1c-8.9 24.2-26.4 46.4-42.6 65.8c-7.4 8.9-20.2 11.1-30.3 5.3l-29.1-16.8c-16 13.7-34.6 24.6-54.9 31.7v33.6c0 11.6-8.3 21.6-19.7 23.6c-24.6 4.2-50.4 4.4-75.9 0c-11.5-2-20-11.9-20-23.6V418c-20.3-7.2-38.9-18-54.9-31.7L74 403c-10 5.8-22.9 3.6-30.3-5.3c-16.2-19.4-33.3-41.6-42.2-65.7c-4-10.9.4-23.2 10.5-29.1l33.3-16.8c-3.9-20.9-3.9-42.4 0-63.4L12 205.8c-10.1-5.8-14.6-18.1-10.5-29c8.9-24.2 26-46.4 42.2-65.8c7.4-8.9 20.2-11.1 30.3-5.3l29.1 16.8c16-13.7 34.6-24.6 54.9-31.7V57.1c0-11.5 8.2-21.5 19.6-23.5c24.6-4.2 50.5-4.4 76-.1c11.5 2 20 11.9 20 23.6v33.6c20.3 7.2 38.9 18 54.9 31.7l29.1-16.8c10-5.8 22.9-3.6 30.3 5.3c16.2 19.4 33.2 41.6 42.1 65.8c4 10.9.1 23.2-10 29.1l-33.7 16.8c3.9 21 3.9 42.5 0 63.5zm-117.6 21.1c59.2-77-28.7-164.9-105.7-105.7c-59.2 77 28.7 164.9 105.7 105.7zm243.4 182.7l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4c-11.8-4.4-22.6-10.7-32.1-18.6c-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3c-2-12-2.1-24.6 0-37.1c1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7c9.5-7.9 20.4-14.2 32.1-18.6c5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0l8.2-14.3c3-5.3 9.4-7.5 15.1-5.4c11.8 4.4 22.6 10.7 32.1 18.6c4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3c2 12 2.1 24.6 0 37.1c-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7c-9.5 7.9-20.4 14.2-32.1 18.6c-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zM501.6 431c38.5 29.6 82.4-14.3 52.8-52.8c-38.5-29.6-82.4 14.3-52.8 52.8z"/></svg>
+                                                </a>
                                             </div>
                                             <div class="d-sm-none">
                                                 <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
@@ -89,7 +93,9 @@
                                     <div class="row d-block d-xl-flex align-items-center">
                                         <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                             <div class="icon-shape icon-shape-success rounded me-4 me-sm-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><circle cx="12" cy="3.5" r="1.5" fill="#327335" opacity="0"><animateTransform attributeName="transform" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="0 12 12;90 12 12;180 12 12;270 12 12"/><animate attributeName="opacity" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="#327335" opacity="0"><animateTransform attributeName="transform" begin="0.2s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="30 12 12;120 12 12;210 12 12;300 12 12"/><animate attributeName="opacity" begin="0.2s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="#327335" opacity="0"><animateTransform attributeName="transform" begin="0.4s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="60 12 12;150 12 12;240 12 12;330 12 12"/><animate attributeName="opacity" begin="0.4s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle></svg>
+                                                <a href="{{ path('projet_list_parameter', {'id':statut.id})}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><circle cx="12" cy="3.5" r="1.5" fill="#327335" opacity="0"><animateTransform attributeName="transform" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="0 12 12;90 12 12;180 12 12;270 12 12"/><animate attributeName="opacity" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="#327335" opacity="0"><animateTransform attributeName="transform" begin="0.2s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="30 12 12;120 12 12;210 12 12;300 12 12"/><animate attributeName="opacity" begin="0.2s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle><circle cx="12" cy="3.5" r="1.5" fill="#327335" opacity="0"><animateTransform attributeName="transform" begin="0.4s" calcMode="discrete" dur="2.4s" repeatCount="indefinite" type="rotate" values="60 12 12;150 12 12;240 12 12;330 12 12"/><animate attributeName="opacity" begin="0.4s" dur="0.6s" keyTimes="0;0.5;1" repeatCount="indefinite" values="1;1;0"/></circle></svg>
+                                                </a>
                                             </div>
                                             <div class="d-sm-none">
                                                 <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
@@ -108,6 +114,140 @@
                         </div>
                     {%endif%}
                 {%endfor%}
+
+                {% for financement in financements%}
+                    {% if financement.id == 1%}
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                                                <a href="{{path('projet_list_financement', {'id':financement.id})}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="currentColor" d="M33.68 15.4h-1.95a14 14 0 0 1 .22 1.6H17.49L8.3 28.07A14 14 0 0 1 22.09 4.62l1-1.76A16 16 0 1 0 34 18a16 16 0 0 0-.23-2.61ZM18 32a13.91 13.91 0 0 1-8.16-2.65L18.43 19h13.52A14 14 0 0 1 18 32Z" class="clr-i-outline--alerted clr-i-outline-path-1--alerted"/><path fill="currentColor" d="M26.85 1.14L21.13 11a1.28 1.28 0 0 0 1.1 2h11.45a1.28 1.28 0 0 0 1.1-2l-5.72-9.86a1.28 1.28 0 0 0-2.21 0Z" class="clr-i-outline--alerted clr-i-outline-path-2--alerted clr-i-alert"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                                                </a>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="mb-1">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elseif financement.id ==2%}
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                                <a href="{{path('projet_list_financement', {'id':financement.id})}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="m9 20l-5-4l5-4v3h13v2H9v3Zm6-8V9H2V7h13V4l5 4l-5 4Z"/></svg>
+                                                </a>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="mb-1">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elseif financement.id ==3%}
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                                <a href="{{path('projet_list_financement', {'id':financement.id})}}">
+                                                    <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                                                </a>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="mb-1">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elseif financement.id ==4%}
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                                                <a href="{{path('projet_list_financement', {'id':financement.id})}}">
+                                                    <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                                                </a>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="mb-1">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elseif financement.id == 5%}
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                                                <a href="{{path('projet_list_financement', {'id':financement.id})}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 20"><g fill="#afafaf" fill-rule="evenodd" clip-rule="evenodd"><path d="M2.5 4.5A2.5 2.5 0 0 1 5 2h11.748a2.5 2.5 0 0 1 2.5 2.5v7.651a2.5 2.5 0 0 1-2.5 2.5h-4.874v2.278a1 1 0 1 1-2 0V14.43a1 1 0 0 1 .626-1.78h6.248a.5.5 0 0 0 .5-.5V4.5a.5.5 0 0 0-.5-.5H5a.5.5 0 0 0-.5.5V6a1 1 0 0 1-2 0V4.5Z"/><path d="M6.187 17.59a1 1 0 0 1 1-1h7.374a1 1 0 1 1 0 2H7.187a1 1 0 0 1-1-1Zm.25-8.208a2.193 2.193 0 1 0-2.058 3.872a2.193 2.193 0 0 0 2.058-3.872ZM1.705 9.35a4.193 4.193 0 1 1 2.674 6.034l-1.677 3.155A1 1 0 1 1 .936 17.6l1.677-3.155a4.194 4.194 0 0 1-.908-5.095Z"/></g></svg>
+                                                </a>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="mb-1">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif%}
+                {% endfor%}
             {% endif%}
         </div>
 

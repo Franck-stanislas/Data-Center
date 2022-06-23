@@ -34,7 +34,7 @@ class AddUserType extends AbstractType
                     'Utilisateur communale' => 'ROLE_ADMIN',
                     'Administrateur' => 'ROLE_SUPER_ADMIN'
                 ],
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => false,
                 'label' => false
             ])

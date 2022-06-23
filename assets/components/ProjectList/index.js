@@ -232,8 +232,8 @@ const ProjectList = () => {
                                         <div className="category-grid-topbar">
                                             <div className="row align-items-center">
                                                 <div className="col-lg-6 col-md-6 col-12">
-                                                    <h3 className="title">Showing
-                                                        1-{projets?.length} of {totalCount} projets found</h3>
+                                                    <h3 className="title">Affiché
+                                                        1-{projets?.length} of {totalCount} projets trouvés</h3>
                                                 </div>
                                                 <div className="col-lg-6 col-md-6 col-12">
                                                     <nav>
@@ -257,11 +257,11 @@ const ProjectList = () => {
                                                         <div className="col-lg-6 col-md-6 col-12" key={projet.id}>
                                                             <div className="single-item-grid">
                                                                 <div className="content">
-                                                                    <a href="javascript:void(0)" className="tag">
+                                                                    <a href={"/category/"+projet.secteur.id+"/projets"} className="tag">
                                                                         {projet.secteur.nomCategorie}
                                                                     </a>
                                                                     <h3 className="title">
-                                                                        <a href="/">{projet.institule}</a>
+                                                                        <a href={"/projet/"+projet.id+"/details"}>{projet.institule}</a>
                                                                     </h3>
                                                                     <p className="location">
                                                                         <a href="javascript:void(0)">
