@@ -252,7 +252,7 @@
 
             {% if is_granted('ROLE_ADMIN') %}
 
-                {% for statut in statuts. %}
+                {% for statut in statuts %}
                     {% if statut.id ==1%}
                         <div class="col-12 col-sm-6 col-xl-4 mb-4">
                             <div class="card border-0 shadow">
@@ -266,7 +266,9 @@
                                             </div>
                                             <div class="d-sm-none">
                                                 <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
-                                                <h3 class="mb-1">{{ users.statut.projet.count }}</h3>
+                                                {% if app.user == 'ADMIN'%}
+                                                    <h3 class="mb-1">{{ users.statut.projet.count }}</h3>
+                                                {%endif%}
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
