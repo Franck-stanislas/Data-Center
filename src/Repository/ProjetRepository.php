@@ -203,6 +203,14 @@ class ProjetRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByUser($userId) {
+        return $this->createQueryBuilder('p')
+           ->andWhere('p.user = :userId')
+           ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 //    /**
 //     * @return Projet[] Returns an array of Projet objects

@@ -39,14 +39,14 @@ class RegionController extends AbstractController
         $this->flashy = $flashy;
     }
 
-    #[Route('/regions', name:'region_list', methods: ['GET'])]
+    #[Route('/regions', name: 'region_list', methods: ['GET'])]
     public function list(RegionRepository $regionRepository): Response
     {
         $regions = $regionRepository->findAll();
         return $this->json($regions, 200);
     }
 
-    #[Route('/regions/{region<[0-9]+>}/departements', name:'departement_list', methods: ['GET'])]
+    #[Route('/regions/{region<[0-9]+>}/departements', name: 'departement_list', methods: ['GET'])]
     public function showDepartement(Region $region): Response
     {
         $departements = $region->getDepartements();
@@ -54,14 +54,14 @@ class RegionController extends AbstractController
         return $this->json($departements, 200);
     }
 
-    #[Route('/departements/{departement<[0-9]+>}/arrondissements', name:'arrondissement_list', methods: ['GET'])]
+    #[Route('/departements/{departement<[0-9]+>}/arrondissements', name: 'arrondissement_list', methods: ['GET'])]
     public function showArrondissement(Departement $departement): Response
     {
         $arrondissements = $departement->getArrondissements();
         return $this->json($arrondissements, 200);
     }
 
-    #[Route('/arrondissements/{arrondissement<[0-9]+>}/communes', name:'commune_list', methods: ['GET'])]
+    #[Route('/arrondissements/{arrondissement<[0-9]+>}/communes', name: 'commune_list', methods: ['GET'])]
     public function showCommune(Arrondissement $arrondissement): Response
     {
         $communes = $arrondissement->getCommunes();
@@ -69,7 +69,7 @@ class RegionController extends AbstractController
         return $this->json($communes, 200);
     }
 
-    #[Route('/categories', name:'categorie_list', methods: ['GET'])]
+    #[Route('/categories', name: 'categorie_list', methods: ['GET'])]
     public function showCategorie(CategorieRepository $categorieRepository): Response
     {
         $categories = $categorieRepository->findAll();
@@ -77,7 +77,7 @@ class RegionController extends AbstractController
         return $this->json($categories, 200);
     }
 
-    #[Route('/status', name:'status_list', methods: ['GET'])]
+    #[Route('/status', name: 'status_list', methods: ['GET'])]
     public function showStatus(StatutRepository $statutRepository): Response
     {
         $statuts = $statutRepository->findAll();
@@ -85,7 +85,7 @@ class RegionController extends AbstractController
         return $this->json($statuts, 200);
     }
 
-    #[Route('/maturite', name:'maturite_list', methods: ['GET'])]
+    #[Route('/maturite', name: 'maturite_list', methods: ['GET'])]
     public function showMaturite(MaturiteRepository $maturiteRepository): Response
     {
         $maturites = $maturiteRepository->findAll();
@@ -93,7 +93,7 @@ class RegionController extends AbstractController
         return $this->json($maturites, 200);
     }
 
-    #[Route('/maturite/{maturite<[0-9]+>}/elts', name:'maturite_elts', methods: ['GET'])]
+    #[Route('/maturite/{maturite<[0-9]+>}/elts', name: 'maturite_elts', methods: ['GET'])]
     public function showMaturiteElts(Maturite $maturite): Response
     {
         $elts = $maturite->getEltMaturites();
@@ -101,7 +101,7 @@ class RegionController extends AbstractController
         return $this->json($elts, 200);
     }
 
-    #[Route('/maturite/{maturite<[0-9]+>}/financements', name:'financement_list', methods: ['GET'])]
+    #[Route('/maturite/{maturite<[0-9]+>}/financements', name: 'financement_list', methods: ['GET'])]
     public function showFinancements(Maturite $maturite): Response
     {
         $financements = $maturite->getFinancements();
@@ -109,17 +109,18 @@ class RegionController extends AbstractController
         return $this->json($financements, 200);
     }
 
-    #[Route('/project/save', name:'project_save', methods: ['POST'])]
+    #[Route('/project/save', name: 'project_save', methods: ['POST'])]
     public function saveProject(
-        ProjetRepository $projectRepository,
+        ProjetRepository         $projectRepository,
         ArrondissementRepository $arrondissementRepository,
-        CategorieRepository $categorieRepository,
-        StatutRepository $statutRepository,
-        MaturiteRepository $maturiteRepository,
-        FinancementRepository $financementRepository,
-        EltMaturiteRepository $eltMaturiteRepository,
-        Security $security,
-        Request $request): Response {
+        CategorieRepository      $categorieRepository,
+        StatutRepository         $statutRepository,
+        MaturiteRepository       $maturiteRepository,
+        FinancementRepository    $financementRepository,
+        EltMaturiteRepository    $eltMaturiteRepository,
+        Security                 $security,
+        Request                  $request): Response
+    {
         // get data of request
         $data = json_decode($request->getContent(), true);
         $projet = new Projet();
@@ -151,10 +152,54 @@ class RegionController extends AbstractController
         return $this->json("ok", 200);
     }
 
+    #[Route('/project/edit', name: 'project_api_edit', methods: ['POST'])]
+    public function editProject(
+        ProjetRepository         $projectRepository,
+        ArrondissementRepository $arrondissementRepository,
+        CategorieRepository      $categorieRepository,
+        StatutRepository         $statutRepository,
+        MaturiteRepository       $maturiteRepository,
+        FinancementRepository    $financementRepository,
+        EltMaturiteRepository    $eltMaturiteRepository,
+        Security                 $security,
+        UsersRepository          $usersRepository,
+        Request                  $request): Response
+    {
+        // get data of request
+        $data = json_decode($request->getContent(), true);
+        $projet = new Projet();
+        $projet->setArrondissement($arrondissementRepository->find($data['arrondissement']));
+        $projet->setSecteur($categorieRepository->find($data['secteur']));
+        $projet->setCouts($data['couts']);
+        $projet->setResultats($data['resultats']);
+        $projet->setObjectifs($data['objectifs']);
+        $projet->setInstitule($data['institule']);
+        $projet->setCaracteristique($data['caracteristique']);
+        $projet->setMarche($data['marche']);
+        $projet->setSupply($data['supply']);
+        $projet->setAtouts($data['atouts']);
+        $projet->setValeurAjouter($data['valeur_ajouter']);
+        $projet->setEligibilite($data['eligibilite']);
+        $projet->setMaturite($maturiteRepository->find($data['maturite']));
+        $projet->setStatut($statutRepository->find($data['status']));
+        $projet->setUser($usersRepository->findOneBy(["id" => $data['user_id']]));
+        foreach ($data['financements'] as $financement) {
+            $projet->addFinancement($financementRepository->find($financement));
+        }
+        foreach ($data['eltsMaturite'] as $maturite) {
+            $projet->addEltsMaturite($eltMaturiteRepository->find($maturite));
+        }
+        // save project
+        $projectRepository->add($projet, true);
+        $this->flashy->success('Projet modifier');
+        $this->redirectToRoute('admin');
+        return $this->json("ok", 200);
+    }
+
     // get all projects with
 
     // get all projects
-    #[Route('/projects', name:'project_list', methods: ['GET'])]
+    #[Route('/projects', name: 'project_list', methods: ['GET'])]
     public function listProject(ProjetRepository $projectRepository, RegionRepository $regionRepository): Response
     {
 
@@ -209,6 +254,5 @@ class RegionController extends AbstractController
 
         return $this->json($projects, 200);
     }
-
 
 }

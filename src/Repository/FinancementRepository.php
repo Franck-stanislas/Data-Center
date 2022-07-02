@@ -39,6 +39,16 @@ class FinancementRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByUser($userId) {
+        return $this->createQueryBuilder('f')
+            ->join('f.projets', 'p')
+            ->join('p.user', 'u')
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Financement[] Returns an array of Financement objects
 //     */
