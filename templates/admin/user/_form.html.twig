@@ -1,0 +1,35 @@
+<div class="d-block mt-4 mb-md-0">
+    {{ form_start(form, {'enctype':'multipart/form-data'}) }}
+        <div class="mb-4 mt-2">
+            <label class="my-1 me-2" htmlFor="institule">Nom</label>
+{#            <input type="text" class="form-control" id="institule" value={project.institule} onChange={handleChange}/>#}
+            {{form_widget(form.first_name)}}
+        </div>
+        <div class="mb-4 mt-2">
+            <label class="my-1 me-2" htmlFor="institule">Prenom</label>
+{#            <textarea rows="4" class="form-control" id="caracteristique" value={project.caracteristique} onChange={handleChange}> </textarea>#}
+            {{form_widget(form.last_name)}}
+        </div>
+
+        <div class="mb-4 mt-2">
+            <label class="my-1 me-2" htmlFor="institule">Email</label>
+            {{ form_widget(form.email) }}
+        </div>
+
+        <div class="mb-4 mt-2">
+            <label class="my-1 me-2" htmlFor="institule">Email</label>
+            {{ form_widget(form.phone) }}
+        </div>
+
+        <div class="mb-4 mt-2">
+            <label class="my-1 me-2" htmlFor="institule">Email</label>
+            {{ form_widget(form.roles) }}
+        </div>
+
+        <div class="mb-4 mt-2">
+            <label class="my-1 me-2" htmlFor="institule">Email</label>
+            {{ form(form.image) }}
+        </div>
+    {{ form_end(form) }}
+</div>
+

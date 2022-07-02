@@ -153,7 +153,7 @@
                             <ul>
                                 {% if projet.maturite.eltMaturites|length > 0%}
                                     <span class="mb-2">Elements de maturite disponibles</span> <br>
-                                    {% for elt in projet.maturite.eltMaturites%}
+                                    {% for elt in projet.eltMaturites%}
                                         <li><a href="javascript:void(0)">{{ elt.nom }}</a></li>
                                     {% endfor%}
                                 {% else%}

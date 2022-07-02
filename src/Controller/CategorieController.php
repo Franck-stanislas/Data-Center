@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @IsGranted("ROLE_ADMIN")
  */
 
-#[Route('/categorie')]
+#[Route('/admin/categorie')]
 class CategorieController extends AbstractController
 {
     public function __construct(FlashyNotifier $flashy)
