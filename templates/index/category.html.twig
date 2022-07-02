@@ -60,10 +60,21 @@
                                                                 <img src="{{ (categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('image/placeholder.png')) }}" alt="{{ categorie.imageName }}" class="thumbnail" height="200" width="200">
                                                             </a>
                                                         </div>
-                                                        <div class="content">
-                                                            <h3 class="title">
+                                                        <div class="content ">
+                                                            <h3 class="title justify-content-between">
                                                                 <a href="{{ path('app_category_detail', {'id':categorie.id}) }}">{{ categorie.nomCategorie }}</a>
+                                                                <span class="text-right" style="display: inline-block;
+                                                                border: 1px solid #eee;
+                                                                font-size: 15px;
+                                                                margin-left: 3px;
+                                                                padding: 1px 6px;
+                                                                border-radius: 4px;
+                                                                font-weight: 600">
+
+                                                                {{categorie.projet.count}}
+                                                            </span>
                                                             </h3>
+
                                                         </div>
                                                     </div>
 

@@ -18,7 +18,7 @@ class SearchForm extends AbstractType
         $builder
             ->add('mot', TextType::class, [
                 'label' => false,
-                'required' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Mot clé',
                 ]
