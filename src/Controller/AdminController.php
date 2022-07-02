@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 
 #[Route('/admin')]
@@ -29,8 +30,16 @@ class AdminController extends AbstractController
     }
 
     #[Route('/', name: 'admin')]
-    public function index(FinancementRepository $financement, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, RegionRepository $regionRepository): Response
+    public function index(FinancementRepository $financement, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, RegionRepository $regionRepository, Security $security): Response
     {
+        $user = $security->getUser();
+
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAll();
+        } else {
+            $projet = $projetRepository->findByUser($user->getId());
+        }
+
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
             return $this->redirectToRoute('login');
@@ -58,7 +67,7 @@ class AdminController extends AbstractController
         }
 
         return $this->render('admin/index.html.twig',[
-            'projets' => $projetRepository->findAll(),
+            'projets' => $projet,
             'users' => $usersRepository->findAll(),
             'statuts' => $statutRepository->findAll(),
             'countByRegion' => $regions,
@@ -77,14 +86,26 @@ class AdminController extends AbstractController
     }
 
     #[Route('/projets', name:'projet_list')]
-    public function listProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
+    public function listProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
     {
+        $user = $security->getUser();
+
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAll();
+            $status = $statutRepository->findAll();
+            $financements = $financementRepository->findAll();
+        } else {
+            $projet = $projetRepository->findByUser($user->getId());
+            $status = $statutRepository->findByUser($user->getId());
+            $financements = $financementRepository->findByUser($user->getId());
+        }
+
 //        dd($projetRepository->findAll());
         return $this->render('admin/projects/list.html.twig',[
-            'projets' => $projetRepository->findAll(),
+            'projets' => $projet,
             'users' => $usersRepository->findAll(),
-            'statuts' => $statutRepository->findAll(),
-            'financements' => $financementRepository->findAll()
+            'statuts' => $status,
+            'financements' => $financements
         ]);
     }
 
@@ -158,7 +179,7 @@ class AdminController extends AbstractController
     }
 
 
-    #[Route("/user/{id}/update", name:"modifier_utilisateur")]
+    #[Route("/user/{id<[0-9]+>}/update", name:"modifier_utilisateur")]
 
     public function editUser(Users $user, UsersRepository $usersRepository, Request $request)
     {

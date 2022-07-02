@@ -39,6 +39,16 @@ class StatutRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByUser($userId) {
+        return $this->createQueryBuilder('s')
+            ->join('s.projet', 'p')
+            ->join('p.user', 'u')
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Statut[] Returns an array of Statut objects
 //     */

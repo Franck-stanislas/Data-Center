@@ -37,26 +37,43 @@ class ProjectsController extends AbstractController
     }
 
     #[Route('/create', name: 'app_projects_create')]
-    public function create(Request $request, ProjetRepository $projetRepository): Response
+    public function create(): Response
     {
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
             return $this->redirectToRoute('login');
         }
 
-        $projet = new Projet();
-        $form = $this->createForm(ProjetType::class, $projet);
-        $form->handleRequest($request);
+        return $this->renderForm('projects/create.html.twig');
+    }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $projetRepository->add($projet, true);
-            $this->flashy->success('Projet enregistré');
-            return $this->redirectToRoute('app_projects', [], Response::HTTP_SEE_OTHER);
+    #[Route('/edit/{id<[0-9]+>}', name: 'project_edit', methods: ['GET'])]
+    public function editProject(Projet $projet): Response
+    {
+        $formatedProjet = [];
+        $formatedProjet['financements'] = [];
+        $formatedProjet['eltsMaturite'] = [];
+        $formatedProjet["arrondissement"] = $projet->getArrondissement()->getId();
+        $formatedProjet["secteur"] = $projet->getSecteur()->getId();
+        $formatedProjet["couts"] = $projet->getCouts();
+        $formatedProjet["resultats"] = $projet->getResultats();
+        $formatedProjet["objectifs"] = $projet->getObjectifs();
+        $formatedProjet["institule"] = $projet->getInstitule();
+        $formatedProjet["caracteristique"] = $projet->getCaracteristique();
+        $formatedProjet["marche"] = $projet->getMarche();
+        $formatedProjet["supply"] = $projet->getSupply();
+        $formatedProjet["atouts"] = $projet->getAtouts();
+        $formatedProjet["valeur_ajouter"] = $projet->getValeurAjouter();
+        $formatedProjet["eligibilite"] = $projet->getEligibilite();
+        $formatedProjet["maturite"] = $projet->getMaturite()->getId();
+        $formatedProjet["status"] = $projet->getStatut()?->getId();
+        $formatedProjet["user_id"] = $projet->getUser()->getId();
+        foreach ($projet->getFinancement() as $financement) {
+            $formatedProjet['financements'][] = $financement->getId();
         }
-
-        return $this->renderForm('projects/create.html.twig', [
-            'projet' => $projet,
-            'form' => $form,
-        ]);
+        foreach ($projet->getEltsMaturite() as $maturite) {
+            $formatedProjet['eltsMaturite'][] = $maturite->getId();
+        }
+        return $this->renderForm('projects/edit.html.twig', compact('formatedProjet'));
     }
 }

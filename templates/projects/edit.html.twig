@@ -1,0 +1,13 @@
+{% extends 'admin/admin.base.html.twig' %}
+
+{% block title 'Nouveau projet ' %}
+
+{% block body %}
+<main class="content">
+    {{ include ('admin/layouts/admin.menu.html.twig') }}
+    {{ include('admin/layouts/navbar.html.twig') }}
+    <div data-project="{{ formatedProjet | json_encode }}" class="edit-project"></div>
+    <div id="root-edit"></div>
+    {#{{ include('projects/_form.html.twig') }}#}
+</main>
+{% endblock %}

@@ -16,6 +16,7 @@ import ReactDOM from 'react-dom';
 import Project from "./components/project";
 import Carte from "./components/carte";
 import ProjectList from "./components/ProjectList";
+import EditProject from "./components/project/EditProject";
 
 
 if(document.getElementById('root-list-projects')) {
@@ -28,4 +29,8 @@ if(document.getElementById('root-carte-project')) {
 
 if(document.getElementById('root')) {
     ReactDOM.render(<Project/>, document.getElementById('root'));
+}
+
+if(document.getElementById('root-edit')) {
+    ReactDOM.render(<EditProject/>, document.getElementById('root-edit'));
 }
