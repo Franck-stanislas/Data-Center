@@ -1,35 +1,59 @@
-<div class="d-block mt-4 mb-md-0">
-    {{ form_start(form, {'enctype':'multipart/form-data'}) }}
-        <div class="mb-4 mt-2">
-            <label class="my-1 me-2" htmlFor="institule">Nom</label>
-{#            <input type="text" class="form-control" id="institule" value={project.institule} onChange={handleChange}/>#}
-            {{form_widget(form.first_name)}}
+<div class="col-12 col-xl-8">
+    <div class="card card-body border-0 shadow mb-4">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Nom </label>
+                    {{form_widget(form.first_name )}}
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Prénom</label>
+                    {{form_widget(form.last_name )}}
+                </div>
+            </div>
         </div>
-        <div class="mb-4 mt-2">
-            <label class="my-1 me-2" htmlFor="institule">Prenom</label>
-{#            <textarea rows="4" class="form-control" id="caracteristique" value={project.caracteristique} onChange={handleChange}> </textarea>#}
-            {{form_widget(form.last_name)}}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Email </label>
+                    {{form_widget(form.email )}}
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Téléphone</label>
+                    {{form_widget(form.phone )}}
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Rôles d'utilisateur </label>
+                    {{form_widget(form.roles )}}
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="first_name">Image</label>
+                    {{form_widget(form.image )}}
+                </div>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button class="btn btn-gray-800 mt-2 me-5 animate-up-2" type="submit">
+                <i class='bx bx-save me-1'></i>
+                {{ button_label|default('Mettre à jour') }}
+            </button>
+            <a href="{{ path('utilisateurs') }} " class="btn btn-gray-800 mt-2 animate-up-2">
+                <i class='bx bx-arrow-back me-1'></i> Retour à la liste
+            </a>
 
-        <div class="mb-4 mt-2">
-            <label class="my-1 me-2" htmlFor="institule">Email</label>
-            {{ form_widget(form.email) }}
         </div>
-
-        <div class="mb-4 mt-2">
-            <label class="my-1 me-2" htmlFor="institule">Email</label>
-            {{ form_widget(form.phone) }}
-        </div>
-
-        <div class="mb-4 mt-2">
-            <label class="my-1 me-2" htmlFor="institule">Email</label>
-            {{ form_widget(form.roles) }}
-        </div>
-
-        <div class="mb-4 mt-2">
-            <label class="my-1 me-2" htmlFor="institule">Email</label>
-            {{ form(form.image) }}
-        </div>
-    {{ form_end(form) }}
+        {{ form_end(form) }}
+    </div>
 </div>
 

@@ -4,8 +4,9 @@
 
 {% block body %}
     <main class="content">
+        {{ include ('admin/layouts/admin.menu.html.twig') }}
+        {{include('admin/layouts/navbar.html.twig')}}
 
-        {% include ('admin/layouts/admin.menu.html.twig') %}
         <div class="py-4">
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -15,7 +16,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item"><a href="#">Maturité</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Listes des maturités</li>
+                <li class="breadcrumb-item active" aria-current="page">Mise à jour des maturités</li>
             </ol>
         </nav>
 
@@ -34,11 +35,7 @@
 
         <h1>Edit Maturite</h1>
 
-        {{ include('maturite/_form.html.twig', {'button_label': 'Update'}) }}
-
-        <a href="{{ path('app_maturite_index') }}">back to list</a>
-
-        {{ include('maturite/_delete_form.html.twig') }}
+        {{ include('maturite/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
         {{include('admin/layouts/footer.html.twig')}}
     </main>

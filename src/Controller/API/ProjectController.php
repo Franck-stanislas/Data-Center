@@ -17,14 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends AbstractController
 {
     #[Route('/get-all', name: 'api_all_projects', methods: ['GET', 'POST'])]
-    public function all(
-        Request $request,
-        ProjetRepository $projetRepository,
-        CategorieRepository $categorieRepository,
-        MaturiteRepository $maturiteRepository,
-        PaginatorInterface $paginator
-    ): Response {
-        $projet = $projetRepository->findAll();
+    public function all(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
+        MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
+    {
+        $projet = $projetRepository->findProjetsWithRegionApi();
         $projets = $paginator->paginate(
             $projet,
             1,
@@ -36,20 +32,16 @@ class ProjectController extends AbstractController
             "currentPage" => $projets->getCurrentPageNumber(),
             "numItemsPerPage" => $projets->getItemNumberPerPage(),
             "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
-            "products" => $projets->getItems(),
+            "projets" => $projets->getItems(),
             "categories" => $categorieRepository->findAllWithProjectsCount(),
             "maturites" => $maturiteRepository->findAllWithProjetsCount()
         ], 200);
     }
 
     #[Route('/filters', name: 'api_filters_projects', methods: ['POST'])]
-    public function filterProjects(
-        Request $request,
-        ProjetRepository $projetRepository,
-        CategorieRepository $categorieRepository,
-        MaturiteRepository $maturiteRepository,
-        PaginatorInterface $paginator
-    ): Response {
+    public function filterProjects(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
+        MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
+    {
         $projet = $projetRepository->findAll();
         $projets = $paginator->paginate(
             $projet,
@@ -122,4 +114,43 @@ class ProjectController extends AbstractController
 
         return $this->json($regions);
     }
+
+    #[Route('/by-maturite', name: 'api_projects_maturite', methods: ['GET'])]
+    public function getProjectsCountByMaturite(ProjetRepository $projetRepository, RegionRepository $regionRepository): Response {
+
+        $projectByMaturite = $projetRepository->findCountProjetsByMaturiteApi();
+        $allRegions = array_map(function ($region) {
+            return $region->getNom();
+        }, $regionRepository->findAll());
+
+        foreach ($projectByMaturite as $project) {
+            // count projects by region
+            $region = $project['region'];
+            $count = $project['count'];
+            $lat = $project['lat'];
+            $lon = $project['lon'];
+            if (!isset($regions[$region])) {
+                $regions[$region] = [
+                    "count" => $count,
+                    "lat" => $lat,
+                    "lon" => $lon,
+                    "region" => $region
+                ];
+            } else {
+                $regions[$region] = [
+                    "count" => $regions[$region]["count"] + $count,
+                    "lat" => $lat,
+                    "lon" => $lon,
+                    "region" => $region
+                ];
+            }
+        }
+        foreach ($allRegions as $region) {
+            if (!isset($regions[$region])) {
+                $regions[$region]["count"] = 0;
+            }
+        }
+        return $this->json($regions);
+    }
+
 }

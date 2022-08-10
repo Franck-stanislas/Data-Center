@@ -36,7 +36,7 @@ const EditOtherInfo = ({project, ...props}) => {
 
     const handleChangeMaturite = (e) => {
         const [id, type] = e.target.value.split('-');
-        axios.get(`https://127.0.0.1:8000/api/maturite/${id}/elts`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/elts`)
             .then(response => {
                 setElements(response.data);
             })
@@ -44,7 +44,7 @@ const EditOtherInfo = ({project, ...props}) => {
                 console.log(error);
             });
 
-        axios.get(`https://127.0.0.1:8000/api/maturite/${id}/financements`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/financements`)
             .then(response => {
                 setFinancements(response.data);
             })
@@ -63,7 +63,7 @@ const EditOtherInfo = ({project, ...props}) => {
     }, [infos])
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/status')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/status')
             .then(response => {
                 setStatuts(response.data);
             })
@@ -73,7 +73,7 @@ const EditOtherInfo = ({project, ...props}) => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/maturite')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/maturite')
             .then(response => {
                 setMaturites(response.data);
             })

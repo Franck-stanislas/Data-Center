@@ -110,16 +110,9 @@ class RegionController extends AbstractController
     }
 
     #[Route('/project/save', name: 'project_save', methods: ['POST'])]
-    public function saveProject(
-        ProjetRepository         $projectRepository,
-        ArrondissementRepository $arrondissementRepository,
-        CategorieRepository      $categorieRepository,
-        StatutRepository         $statutRepository,
-        MaturiteRepository       $maturiteRepository,
-        FinancementRepository    $financementRepository,
-        EltMaturiteRepository    $eltMaturiteRepository,
-        Security                 $security,
-        Request                  $request): Response
+    public function saveProject( ProjetRepository $projectRepository, ArrondissementRepository $arrondissementRepository, CategorieRepository $categorieRepository, StatutRepository $statutRepository,
+        MaturiteRepository       $maturiteRepository, FinancementRepository $financementRepository,
+        EltMaturiteRepository    $eltMaturiteRepository, Security $security, Request $request): Response
     {
         // get data of request
         $data = json_decode($request->getContent(), true);
@@ -195,8 +188,6 @@ class RegionController extends AbstractController
         $this->redirectToRoute('admin');
         return $this->json("ok", 200);
     }
-
-    // get all projects with
 
     // get all projects
     #[Route('/projects', name: 'project_list', methods: ['GET'])]

@@ -71,17 +71,17 @@
                             <div class="row d-block d-xl-flex align-items-center">
                                 <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                     <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
-                                        <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="4em" height="4em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1zm2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936V5zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2zM14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1v1.997z"/></svg>
                                     </div>
                                     <div class="d-sm-none">
-                                        <h2 class="fw-extrabold h5">Investisseurs</h2>
-                                        <h3 class="mb-1">43k</h3>
+                                        <h2 class="fw-extrabold h5">Projets archivés</h2>
+                                        <h3 class="mb-1">0</h3>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-7 px-xl-0">
                                     <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0">Investisseurs</h2>
-                                        <h3 class="fw-extrabold mb-2">43k</h3>
+                                        <h2 class="h6 text-gray-400 mb-0">Projets archivés</h2>
+                                        <h3 class="fw-extrabold mb-2">0</h3>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                     {%endif%}
                 {%endfor%}
 
-                                                      {% for financement in financements%}
+                {% for financement in financements%}
                     {% if financement.id == 1%}
                         <div class="col-12 col-sm-6 col-xl-4 mb-4">
                             <div class="card border-0 shadow">

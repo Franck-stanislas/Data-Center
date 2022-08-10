@@ -19,8 +19,12 @@ class EditUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('first_name', TextType::class)
-            ->add('last_name', TextType::class)
+            ->add('first_name', TextType::class,[
+                'attr' => ['class' =>'form-control'],
+            ])
+            ->add('last_name', TextType::class,[
+                'attr' => ['class' =>'form-control'],
+            ])
             ->add('email', EmailType::class,[
                 'constraints' => [
                     new NotBlank([
@@ -30,7 +34,9 @@ class EditUserType extends AbstractType
                 'required' => true,
                 'attr' => ['class' =>'form-control'],
             ])
-            ->add('phone', NumberType::class)
+            ->add('phone', NumberType::class,[
+                'attr' => ['class' =>'form-control'],
+            ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Utilisateur communale' => 'ROLE_USER',
@@ -38,7 +44,8 @@ class EditUserType extends AbstractType
                 ],
                 'expanded' => true,
                 'multiple' => true,
-                'label' => 'Rôles'
+                'label' => 'Rôles',
+                'attr' => ['class' =>'form-control'],
             ])
             ->add('image', VichImageType::class, [
                 'label' => false,
@@ -46,9 +53,9 @@ class EditUserType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer?',
                 'download_uri' => false,
-                'imagine_pattern' => 'squared_thumbnail_medium'
+                'imagine_pattern' => 'squared_thumbnail_medium',
+                'attr' => ['class' =>'form-control'],
             ])
-            ->add('valider', SubmitType::class)
         ;
     }
 

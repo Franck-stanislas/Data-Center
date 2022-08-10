@@ -7,6 +7,7 @@ use App\Entity\Statut;
 use App\Entity\Users;
 use App\Form\AddUserType;
 use App\Form\EditUserType;
+use App\Form\UserProfilType;
 use App\Repository\FinancementRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\RegionRepository;
@@ -75,14 +76,27 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/profil', name: 'app_profil')]
-    public function profil(): Response
+    #[Route('/profil/{id<[0-9]+>}', name: 'app_profil')]
+    public function profil(Users $user, UsersRepository $usersRepository, Request $request): Response
     {
         if(! $this->getUser()){
             $this->flashy->error('Vous devez vous connecté en tant qu\'administrateur au préalable!');
             return $this->redirectToRoute('login');
         }
-        return $this->render('admin/profil.html.twig');
+        $form = $this->createForm(UserProfilType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $usersRepository->add($user, true);
+
+            $this->flashy->success('Informations misent à jour');
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->renderForm('admin/profil.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
     }
 
     #[Route('/projets', name:'projet_list')]

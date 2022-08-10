@@ -27,7 +27,7 @@ const ProjectList = () => {
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/projects/get-all')
             .then(response => {
-                setProjets(response.data.products);
+                setProjets(response.data.projets);
                 setMaturites(response.data.maturites);
                 setCategories(response.data.categories);
                 setTotalCount(response.data.totalCount);
@@ -39,7 +39,7 @@ const ProjectList = () => {
             .catch(error => {
                 console.log(error);
             });
-        axios.get('https://127.0.0.1:8000/api/regions')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/regions')
             .then(response => {
                 setRegions(response.data);
             })
@@ -57,7 +57,7 @@ const ProjectList = () => {
         const value = event.target.value;
         setRegion(value);
         setArrondissement(null)
-        axios.get(`https://127.0.0.1:8000/api/regions/${value}/departements`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/regions/${value}/departements`)
             .then(response => {
                 setDepartements(response.data);
             })
@@ -69,7 +69,7 @@ const ProjectList = () => {
     const handleDepartementChange = (event) => {
         const value = event.target.value;
         setDepartement(value);
-        axios.get(`https://127.0.0.1:8000/api/departements/${value}/arrondissements`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/departements/${value}/arrondissements`)
             .then(response => {
                 setArrondissements(response.data);
             })
@@ -112,7 +112,7 @@ const ProjectList = () => {
 
     useEffect(() => {
         if (!isFirstLoad) {
-            axios.post('https://127.0.0.1:8000/api/projects/filters', {
+            axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/filters', {
                 page: currentPage,
                 activesMaturites,
                 activesCategories,
@@ -120,7 +120,7 @@ const ProjectList = () => {
                 region, departement, arrondissement
             })
                 .then(response => {
-                    setProjets(response.data.products);
+                    setProjets(response.data.projets);
                     setTotalPages(response.data.totalPages);
                     setCategories(response.data.categories);
                     setMaturites(response.data.maturites);
@@ -269,6 +269,12 @@ const ProjectList = () => {
                                                                             {projet.arrondissement.ville}
                                                                         </a>
                                                                     </p>
+                                                                    <p className="location">
+                                                                        <a href="javascript:void(0)">
+                                                                            <i className="lni lni-map-marker"></i>
+                                                                            Region : {projet.arrondissement.departement.region.nom} CMR
+                                                                        </a>
+                                                                    </p>
                                                                     <ul className="info">
                                                                         <span>Estimation du cout</span><br/>
                                                                         <li className="price">{projet.couts} FCFA</li>
@@ -277,6 +283,7 @@ const ProjectList = () => {
                                                             </div>
                                                         </div>
                                                     ))}
+
 
                                                     {!projets && <span
                                                         className="text-danger text-center">Aucun projet disponible pour le moment</span>}

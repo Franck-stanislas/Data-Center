@@ -34,8 +34,8 @@ class AddUserType extends AbstractType
                     'Utilisateur communale' => 'ROLE_ADMIN',
                     'Administrateur' => 'ROLE_SUPER_ADMIN'
                 ],
-                'expanded' => false,
-                'multiple' => false,
+                'expanded' => true,
+                'multiple' => true,
                 'label' => false
             ])
             ->add('password', TextType::class,[

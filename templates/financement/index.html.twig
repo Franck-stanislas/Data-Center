@@ -50,9 +50,7 @@
                         {% for financement in financements %}
                             <tr>
                                 <td>{{ financement.id }}</td>
-                                <td>
-                                    <img src="{{(financement.imageName ? vich_uploader_asset(financement) : asset('uploads/categorie/placeholer.png')) | imagine_filter('squared_thumbnail_medium')}}" alt="{{ financement.nom_categorie }}" class="card-img-top img-thumbnail">
-                                </td>
+                                <td>{{ financement.nomFinancement}}</td>
                                 <td>
                                     <a href="{{ path('app_financement_edit', {'id': financement.id}) }}" class="me-3">
                                         <i class='bx bx-pencil bx-sm text-success'></i>

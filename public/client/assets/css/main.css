@@ -1179,7 +1179,7 @@ ol {
   width: 40px;
   text-align: center;
   border-radius: 4px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
 }
 
 .pagination .pagination-list li.active a,
@@ -1992,7 +1992,7 @@ ol {
   padding: 35px 40px;
   padding-right: 55px;
   width: 100%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   position: relative;
   -webkit-transform: translateY(50%);
   transform: translateY(50%);
@@ -2096,7 +2096,7 @@ ol {
   padding-right: 45px;
   height: 55px;
   font-size: 15px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
 }
 
 .search-form .search-input input:focus {
@@ -2115,7 +2115,7 @@ ol {
   width: 100%;
   background: #fff;
   border-radius: 6px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   padding: 0 25px;
   height: 55px;
   -webkit-appearance: none;
@@ -2310,7 +2310,7 @@ ol {
 
 .testimonials .single-testimonial {
   background: #fff;
-  border: 1px solid #ececec;
+  border: 2px solid #ececec;
   padding: 50px 40px;
   margin: 20px 0;
   -webkit-transition: all 0.4s ease;
@@ -2395,7 +2395,7 @@ ol {
   position: relative;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  border: 1px solid #ececec;
+  border: 2px solid #ececec;
   overflow: hidden;
   border-radius: 6px;
   padding: 40px 40px;
@@ -2500,7 +2500,7 @@ ol {
   display: block;
   overflow: hidden;
   border: none;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
 }
 
 .accordion-item .accordion-button span {
@@ -2535,7 +2535,7 @@ ol {
 }
 
 .accordion-body {
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 0 0 5px 5px;
   padding: 30px 20px;
 }
@@ -2636,7 +2636,7 @@ ol {
   padding: 40px 30px 30px 30px;
   border-radius: 6px;
   border-radius: 0 0 6px 6px;
-  border: 1px solid #ececec;
+  border: 2px solid #ececec;
 }
 
 .latest-news-area .single-news .content-body .title {
@@ -2732,7 +2732,7 @@ ol {
   background-color: #fff;
   padding: 40px;
   margin-bottom: 40px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 0 0 6px 6px;
   border-top-color: transparent;
 }
@@ -2997,7 +2997,7 @@ blockquote .shape {
   justify-content: space-between;
   background: #fff;
   padding: 30px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
 }
 
 /*comments*/
@@ -3005,7 +3005,7 @@ blockquote .shape {
   background-color: #fff;
   padding: 40px;
   margin-top: 40px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 5px;
 }
 
@@ -3112,7 +3112,7 @@ blockquote .shape {
   font-weight: 500;
   z-index: 2;
   border-radius: 4px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   color: #f5821e;
 }
 
@@ -3147,7 +3147,7 @@ blockquote .shape {
   background-color: #fff;
   padding: 40px;
   margin-top: 40px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 5px;
 }
 
@@ -3170,7 +3170,7 @@ blockquote .shape {
   padding: 0 25px;
   font-weight: 500;
   height: 55px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   margin-bottom: 25px;
   border-radius: 0;
   font-size: 15px;
@@ -3213,7 +3213,7 @@ blockquote .shape {
   background-color: #fff;
   margin-bottom: 30px;
   border-radius: 5px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
 }
 
 .sidebar .widget:last-child {
@@ -3259,7 +3259,7 @@ blockquote .shape {
   font-size: 15px;
   font-weight: 400;
   border-radius: 0;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 5px;
 }
 
@@ -3395,7 +3395,7 @@ blockquote .shape {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   border-radius: 50%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   font-size: 12px;
 }
 
@@ -3430,7 +3430,7 @@ blockquote .shape {
   color: #fff;
   background: transparent;
   color: #888;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 4px;
 }
 
@@ -3524,7 +3524,7 @@ blockquote .shape {
 
 .categories .cat-inner {
   padding: 30px 40px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   position: relative;
   z-index: 9;
@@ -3551,7 +3551,7 @@ blockquote .shape {
 
 .categories.style2 .single-cat {
   margin-top: 30px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   padding: 25px 10px;
 }
 
@@ -3606,7 +3606,7 @@ blockquote .shape {
   font-weight: 500;
   text-align: center;
   background: #f9f9f9;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 5px;
   color: #081828;
   display: inline-block;
@@ -3665,7 +3665,7 @@ blockquote .shape {
 .all-categories ul li a {
   color: #888;
   padding: 10px 15px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   display: block;
   border-radius: 4px;
 }
@@ -3689,7 +3689,7 @@ blockquote .shape {
   padding: 15px 20px;
   background-color: #fff;
   border-radius: 6px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   padding-right: 15px;
 }
 
@@ -3708,7 +3708,7 @@ blockquote .shape {
 .category-page .category-grid-topbar .nav button {
   border: none;
   padding: 5px 10px 3px 10px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 4px;
   margin-right: 6px;
 }
@@ -3726,7 +3726,7 @@ blockquote .shape {
 .category-sidebar .single-widget {
   background-color: #fff;
   padding: 30px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   margin-bottom: 30px;
 }
@@ -3749,7 +3749,7 @@ blockquote .shape {
 .category-sidebar .single-widget.search form input {
   height: 50px;
   width: 100%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   color: #081828;
   padding: 0px 15px;
@@ -3902,7 +3902,7 @@ blockquote .shape {
   line-height: 28px;
   text-align: center;
   display: block;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
   font-size: 13px;
   position: absolute;
@@ -4193,7 +4193,7 @@ blockquote .shape {
   text-align: center;
   display: block;
   border-radius: 50%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
 }
 
 .items-grid .single-grid .content .bottom-content .like:hover {
@@ -4372,7 +4372,7 @@ blockquote .shape {
   border-radius: 6px;
   overflow: hidden;
   margin-top: 30px;
-  border: 1px solid #3333331a;
+  border: 2px solid #3333331a;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
@@ -4522,7 +4522,7 @@ blockquote .shape {
   line-height: 35px;
   text-align: center;
   display: block;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
 }
 
@@ -4673,7 +4673,7 @@ blockquote .shape {
   position: relative;
   background: #fff;
   border-radius: 6px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   padding: 50px 30px;
   padding-left: 115px;
 }
@@ -4740,7 +4740,7 @@ blockquote .shape {
   margin-top: 30px;
   background: #fff;
   border-radius: 6px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   padding-bottom: 20px;
 }
 
@@ -4910,7 +4910,7 @@ blockquote .shape {
 
 /* Dashboard Block */
 .dashboard-block {
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   background: #fff;
   margin-top: 30px;
@@ -4928,7 +4928,7 @@ blockquote .shape {
 /* Dasshboard Sidebar */
 .dashboard-sidebar {
   background: #fff;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
 }
 
@@ -5081,7 +5081,7 @@ blockquote .shape {
 .profile-settings-block .profile-setting-form .form-group input {
   height: 50px;
   width: 100%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   color: #081828;
   background: #fff;
@@ -5091,7 +5091,7 @@ blockquote .shape {
 .profile-settings-block .profile-setting-form .form-group textarea {
   height: 130px;
   padding: 20px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   color: #081828;
   width: 100%;
@@ -5146,7 +5146,7 @@ blockquote .shape {
 .default-form-style .form-group input {
   height: 50px;
   width: 100%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   color: #081828;
   background: #fff;
@@ -5156,7 +5156,7 @@ blockquote .shape {
 .default-form-style .form-group select {
   height: 50px;
   width: 100%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   color: #081828;
   background: #fff;
@@ -5189,7 +5189,7 @@ blockquote .shape {
 .default-form-style .form-group textarea {
   height: 130px;
   padding: 20px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   color: #081828;
   width: 100%;
@@ -5225,7 +5225,7 @@ blockquote .shape {
   height: 50px;
   width: 50px;
   line-height: 50px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
   text-align: center;
   color: #888;
@@ -5392,7 +5392,7 @@ blockquote .shape {
 }
 
 .list-nav ul li a {
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 4px;
   padding: 8px 12px 8px 15px;
   font-size: 14px;
@@ -5402,7 +5402,7 @@ blockquote .shape {
 
 .list-nav ul li a span {
   display: inline-block;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   font-size: 11px;
   margin-left: 3px;
   padding: 1px 6px;
@@ -5450,7 +5450,7 @@ blockquote .shape {
 }
 
 .list-nav1 ul li a {
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 4px;
   padding: 8px 12px 8px 15px;
   font-size: 14px;
@@ -5460,7 +5460,7 @@ blockquote .shape {
 
 .list-nav1 ul li a span {
   display: inline-block;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   font-size: 11px;
   margin-left: 3px;
   padding: 1px 6px;
@@ -5568,7 +5568,7 @@ blockquote .shape {
   height: 30px;
   width: 30px;
   line-height: 30px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
   color: #888;
   text-align: center;
@@ -5625,7 +5625,7 @@ blockquote .shape {
   width: 40px;
   line-height: 40px;
   text-align: center;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -5864,7 +5864,7 @@ blockquote .shape {
   color: #888;
   font-size: 14px;
   display: block;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
   line-height: 40px;
 }
@@ -5937,7 +5937,7 @@ blockquote .shape {
   height: 30px;
   width: 30px;
   line-height: 30px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
   color: #888;
   text-align: center;
@@ -6019,7 +6019,7 @@ blockquote .shape {
 
 .login .form-head {
   padding: 50px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   background-color: #fff;
 }
@@ -6049,7 +6049,7 @@ blockquote .shape {
   min-height: 56px;
   padding: 3px 20px;
   color: #081828;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   outline: 0;
   background-color: #fff;
@@ -6157,7 +6157,7 @@ blockquote .shape {
 .login .form-head .socila-login ul li a {
   padding: 15px 20px;
   text-align: center;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   display: block;
   color: #888;
@@ -6224,7 +6224,7 @@ blockquote .shape {
   padding: 40px;
   background-color: #f9f9f9;
   text-align: center;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
 }
 
@@ -6272,7 +6272,7 @@ blockquote .shape {
 .item-details .top-area {
   background-color: #fff;
   padding: 30px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
 }
 
@@ -6462,7 +6462,7 @@ blockquote .shape {
   text-align: center;
   display: block;
   border-radius: 50%;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   background-color: #fff;
   color: #f5821e;
   line-height: 40px;
@@ -6523,7 +6523,7 @@ blockquote .shape {
 .item-details-blocks .single-block {
   background-color: #fff;
   padding: 30px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   margin-top: 30px;
 }
@@ -6562,7 +6562,7 @@ blockquote .shape {
 
 .item-details-blocks .single-block.tags ul li a {
   padding: 8px 15px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   color: #888;
   border-radius: 4px;
 }
@@ -6604,7 +6604,7 @@ blockquote .shape {
 
 .item-details-blocks .single-block.comments .single-comment .reply {
   padding: 8px 15px;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   color: #888;
   border-radius: 4px;
   margin-top: 20px;
@@ -6721,7 +6721,7 @@ blockquote .shape {
   text-align: center;
   padding: 40px;
   background-color: #fff;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
 }
 
@@ -6815,7 +6815,7 @@ blockquote .shape {
 .bookmarked .job-items {
   padding: 30px;
   background-color: #fff;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
 }
 
@@ -7117,7 +7117,7 @@ blockquote .shape {
   .post-ad-tab nav .nav-tabs {
     border: none;
     padding: 20px;
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     border-radius: 6px;
   }
   .post-ad-tab .step-two-content .upload-input {
@@ -7700,7 +7700,7 @@ blockquote .shape {
   .post-ad-tab nav .nav-tabs {
     border: none;
     padding: 20px;
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     border-radius: 6px;
   }
   .post-ad-tab .step-two-content .upload-input {
@@ -7867,7 +7867,7 @@ blockquote .shape {
   .messages-body .chat-list .reply-block input {
     width: 100%;
     padding: 20px;
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     margin-top: 10px;
     padding-right: 75px;
     border-radius: 6px;
@@ -8029,7 +8029,7 @@ blockquote .shape {
   z-index: 5;
   overflow: hidden;
   background-color: #fff;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
 }
 
@@ -8104,7 +8104,7 @@ blockquote .shape {
   display: block;
   line-height: 40px;
   background: #f9f9f9;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 50%;
   position: relative;
   z-index: 3;
@@ -8126,7 +8126,7 @@ blockquote .shape {
 .contact-us .form-main {
   padding: 45px 50px 50px;
   background: #fff;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   height: 100%;
 }
@@ -8153,7 +8153,7 @@ blockquote .shape {
   height: 55px;
   line-height: 55px;
   width: 100%;
-  border: 1px solid #e6e2f5;
+  border: 2px solid #e6e2f5;
   padding: 0px 20px;
   color: #333;
   border-radius: 0px;
@@ -8164,7 +8164,7 @@ blockquote .shape {
 .contact-us .form .form-group textarea {
   height: 180px;
   width: 100%;
-  border: 1px solid #e6e2f5;
+  border: 2px solid #e6e2f5;
   padding: 15px 20px;
   color: #333;
   border-radius: 0px;
@@ -8421,7 +8421,7 @@ blockquote .shape {
 
 .coming-soon .soon-content .box {
   background: #fff;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   border-radius: 6px;
   width: 100px;
   height: 100px;
@@ -8468,7 +8468,7 @@ blockquote .shape {
 }
 
 .footer .single-footer.mobile-app .app-button .btn {
-  border: 1px solid #eeeeee4a;
+  border: 2px solid #eeeeee4a;
   border-radius: 6px;
   padding: 12px 35px;
   position: relative;
@@ -8631,7 +8631,7 @@ blockquote .shape {
   border-radius: 50%;
   color: #fff;
   background: transparent;
-  border: 1px solid #eee3;
+  border: 2px solid #eee3;
 }
 
 .footer .footer-bottom .footer-social li a:hover {

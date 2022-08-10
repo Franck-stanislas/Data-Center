@@ -46,7 +46,11 @@
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
                             <h2 class="title">{{ projet.institule }}</h2>
-                            <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">{{ projet.arrondissement.ville }}</a></p>
+                            <p class="location">
+                                <i class="lni lni-map-marker"></i>
+                                <a href="javascript:void(0)" class="me-5">{{ projet.arrondissement.ville }}</a>
+                                <a href="javascript:void(0)">Region : {{ projet.arrondissement.departement.region.nom }} CMR</a>
+                            </p>
                             <span>Estimation du cout</span><br>
                             <h3 class="price">
 
@@ -151,9 +155,9 @@
                         <div class="single-block tags">
                             <h3>Autres infos</h3>
                             <ul>
-                                {% if projet.maturite.eltMaturites|length > 0%}
+                                {% if projet.eltsMaturite|length > 0%}
                                     <span class="mb-2">Elements de maturite disponibles</span> <br>
-                                    {% for elt in projet.eltMaturites%}
+                                    {% for elt in projet.eltsMaturite%}
                                         <li><a href="javascript:void(0)">{{ elt.nom }}</a></li>
                                     {% endfor%}
                                 {% else%}

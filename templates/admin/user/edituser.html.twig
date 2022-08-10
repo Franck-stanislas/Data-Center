@@ -5,8 +5,7 @@
 {% block body %}
     <main class="content">
 
-        {% include 'admin/layouts/admin.menu.html.twig' %}
-
+        {{ include ('admin/layouts/admin.menu.html.twig') }}
         {{include('admin/layouts/navbar.html.twig')}}
 
         <div class="py-4">
@@ -29,7 +28,7 @@
 
             </div>
         </div>
-        {{ include('admin/user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        {{ include('admin/user/_form.html.twig') }}
 {#        {{ form(userForm) }}#}
         {{include('admin/layouts/footer.html.twig')}}
     </main>

@@ -4,8 +4,8 @@
                 class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
             <div class="d-flex align-items-center">
                 <div class="avatar-lg me-4">
-                    <img src="../../assets/img/team/profile-picture-3.jpg"
-                         class="card-img-top rounded-circle border-white" alt="Bonnie Green">
+                    <img src="{{app.user.photo ? vich_uploader_asset(app.user, 'image') : asset('image/avatar.png') }}"
+                         class="card-img-top rounded-circle border-white" alt="{{ app.user.photo}}">
                 </div>
                 <div class="d-block">
                     {% if app.user %}
@@ -39,7 +39,7 @@
             <li class="nav-item">
                 <a href="{{ path('app_index') }}" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">
-                        <img src="{{ asset('client/assets/images/logo/logo1.svg') }}" alt="BANQUE DE DONNEES">
+                        <img src="{{ asset('client/assets/images/logo/logo1.svg') }}" alt="BANQUE DE PROJETS">
                     </span>
 {#                    <span class="mt-1 ms-1 sidebar-text">BANQUE DE DONNEES</span>#}
                 </a>
@@ -343,9 +343,18 @@
                     </ul>
                 </div>
             </li>
+
+            <li class="nav-item ">
+                    <a href="#" class="nav-link">
+                    <span class="sidebar-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1zm2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936V5zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2zM14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1v1.997z"/></svg>
+                    </span>
+                        <span class="sidebar-text">Projets Archivés</span>
+                    </a>
+            </li>
             {% endif%}
 
-            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+            <li role="separator" class="dropdown-divider mt-6 mb-3 border-gray-700"></li>
             {% if app.user%}
             <li class="nav-item">
                 <a href="{{  path('app_logout') }}"

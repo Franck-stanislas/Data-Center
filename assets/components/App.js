@@ -8,7 +8,7 @@ import axios from "axios";
 const App = () => {
 
     const save = () => {
-        axios.post('https://127.0.0.1:8000/api/project/save', project)
+        axios.post('https://banquedeprojet.minddevelonline.cm/api/project/save', project)
             .then(res => {
                 console.log(res);
             })

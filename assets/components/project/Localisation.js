@@ -9,7 +9,7 @@ const Localisation = ({setProject}) => {
     const [arrondissements, setArrondissements] = useState([]);
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/regions')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/regions')
             .then(response => {
                 setRegions(response.data);
             })
@@ -20,7 +20,7 @@ const Localisation = ({setProject}) => {
 
     const handleRegionChange = (event) => {
         const value = event.target.value;
-        axios.get(`https://127.0.0.1:8000/api/regions/${value}/departements`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/regions/${value}/departements`)
             .then(response => {
                 setDepartements(response.data);
             })
@@ -31,7 +31,7 @@ const Localisation = ({setProject}) => {
 
     const handleDepartementChange = (event) => {
         const value = event.target.value;
-        axios.get(`https://127.0.0.1:8000/api/departements/${value}/arrondissements`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/departements/${value}/arrondissements`)
             .then(response => {
                 setArrondissements(response.data);
             })

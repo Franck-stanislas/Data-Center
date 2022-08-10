@@ -99,6 +99,7 @@ class ProjetRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    // find count projet by region on maps
     public function findCountProjetsByArrondissementApi(): array
     {
         $query = $this->createQueryBuilder('p')
@@ -106,6 +107,37 @@ class ProjetRepository extends ServiceEntityRepository
             ->join('p.arrondissement', 'a')
             ->join('a.departement', 'd')
             ->join('d.region', 'r')
+            ->groupBy('a.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    // find  projet with all region
+    public function findProjetsWithRegionApi(): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('p , a.nom as arrondissement, d.nom as departement, r.nom as region')
+            ->join('p.secteur', 's')
+            ->join('p.arrondissement', 'a')
+            ->join('a.departement', 'd')
+            ->join('d.region', 'r')
+
+//            ->groupBy('a.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    // find count projet by region join maturity
+    public function findCountProjetsByMaturiteApi(): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('COUNT(p.id) as count, m.maturite as maturite, a.nom as arrondissement, d.nom as departement, r.nom as region, r.lat as lat, r.lon as lon')
+            ->join('p.arrondissement', 'a')
+            ->join('a.departement', 'd')
+            ->join('d.region', 'r')
+            ->join('p.maturite', 'm')
             ->groupBy('a.id')
             ->getQuery();
 
@@ -178,8 +210,7 @@ class ProjetRepository extends ServiceEntityRepository
      */
     public function findSearch(SearchData $search)
     {
-        $query =  $this
-            ->createQueryBuilder('p');
+        $query =  $this->createQueryBuilder('p');
         if(!empty($search->mot)) {
             $query
                 ->where('p.institule LIKE :mot OR p.objectifs LIKE :mot OR p.resultats LIKE :mot')
@@ -210,7 +241,6 @@ class ProjetRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
 
 //    /**
 //     * @return Projet[] Returns an array of Projet objects

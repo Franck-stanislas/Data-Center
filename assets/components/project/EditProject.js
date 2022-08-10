@@ -18,7 +18,7 @@ const EditProject = () => {
     const [type, setType] = useState("");
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/status')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/status')
             .then(response => {
                 setStatuts(response.data);
             })
@@ -28,7 +28,7 @@ const EditProject = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/maturite')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/maturite')
             .then(response => {
                 setMaturites(response.data);
             })
@@ -45,7 +45,7 @@ const EditProject = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/categories')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/categories')
             .then(response => {
                 setCategories(response.data);
             })
@@ -85,7 +85,7 @@ const EditProject = () => {
 
     const handleChangeMaturite = (e) => {
         const [id, type] = e.target.value.split('-');
-        axios.get(`https://127.0.0.1:8000/api/maturite/${id}/elts`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/elts`)
             .then(response => {
                 setElements(response.data);
             })
@@ -93,7 +93,7 @@ const EditProject = () => {
                 console.log(error);
             });
 
-        axios.get(`https://127.0.0.1:8000/api/maturite/${id}/financements`)
+        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/financements`)
             .then(response => {
                 setFinancements(response.data);
             })
@@ -109,7 +109,7 @@ const EditProject = () => {
 
 
     const edit = () => {
-        axios.post('https://127.0.0.1:8000/api/project/edit', project)
+        axios.post('https://banquedeprojet.minddevelonline.cm/api/project/edit', project)
             .then(res => {
                 console.log(res);
             })

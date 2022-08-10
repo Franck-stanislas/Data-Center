@@ -27,7 +27,7 @@ const ProjectInfo = (props) => {
     }, [project])
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/categories')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/categories')
             .then(response => {
                 setCategories(response.data);
             })
