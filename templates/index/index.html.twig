@@ -12,9 +12,9 @@
                     <div class="hero-text text-center">
                         <!-- Start Hero Text -->
                         <div class="section-heading">
-                            <h2 class="wow fadeInUp" data-wow-delay=".3s">BANQUE DE PROJETS DES COLLECTIVITES <br> TERRITORIALES DECENTRALISEES DU CAMEROUN</h2>
+                            <h2 class="wow fadeInUp" data-wow-delay=".3s">{%trans%}BANQUE DE PROJETS DES COLLECTIVITES <br> TERRITORIALES DECENTRALISEES DU CAMEROUN A BESOIN DE FINANCEMENT{%endtrans%}</h2>
                             <p class="wow fadeInUp" data-wow-delay=".5s">
-                                Plateforme d'enregistement et de publication des projets de developpement des collectivités territoriales <br> décentralisées  à l'endroit des potentiels investisseurs.
+                                {%trans%}Plateforme d'enregistement et de publication des projets de developpement des collectivités territoriales <br> décentralisées  à l'endroit des potentiels investisseurs.{%endtrans%}
                             </p>
                         </div>
                         <!-- End Hero Text -->
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-12 p-0">
                                     <div class="search-btn button">
-                                        <button class="btn"><i class="lni lni-search-alt"></i> Chercher </button>
+                                        <button class="btn"><i class="lni lni-search-alt"></i>{%trans%} Chercher {%endtrans%}</button>
                                     </div>
                                 </div>
                             </div>
@@ -91,8 +91,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Recents Projets</h2>
-                        <p class="wow fadeInUp" data-wow-delay=".6s">Recents projets de developpement repertoriés du territoire camerounais.</p>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">{%trans%}Recents Projets{%endtrans%}</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">{%trans%}Recents projets de developpement repertoriés du territoire camerounais.{%endtrans%}</p>
                     </div>
                 </div>
             </div>
@@ -112,11 +112,11 @@
                                                 </h3>
                                                 <ul class="info-list">
                                                     <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville}}</a></li>
-                                                    <li><a href="javascript:void(0)"> Region : {{projet.arrondissement.departement.region.nom}} CMR</a></li>
+                                                    <li><a href="javascript:void(0)"> {%trans%}Region {%endtrans%}: {{projet.arrondissement.departement.region.nom}} CMR</a></li>
                                                 </ul>
                                             </div>
                                             <div class="bottom-content">
-                                                <p class="price">Estimation du cout: <span>{{ projet.couts }}</span></p>
+                                                <p class="price">{%trans%}Estimation du cout: {%endtrans%}<span>{{ projet.couts }}</span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                     </div>
                 {% endfor%}
             {% else%}
-                <span class="text-center text-danger"> Aucun projet repertorié</span>
+                <span class="text-center text-danger"> {%trans%}Aucun projet repertorié{%endtrans%}</span>
             {% endif %}
         </div>
     </section>
@@ -149,8 +149,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Comment proceder </h2>
-                        <p class="wow fadeInUp" data-wow-delay=".6s"> Très facile et pratique, en 4 étapes.</p>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">{%trans%}Comment proceder {%endtrans%}</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s"> {%trans%}Très facile et pratique, en 4 étapes.{%endtrans%}</p>
                     </div>
                 </div>
             </div>
@@ -159,8 +159,8 @@
                     <!-- Start Single Work -->
                     <div class="single-work wow fadeInUp" data-wow-delay=".2s">
                         <span class="serial">01</span>
-                        <h3>Visualiser les projets</h3>
-                        <p> Acceder à la rubrique projet du site pour visualiser la liste de tous les projets.</p>
+                        <h3>{%trans%}Visualiser les projets{%endtrans%}</h3>
+                        <p> {%trans%}Acceder à la rubrique projet du site pour visualiser la liste de tous les projets.{%endtrans%}</p>
                     </div>
                     <!-- End Single Work -->
                 </div>
@@ -168,8 +168,8 @@
                     <!-- Start Single Work -->
                     <div class="single-work wow fadeInUp" data-wow-delay=".4s">
                         <span class="serial">02</span>
-                        <h3>Choisir le secteur d'activité</h3>
-                        <p>Selectionner le secteur d'activité souhaité.</p>
+                        <h3>{%trans%}Choisir le secteur d'activité{%endtrans%}</h3>
+                        <p>{%trans%}Selectionner le secteur d'activité souhaité.{%endtrans%}</p>
                     </div>
                     <!-- End Single Work -->
                 </div>
@@ -177,8 +177,8 @@
                     <!-- Start Single Work -->
                     <div class="single-work wow fadeInUp" data-wow-delay=".6s">
                         <span class="serial">03</span>
-                        <h3>Définir la maturité du projet</h3>
-                        <p> Définir la maturité du projet sur lequel vous souhaitez avoir des informations</p>
+                        <h3>{%trans%}Définir la maturité du projet{%endtrans%}</h3>
+                        <p>{%trans%} Définir la maturité du projet sur lequel vous souhaitez avoir des informations{%endtrans%}</p>
                     </div>
                     <!-- End Single Work -->
                 </div>
@@ -186,8 +186,8 @@
                     <!-- Start Single Work -->
                     <div class="single-work wow fadeInUp" data-wow-delay=".6s">
                         <span class="serial">04</span>
-                        <h3>Acceder à un projet</h3>
-                        <p> Cliquer sur un projet pour pouvoir avoir les informations relatives à ce dernier</p>
+                        <h3>{%trans%}Acceder à un projet{%endtrans%}</h3>
+                        <p>{%trans%} Cliquer sur un projet pour pouvoir avoir les informations relatives à ce dernier{%endtrans%}</p>
                     </div>
                     <!-- End Single Work -->
                 </div>
@@ -202,8 +202,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Carte de Projet </h2>
-                        <p class="wow fadeInUp" data-wow-delay=".6s"> Statistique de la repartition géographique des projets par region.</p>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">{%trans%}Carte de Projet{%endtrans%} </h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s"> {%trans%}Statistique de la repartition géographique des projets par region.{%endtrans%}</p>
                     </div>
                 </div>
             </div>

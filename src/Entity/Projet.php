@@ -7,21 +7,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Ignore;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
-class Projet
+class Projet implements Translatable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255)]
     private $institule;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'text', nullable: true)]
     private $objectifs;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'text', nullable: true)]
     private $resultats;
 
@@ -59,23 +64,32 @@ class Projet
     #[ORM\Column(type: 'float', nullable: true)]
     private $lat;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'text', nullable: true)]
     private $caracteristique;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $marche;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $supply;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'text', nullable: true)]
     private $atouts;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'text', nullable: true)]
     private $valeurAjouter;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'text', nullable: true)]
     private $eligibilite;
+
+    #[ORM\Column(type: 'boolean')]
+    private $etat;
 
     public function __construct()
     {
@@ -340,4 +354,21 @@ class Projet
 
         return $this;
     }
+
+    public function isEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+//    public function setTranslatableLocale($locale)
+//    {
+//        $this->locale = $locale;
+//    }
 }

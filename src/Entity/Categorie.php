@@ -11,17 +11,20 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
-class Categorie
+class Categorie implements Translatable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255)]
     private $nom_categorie;
 
@@ -47,6 +50,13 @@ class Categorie
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $iconeName;
+
+    /**
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+//    #[Gedmo\Locale]
+//    private $locale;
 
     public function __construct()
     {
@@ -163,6 +173,11 @@ class Categorie
 
         return $this;
     }
+
+//    public function setTranslatableLocale($locale)
+//    {
+//        $this->locale = $locale;
+//    }
 
 //    public function getProjetNumber(ProjetRepository $projetRepository):float{
 //

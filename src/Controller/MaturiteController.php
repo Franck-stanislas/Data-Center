@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Require ROLE_ADMIN for all the actions of this controller
@@ -21,9 +22,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('admin/maturite')]
 class MaturiteController extends AbstractController
 {
-    public function __construct(FlashyNotifier $flashy)
+    public function __construct(FlashyNotifier $flashy, TranslatorInterface $translator)
     {
         $this->flashy = $flashy;
+        $this->translation = $translator;
     }
 
     #[Route('/', name: 'app_maturite_index', methods: ['GET'])]
@@ -53,7 +55,8 @@ class MaturiteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $maturiteRepository->add($maturite, true);
-            $this->flashy->success('Nouvelle maturité ajoutée');
+            $message = $this->translation->trans('Nouvelle maturité ajoutée');
+            $this->flashy->success($message);
             return $this->redirectToRoute('app_maturite_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -89,7 +92,8 @@ class MaturiteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $maturiteRepository->add($maturite, true);
-            $this->flashy->success('Nouvelle maturité mis à jour');
+            $message = $this->translation->trans('Nouvelle maturité mis à jour');
+            $this->flashy->primary($message);
             return $this->redirectToRoute('app_maturite_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -109,7 +113,8 @@ class MaturiteController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete'.$maturite->getId(), $request->request->get('_token'))) {
             $maturiteRepository->remove($maturite, true);
-            $this->flashy->success(' Maturité supprimée');
+            $message = $this->translation->trans('Maturité supprimée');
+            $this->flashy->success($message);
         }
 
         return $this->redirectToRoute('app_maturite_index', [], Response::HTTP_SEE_OTHER);

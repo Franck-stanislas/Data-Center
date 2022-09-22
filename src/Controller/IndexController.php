@@ -7,12 +7,15 @@ use App\Entity\Projet;
 use App\Entity\SearchData;
 use App\Form\SearchForm;
 use App\Repository\CategorieRepository;
+use App\Repository\FinancementRepository;
 use App\Repository\MaturiteRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\StatutRepository;
 use App\Repository\UsersRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -120,16 +123,28 @@ class IndexController extends AbstractController
         ]);
     }
 
-
-    #[Route('/carte-projet', name: 'app_project_map')]
-    public function mapProject(CategorieRepository $categorieRepository, StatutRepository $statut): Response
-    {
-        return $this->render('index/carte.html.twig');
-    }
+//    #[Route('/financement', name: '')]
+//    public function financementProject(FinancementRepository $financementRepository): Response
+//    {
+//        $financements = $financementRepository->findBy([], ['nom'=>'ASC']);
+//        return $this->render('layout/financementNavbar.html.twig', compact('financements'));
+//    }
 
     #[Route('/about', name: 'app_project_about')]
     public function about():Response
     {
         return $this->render('index/about.html.twig');
     }
+
+    #[Route('/change-locale/{locale}', name:'app_change_locale')]
+    public function changeLocale($locale, Request $request)
+    {
+//        // On stocke la langue demandée dans la session
+        $request->getSession()->set('_locale', $locale);
+
+        // On revient sur la page précédente
+        return $this->redirect($request->headers->get('referer'));
+
+    }
+
 }

@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Statut{% endblock %}
+{% block title 'Statut' %}
 
 {% block body %}
-    <h1>Statut</h1>
+    <h1>{%trans%}Statut{%endtrans%}</h1>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ statut.id }}</td>
+                <td> {{ statut.id }} </td>
             </tr>
             <tr>
                 <th>Nom</th>
-                <td>{{ statut.nom }}</td>
+                <td>{{ statut.nom|length}}</td>
             </tr>
         </tbody>
     </table>

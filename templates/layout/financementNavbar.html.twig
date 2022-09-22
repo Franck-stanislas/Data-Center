@@ -1,0 +1,11 @@
+<li class="nav-item">
+    <a class="{{ (app.request.attributes.get('_route') == 'app_carte' or app.request.attributes.get('_route') == 'app_project_map') ? 'active' : '' }} dd-menu collapsed" href="javascript:void(0)"
+       data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
+       aria-controls="navbarSupportedContent" aria-expanded="false"
+       aria-label="Toggle navigation">{%trans%}Sources de Financements{%endtrans%}</a>
+    <ul class="sub-menu collapse" id="submenu-1-3">
+        {% for financement in financements%}
+            <li class="nav-item"><a href="javascript:void(0)">{{ financement.nomFinancement|trans }}</a></li>
+        {% endfor%}
+    </ul>
+</li>

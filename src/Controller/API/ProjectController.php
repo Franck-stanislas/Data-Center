@@ -20,13 +20,13 @@ class ProjectController extends AbstractController
     public function all(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
         MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
     {
-        $projet = $projetRepository->findProjetsWithRegionApi();
+        $projet = $projetRepository->findAll();
         $projets = $paginator->paginate(
             $projet,
             1,
-            4
+            30
         );
-
+//dd(ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()));
         return $this->json([
             "totalCount" => count($projet),
             "currentPage" => $projets->getCurrentPageNumber(),
@@ -46,7 +46,7 @@ class ProjectController extends AbstractController
         $projets = $paginator->paginate(
             $projet,
             1,
-            4
+            30
         );
         $data = json_decode($request->getContent(), true);
         if(!empty($data)) {
@@ -61,7 +61,7 @@ class ProjectController extends AbstractController
             $projets = $paginator->paginate(
                 $projet,
                 $data['page'] ?: 1,
-                4
+                30
             );
         }
 
@@ -74,6 +74,25 @@ class ProjectController extends AbstractController
             "categories" => $categorieRepository->findAllByMaturitesWithProjectsCount($data['activesMaturites']),
             "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories'])
         ], 200);
+    }
+
+    #[Route('/print-projects', name: 'api_print_projects', methods: ['POST'])]
+    public function printProjects(Request $request, ProjetRepository $projetRepository): Response
+    {
+        $projet = $projetRepository->findAll();
+        $data = json_decode($request->getContent(), true);
+        if(!empty($data)) {
+            $projet = $projetRepository->findAllByFilters(
+                $data['activesMaturites'],
+                $data['activesCategories'],
+                $data['search'],
+                (int) $data['region'] ?: null,
+                (int) $data['departement'] ?: null,
+                (int) $data['arrondissement'] ?: null
+            );
+        }
+
+        return $this->json($projet, 200);
     }
 
     #[Route('/by-region', name: 'api_projects_region', methods: ['GET'])]

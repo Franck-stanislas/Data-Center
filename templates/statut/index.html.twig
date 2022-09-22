@@ -15,19 +15,19 @@
                             <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         </a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#">Statut</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Listes des statuts des projets</li>
+                    <li class="breadcrumb-item"><a href="#">{%trans%}Statut{%endtrans%}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{%trans%}Listes des statuts des projets{%endtrans%}</li>
                 </ol>
             </nav>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4"> Statut de projet </h1>
+                    <h1 class="h4">{%trans%} Statut de projet {%endtrans%}</h1>
                 </div>
                 <div>
                     <a href="{{ path('app_statut_new') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">
                         <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                        Ajouter un statut
+                        {%trans%}Ajouter un statut{%endtrans%}
                     </a>
                 </div>
             </div>
@@ -42,15 +42,15 @@
                         <thead class="thead-light">
                         <tr>
                             <th class="border-0 rounded-start">#</th>
-                            <th class="border-0">Nom du statut</th>
-                            <th class="border-0">Actions</th>
+                            <th class="border-0">{%trans%}Nom du statut {%endtrans%}</th>
+                            <th class="border-0">{%trans%}Actions {%endtrans%}</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for statut in statuts %}
                             <tr>
                                 <td>{{ statut.id }}</td>
-                                <td>{{ statut.nom }}</td>
+                                <td>{{ statut.nom|length }}</td>
                                 <td>
                                     <a href="{{ path('app_statut_edit', {'id': statut.id}) }}" class="me-3">
                                         <i class='bx bx-pencil bx-sm text-success'></i>
@@ -60,7 +60,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="3" class="text-center text-danger">Aucun enregistrement trouvé</td>
+                                <td colspan="3" class="text-center text-danger">{%trans%}Aucun enregistrement trouvé{%endtrans%}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="NoqDTT8" resname="Informations misent à jour">
+        <source>Informations misent à jour</source>
+        <target>Informations misent à jour</target>
+      </trans-unit>
+      <trans-unit id=".IKImVY" resname="Projet supprimé">
+        <source>Projet supprimé</source>
+        <target>Projet supprimé</target>
+      </trans-unit>
+      <trans-unit id="U.Z.3j4" resname="Catégorie modifié">
+        <source>Catégorie modifié</source>
+        <target>Catégorie modifié</target>
+      </trans-unit>
+      <trans-unit id="l3Wjqij" resname="Utilisateur ajouté">
+        <source>Utilisateur ajouté</source>
+        <target>Utilisateur ajouté</target>
+      </trans-unit>
+      <trans-unit id="aaIhYeI" resname="Utilisateur modifié avec succès">
+        <source>Utilisateur modifié avec succès</source>
+        <target>Utilisateur modifié avec succès</target>
+      </trans-unit>
+      <trans-unit id="p2OquRv" resname="Utilisateur supprimé">
+        <source>Utilisateur supprimé</source>
+        <target>Utilisateur supprimé</target>
+      </trans-unit>
+      <trans-unit id="dk.dHcD" resname="Catégorie enregistré">
+        <source>Catégorie enregistré</source>
+        <target>Catégorie enregistré</target>
+      </trans-unit>
+      <trans-unit id="3_Qm0O." resname="Nouveau élément de maturité enregistré">
+        <source>Nouveau élément de maturité enregistré</source>
+        <target>Nouveau élément de maturité enregistré</target>
+      </trans-unit>
+      <trans-unit id="r4prRzm" resname="Elément de maturité modifié">
+        <source>Elément de maturité modifié</source>
+        <target>Elément de maturité modifié</target>
+      </trans-unit>
+      <trans-unit id="WBp6o2g" resname="Elément de maturité supprimé">
+        <source>Elément de maturité supprimé</source>
+        <target>Elément de maturité supprimé</target>
+      </trans-unit>
+      <trans-unit id="LJt8U8n" resname="Source de financement enregistré">
+        <source>Source de financement enregistré</source>
+        <target>Source de financement enregistré</target>
+      </trans-unit>
+      <trans-unit id="7kuhGOM" resname="Source de financement mis à jour">
+        <source>Source de financement mis à jour</source>
+        <target>Source de financement mis à jour</target>
+      </trans-unit>
+      <trans-unit id="cBUN3H6" resname="Source de financement supprimé avec succès!">
+        <source>Source de financement supprimé avec succès!</source>
+        <target>Source de financement supprimé avec succès!</target>
+      </trans-unit>
+      <trans-unit id="CRnL7tx" resname="Nouvelle maturité ajoutée">
+        <source>Nouvelle maturité ajoutée</source>
+        <target>Nouvelle maturité ajoutée</target>
+      </trans-unit>
+      <trans-unit id="j3cUW1H" resname="Nouvelle maturité mis à jour">
+        <source>Nouvelle maturité mis à jour</source>
+        <target>Nouvelle maturité mis à jour</target>
+      </trans-unit>
+      <trans-unit id="TSmMRI8" resname="Maturité supprimée">
+        <source>Maturité supprimée</source>
+        <target>Maturité supprimée</target>
+      </trans-unit>
+      <trans-unit id="SvKZgtT" resname="Projet enregistré">
+        <source>Projet enregistré</source>
+        <target>Projet enregistré</target>
+      </trans-unit>
+      <trans-unit id="2Qtefwf" resname="Projet modifié">
+        <source>Projet modifié</source>
+        <target>Projet modifié</target>
+      </trans-unit>
+      <trans-unit id="Ocd0OjQ" resname="Le compte a bien été créé !">
+        <source>Le compte a bien été créé !</source>
+        <target>Le compte a bien été créé !</target>
+      </trans-unit>
+      <trans-unit id="60_mt6v" resname="Nouveau statut ajouté">
+        <source>Nouveau statut ajouté</source>
+        <target>Nouveau statut ajouté</target>
+      </trans-unit>
+      <trans-unit id="Ba_WWDk" resname="Statut mis à jour">
+        <source>Statut mis à jour</source>
+        <target>Statut mis à jour</target>
+      </trans-unit>
+      <trans-unit id="zv3WFof" resname="Statut supprimé">
+        <source>Statut supprimé</source>
+        <target>Statut supprimé</target>
+      </trans-unit>
+      <trans-unit id="7axpK40" resname="Nouvel utilisateur">
+        <source>Nouvel utilisateur</source>
+        <target>Nouvel utilisateur</target>
+      </trans-unit>
+      <trans-unit id="OutpwYZ" resname="Nouveau projet">
+        <source>Nouveau projet</source>
+        <target>Nouveau projet</target>
+      </trans-unit>
+      <trans-unit id="zJA_ya9" resname="Compte utilisateur">
+        <source>Compte utilisateur</source>
+        <target>Compte utilisateur</target>
+      </trans-unit>
+      <trans-unit id="fokeBiB" resname="Projets archivés">
+        <source>Projets archivés</source>
+        <target>Projets archivés</target>
+      </trans-unit>
+      <trans-unit id="GpukD6k" resname="Nombre de projet">
+        <source>Nombre de projet</source>
+        <target>Nombre de projet</target>
+      </trans-unit>
+      <trans-unit id="Ih_82YZ" resname="Projets enregistrés">
+        <source>Projets enregistrés</source>
+        <target>Projets enregistrés</target>
+      </trans-unit>
+      <trans-unit id="sYBhQMd" resname="Projet par region">
+        <source>Projet par region</source>
+        <target>Projet par region</target>
+      </trans-unit>
+      <trans-unit id="cJzu9tn" resname="Mois">
+        <source>Mois</source>
+        <target>Mois</target>
+      </trans-unit>
+      <trans-unit id="h8wSOXh" resname="Années">
+        <source>Années</source>
+        <target>Années</target>
+      </trans-unit>
+      <trans-unit id="Dr0lo0H" resname="Ville">
+        <source>Ville</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="CKIcKfY" resname="Intitulé">
+        <source>Intitulé</source>
+        <target>Intitulé</target>
+      </trans-unit>
+      <trans-unit id="UhKqTTF" resname="Secteur">
+        <source>Secteur</source>
+        <target>Secteur</target>
+      </trans-unit>
+      <trans-unit id="M20Wmv7" resname="Objectifs">
+        <source>Objectifs</source>
+        <target>Objectifs</target>
+      </trans-unit>
+      <trans-unit id="FK1eMeH" resname="Résultat attendus">
+        <source>Résultat attendus</source>
+        <target>Résultat attendus</target>
+      </trans-unit>
+      <trans-unit id="8ySfOr4" resname="Couts estimatif">
+        <source>Couts estimatif</source>
+        <target>Couts estimatif</target>
+      </trans-unit>
+      <trans-unit id="_8M0UOg" resname="Maturité du projet">
+        <source>Maturité du projet</source>
+        <target>Maturité du projet</target>
+      </trans-unit>
+      <trans-unit id="CELiA9R" resname="Eléments de maturation">
+        <source>Eléments de maturation</source>
+        <target>Eléments de maturation</target>
+      </trans-unit>
+      <trans-unit id="h3x2hvh" resname="Statut du projet">
+        <source>Statut du projet</source>
+        <target>Statut du projet</target>
+      </trans-unit>
+      <trans-unit id="yxporLK" resname="Financement">
+        <source>Financement</source>
+        <target>Financement</target>
+      </trans-unit>
+      <trans-unit id="L5GWJ1K" resname="Aucun projet enregistré">
+        <source>Aucun projet enregistré</source>
+        <target>Aucun projet enregistré</target>
+      </trans-unit>
+      <trans-unit id="4A9Q_qc" resname="Mon Profil">
+        <source>Mon Profil</source>
+        <target>Mon Profil</target>
+      </trans-unit>
+      <trans-unit id="sYru0ag" resname="Se déconnecter">
+        <source>Se déconnecter</source>
+        <target>Se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="Tvyg0Qx" resname="About">
+        <source>About</source>
+        <target>About</target>
+      </trans-unit>
+      <trans-unit id="K1w9JnI" resname="Contact">
+        <source>Contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="H2TZrwV" resname="Informations Générales">
+        <source>Informations Générales</source>
+        <target>Informations Générales</target>
+      </trans-unit>
+      <trans-unit id="ssEkU20" resname="Nom">
+        <source>Nom</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="4yW.j5A" resname="Prénom">
+        <source>Prénom</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="lpzL089" resname="Email">
+        <source>Email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="zExCS1c" resname="Téléphone">
+        <source>Téléphone</source>
+        <target>Téléphone</target>
+      </trans-unit>
+      <trans-unit id="uCA6YV5" resname="Choisir une photo de profil">
+        <source>Choisir une photo de profil</source>
+        <target>Choisir une photo de profil</target>
+      </trans-unit>
+      <trans-unit id="CTJrC2S" resname="Changer Image">
+        <source>Changer Image</source>
+        <target>Changer Image</target>
+      </trans-unit>
+      <trans-unit id="kkzOJ5x" resname="JPG, GIF or PNG. Taille max de 800K">
+        <source>JPG, GIF or PNG. Taille max de 800K</source>
+        <target>JPG, GIF or PNG. Taille max de 800K</target>
+      </trans-unit>
+      <trans-unit id="NkHc7Pk" resname="Projets Archivés">
+        <source>Projets Archivés</source>
+        <target>Projets Archivés</target>
+      </trans-unit>
+      <trans-unit id="c0OEHnJ" resname="Liste">
+        <source>Liste</source>
+        <target>Liste</target>
+      </trans-unit>
+      <trans-unit id="wBwC77n" resname="Liste des Projets Archivés">
+        <source>Liste des Projets Archivés</source>
+        <target>Liste des Projets Archivés</target>
+      </trans-unit>
+      <trans-unit id="xDY3y18" resname="Caractéristique">
+        <source>Caractéristique</source>
+        <target>Caractéristique</target>
+      </trans-unit>
+      <trans-unit id="oZU3B4Z" resname="Marchés cibles">
+        <source>Marchés cibles</source>
+        <target>Marchés cibles</target>
+      </trans-unit>
+      <trans-unit id="1siKeCn" resname="Supply Chain">
+        <source>Supply Chain</source>
+        <target>Supply Chain</target>
+      </trans-unit>
+      <trans-unit id="CI1gmJd" resname="Facteurs et atouts géographique">
+        <source>Facteurs et atouts géographique</source>
+        <target>Facteurs et atouts géographique</target>
+      </trans-unit>
+      <trans-unit id="GMI.mBQ" resname="Valeur ajoutées">
+        <source>Valeur ajoutées</source>
+        <target>Valeur ajoutées</target>
+      </trans-unit>
+      <trans-unit id="25cSOei" resname="Eligibilité au bénéfice">
+        <source>Eligibilité au bénéfice</source>
+        <target>Eligibilité au bénéfice</target>
+      </trans-unit>
+      <trans-unit id="Da1htjG" resname="Projets">
+        <source>Projets</source>
+        <target>Projets</target>
+      </trans-unit>
+      <trans-unit id="N91sELK" resname="Liste des projets">
+        <source>Liste des projets</source>
+        <target>Liste des projets</target>
+      </trans-unit>
+      <trans-unit id="jycFEb3" resname="Ajouter un projet">
+        <source>Ajouter un projet</source>
+        <target>Ajouter un projet</target>
+      </trans-unit>
+      <trans-unit id=".4BZ3Gd" resname="Actions">
+        <source>Actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="UzFhc1Y" resname="Accueil">
+        <source>Accueil</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="_m0EU8u" resname="Secteurs">
+        <source>Secteurs</source>
+        <target>Secteurs</target>
+      </trans-unit>
+      <trans-unit id="ZyFT62v" resname="A propos">
+        <source>A propos</source>
+        <target>A propos</target>
+      </trans-unit>
+      <trans-unit id="_JbiKmu" resname="Qui sommes&#10;                                                        nous?">
+        <source>Qui sommes
+                                                        nous?</source>
+        <target>Qui sommes nous?</target>
+      </trans-unit>
+      <trans-unit id="Z7aWRoY" resname="Dashboard">
+        <source>Dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="0FJ_Sz1" resname="Logout">
+        <source>Logout</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="Dvf5y03" resname="Se deconnecter">
+        <source>Se deconnecter</source>
+        <target>Se deconnecter</target>
+      </trans-unit>
+      <trans-unit id="CsPSyzA" resname="Se connecter">
+        <source>Se connecter</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="LSWfCb9" resname="Langues">
+        <source>Langues</source>
+        <target>Langues</target>
+      </trans-unit>
+      <trans-unit id="J9U0bzr" resname="Banque de Projets des &lt;br&gt; Collectivités Territoriales &lt;br&gt; Décentralisées">
+        <source>Banque de Projets des &lt;br&gt; Collectivités Territoriales &lt;br&gt; Décentralisées</source>
+        <target><![CDATA[Banque de Projets des <br> Collectivités Territoriales <br> Décentralisées]]></target>
+      </trans-unit>
+      <trans-unit id="xbMJlFT" resname="BANQUE DE PROJETS DES CTD">
+        <source>BANQUE DE PROJETS DES CTD</source>
+        <target>BANQUE DE PROJETS DES CTD</target>
+      </trans-unit>
+      <trans-unit id="sTObaF8" resname="Travaillez Avec Nous">
+        <source>Travaillez Avec Nous</source>
+        <target>Travaillez Avec Nous</target>
+      </trans-unit>
+      <trans-unit id="2ASL7bv" resname="Consultez nos&#10;                                                    marchés">
+        <source>Consultez nos
+                                                    marchés</source>
+        <target>Consultez nos marchés</target>
+      </trans-unit>
+      <trans-unit id="2rauMUa" resname="Appel d'offres et conditions générales">
+        <source>Appel d'offres et conditions générales</source>
+        <target>Appel d'offres et conditions générales</target>
+      </trans-unit>
+      <trans-unit id="uUYiX6m" resname="Liens Rapides">
+        <source>Liens Rapides</source>
+        <target>Liens Rapides</target>
+      </trans-unit>
+      <trans-unit id="KyZR9lw" resname="A Propos">
+        <source>A Propos</source>
+        <target>A Propos</target>
+      </trans-unit>
+      <trans-unit id="YdaVBBA" resname="Connexion">
+        <source>Connexion</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="7UVCgWj" resname="Carrefour Nlongkak&lt;br&gt; Yaoundé, CAMEROUN">
+        <source>Carrefour Nlongkak&lt;br&gt; Yaoundé, CAMEROUN</source>
+        <target><![CDATA[Carrefour Nlongkak<br> Yaoundé, CAMEROUN]]></target>
+      </trans-unit>
+      <trans-unit id="cmrZXL6" resname="Designed and Developped by">
+        <source>Designed and Developped by</source>
+        <target>Designed and Developped by</target>
+      </trans-unit>
+      <trans-unit id="aKU0H8a" resname="Catégorie">
+        <source>Catégorie</source>
+        <target>Catégorie</target>
+      </trans-unit>
+      <trans-unit id="NfB_iiZ" resname="Ajout">
+        <source>Ajout</source>
+        <target>Ajout</target>
+      </trans-unit>
+      <trans-unit id="rlrYByI" resname="Ajouter une catégorie">
+        <source>Ajouter une catégorie</source>
+        <target>Ajouter une catégorie</target>
+      </trans-unit>
+      <trans-unit id="BDGoMMB" resname="Nom categorie">
+        <source>Nom categorie</source>
+        <target>Nom categorie</target>
+      </trans-unit>
+      <trans-unit id="GqTLC8y" resname="Image">
+        <source>Image</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="JTo.TcP" resname="Aucun enregistrement trouvé">
+        <source>Aucun enregistrement trouvé</source>
+        <target>Aucun enregistrement trouvé</target>
+      </trans-unit>
+      <trans-unit id="a3wiUW." resname="Nom de la catégorie">
+        <source>Nom de la catégorie</source>
+        <target>Nom de la catégorie</target>
+      </trans-unit>
+      <trans-unit id="kT0NAoN" resname="Icone">
+        <source>Icone</source>
+        <target>Icone</target>
+      </trans-unit>
+      <trans-unit id="QLeNDdM" resname="Retour à la liste">
+        <source>Retour à la liste</source>
+        <target>Retour à la liste</target>
+      </trans-unit>
+      <trans-unit id="jSVNyRv" resname="Elément de maturité">
+        <source>Elément de maturité</source>
+        <target>Elément de maturité</target>
+      </trans-unit>
+      <trans-unit id="rL8IgGj" resname="Ajouter un élément de maturité">
+        <source>Ajouter un élément de maturité</source>
+        <target>Ajouter un élément de maturité</target>
+      </trans-unit>
+      <trans-unit id="6M8t3hz" resname="Nom de l'élément">
+        <source>Nom de l'élément</source>
+        <target>Nom de l'élément</target>
+      </trans-unit>
+      <trans-unit id="e_dnKIu" resname="Maturité de l'élément">
+        <source>Maturité de l'élément</source>
+        <target>Maturité de l'élément</target>
+      </trans-unit>
+      <trans-unit id="Q.swPM2" resname="Nom de la source de financement">
+        <source>Nom de la source de financement</source>
+        <target>Nom de la source de financement</target>
+      </trans-unit>
+      <trans-unit id="fDZkggX" resname="Projet Detaillé">
+        <source>Projet Detaillé</source>
+        <target>Projet Detaillé</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="ROi6GV7" resname="Detail du projet">
+        <source>Detail du projet</source>
+        <target>Detail du projet</target>
+      </trans-unit>
+      <trans-unit id="06AI7xM" resname="Region">
+        <source>Region</source>
+        <target>Region</target>
+      </trans-unit>
+      <trans-unit id="F.F3aJ8" resname="Estimation du cout">
+        <source>Estimation du cout</source>
+        <target>Estimation du cout</target>
+      </trans-unit>
+      <trans-unit id="QSvguc1" resname="Informations">
+        <source>Informations</source>
+        <target>Informations</target>
+      </trans-unit>
+      <trans-unit id="RQ.RLtw" resname="Maturite">
+        <source>Maturite</source>
+        <target>Maturite</target>
+      </trans-unit>
+      <trans-unit id="3uN3z9j" resname="Statut">
+        <source>Statut</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="2udc.zu" resname="Indisponible">
+        <source>Indisponible</source>
+        <target>Indisponible</target>
+      </trans-unit>
+      <trans-unit id="8z52pqt" resname="Appeler pour plus d'info">
+        <source>Appeler pour plus d'info</source>
+        <target>Appeler pour plus d'info</target>
+      </trans-unit>
+      <trans-unit id="Um4Ah8w" resname="Description">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="BUXh1EQ" resname="Caractéristique de l'activité">
+        <source>Caractéristique de l'activité</source>
+        <target>Caractéristique de l'activité</target>
+      </trans-unit>
+      <trans-unit id="6io.VfE" resname="Marché cibles">
+        <source>Marché cibles</source>
+        <target>Marché cibles</target>
+      </trans-unit>
+      <trans-unit id="duTZzWO" resname="Facteurs et atouts géographiques de production">
+        <source>Facteurs et atouts géographiques de production</source>
+        <target>Facteurs et atouts géographiques de production</target>
+      </trans-unit>
+      <trans-unit id="38gzobs" resname="Position sur le complexe des chaines de valeur ajoutée">
+        <source>Position sur le complexe des chaines de valeur ajoutée</source>
+        <target>Position sur le complexe des chaines de valeur ajoutée</target>
+      </trans-unit>
+      <trans-unit id="zFj_5K0" resname="Eligibilité au bénéfice des appuis et&#10;                                arrangement de l’environnement&#10;                                institutionnel">
+        <source>Eligibilité au bénéfice des appuis et
+                                arrangement de l’environnement
+                                institutionnel</source>
+        <target>Eligibilité au bénéfice des appuis et
+                                arrangement de l’environnement
+                                institutionnel</target>
+      </trans-unit>
+      <trans-unit id="b4ziXUh" resname="Impact économique">
+        <source>Impact économique</source>
+        <target>Impact économique</target>
+      </trans-unit>
+      <trans-unit id="dRb43H_" resname="Autres infos">
+        <source>Autres infos</source>
+        <target>Autres infos</target>
+      </trans-unit>
+      <trans-unit id="jh0T7FH" resname="Elements de maturite disponibles">
+        <source>Elements de maturite disponibles</source>
+        <target>Elements de maturite disponibles</target>
+      </trans-unit>
+      <trans-unit id="uFmX6T." resname="Aucunes informations pour le moment">
+        <source>Aucunes informations pour le moment</source>
+        <target>Aucunes informations pour le moment</target>
+      </trans-unit>
+      <trans-unit id="JMMAWUt" resname="Publié par">
+        <source>Publié par</source>
+        <target>Publié par</target>
+      </trans-unit>
+      <trans-unit id="SuPTD1b" resname="Utilisateur Communale">
+        <source>Utilisateur Communale</source>
+        <target>Utilisateur Communale</target>
+      </trans-unit>
+      <trans-unit id="tbqPNFQ" resname="Super Administrateur">
+        <source>Super Administrateur</source>
+        <target>Super Administrateur</target>
+      </trans-unit>
+      <trans-unit id="FbYZdLJ" resname="Location">
+        <source>Location</source>
+        <target>Location</target>
+      </trans-unit>
+      <trans-unit id="GWN4DWw" resname="BANQUE DE PROJETS DES COLLECTIVITES &lt;br&gt; TERRITORIALES DECENTRALISEES DU CAMEROUN A BESOIN DE FINANCEMENT">
+        <source>BANQUE DE PROJETS DES COLLECTIVITES &lt;br&gt; TERRITORIALES DECENTRALISEES DU CAMEROUN A BESOIN DE FINANCEMENT</source>
+        <target><![CDATA[BANQUE DE PROJETS DES COLLECTIVITES <br> TERRITORIALES DECENTRALISEES DU CAMEROUN A BESOIN DE FINANCEMENT]]></target>
+      </trans-unit>
+      <trans-unit id="ejYzL1G" resname="Plateforme d'enregistement et de publication des projets de developpement des collectivités territoriales &lt;br&gt; décentralisées  à l'endroit des potentiels investisseurs.">
+        <source>Plateforme d'enregistement et de publication des projets de developpement des collectivités territoriales &lt;br&gt; décentralisées  à l'endroit des potentiels investisseurs.</source>
+        <target><![CDATA[Plateforme d'enregistement et de publication des projets de developpement des collectivités territoriales <br> décentralisées  à l'endroit des potentiels investisseurs.]]></target>
+      </trans-unit>
+      <trans-unit id="1PQek7g" resname="Chercher">
+        <source>Chercher</source>
+        <target>Chercher</target>
+      </trans-unit>
+      <trans-unit id="8F_7a0Q" resname="Recents Projets">
+        <source>Recents Projets</source>
+        <target>Recents Projets</target>
+      </trans-unit>
+      <trans-unit id="iNPnc8O" resname="Recents projets de developpement repertoriés du territoire camerounais.">
+        <source>Recents projets de developpement repertoriés du territoire camerounais.</source>
+        <target>Recents projets de developpement repertoriés du territoire camerounais.</target>
+      </trans-unit>
+      <trans-unit id="pBAu1UH" resname="Estimation du cout:">
+        <source>Estimation du cout:</source>
+        <target>Estimation du cout:</target>
+      </trans-unit>
+      <trans-unit id="whUMWRI" resname="Aucun projet repertorié">
+        <source>Aucun projet repertorié</source>
+        <target>Aucun projet repertorié</target>
+      </trans-unit>
+      <trans-unit id="gf5AvD8" resname="Comment proceder">
+        <source>Comment proceder</source>
+        <target>Comment proceder</target>
+      </trans-unit>
+      <trans-unit id="x4PN3ot" resname="Très facile et pratique, en 4 étapes.">
+        <source>Très facile et pratique, en 4 étapes.</source>
+        <target>Très facile et pratique, en 4 étapes.</target>
+      </trans-unit>
+      <trans-unit id="6dv7uyj" resname="Visualiser les projets">
+        <source>Visualiser les projets</source>
+        <target>Visualiser les projets</target>
+      </trans-unit>
+      <trans-unit id="Hdi8YH1" resname="Acceder à la rubrique projet du site pour visualiser la liste de tous les projets.">
+        <source>Acceder à la rubrique projet du site pour visualiser la liste de tous les projets.</source>
+        <target>Acceder à la rubrique projet du site pour visualiser la liste de tous les projets.</target>
+      </trans-unit>
+      <trans-unit id="nJ_OvM6" resname="Choisir le secteur d'activité">
+        <source>Choisir le secteur d'activité</source>
+        <target>Choisir le secteur d'activité</target>
+      </trans-unit>
+      <trans-unit id="3asgwPW" resname="Selectionner le secteur d'activité souhaité.">
+        <source>Selectionner le secteur d'activité souhaité.</source>
+        <target>Selectionner le secteur d'activité souhaité.</target>
+      </trans-unit>
+      <trans-unit id="mlK86KK" resname="Définir la maturité du projet">
+        <source>Définir la maturité du projet</source>
+        <target>Définir la maturité du projet</target>
+      </trans-unit>
+      <trans-unit id="m7otg6b" resname="Définir la maturité du projet sur lequel vous souhaitez avoir des informations">
+        <source>Définir la maturité du projet sur lequel vous souhaitez avoir des informations</source>
+        <target>Définir la maturité du projet sur lequel vous souhaitez avoir des informations</target>
+      </trans-unit>
+      <trans-unit id="3rwbW26" resname="Acceder à un projet">
+        <source>Acceder à un projet</source>
+        <target>Acceder à un projet</target>
+      </trans-unit>
+      <trans-unit id="T.Qj25g" resname="Cliquer sur un projet pour pouvoir avoir les informations relatives à ce dernier">
+        <source>Cliquer sur un projet pour pouvoir avoir les informations relatives à ce dernier</source>
+        <target>Cliquer sur un projet pour pouvoir avoir les informations relatives à ce dernier</target>
+      </trans-unit>
+      <trans-unit id=".8bkDeq" resname="Carte de Projet">
+        <source>Carte de Projet</source>
+        <target>Carte de Projet</target>
+      </trans-unit>
+      <trans-unit id="ortBr2W" resname="Statistique de la repartition géographique des projets par region.">
+        <source>Statistique de la repartition géographique des projets par region.</source>
+        <target>Statistique de la repartition géographique des projets par region.</target>
+      </trans-unit>
+      <trans-unit id="rldENCT" resname="Sources de Financements">
+        <source>Sources de Financements</source>
+        <target>Sources de Financements</target>
+      </trans-unit>
+      <trans-unit id="sym6UIu" resname="Nom de la maturité">
+        <source>Nom de la maturité</source>
+        <target>Nom de la maturité</target>
+      </trans-unit>
+      <trans-unit id="OrJMnW3" resname="Type de la maturité">
+        <source>Type de la maturité</source>
+        <target>Type de la maturité</target>
+      </trans-unit>
+      <trans-unit id="v9G0130" resname="Nouvelle catégorie">
+        <source>Nouvelle catégorie</source>
+        <target>Nouvelle catégorie</target>
+      </trans-unit>
+      <trans-unit id="OXfTUpb" resname="Categorie">
+        <source>Categorie</source>
+        <target>Categorie</target>
+      </trans-unit>
+      <trans-unit id="QuN2BLY" resname="Modifier">
+        <source>Modifier</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="Da7haHo" resname="Nouveau élément de maturité">
+        <source>Nouveau élément de maturité</source>
+        <target>Nouveau élément de maturité</target>
+      </trans-unit>
+      <trans-unit id="39B2Ild" resname="Elément de Maturité">
+        <source>Elément de Maturité</source>
+        <target>Elément de Maturité</target>
+      </trans-unit>
+      <trans-unit id="U0M9PNE" resname="back to list">
+        <source>back to list</source>
+        <target>back to list</target>
+      </trans-unit>
+      <trans-unit id="YPi2C7k" resname="Source de financement">
+        <source>Source de financement</source>
+        <target>Source de financement</target>
+      </trans-unit>
+      <trans-unit id="ZcF5bqu" resname="Mise à jour">
+        <source>Mise à jour</source>
+        <target>Mise à jour</target>
+      </trans-unit>
+      <trans-unit id="GFGZbsy" resname="Mise à jour de la source de financement">
+        <source>Mise à jour de la source de financement</source>
+        <target>Mise à jour de la source de financement</target>
+      </trans-unit>
+      <trans-unit id="W3l77qo" resname="Listes des financements">
+        <source>Listes des financements</source>
+        <target>Listes des financements</target>
+      </trans-unit>
+      <trans-unit id="pUw6J5Y" resname="Ajouter une source de financement">
+        <source>Ajouter une source de financement</source>
+        <target>Ajouter une source de financement</target>
+      </trans-unit>
+      <trans-unit id="4qiA28b" resname="Qui sommes nous?">
+        <source>Qui sommes nous?</source>
+        <target>Qui sommes nous?</target>
+      </trans-unit>
+      <trans-unit id="Uwn1tHC" resname="CONNAITRE LE MINDDEVEL">
+        <source>CONNAITRE LE MINDDEVEL</source>
+        <target>CONNAITRE LE MINDDEVEL</target>
+      </trans-unit>
+      <trans-unit id="IaOjT3." resname="&gt;Crée à la faveur du Décret Présidentiel N°2018/190 du 02 mars 2018, modifiant et&#10;                            complétant certaines dispositions du décret n°2011/408 du 09&#10;                            décembre 2011 portant organisation du Gouvernement..">
+        <source>&gt;Crée à la faveur du Décret Présidentiel N°2018/190 du 02 mars 2018, modifiant et
+                            complétant certaines dispositions du décret n°2011/408 du 09
+                            décembre 2011 portant organisation du Gouvernement..</source>
+        <target><![CDATA[>Crée à la faveur du Décret Présidentiel N°2018/190 du 02 mars 2018, modifiant et
+                            complétant certaines dispositions du décret n°2011/408 du 09
+                            décembre 2011 portant organisation du Gouvernement..]]></target>
+      </trans-unit>
+      <trans-unit id="rqqUM0h" resname="MISSIONS DANS LE DOMAINE DE LA DECENTRALISATION">
+        <source>MISSIONS DANS LE DOMAINE DE LA DECENTRALISATION</source>
+        <target>MISSIONS DANS LE DOMAINE DE LA DECENTRALISATION</target>
+      </trans-unit>
+      <trans-unit id="6yET4Te" resname="Elaboration de la législation et de la réglementation relatives à l’organisation et au fonctionnement des Collectivités Territoriales Décentralisées">
+        <source>Elaboration de la législation et de la réglementation relatives à l’organisation et au fonctionnement des Collectivités Territoriales Décentralisées</source>
+        <target>Elaboration de la législation et de la réglementation relatives à l’organisation et au fonctionnement des Collectivités Territoriales Décentralisées</target>
+      </trans-unit>
+      <trans-unit id=".Wlituu" resname="Evaluation et suivi de la mise en œuvre de la décentralisation">
+        <source>Evaluation et suivi de la mise en œuvre de la décentralisation</source>
+        <target>Evaluation et suivi de la mise en œuvre de la décentralisation</target>
+      </trans-unit>
+      <trans-unit id="7caqY02" resname="Suivi et contrôle des Collectivités Territoriales Décentralisées">
+        <source>Suivi et contrôle des Collectivités Territoriales Décentralisées</source>
+        <target>Suivi et contrôle des Collectivités Territoriales Décentralisées</target>
+      </trans-unit>
+      <trans-unit id="0Z.Z_.l" resname="Application de la législation et de la réglementation sur l’état civil">
+        <source>Application de la législation et de la réglementation sur l’état civil</source>
+        <target>Application de la législation et de la réglementation sur l’état civil</target>
+      </trans-unit>
+      <trans-unit id="PtLj41V" resname="Sous l’autorité du Président de la République, de l’exercice de la tutelle de l’Etat sur les Collectivités Territoriales Décentralisées.">
+        <source>Sous l’autorité du Président de la République, de l’exercice de la tutelle de l’Etat sur les Collectivités Territoriales Décentralisées.</source>
+        <target>Sous l’autorité du Président de la République, de l’exercice de la tutelle de l’Etat sur les Collectivités Territoriales Décentralisées.</target>
+      </trans-unit>
+      <trans-unit id="fccVMlM" resname="Organismes Sous Tutelles Et Partenaires">
+        <source>Organismes Sous Tutelles Et Partenaires</source>
+        <target>Organismes Sous Tutelles Et Partenaires</target>
+      </trans-unit>
+      <trans-unit id="F5CixBC" resname="Carte de projet">
+        <source>Carte de projet</source>
+        <target>Carte de projet</target>
+      </trans-unit>
+      <trans-unit id="uLHYlMa" resname="Categories">
+        <source>Categories</source>
+        <target>Categories</target>
+      </trans-unit>
+      <trans-unit id="SxUSCLz" resname="Catégories">
+        <source>Catégories</source>
+        <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="miw_aON" resname="Liste de catégories">
+        <source>Liste de catégories</source>
+        <target>Liste de catégories</target>
+      </trans-unit>
+      <trans-unit id="NXZqTrY" resname="Affiché">
+        <source>Affiché</source>
+        <target>Affiché</target>
+      </trans-unit>
+      <trans-unit id="V2st6MP" resname="catégories trouvé">
+        <source>catégories trouvé</source>
+        <target>catégories trouvé</target>
+      </trans-unit>
+      <trans-unit id="zhoGTzR" resname="BANQUE DE PROJETS DES COLLECTIVITES &lt;br&gt; TERRITORIALES DECENTRALISEES DU CAMEROUN">
+        <source>BANQUE DE PROJETS DES COLLECTIVITES &lt;br&gt; TERRITORIALES DECENTRALISEES DU CAMEROUN</source>
+        <target><![CDATA[BANQUE DE PROJETS DES COLLECTIVITES <br> TERRITORIALES DECENTRALISEES DU CAMEROUN]]></target>
+      </trans-unit>
+      <trans-unit id="cz0cdCZ" resname="Rechercher">
+        <source>Rechercher</source>
+        <target>Rechercher</target>
+      </trans-unit>
+      <trans-unit id="qqYFYUz" resname="Toutes les categories">
+        <source>Toutes les categories</source>
+        <target>Toutes les categories</target>
+      </trans-unit>
+      <trans-unit id="FZ2ievd" resname="Résultat de la recherche">
+        <source>Résultat de la recherche</source>
+        <target>Résultat de la recherche</target>
+      </trans-unit>
+      <trans-unit id="wQ8rXay" resname="Projets trouvés">
+        <source>Projets trouvés</source>
+        <target>Projets trouvés</target>
+      </trans-unit>
+      <trans-unit id="c5xrQXL" resname="Aucun élément trouvé">
+        <source>Aucun élément trouvé</source>
+        <target>Aucun élément trouvé</target>
+      </trans-unit>
+      <trans-unit id=".5yLjAZ" resname="Mot de passe">
+        <source>Mot de passe</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="yrFEeRj" resname="Se souvenir de moi">
+        <source>Se souvenir de moi</source>
+        <target>Se souvenir de moi</target>
+      </trans-unit>
+      <trans-unit id="PdvEmIS" resname="Mot de passe oublié?">
+        <source>Mot de passe oublié?</source>
+        <target>Mot de passe oublié?</target>
+      </trans-unit>
+      <trans-unit id="hdv5cPr" resname="Maturité">
+        <source>Maturité</source>
+        <target>Maturité</target>
+      </trans-unit>
+      <trans-unit id="Fri_kzl" resname="Mise à jour des maturités">
+        <source>Mise à jour des maturités</source>
+        <target>Mise à jour des maturités</target>
+      </trans-unit>
+      <trans-unit id="RY.SYaY" resname="Ajouter une maturité">
+        <source>Ajouter une maturité</source>
+        <target>Ajouter une maturité</target>
+      </trans-unit>
+      <trans-unit id="WtXKsVb" resname="Modifier Maturite">
+        <source>Modifier Maturite</source>
+        <target>Modifier Maturite</target>
+      </trans-unit>
+      <trans-unit id="WG9Vx7a" resname="Listes des maturités">
+        <source>Listes des maturités</source>
+        <target>Listes des maturités</target>
+      </trans-unit>
+      <trans-unit id="wa.YxNZ" resname="Nom maturité">
+        <source>Nom maturité</source>
+        <target>Nom maturité</target>
+      </trans-unit>
+      <trans-unit id="uq3fcPt" resname="Type">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="EbwNSnW" resname="Nouvelle maturité">
+        <source>Nouvelle maturité</source>
+        <target>Nouvelle maturité</target>
+      </trans-unit>
+      <trans-unit id="39jihYJ" resname="Ajout du nouvelle maturité">
+        <source>Ajout du nouvelle maturité</source>
+        <target>Ajout du nouvelle maturité</target>
+      </trans-unit>
+      <trans-unit id="GOgPA4x" resname="&gt;Maturite">
+        <source>&gt;Maturite</source>
+        <target><![CDATA[>Maturite]]></target>
+      </trans-unit>
+      <trans-unit id="AoGJ_zw" resname="Mise à jour du statut de projet">
+        <source>Mise à jour du statut de projet</source>
+        <target>Mise à jour du statut de projet</target>
+      </trans-unit>
+      <trans-unit id="EeMMS0k" resname="Listes des statuts des projets">
+        <source>Listes des statuts des projets</source>
+        <target>Listes des statuts des projets</target>
+      </trans-unit>
+      <trans-unit id="Fo203TP" resname="Statut de projet">
+        <source>Statut de projet</source>
+        <target>Statut de projet</target>
+      </trans-unit>
+      <trans-unit id="UJhmuNm" resname="Ajouter un statut">
+        <source>Ajouter un statut</source>
+        <target>Ajouter un statut</target>
+      </trans-unit>
+      <trans-unit id="kWpTlGt" resname="Nom du statut">
+        <source>Nom du statut</source>
+        <target>Nom du statut</target>
+      </trans-unit>
+      <trans-unit id="pvYalgr" resname="Nouveau statut">
+        <source>Nouveau statut</source>
+        <target>Nouveau statut</target>
+      </trans-unit>
+      <trans-unit id="dsBEHkv" resname="Ajout un nouveau statut">
+        <source>Ajout un nouveau statut</source>
+        <target>Ajout un nouveau statut</target>
+      </trans-unit>
+      <trans-unit id="w2NPLt7" resname="Nouveau">
+        <source>Nouveau</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="I9OTi17" resname="Utilisateurs">
+        <source>Utilisateurs</source>
+        <target>Utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="NuVpBRd" resname="Manager Users">
+        <source>Manager Users</source>
+        <target>Manager Users</target>
+      </trans-unit>
+      <trans-unit id="_1_eksG" resname="Déconnexion">
+        <source>Déconnexion</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

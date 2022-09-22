@@ -18,7 +18,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
  *
  * @method Projet|null find($id, $lockMode = null, $lockVersion = null)
  * @method Projet|null findOneBy(array $criteria, array $orderBy = null)
- * @method Projet[]    findAll()
+// * @method Projet[]    findAll()
  * @method Projet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ProjetRepository extends ServiceEntityRepository
@@ -44,6 +44,24 @@ class ProjetRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findAll(){
+        return $this->createQueryBuilder('projet')
+            ->where('projet.etat = :etats')
+            ->setParameter('etats', false)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findAllByEtat(){
+        return $this->createQueryBuilder('projet')
+            ->where('projet.etat = :etats')
+            ->setParameter('etats', true)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     public function findAllByIdDesc(){

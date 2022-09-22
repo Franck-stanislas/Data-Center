@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Financement;
+use App\Entity\Projet;
 use App\Entity\Statut;
 use App\Entity\Users;
 use App\Form\AddUserType;
@@ -20,14 +21,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 #[Route('/admin')]
 class AdminController extends AbstractController
 {
-    public function __construct(FlashyNotifier $flashy)
+    public function __construct(FlashyNotifier $flashy, TranslatorInterface $translator)
     {
         $this->flashy = $flashy;
+        $this->translator = $translator;
     }
 
     #[Route('/', name: 'admin')]
@@ -37,6 +40,7 @@ class AdminController extends AbstractController
 
         if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
             $projet = $projetRepository->findAll();
+            $projetArchives = $projetRepository->findAllByEtat();
         } else {
             $projet = $projetRepository->findByUser($user->getId());
         }
@@ -69,6 +73,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/index.html.twig',[
             'projets' => $projet,
+            'archives' =>$projetArchives,
             'users' => $usersRepository->findAll(),
             'statuts' => $statutRepository->findAll(),
             'countByRegion' => $regions,
@@ -89,7 +94,8 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $usersRepository->add($user, true);
 
-            $this->flashy->success('Informations misent à jour');
+            $message = $this->translator->trans('Informations misent à jour');
+            $this->flashy->success($message);
             return $this->redirectToRoute('admin');
         }
 
@@ -103,7 +109,6 @@ class AdminController extends AbstractController
     public function listProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
     {
         $user = $security->getUser();
-
         if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
             $projet = $projetRepository->findAll();
             $status = $statutRepository->findAll();
@@ -121,6 +126,49 @@ class AdminController extends AbstractController
             'statuts' => $status,
             'financements' => $financements
         ]);
+    }
+
+    #[Route('/projets-archives', name:'projet_archives')]
+    public function archiveProject(ProjetRepository $projetRepository, UsersRepository $usersRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAllByEtat();
+        } else {
+            $projet = $projetRepository->findByUser($user->getId());
+        }
+
+//        dd($projetRepository->findAll());
+        return $this->render('admin/projects/archiveProjet.html.twig',[
+            'projets' => $projet,
+            'users' => $usersRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/projets/{id}', name: 'app_projet_delete', methods: ['POST'])]
+    public function projetDelete(Request $request, Projet $projet, ProjetRepository $projetRepository): Response
+    {
+
+        if ($this->isCsrfTokenValid('delete'.$projet->getId(), $request->request->get('_token'))) {
+            $projetRepository->remove($projet, true);
+            $message  = $this->translator->trans('Projet supprimé');
+            $this->flashy->success($message);
+        }
+
+        return $this->redirectToRoute('projet_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/archives/{id<[0-9]+>}', name: 'app_projet_archive', methods: ['GET'])]
+    public function projetArchive(Request $request, Projet $projet, ProjetRepository $projetRepository): Response
+    {
+
+       $projets = $projet->setEtat(1);
+       $projetRepository->add($projets, true);
+       $message  = $this->translator->trans('Catégorie modifié');
+       $this->flashy->success($message);
+
+        return $this->redirectToRoute('projet_list', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/statut/{id}', name:'projet_list_parameter')]
@@ -181,7 +229,8 @@ class AdminController extends AbstractController
             $user->setPassword($hashedPassword);
 
             $users->add($user, true);
-            $this->flashy->success('Utilisateur ajouté');
+            $message  = $this->translator->trans('Utilisateur ajouté');
+            $this->flashy->success($message);
 
             return $this->redirectToRoute('utilisateurs', [], Response::HTTP_SEE_OTHER);
         }
@@ -203,7 +252,8 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $usersRepository->add($user, true);
 
-            $this->flashy->success('Utilisateur modifié avec succès');
+            $message  = $this->translator->trans('Utilisateur modifié avec succès');
+            $this->flashy->primary($message);
             return $this->redirectToRoute('utilisateurs');
         }
 
@@ -213,7 +263,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
+    #[Route('/user/{id<[0-9]+>}', name: 'user_delete', methods: ['POST'])]
     public function delete(Request $request, Users $users, UsersRepository $usersRepository): Response
     {
         if(! $this->getUser()){
@@ -223,7 +273,8 @@ class AdminController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete'.$users->getId(), $request->request->get('_token'))) {
             $usersRepository->remove($users, true);
-            $this->flashy->success('Utilisateur supprimé');
+            $message  = $this->translator->trans('Utilisateur supprimé');
+            $this->flashy->success($message);
         }
 
         return $this->redirectToRoute('utilisateurs', [], Response::HTTP_SEE_OTHER);

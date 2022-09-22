@@ -21,10 +21,11 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier, FlashyNotifier $flashyNotifier)
+    public function __construct(EmailVerifier $emailVerifier, FlashyNotifier $flashyNotifier, TranslatorInterface $translator)
     {
         $this->emailVerifier = $emailVerifier;
         $this->flashy = $flashyNotifier;
+        $this->translation = $translator;
     }
 
     #[Route('/register', name: 'app_register')]
@@ -45,7 +46,8 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->flashy->success('Le compte a bien été créer!');
+            $message = $this->translation->trans('Le compte a bien été créé !');
+            $this->flashy->success($message);
 
             // generate a signed url and email it to the user
 //            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,

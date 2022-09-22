@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Nom de l'élément</label>
-                    {{ form_widget(form.nom) }}
+                    <label for="first_name">{%trans%}Nom de l'élément{%endtrans%}</label>
+                    {{ form_widget(form.nom|trans) }}
                 </div>
             </div>
 
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Maturité de l'élément</label>
+                    <label for="first_name">{%trans%}Maturité de l'élément{%endtrans%}</label>
                     {{ form_widget(form.idMaturite) }}
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 {{ button_label|default('Enregistrer') }}
             </button>
             <a href="{{ path('app_elt_maturite_index') }} " class="btn btn-gray-800 mt-2 animate-up-2">
-                <i class='bx bx-arrow-back me-1'></i> Retour à la liste
+                <i class='bx bx-arrow-back me-1'></i> {%trans%}Retour à la liste{%endtrans%}
             </a>
 
         </div>

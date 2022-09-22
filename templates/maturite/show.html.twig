@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Maturite{% endblock %}
+{% block title 'Maturite' %}
 
 {% block body %}
-    <h1>Maturite</h1>
+    <h1{%trans%}>Maturite{%endtrans%}</h1>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ maturite.id }}</td>
+                <td> {{ maturite.id }} </td>
             </tr>
             <tr>
                 <th>Nom_maturite</th>
-                <td>{{ maturite.nomMaturite }}</td>
+                <td>{{ maturite.nomMaturite|trans }}</td>
             </tr>
         </tbody>
     </table>

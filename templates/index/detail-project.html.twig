@@ -8,13 +8,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Projet Detaillé</h1>
+                        <h1 class="page-title">{%trans%}Projet Detaillé{%endtrans%}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="{{ path('app_index') }}">Home</a></li>
-                        <li>Detail du projet {{ projet.id }}</li>
+                        <li><a href="{{ path('app_index') }}">{%trans%}Home{%endtrans%}</a></li>
+                        <li>{%trans%}Detail du projet{%endtrans%} {{ projet.institule }}</li>
                     </ul>
                 </div>
             </div>
@@ -49,22 +49,22 @@
                             <p class="location">
                                 <i class="lni lni-map-marker"></i>
                                 <a href="javascript:void(0)" class="me-5">{{ projet.arrondissement.ville }}</a>
-                                <a href="javascript:void(0)">Region : {{ projet.arrondissement.departement.region.nom }} CMR</a>
+                                <a href="javascript:void(0)">{%trans%}Region{%endtrans%} : {{ projet.arrondissement.departement.region.nom }} CMR</a>
                             </p>
-                            <span>Estimation du cout</span><br>
+                            <span>{%trans%}Estimation du cout{%endtrans%}</span><br>
                             <h3 class="price">
 
                                 {{ projet.couts }} FCFA
                             </h3>
                             <div class="list-info">
-                                <h4>Informations</h4>
+                                <h4>{%trans%}Informations{%endtrans%}</h4>
                                 <ul>
-                                    <li><span> Secteur:</span> {{projet.secteur.nomCategorie}}</li>
-                                    <li><span>Maturite:</span> {{ projet.maturite.nomMaturite }}</li>
+                                    <li><span> {%trans%}Secteur{%endtrans%}:</span> {{projet.secteur.nomCategorie|trans}}</li>
+                                    <li><span>{%trans%}Maturite{%endtrans%}:</span> {{ projet.maturite.nomMaturite }}</li>
                                     {% if projet.statut%}
-                                        <li><span>Statut:</span> {{ projet.statut.nom }}</li>
+                                        <li><span>{%trans%}Statut{%endtrans%}:</span> {{ projet.statut.nom }}</li>
                                     {%else%}
-                                        <li><span>Statut:</span> Indisponible</li>
+                                        <li><span>{%trans%}Statut{%endtrans%}:</span> {%trans%}Indisponible{%endtrans%}</li>
                                     {% endif%}
                                 </ul>
                             </div>
@@ -74,7 +74,7 @@
                                         <a href="tel:+237{{projet.user.phone}}" class="call">
                                             <i class="lni lni-phone-set"></i>
                                             +237 {{projet.user.phone}}
-                                            <span>Appeler pour plus d'info</span>
+                                            <span>{%trans%}Appeler pour plus d'info{%endtrans%}</span>
                                         </a>
                                     </li>
                                     <li>
@@ -93,75 +93,75 @@
                     <div class="col-lg-8 col-md-7 col-12">
 
                         <div class="single-block description">
-                            <h3>Description</h3>
+                            <h3>{%trans%}Description{%endtrans%}</h3>
                             <p>
-                                {{ projet.objectifs}}
+                                {{ projet.objectifs|trans}}
                             </p>
                         </div>
 
                         <div class="single-block description">
-                            <h3>Caractéristique de l'activité</h3>
+                            <h3>{%trans%}Caractéristique de l'activité{%endtrans%}</h3>
                             <p class="text-start">
-                                {{ projet.caracteristique}}
+                                {{ projet.caracteristique|trans}}
                             </p>
                         </div>
 
                         <div class="single-block description">
-                            <h3>Marché cibles</h3>
+                            <h3>{%trans%}Marché cibles{%endtrans%}</h3>
                             <p class="text-start">
-                                {{ projet.marche}}
+                                {{ projet.marche|trans}}
                             </p>
                         </div>
 
                         <div class="single-block description">
-                            <h3>Supply Chain</h3>
+                            <h3>{%trans%}Supply Chain{%endtrans%}</h3>
                             <p class="text-start">
-                                {{ projet.supply}}
+                                {{ projet.supply|trans}}
                             </p>
                         </div>
 
                         <div class="single-block description">
-                            <h3>Facteurs et atouts géographiques de production</h3>
+                            <h3>{%trans%}Facteurs et atouts géographiques de production{%endtrans%}</h3>
                             <p class="text-start">
-                                {{ projet.atouts}}
+                                {{ projet.atouts|trans}}
                             </p>
                         </div>
 
                         <div class="single-block description">
-                            <h3>Position sur le complexe des chaines de valeur ajoutée</h3>
+                            <h3>{%trans%}Position sur le complexe des chaines de valeur ajoutée{%endtrans%}</h3>
                             <p class="text-start">
-                                {{ projet.valeurAjouter}}
+                                {{ projet.valeurAjouter|trans}}
                             </p>
                         </div>
 
                         <div class="single-block description">
-                            <h3>Eligibilité au bénéfice des appuis et
+                            <h3>{%trans%}Eligibilité au bénéfice des appuis et
                                 arrangement de l’environnement
-                                institutionnel
+                                institutionnel{%endtrans%}
                             </h3>
                             <p class="text-start">
-                                {{ projet.eligibilite}}
+                                {{ projet.eligibilite|trans}}
                             </p>
                         </div>
 
                         <div class="single-block description">
-                            <h3>Impact économique</h3>
+                            <h3>{%trans%}Impact économique{%endtrans%}</h3>
                             <p class="text-start">
-                                {{ projet.resultats}}
+                                {{ projet.resultats|trans}}
                             </p>
                         </div>
 
 
                         <div class="single-block tags">
-                            <h3>Autres infos</h3>
+                            <h3>{%trans%}Autres infos{%endtrans%}</h3>
                             <ul>
                                 {% if projet.eltsMaturite|length > 0%}
-                                    <span class="mb-2">Elements de maturite disponibles</span> <br>
+                                    <span class="mb-2">{%trans%}Elements de maturite disponibles{%endtrans%}</span> <br>
                                     {% for elt in projet.eltsMaturite%}
-                                        <li><a href="javascript:void(0)">{{ elt.nom }}</a></li>
+                                        <li><a href="javascript:void(0)">{{ elt.nom|trans }}</a></li>
                                     {% endfor%}
                                 {% else%}
-                                    <li> <span class="">Aucunes informations pour le moment</span></li>
+                                    <li> <span class="">{%trans%}Aucunes informations pour le moment{%endtrans%}</span></li>
                                 {% endif%}
                             </ul>
                         </div>
@@ -171,7 +171,7 @@
                         <div class="item-details-sidebar">
 
                             <div class="single-block author">
-                                <h3>Publié par</h3>
+                                <h3>{%trans%}Publié par{%endtrans%}</h3>
                                 <div class="content">
                                     {% for user in users%}
                                         <img src="{{user.photo ? vich_uploader_asset(user, 'image') : asset('image/avatar.png') }}" alt="{{user.firstName}}">
@@ -179,9 +179,9 @@
                                         <span>
                                             {% for role in user.roles %}
                                                 {% if role == "ROLE_COMMUNALE" %}
-                                                    Utilisateur Communale
+                                                   {%trans%} Utilisateur Communale{%endtrans%}
                                                 {% elseif role == "ROLE_SUPER_ADMIN" %}
-                                                    Super Administrateur
+                                                    {%trans%}Super Administrateur{%endtrans%}
                                                 {% endif %}
                                             {% endfor %}
                                         </span>
@@ -190,7 +190,7 @@
                             </div>
 
                             <div class="single-block ">
-                                <h3>Location</h3>
+                                <h3>{%trans%}Location{%endtrans%}</h3>
                                 <div class="mapouter">
                                     <div class="gmap_canvas"><iframe width="100%" height="300" id="gmap_canvas" src="{{ mapUrl }}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://putlocker-is.org"></a><br>
                                         <style>

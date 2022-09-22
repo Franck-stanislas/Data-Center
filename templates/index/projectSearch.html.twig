@@ -9,12 +9,12 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Résultat de la recherche</h1>
+                        <h1 class="page-title">{%trans%}Résultat de la recherche{%endtrans%}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li> {{ projetSearchCount }} Projets trouvés</li>
+                        <li> {{ projetSearchCount }} {%trans%}Projets trouvés{%endtrans%}</li>
                     </ul>
                 </div>
             </div>
@@ -34,17 +34,17 @@
                                 <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                     <div class="content">
                                         <div class="top-content">
-                                            <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie }}</a>
+                                            <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie|trans }}</a>
                                             <h3 class="title">
-                                                <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule }}</a>
+                                                <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule|trans }}</a>
                                             </h3>
                                             <ul class="info-list">
-                                                <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville}}</a></li>
-                                                <li><a href="javascript:void(0)"> Region : {{projet.arrondissement.departement.region.nom}} CMR</a></li>
+                                                <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville|trans}}</a></li>
+                                                <li><a href="javascript:void(0)"> {%trans%}Region{%endtrans%} : {{projet.arrondissement.departement.region.nom|trans}} CMR</a></li>
                                             </ul>
                                         </div>
                                         <div class="bottom-content">
-                                            <p class="price">Estimation du cout: <span>{{ projet.couts }} FCFA</span></p>
+                                            <p class="price">{%trans%}Estimation du cout{%endtrans%}: <span>{{ projet.couts }} FCFA</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                 </div>
 
             {% else%}
-                <span class="text-center text-danger"> Aucun élément trouvé</span>
+                <span class="text-center text-danger"> {%trans%}Aucun élément trouvé{%endtrans%}</span>
             {% endif %}
         </div>
     </section>

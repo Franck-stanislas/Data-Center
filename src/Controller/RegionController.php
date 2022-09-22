@@ -30,13 +30,15 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/api')]
 class RegionController extends AbstractController
 {
-    public function __construct(FlashyNotifier $flashy)
+    public function __construct(FlashyNotifier $flashy, TranslatorInterface $translator)
     {
         $this->flashy = $flashy;
+        $this->translation = $translator;
     }
 
     #[Route('/regions', name: 'region_list', methods: ['GET'])]
@@ -140,7 +142,8 @@ class RegionController extends AbstractController
         }
         // save project
         $projectRepository->add($projet, true);
-        $this->flashy->success('Projet enregistré');
+        $message  = $this->translation->trans('Projet enregistré');
+        $this->flashy->success($message);
         $this->redirectToRoute('admin');
         return $this->json("ok", 200);
     }
@@ -184,7 +187,9 @@ class RegionController extends AbstractController
         }
         // save project
         $projectRepository->add($projet, true);
-        $this->flashy->success('Projet modifier');
+
+        $message  = $this->translation->trans('Projet modifié');
+        $this->flashy->primary($message);
         $this->redirectToRoute('admin');
         return $this->json("ok", 200);
     }

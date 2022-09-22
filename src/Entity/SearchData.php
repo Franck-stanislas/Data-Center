@@ -3,11 +3,14 @@ namespace App\Entity;
 
 use App\Entity\Categorie;
 use App\Entity\Maturite;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
-class SearchData
+class SearchData implements Translatable
 {
     /*
      * @var string|null
+     * @Gedmo\Translatable
      *
      */
     public $mot = '';
@@ -69,5 +72,10 @@ class SearchData
     public function setCategorie(Categorie $categorie): void
     {
         $this->categorie = $categorie;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

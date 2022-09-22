@@ -1,6 +1,6 @@
 {% extends 'admin/admin.base.html.twig' %}
 
-{% block title %}Edit Statut{% endblock %}
+{% block title 'Modifier Statut' %}
 
 {% block body %}
     <main class="content">
@@ -15,13 +15,13 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="{{ path('app_elt_maturite_index')}}">Statut de projet</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Mise à jour</li>
+                    <li class="breadcrumb-item active" aria-current="page">{%trans%}Mise à jour{%endtrans%}</li>
                 </ol>
             </nav>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4 text-center"> Mise à jour du statut de projet </h1>
+                    <h1 class="h4 text-center"> {%trans%}Mise à jour du statut de projet{%endtrans%} </h1>
                 </div>
 
             </div>

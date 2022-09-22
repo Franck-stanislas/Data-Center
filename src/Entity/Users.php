@@ -56,7 +56,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Image(maxSize:"8M", mimeTypes: ['image/*'], mimeTypesMessage: "Mauvais type de fichier, format pris en charge  PNG|JPEG|JPG|*")]
     private ?File $image = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo;
 
     //#[ORM\Column(type: 'datetime', nullable:true)]
@@ -64,6 +64,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Projet::class), Ignore]
     private $projets;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $locale;
 
     public function __construct()
     {
@@ -251,6 +254,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $projet->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }

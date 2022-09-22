@@ -37,7 +37,7 @@ const ProjectInfo = (props) => {
     }, []);
 
     return (
-        <form className="conatainer">
+        <form className="container">
             <div className="d-block mt-4 mb-md-0">
                 <p className="mb-0">Présentation du projet.</p>
                 <div className="mb-4 mt-2">

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon"
               href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.svg') }}"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('client/assets/images/logo-mindevel-2.jpg') }}"/>
         <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.45.0/maps/maps.css'>
         <link rel='stylesheet' type='text/css'
               href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.45.0/maps/css-styles/routing.css'/>
@@ -75,7 +75,11 @@
                             <nav class="navbar navbar-expand-lg">
                                 <a class="navbar-brand" href="{{ path('app_index') }}"
                                    style="color: #f5821e; text-decoration: none">
-                                    <img src="{{ asset('client/assets/images/logo/logo.svg') }}" alt="Logo">
+                                    {% if app.request.locale == "fr"%}
+                                        <img class="img-fluid" src="{{ asset('client/assets/images/logo/logoMin.svg') }}" alt="Logo">
+                                    {%else%}
+                                        <img class="img-fluid" src="{{ asset('client/assets/images/logo/logoMinEn.svg') }}" alt="Logo">
+                                    {%endif%}
                                 </a>
                                 <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -88,45 +92,57 @@
                                     <ul id="nav" class="navbar-nav ms-auto">
                                         <li class="nav-item">
                                             <a class=" {{ app.request.attributes.get('_route') == 'app_index' ? 'active' : '' }} dd-menu collapsed"
-                                               href="{{ path('app_index') }}">Accueil</a>
+                                               href="{{ path('app_index') }}">{%trans%}Accueil{%endtrans%}</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="{{ app.request.attributes.get('_route') == 'app_projects_list' ? 'active' : '' }}"
-                                               href="{{ path('app_projects_list') }}">Projets</a>
+                                               href="{{ path('app_projects_list') }}">{%trans%}Projets{%endtrans%}</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="{{ (app.request.attributes.get('_route') == 'app_project_category' or app.request.attributes.get('_route') =='app_category_detail') ? 'active' : '' }} dd-menu collapsed"
-                                               href="{{ path('app_project_category') }}">Secteurs</a>
+                                               href="{{ path('app_project_category') }}">{%trans%}Secteurs{%endtrans%}</a>
                                         </li>
 
 {#                                        <li class="nav-item">#}
 {#                                            <a class="{{ (app.request.attributes.get('_route') == 'app_carte' or app.request.attributes.get('_route') == 'app_project_map') ? 'active' : '' }} dd-menu collapsed"#}
 {#                                               href="{{ path('app_project_map') }}">Carte projet</a>#}
 {#                                        </li>#}
-                                        <li class="nav-item">
-                                            <a class="{{ (app.request.attributes.get('_route') == 'app_carte' or app.request.attributes.get('_route') == 'app_project_map') ? 'active' : '' }} dd-menu collapsed" href="javascript:void(0)"
-                                               data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
-                                               aria-controls="navbarSupportedContent" aria-expanded="false"
-                                               aria-label="Toggle navigation">Sources de Financements</a>
-                                            <ul class="sub-menu collapse" id="submenu-1-3">
-                                                <li class="nav-item"><a href="javascript:void(0)">Ad Grid</a></li>
-                                                <li class="nav-item"><a href="javascript:void(0)">Ad Listing</a></li>
-                                                <li class="nav-item"><a href="javascript:void(0)">Ad Details</a></li>
-                                            </ul>
-                                        </li>
+{#                                        {{ include('layout/financementNavbar.html.twig')}}#}
 
                                         <li class="nav-item">
                                             <a class="{{ app.request.attributes.get('_route') == 'app_project_about' ? 'active' : '' }} dd-menu collapsed"
                                                href="javascript:void(0)"
                                                data-bs-toggle="collapse" data-bs-target="#submenu-1-5"
                                                aria-controls="navbarSupportedContent" aria-expanded="false"
-                                               aria-label="Toggle navigation">A propos</a>
+                                               aria-label="Toggle navigation">{%trans%}A propos{%endtrans%}</a>
                                             <ul class="sub-menu collapse" id="submenu-1-5">
-                                                <li class="nav-item"><a href="{{ path('app_project_about') }}">Qui sommes
-                                                        nous?</a>
+                                                <li class="nav-item"><a href="{{ path('app_project_about') }}">{%trans%}Qui sommes
+                                                        nous?{%endtrans%}</a>
                                                 </li>
                                             </ul>
                                         </li>
+{#                                        {% if app.user %}#}
+{#                                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a href="{{ path('admin') }}"> Dashboard <i class="lni lni-dashboard"></i></a>#}
+{#                                                </li>#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a href="{{ path('app_logout') }}"> Logout <i class="lni lni-enter"></i> </a>#}
+{#                                                </li>#}
+{#                                            {% else %}#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a href="{{ path('app_logout') }}">Logout <i class="lni lni-enter"></i> </a>#}
+{#                                                </li>#}
+{#                                                <li class="nav-item">#}
+{#                                                    <a href="javascript:void(0)"><i class="lni lni-user"></i>#}
+{#                                                        {{ app.user.email }}</a>#}
+{#                                                </li>#}
+{#                                            {% endif %}#}
+{#                                        {% else %}#}
+{#                                            <li class="nav-item">#}
+{#                                                <a href="{{ path('login') }}"><i class="lni lni-enter"></i> Login</a>#}
+{#                                            </li>#}
+{#                                        {% endif %}#}
                                     </ul>
                                 </div> <!-- navbar collapse -->
                                 {% if app.user %}
@@ -135,32 +151,37 @@
                                             <ul>
                                                 <li>
                                                     <a href="{{ path('admin') }}"><i class="lni lni-dashboard"></i>
-                                                        Dashboard</a>
+                                                        {%trans%}Dashboard{%endtrans%}</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ path('app_logout') }}"><i class="lni lni-enter"></i> Logout</a>
+                                                    <a href="{{ path('app_logout') }}"><i class="lni lni-enter"></i> {%trans%}Logout{%endtrans%}</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="button header-button">
-                                            <a href="{{ path('app_projects_create') }}" class="btn">Ajouter un projet</a>
+                                            <a href="{{ path('app_projects_create') }}" class="btn">{%trans%}Ajouter un projet{%endtrans%}</a>
                                         </div>
 
                                         <div class="dropdown">
                                             <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuButton1"
                                                data-bs-toggle="dropdown" aria-expanded="false" style="color:#f5821e">
-                                                <i class="lni lni-world" style="color:#f5821e"></i>
+                                                <img class="img-fluid" width="30" height="30" src="{{asset('client/assets/images/flag-3d-round-250.png')}}" alt="cameroun">
+
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="#">Français</a></li>
-                                                <li><a class="dropdown-item" href="#">Englais</a></li>
+                                                {% for locale in locales%}
+                                                     {% if locale != app.request.locale %}
+                                                        <li><a class="dropdown-item" href="{{path('app_change_locale', {'locale' : locale})}}">{{locale}}</a></li>
+                                                     {% endif%}
+                                                {%endfor%}
+{#                                                <li><a class="dropdown-item" href="#">Englais</a></li>#}
                                             </ul>
                                         </div>
                                     {% else %}
                                         <div class="login-button">
                                             <ul>
                                                 <li>
-                                                    <a href="{{ path('app_logout') }}"><i class="lni lni-enter"></i> Logout</a>
+                                                    <a href="{{ path('app_logout') }}"><i class="lni lni-enter"></i> {%trans%}Se deconnecter{%endtrans%}</a>
                                                 </li>
                                                 <li>
                                                     <a href="javascript:void(0)"><i class="lni lni-user"></i>
@@ -173,7 +194,7 @@
                                     <div class="login-button">
                                         <ul>
                                             <li>
-                                                <a href="{{ path('login') }}"><i class="lni lni-enter"></i> Login</a>
+                                                <a href="{{ path('login') }}"><i class="lni lni-enter"></i> {%trans%}Se connecter{%endtrans%}</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -181,11 +202,17 @@
                                     <div class="dropdown">
                                         <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuButton1"
                                            data-bs-toggle="dropdown" aria-expanded="false" style="color:#f5821e">
-                                            <i class="lni lni-world" style="color:#f5821e"></i> Langues
+{#                                            <i class="lni lni-world" style="color:#f5821e"></i> {%trans%}Langues{%endtrans%}#}
+                                            <img class="img-fluid" width="30" height="30" src="{{asset('client/assets/images/flag-3d-round-250.png')}}" alt="cameroun"> {%trans%}Langues{%endtrans%}
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="#">Français</a></li>
-                                            <li><a class="dropdown-item" href="#">Englais</a></li>
+                                            {% for locale in locales%}
+                                                {% if locale != app.request.locale %}
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{path('app_change_locale', {'locale' : locale})}}">{{locale}}</a>
+                                                    </li>
+                                                {% endif%}
+                                            {%endfor%}
                                         </ul>
                                     </div>
 
@@ -208,13 +235,13 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer mobile-app">
-                                <h3>Banque de Projets des <br> Collectivités Territoriales <br> Décentralisées</h3>
+                                <h3>{%trans%}Banque de Projets des <br> Collectivités Territoriales <br> Décentralisées{%endtrans%}</h3>
                                 <div class="app-button">
                                     <a href=" https://www.google.com/maps/search/lonkak+yaounde+sous+prefecture/@3.8789854,11.5087975,15z"
                                        class="btn">
                                         <i><img src="{{ asset('client/assets/images/logo/logo2.svg') }}" alt=""></i>
                                         <span class="text">
-                                                <span class=" text-center">BANQUE DE PROJETS DES CTD</span>
+                                                <span class=" text-center">{%trans%}BANQUE DE PROJETS DES CTD{%endtrans%}</span>
 
                                             </span>
                                     </a>
@@ -225,13 +252,13 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
-                                <h3>Travaillez Avec Nous</h3>
+                                <h3>{%trans%}Travaillez Avec Nous{%endtrans%}</h3>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-12">
                                         <ul>
-                                            <li><a href=" https://www.minddevel.gov.cm/index.php/marches/">Consultez nos
-                                                    marchés</a></li>
-                                            <li><a href="javascript:void(0)">Appel d'offres et conditions générales</a></li>
+                                            <li><a href=" https://www.minddevel.gov.cm/index.php/marches/">{%trans%}Consultez nos
+                                                    marchés{%endtrans%}</a></li>
+                                            <li><a href="javascript:void(0)">{%trans%}Appel d'offres et conditions générales{%endtrans%}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -241,10 +268,10 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
-                                <h3>Liens Rapides</h3>
+                                <h3>{%trans%}Liens Rapides{%endtrans%}</h3>
                                 <ul>
-                                    <li><a href="javascript:void(0)">A Propos</a></li>
-                                    <li><a href="{{ path('login') }}">Connexion</a></li>
+                                    <li><a href="{{path('app_project_about')}}">{%trans%}A Propos{%endtrans%}</a></li>
+                                    <li><a href="{{ path('login') }}">{%trans%}Connexion{%endtrans%}</a></li>
                                 </ul>
                             </div>
                             <!-- End Single Widget -->
@@ -252,10 +279,10 @@
                         <div class="col-lg-3 col-md-6 col-12">
                             <!-- Single Widget -->
                             <div class="single-footer f-link">
-                                <h3>Contact</h3>
+                                <h3>{%trans%}Contact{%endtrans%}</h3>
                                 <ul>
-                                    <li class="text-white">Carrefour Nlongkak<br> Yaoundé, CAMEROUN</li>
-                                    <li class="text-white"><a href="tel:(+237) 222 213 99"> Téléphone : (+237) 222 213 992</a>
+                                    <li class="text-white">{%trans%}Carrefour Nlongkak<br> Yaoundé, CAMEROUN{%endtrans%}</li>
+                                    <li class="text-white"><a href="tel:(+237) 222 213 99"> {%trans%}Téléphone{%endtrans%} : (+237) 222 213 992</a>
                                     </li>
                                     <li><a href="mailto:contact@minddevel.gov.cm" class="text-decoration-none ">Email :
                                             contact@minddevel.gov.cm</a></li>
@@ -274,7 +301,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="content">
-                                    <p class="copyright-text">Designed and Developped by
+                                    <p class="copyright-text">{%trans%}Designed and Developped by{%endtrans%}
                                         <a href="https://www.minddevel.gov.cm" rel="nofollow" target="_blank">MINDDEVEL</a>
                                     </p>
                                 </div>

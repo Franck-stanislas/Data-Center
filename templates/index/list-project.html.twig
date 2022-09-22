@@ -9,13 +9,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Projets</h1>
+                        <h1 class="page-title">{%trans%}Projets{%endtrans%}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="{{ path('app_index') }}">Home</a></li>
-                        <li>Liste des projets</li>
+                        <li><a href="{{ path('app_index') }}">{%trans%}Accueil{%endtrans%}</a></li>
+                        <li>{%trans%}Liste des projets{%endtrans%}</li>
                     </ul>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="col-lg-3 col-md-4 col-12">
                     <div class="category-sidebar">
                         <div class="single-widget search">
-                            <h3>Rechercher</h3>
+                            <h3>{%trans%}Rechercher{%endtrans%}</h3>
                             <form action="#">
                                 <input type="text" placeholder="Rechercher Ici...">
                                 <button type="submit"><i class="lni lni-search-alt"></i></button>
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="single-widget">
-                            <h3>Toutes les categories</h3>
+                            <h3>{%trans%}Toutes les categories{%endtrans%}</h3>
                             <ul class="list" id="cat-filter">
                                 {% if categories|length > 0%}
                                     {% for categorie in categories%}
@@ -57,11 +57,11 @@
                             <div class="col-12">
                                 <div class="category-grid-topbar mb-4">
                                     {% if statuts|length > 0%}
-                                        <h3 class="ml-3 mt-3" style=" margin-left: 45px; font-size: 18px; font-weight: 600; display: block;">Maturité du projet</h3>
+                                        <h3 class="ml-3 mt-3" style=" margin-left: 45px; font-size: 18px; font-weight: 600; display: block;">{%trans%}Maturité du projet{%endtrans%}</h3>
                                         <nav class="list-nav1 ">
                                             <ul>
                                                 {% for maturite in maturites%}
-                                                    <li class="active m-3"><a href="javascript:void(0)">{{ maturite.nomMaturite }} <span>{{maturite.projet |length}}</span></a></li>
+                                                    <li class="active m-3"><a href="javascript:void(0)">{{ maturite.nomMaturite|trans }} <span>{{maturite.projet |length}}</span></a></li>
                                                 {% endfor%}
                                             </ul>
                                         </nav>
@@ -92,19 +92,19 @@
                                                             <div class="single-item-grid">
                                                                 <div class="content">
                                                                     <a href="javascript:void(0)" class="tag">
-                                                                        {{ projet.secteur.nomCategorie }}
+                                                                        {{ projet.secteur.nomCategorie|trans }}
                                                                     </a>
                                                                     <h3 class="title">
-                                                                        <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule }}</a>
+                                                                        <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule|trans }}</a>
                                                                     </h3>
                                                                     <p class="location">
                                                                         <a href="javascript:void(0)">
                                                                             <i class="lni lni-map-marker"></i>
-                                                                            {{projet.arrondissement.ville}}
+                                                                            {{projet.arrondissement.ville|trans}}
                                                                         </a>
                                                                     </p>
                                                                     <ul class="info">
-                                                                        <span>Estimation du cout</span><br>
+                                                                        <span>{%trans%}Estimation du cout{%endtrans%}</span><br>
                                                                         <li class="price">{{ projet.couts }} FCFA</li>
                                                                     </ul>
                                                                 </div>
@@ -130,25 +130,25 @@
                                                                 <div class="row align-items-center">
                                                                     <div class="col-lg-12 col-md-5 col-12">
                                                                         <div class="content">
-                                                                            <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie }}</a>
+                                                                            <a href="javascript:void(0)" class="tag">{{ projet.secteur.nomCategorie|trans }}</a>
                                                                             <div class="d-inline-flex justify-content-between">
                                                                                 <h3 class="title me-5">
-                                                                                    <a href=" {{ path('app_project_detail', {'id':projet.id}) }} ">{{projet.institule}}</a>
+                                                                                    <a href=" {{ path('app_project_detail', {'id':projet.id}) }} ">{{projet.institule|trans}}</a>
                                                                                 </h3>
                                                                                 <p class="location me-5">
                                                                                     <a href="javascript:void(0)">
                                                                                         <i class="lni lni-map-marker"></i>
-                                                                                        {{projet.arrondissement.ville}}
+                                                                                        {{projet.arrondissement.ville|trans}}
                                                                                     </a>
                                                                                 </p>
                                                                                 <p class="location me-5">
                                                                                     <a href="javascript:void(0)">
                                                                                         <i class="lni lni-map-marker"></i>
-                                                                                        {{projet.arrondissement.departement.region.nom}}
+                                                                                        {{projet.arrondissement.departement.region.nom|trans}}
                                                                                     </a>
                                                                                 </p>
                                                                                 <ul class="info">
-                                                                                    <span>Estimation du cout</span>
+                                                                                    <span>{%trans%}Estimation du cout{%endtrans%}</span>
                                                                                     <li class="price">{{ projet.couts }} FCFA</li>
                                                                                 </ul>
                                                                             </div>

@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 /**
  * Require ROLE_ADMIN for all the actions of this controller
  *
@@ -20,9 +22,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('admin/financement')]
 class FinancementController extends AbstractController
 {
-    public function __construct(FlashyNotifier $flashy)
+    public function __construct(FlashyNotifier $flashy, TranslatorInterface $translator)
     {
         $this->flashy = $flashy;
+        $this->translation = $translator;
     }
 
     #[Route('/', name: 'app_financement_index', methods: ['GET'])]
@@ -42,7 +45,8 @@ class FinancementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $financementRepository->add($financement, true);
-            $this->flashy->success('Source de financement enregistré');
+            $message = $this->translation->trans('Source de financement enregistré');
+            $this->flashy->success($message);
             return $this->redirectToRoute('app_financement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -68,7 +72,8 @@ class FinancementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $financementRepository->add($financement, true);
-            $this->flashy->success('Source de financement mis à jour');
+            $message = $this->translation->trans('Source de financement mis à jour');
+            $this->flashy->primary($message);
             return $this->redirectToRoute('app_financement_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -83,7 +88,8 @@ class FinancementController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$financement->getId(), $request->request->get('_token'))) {
             $financementRepository->remove($financement, true);
-            $this->flashy->success('Source de financement supprimé avec succès!');
+            $message = $this->translation->trans('Source de financement supprimé avec succès!');
+            $this->flashy->success($message);
         }
 
         return $this->redirectToRoute('app_financement_index', [], Response::HTTP_SEE_OTHER);

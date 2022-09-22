@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import axios from "axios";
 import debounce from "lodash.debounce";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 
 const ProjectList = () => {
@@ -25,9 +27,9 @@ const ProjectList = () => {
     const [arrondissement, setArrondissement] = useState("");
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/projects/get-all')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/get-all')
             .then(response => {
-                setProjets(response.data.projets);
+                setProjets(response.data.products);
                 setMaturites(response.data.maturites);
                 setCategories(response.data.categories);
                 setTotalCount(response.data.totalCount);
@@ -120,7 +122,7 @@ const ProjectList = () => {
                 region, departement, arrondissement
             })
                 .then(response => {
-                    setProjets(response.data.projets);
+                    setProjets(response.data.products);
                     setTotalPages(response.data.totalPages);
                     setCategories(response.data.categories);
                     setMaturites(response.data.maturites);
@@ -130,6 +132,55 @@ const ProjectList = () => {
                 });
         }
     }, [currentPage, activesMaturites, activesCategories, search, region, departement, arrondissement])
+
+    const imprimerProjet = () => {
+        axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/print-projects', {
+            activesMaturites,
+            activesCategories,
+            search,
+            region, departement, arrondissement
+        })
+            .then(response => {
+                const projets = response.data;
+                if (projets) {
+                    const projectsToPrint = projets.map((project, index) => ({
+                        'id' : index+1,
+                        'nom': project.institule,
+                        'secteur': project.secteur.nomCategorie,
+                        'arrondissement': project.arrondissement.ville,
+                        'couts': project.couts,
+                        'maturite': project.maturite.nom_maturite,
+                    }));
+                    console.log({projectsToPrint});
+                    const unit = "pt";
+                    const size = "A4"; // Use A1, A2, A3 or A4
+                    const orientation = "portrait"; // portrait or landscape
+
+                    const marginLeft = 40;
+                    const doc = new jsPDF(orientation, unit, size);
+
+                    doc.setFontSize(15);
+
+                    const title = "Liste des projets";
+                    const headers = [["ID","NOM", "SECTEUR", "ARRONDISSEMENT", "COUTS", "MATURITE"]];
+
+                    const data = projectsToPrint.map(elt=> [elt.id, elt.nom, elt.secteur, elt.arrondissement, elt.couts, elt.maturite]);
+
+                    let content = {
+                        startY: 50,
+                        head: headers,
+                        body: data
+                    };
+
+                    doc.text(title, marginLeft, 40);
+                    doc.autoTable(content);
+                    doc.save("listeProjets.pdf")
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
     return (
         <>
@@ -167,36 +218,36 @@ const ProjectList = () => {
                                 <div className="single-widget">
                                     <h3>Localisation</h3>
                                     <form>
-                                    <ul className="list" id="cat-filter">
-                                        <div className="form-group mb-2">
-                                            <label htmlFor="region">Region</label>
-                                            <select name="region" id="region" className="form-control" value={region} onChange={handleRegionChange}>
-                                                <option selected="">Veuillez choisir une region</option>
-                                                {regions.map(region => (<option key={region.id} value={region.id}>{region.nom}</option>))}
-                                            </select>
-                                        </div>
-                                        <div className="form-group mb-2">
-                                            <label htmlFor="departement">Département</label>
-                                            <select name="departement" id="departement" className="form-control" value={departement} onChange={handleDepartementChange}>
-                                                <option selected=""> Choisir un département</option>
-                                                {departements.map(departement => (
-                                                    <option key={departement.id} value={departement.id}>{departement.nom}</option>))}
-                                            </select>
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="arrondissement">Arrondissement</label>
-                                            <select name="arrondissement" id="arrondissement" className="form-control" value={arrondissement} onChange={handleArrondissementChange}>
-                                                <option selected="">Choisir un arrondissement</option>
-                                                {arrondissements.map(arrondissement => (
-                                                    <option key={arrondissement.id} value={arrondissement.id}>{arrondissement.nom}</option>))}
-                                            </select>
-                                        </div>
-                                    </ul>
+                                        <ul className="list" id="cat-filter">
+                                            <div className="form-group mb-2">
+                                                <label htmlFor="region">Region</label>
+                                                <select name="region" id="region" className="form-control" value={region} onChange={handleRegionChange}>
+                                                    <option selected="">Veuillez choisir une region</option>
+                                                    {regions.map(region => (<option key={region.id} value={region.id}>{region.nom}</option>))}
+                                                </select>
+                                            </div>
+                                            <div className="form-group mb-2">
+                                                <label htmlFor="departement">Département</label>
+                                                <select name="departement" id="departement" className="form-control" value={departement} onChange={handleDepartementChange}>
+                                                    <option selected=""> Choisir un département</option>
+                                                    {departements.map(departement => (
+                                                        <option key={departement.id} value={departement.id}>{departement.nom}</option>))}
+                                                </select>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="arrondissement">Arrondissement</label>
+                                                <select name="arrondissement" id="arrondissement" className="form-control" value={arrondissement} onChange={handleArrondissementChange}>
+                                                    <option selected="">Choisir un arrondissement</option>
+                                                    {arrondissements.map(arrondissement => (
+                                                        <option key={arrondissement.id} value={arrondissement.id}>{arrondissement.nom}</option>))}
+                                                </select>
+                                            </div>
+                                        </ul>
                                     </form>
                                 </div>
 
                                 <div className="single-widget">
-                                    <h3>Toutes les categories</h3>
+                                    <h3>Toutes les secteurs</h3>
                                     <ul className="list" id="cat-filter">
                                         {categories && categories.map((category) => (
                                             <li key={category.id} onClick={() => handleChangeActivesCategories(category.id)}>
@@ -271,25 +322,25 @@ const ProjectList = () => {
                                                                     </p>
                                                                     <p className="location">
                                                                         <a href="javascript:void(0)">
-                                                                            <i className="lni lni-map-marker"></i>
-                                                                            Region : {projet.arrondissement.departement.region.nom} CMR
+                                                                            <i class="lni lni-map-marker"></i>
+                                                                            Region :  CMR
                                                                         </a>
                                                                     </p>
                                                                     <ul className="info">
                                                                         <span>Estimation du cout</span><br/>
                                                                         <li className="price">{projet.couts} FCFA</li>
                                                                     </ul>
+
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     ))}
 
-
                                                     {!projets && <span
                                                         className="text-danger text-center">Aucun projet disponible pour le moment</span>}
                                                 </div>
                                                 <div className="row">
-                                                    <div className="col-12">
+                                                    <div className="col-6">
                                                         <div className="pagination left">
                                                             <ul className="pagination-list">
                                                                 <li onClick={() => currentPage > 1 && setCurrentPage((prevState) => prevState - 1)}>
@@ -302,20 +353,19 @@ const ProjectList = () => {
                                                                            onClick={() => setCurrentPage(i + 1)}>{i + 1}</a>
                                                                     </li>
                                                                 ))}
-                                                                {/*{totalPages > 1 && Array.from({length: totalPages}, (_, i) => (
-                                                                    <li
-                                                                        key={i}
-                                                                        className={i + 1 === currentPage ?
-                                                                            "active"
-                                                                            : i + 1 > nbItemPagination ? "d-none" : ""}
-                                                                    >
-                                                                        <a href="javascript:void(0)">{i + 1}</a>
-                                                                    </li>
-                                                                ))}*/}
                                                                 <li onClick={() => currentPage < totalPages && setCurrentPage((prevState) => prevState + 1)}>
                                                                     <a href="javascript:void(0)"><i
-                                                                        className="lni lni-chevron-right"></i></a></li>
+                                                                        className="lni lni-chevron-right"></i></a>
+                                                                </li>
                                                             </ul>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="pagination right">
+                                                            <button className="btn btn-outline-primary" onClick={() => imprimerProjet()}>
+                                                                <i className="lni lni-download"></i> Télécharger
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 /**
  * Require ROLE_ADMIN for all the actions of this controller
  *
@@ -20,9 +22,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('admin/Eltmaturite')]
 class EltMaturiteController extends AbstractController
 {
-    public function __construct(FlashyNotifier $flashy)
+    public function __construct(FlashyNotifier $flashy, TranslatorInterface $translator)
     {
         $this->flashy = $flashy;
+        $this->translation = $translator;
     }
 
     #[Route('/', name: 'app_elt_maturite_index', methods: ['GET'])]
@@ -51,7 +54,8 @@ class EltMaturiteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eltMaturiteRepository->add($eltMaturite, true);
-            $this->flashy->success('Nouveau élément de maturité enregistré');
+            $message = $this->translation->trans('Nouveau élément de maturité enregistré');
+            $this->flashy->success($message);
             return $this->redirectToRoute('app_elt_maturite_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -87,7 +91,9 @@ class EltMaturiteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eltMaturiteRepository->add($eltMaturite, true);
-            $this->flashy->success('Elément de maturité modifié');
+
+            $message = $this->translation->trans('Elément de maturité modifié');
+            $this->flashy->primary($message);
             return $this->redirectToRoute('app_elt_maturite_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -107,7 +113,8 @@ class EltMaturiteController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete'.$eltMaturite->getId(), $request->request->get('_token'))) {
             $eltMaturiteRepository->remove($eltMaturite, true);
-            $this->flashy->success('Elément de maturité supprimé');
+            $message = $this->translation->trans('Elément de maturité supprimé');
+            $this->flashy->success($message);
         }
 
         return $this->redirectToRoute('app_elt_maturite_index', [], Response::HTTP_SEE_OTHER);

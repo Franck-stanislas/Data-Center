@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Require ROLE_ADMIN for all the actions of this controller
@@ -21,9 +22,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/categorie')]
 class CategorieController extends AbstractController
 {
-    public function __construct(FlashyNotifier $flashy)
+    public function __construct(FlashyNotifier $flashy, TranslatorInterface $translator)
     {
         $this->flashy = $flashy;
+        $this->translation = $translator;
     }
 
     #[Route('/', name: 'app_categorie_index', methods: ['GET'])]
@@ -52,7 +54,9 @@ class CategorieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categorieRepository->add($categorie, true);
-            $this->flashy->success('Catégorie enregistré');
+
+            $message = $this->translation->trans('Catégorie enregistré');
+            $this->flashy->success($message);
 
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -89,7 +93,8 @@ class CategorieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categorieRepository->add($categorie, true);
-            $this->flashy->success('Catégorie modifié');
+            $message = $this->translation->trans('Catégorie modifié');
+            $this->flashy->primary($message);
 
             return $this->redirectToRoute('app_categorie_index', [], Response::HTTP_SEE_OTHER);
         }
