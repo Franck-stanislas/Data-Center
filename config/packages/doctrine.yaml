@@ -22,6 +22,7 @@ doctrine:
                 # make sure vendor library location is correct
                 dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translatable/Entity"
 
+
 when@test:
     doctrine:
         dbal:

@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-
+import { useTranslation } from 'react-i18next';
 const EditOtherInfo = ({project, ...props}) => {
-
     const [statuts, setStatuts] = useState([]);
     const [maturites, setMaturites] = useState([]);
     const [elements, setElements] = useState([]);
     const [financements, setFinancements] = useState([]);
     const [type, setType] = useState("");
+
+    const { t, i18n } = useTranslation();
 
 
     const handleChangeCR = (e) => {
@@ -86,7 +87,7 @@ const EditOtherInfo = ({project, ...props}) => {
     return (
         <form className="container">
             <div className="d-block mt-4 mb-md-0">
-                <p className="mb-4">Autres informations.</p>
+                <p className="mb-4">{t('Autres informations')}.</p>
                 <div className="row container">
                     {maturites.map(maturite => (
                         <div className="form-check col-lg-4 col-sm-6" key={maturite.id}>
@@ -99,7 +100,7 @@ const EditOtherInfo = ({project, ...props}) => {
                 </div>
 
                 {(type === 'mature' || type === 'encours') && <>
-                    <p className="mb-4">Elémentts de maturité.</p>
+                    <p className="mb-4">{t('Elémentts de maturité')}.</p>
                     <div className="row container">
                         {elements.map(elt => (
                             <div className="form-check col-lg-4 col-sm-6" key={elt.id}>
@@ -110,7 +111,7 @@ const EditOtherInfo = ({project, ...props}) => {
                             </div>
                         ))}
                     </div>
-                    <p className="mb-4">Status.</p>
+                    <p className="mb-4">{t('Status')}.</p>
                     <div className="row container">
                         {statuts.map(statut => (
                             <div className="form-check col-lg-4 col-sm-6" key={statut.id}>
@@ -121,7 +122,7 @@ const EditOtherInfo = ({project, ...props}) => {
                             </div>
                         ))}
                     </div>
-                    <p className="mb-4">Financement.</p>
+                    <p className="mb-4">{t('Financement')}.</p>
                     <div className="row container">
                         {financements.map(financement => (
                             <div className="form-check col-lg-4 col-sm-6" key={financement.id}>
@@ -135,7 +136,7 @@ const EditOtherInfo = ({project, ...props}) => {
                 </>}
 
                 {(type === 'idee') && <>
-                    <p className="mb-4">Financement.</p>
+                    <p className="mb-4">{t('Financement')}.</p>
                     <div className="row container">
                         {financements.map(financement => (
                             <div className="form-check col-lg-4 col-sm-6" key={financement.id}>

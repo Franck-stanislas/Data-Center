@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="{{ path('app_index') }}">{%trans%}Home{%endtrans%}</a></li>
-                        <li> <a href="{{path('app_project_category')}}"> {%trans%}Categories {%endtrans%}</a></li>
+                        <li><a href="{{ path('app_index') }}">{%trans%}Accueil{%endtrans%}</a></li>
+                        <li> <a href="{{path('app_project_category')}}"> {%trans%}Secteurs {%endtrans%}</a></li>
                         <li>{{ categorie.nomCategorie|trans }}</li>
                     </ul>
                 </div>
@@ -28,7 +28,7 @@
         <div class="container">
 
             {% if projets|length > 0%}
-                {% for row in projets|batch(9)%}
+                {% for row in projets|batch(30)%}
                     <div class="single-head">
                         <div class="row">
                             {% for projet in row%}
@@ -42,8 +42,15 @@
                                                     <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule|trans }}</a>
                                                 </h3>
                                                 <ul class="info-list">
-                                                    <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville|trans}}</a></li>
-                                                    <li><a href="javascript:void(0)"> {%trans%}Region{%endtrans%} : {{projet.arrondissement.departement.region.nom|trans}} CMR</a></li>
+                                                    {% if projet.arrondissement%}
+                                                        <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville}}</a></li>
+                                                        <li><a href="javascript:void(0)"> {%trans%}Region {%endtrans%}: {{projet.arrondissement.departement.region.nom}} CMR</a></li>
+                                                    {%else%}
+                                                        <li><a href="javascript:void(0)"> Projet régionale de:</a></li>
+                                                        <li><a href="javascript:void(0)"> <i class="lni lni-map-marker"></i> {{projet.region.nom}} CMR</a></li>
+                                                    {% endif %}
+{#                                                    <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville|trans}}</a></li>#}
+{#                                                    <li><a href="javascript:void(0)"> {%trans%}Region{%endtrans%} : {{projet.arrondissement.departement.region.nom|trans}} CMR</a></li>#}
                                                 </ul>
                                             </div>
                                             <div class="bottom-content">

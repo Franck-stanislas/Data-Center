@@ -17,14 +17,13 @@ use Gedmo\Translatable\Translatable;
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
-class Categorie implements Translatable
+class Categorie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[Gedmo\Translatable]
     #[ORM\Column(type: 'string', length: 255)]
     private $nom_categorie;
 

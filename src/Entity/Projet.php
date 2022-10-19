@@ -88,8 +88,11 @@ class Projet implements Translatable
     #[ORM\Column(type: 'text', nullable: true)]
     private $eligibilite;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', nullable: true)]
     private $etat;
+
+    #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'projets')]
+    private $region;
 
     public function __construct()
     {
@@ -371,4 +374,16 @@ class Projet implements Translatable
 //    {
 //        $this->locale = $locale;
 //    }
+
+public function getRegion(): ?Region
+{
+    return $this->region;
+}
+
+public function setRegion(?Region $region): self
+{
+    $this->region = $region;
+
+    return $this;
+}
 }

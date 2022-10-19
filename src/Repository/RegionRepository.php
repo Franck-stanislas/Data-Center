@@ -39,6 +39,35 @@ class RegionRepository extends ServiceEntityRepository
         }
     }
 
+    // return name and count relation with all region
+    public function findAllWithProjetsCount(): array
+    {
+        $query = $this->createQueryBuilder('r')
+            ->select('r.id, r.nom, COUNT(p.id) AS projetCount')
+            ->leftJoin('r.projets', 'p')
+            ->groupBy('r.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function findAllByRegionsWithProjetsCount(array $regions): array  {
+        if(empty($regions)) return $this->findAllWithProjetsCount();
+
+        $query = $this->createQueryBuilder('r')
+            ->select('r.id, r.nom, COUNT(p.id) AS projetCount')
+            ->join('r.departements', 'd')
+            ->join('d.arrondissements', 'a')
+            ->join('a.projets', 'p')
+            ->join('p.secteur', 's')
+            ->where('s.id IN (:regions)')
+            ->setParameter('regions', $regions)
+            ->groupBy('r.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Region[] Returns an array of Region objects
 //     */

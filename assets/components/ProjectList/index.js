@@ -3,6 +3,7 @@ import axios from "axios";
 import debounce from "lodash.debounce";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { useTranslation } from 'react-i18next';
 
 
 const ProjectList = () => {
@@ -25,6 +26,11 @@ const ProjectList = () => {
     const [region, setRegion] = useState("");
     const [departement, setDepartement] = useState("");
     const [arrondissement, setArrondissement] = useState("");
+
+    const { t, i18n } = useTranslation();
+    const changeLanguage = lng => {
+        i18n.changeLanguage(lng);
+    };
 
     useEffect(() => {
         axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/get-all')
@@ -189,18 +195,23 @@ const ProjectList = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-6 col-md-6 col-12">
                             <div className="breadcrumbs-content">
-                                <h1 className="page-title">Projets</h1>
+                                <h1 className="page-title">{t('Projets')}</h1>
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-12">
                             <ul className="breadcrumb-nav">
-                                <li><a href="/">Home</a></li>
-                                <li>Liste des projets</li>
+                                <li><a href="/">{t('Home')}</a></li>
+                                <li>{t('Liste des projets')}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <header className="App-header">
+                <button className="btn" onClick={() => changeLanguage('en')}>english</button>
+                <button className="btn" onClick={() => changeLanguage('fr')}>french</button>
+            </header>
 
             <section className="category-page section">
                 <div className="container">
@@ -208,7 +219,7 @@ const ProjectList = () => {
                         <div className="col-lg-3 col-md-4 col-12">
                             <div className="category-sidebar">
                                 <div className="single-widget search">
-                                    <h3>Rechercher</h3>
+                                    <h3>{t('Rechercher')}</h3>
                                     <form action="#">
                                         <input type="text" placeholder="Rechercher Ici..." value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                                         <button type="submit"><i className="lni lni-search-alt"/></button>
@@ -216,28 +227,28 @@ const ProjectList = () => {
                                 </div>
 
                                 <div className="single-widget">
-                                    <h3>Localisation</h3>
+                                    <h3>{t('Localisation')}</h3>
                                     <form>
                                         <ul className="list" id="cat-filter">
                                             <div className="form-group mb-2">
-                                                <label htmlFor="region">Region</label>
+                                                <label htmlFor="region">{t('Region')}</label>
                                                 <select name="region" id="region" className="form-control" value={region} onChange={handleRegionChange}>
-                                                    <option selected="">Veuillez choisir une region</option>
+                                                    <option selected="">{t('Veuillez choisir une region')}</option>
                                                     {regions.map(region => (<option key={region.id} value={region.id}>{region.nom}</option>))}
                                                 </select>
                                             </div>
                                             <div className="form-group mb-2">
-                                                <label htmlFor="departement">Département</label>
+                                                <label htmlFor="departement">{t('Département')}</label>
                                                 <select name="departement" id="departement" className="form-control" value={departement} onChange={handleDepartementChange}>
-                                                    <option selected=""> Choisir un département</option>
+                                                    <option selected="">{t('Choisir un département')} </option>
                                                     {departements.map(departement => (
                                                         <option key={departement.id} value={departement.id}>{departement.nom}</option>))}
                                                 </select>
                                             </div>
                                             <div className="form-group">
-                                                <label htmlFor="arrondissement">Arrondissement</label>
+                                                <label htmlFor="arrondissement">{t('Arrondissement')}</label>
                                                 <select name="arrondissement" id="arrondissement" className="form-control" value={arrondissement} onChange={handleArrondissementChange}>
-                                                    <option selected="">Choisir un arrondissement</option>
+                                                    <option selected="">{t('Choisir un arrondissement')}</option>
                                                     {arrondissements.map(arrondissement => (
                                                         <option key={arrondissement.id} value={arrondissement.id}>{arrondissement.nom}</option>))}
                                                 </select>
@@ -247,7 +258,7 @@ const ProjectList = () => {
                                 </div>
 
                                 <div className="single-widget">
-                                    <h3>Toutes les secteurs</h3>
+                                    <h3>{t('Tous les secteurs')}</h3>
                                     <ul className="list" id="cat-filter">
                                         {categories && categories.map((category) => (
                                             <li key={category.id} onClick={() => handleChangeActivesCategories(category.id)}>
@@ -264,7 +275,7 @@ const ProjectList = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="category-grid-topbar mb-4">
-                                            <span className="ml-4 mt-3 fw-bold">Maturité du projet</span>
+                                            <span className="ml-4 mt-3 fw-bold">{t('Maturité du projet')}</span>
                                             <nav className="list-nav1">
                                                 <ul>
                                                     {maturites && maturites.map((maturite) => (
@@ -283,8 +294,8 @@ const ProjectList = () => {
                                         <div className="category-grid-topbar">
                                             <div className="row align-items-center">
                                                 <div className="col-lg-6 col-md-6 col-12">
-                                                    <h3 className="title">Affiché
-                                                        1-{projets?.length} of {totalCount} projets trouvés</h3>
+                                                    <h3 className="title">{t('Affiché')}
+                                                        1-{projets?.length} {t('sur')} {totalCount}{t('projets trouvés')} </h3>
                                                 </div>
                                                 <div className="col-lg-6 col-md-6 col-12">
                                                     <nav>
@@ -327,7 +338,7 @@ const ProjectList = () => {
                                                                         </a>
                                                                     </p>
                                                                     <ul className="info">
-                                                                        <span>Estimation du cout</span><br/>
+                                                                        <span>{t('Estimation du cout')}</span><br/>
                                                                         <li className="price">{projet.couts} FCFA</li>
                                                                     </ul>
 
@@ -337,7 +348,7 @@ const ProjectList = () => {
                                                     ))}
 
                                                     {!projets && <span
-                                                        className="text-danger text-center">Aucun projet disponible pour le moment</span>}
+                                                        className="text-danger text-center">{t('Aucun projet disponible pour le moment')}</span>}
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-6">
@@ -364,7 +375,7 @@ const ProjectList = () => {
                                                     <div className="col-6">
                                                         <div className="pagination right">
                                                             <button className="btn btn-outline-primary" onClick={() => imprimerProjet()}>
-                                                                <i className="lni lni-download"></i> Télécharger
+                                                                <i className="lni lni-download"></i>{t('Télécharger')}
                                                             </button>
                                                         </div>
                                                     </div>

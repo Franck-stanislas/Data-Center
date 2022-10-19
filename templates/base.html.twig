@@ -52,6 +52,21 @@
               href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
               type="text/css">
 
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <link
+                rel="stylesheet"
+                href="https://unpkg.com/react-leaflet-markercluster/dist/styles.min.css"
+        />
+
+
+{#        <link href="https://rawgit.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/MarkerCluster.Default.css" rel="stylesheet" />#}
+{#        <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" rel="stylesheet" />#}
+{#        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>#}
+{#        <script src="https://rawgit.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/leaflet.markercluster.js"></script>#}
+{#        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>#}
+{#        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>#}
+{#        <script src="https://npmcdn.com/react-leaflet@0.12.2/dist/react-leaflet.js"></script>#}
+
     </head>
     <body>
 
@@ -108,6 +123,18 @@
 {#                                               href="{{ path('app_project_map') }}">Carte projet</a>#}
 {#                                        </li>#}
 {#                                        {{ include('layout/financementNavbar.html.twig')}}#}
+
+                                        <li class="nav-item">
+                                            <a class="{{ app.request.attributes.get('_route') == 'app_regional_projects_list' ? 'active' : '' }} dd-menu collapsed"
+                                               href="javascript:void(0)"
+                                               data-bs-toggle="collapse" data-bs-target="#ctd"
+                                               aria-controls="navbarSupportedContent" aria-expanded="false"
+                                               aria-label="Toggle navigation">{%trans%}CTD{%endtrans%}</a>
+                                            <ul class="sub-menu collapse" id="ctd">
+                                                <li class="nav-item"><a href="{{ path('app_regional_projects_list') }}">{%trans%}Regions{%endtrans%}</a></li>
+                                                <li class="nav-item"><a href="{{ path('app_arron_project_list') }}">{%trans%}Communes{%endtrans%}</a></li>
+                                            </ul>
+                                        </li>
 
                                         <li class="nav-item">
                                             <a class="{{ app.request.attributes.get('_route') == 'app_project_about' ? 'active' : '' }} dd-menu collapsed"

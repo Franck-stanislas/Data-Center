@@ -6,8 +6,9 @@ import ProjectInfo from "./ProjectInfo";
 import OtherInfo from "./OtherInfo";
 import EditProjectInfo from "./EditProjectInfo";
 import EditOtherInfo from "./EditOtherInfo";
-
+import { useTranslation } from 'react-i18next';
 const EditProject = () => {
+    const { t, i18n } = useTranslation();
     const [step, setStep] = useState(1);
     const [project, setProject] = useState({});
     const [categories, setCategories] = useState([]);
@@ -133,11 +134,11 @@ const EditProject = () => {
                                     </svg>
                                 </a>
                             </li>
-                            <li className="breadcrumb-item active" aria-current="page">Ajout projet</li>
+                            <li className="breadcrumb-item active" aria-current="page">{t('Ajout projet')}</li>
                         </ol>
                     </nav>
-                    <h2 className="h4">Modification projet</h2>
-                    <p className="mb-0">Suivez ces etapes.</p>
+                    <h2 className="h4">{t('Modification projet')}</h2>
+                    <p className="mb-0">{t('Suivez ces etapes')}.</p>
                 </div>
             </div>
             <Stepper active={step} breakpoint="lg" onStepClick={setStep}>
@@ -159,65 +160,64 @@ const EditProject = () => {
             {step === 1 && (
                 <form className="container">
                     <div className="d-block mt-4 mb-md-0">
-                        <p className="mb-0">Présentation du projet.</p>
+                        <p className="mb-0">{t('Présentation du projet')}.</p>
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="institule">Intitulé</label>
+                            <label className="my-1 me-2" htmlFor="institule">{t('Intitulé')}</label>
                             <input type="text" className="form-control" id="institule" value={project.institule} onChange={handleChange}/>
                         </div>
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="institule">Caracteristique de l'activité</label>
+                            <label className="my-1 me-2" htmlFor="institule">{t('Caracteristique de l\'activité')}</label>
                             <textarea rows="4" className="form-control" id="caracteristique" value={project.caracteristique} onChange={handleChange}> </textarea>
                         </div>
 
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="institule">Marchés cibles</label>
+                            <label className="my-1 me-2" htmlFor="institule">{t('Marchés cibles')}</label>
                             <input type="text" className="form-control" id="marche" value={project.marche} onChange={handleChange}/>
                         </div>
 
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="supply">Supply Chain</label>
+                            <label className="my-1 me-2" htmlFor="supply">{t('Supply Chain')}</label>
                             <textarea rows="4" className="form-control" id="supply" value={project.supply} onChange={handleChange}></textarea>
                         </div>
 
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="atouts">Facteurs et atouts géographiques de production</label>
+                            <label className="my-1 me-2" htmlFor="atouts">{t('Facteurs et atouts géographiques de production')}</label>
                             <input rows="4" className="form-control" id="atouts" value={project.atouts} onChange={handleChange}/>
                         </div>
 
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="secteur">Secteur</label>
+                            <label className="my-1 me-2" htmlFor="secteur">{t('Secteur')}</label>
                             <select className="form-select" id="secteur" aria-label="" onChange={handleChange}>
-                                <option selected="">Choisir une categorie</option>
+                                <option selected="">{t('Choisir un secteur')}</option>
                                 {categories.map(category => (
                                     <option key={category.id} value={category.id} selected={project.secteur === category.id}>{category.nomCategorie}</option>
                                 ))}
                             </select>
                         </div>
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="objectifs">Objectis</label>
+                            <label className="my-1 me-2" htmlFor="objectifs">{t('Objectis')}</label>
                             <textarea className="form-control" placeholder="Enter your objectifs..." id="objectifs" value={project.objectifs} onChange={handleChange}
                                       rows="4"></textarea>
                         </div>
 
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="valeur_ajouter">Position sur le complexe des chaines de valeur ajoutée</label>
+                            <label className="my-1 me-2" htmlFor="valeur_ajouter">{t('Position sur le complexe des chaines de valeur ajoutée')}</label>
                             <textarea className="form-control"  rows="4" id="valeur_ajouter" value={project.valeur_ajouter} onChange={handleChange}></textarea>
                         </div>
 
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="eligibilite">Eligibilité au bénéfice des appuis et
-                                arrangement de l’environnement institutionnel</label>
+                            <label className="my-1 me-2" htmlFor="eligibilite">{t('Eligibilité au bénéfice des appuis et arrangement de l’environnement institutionnel')}</label>
                             <textarea className="form-control" placeholder="Entrer vos données..." id="eligibilite" value={project.eligibilite} onChange={handleChange}
                                       rows="4"></textarea>
                         </div>
 
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="resultats">Resultats attendus</label>
+                            <label className="my-1 me-2" htmlFor="resultats">{t('Resultats attendus')}</label>
                             <textarea className="form-control" placeholder="Enter your message..." id="resultats" value={project.resultats} onChange={handleChange}
                                       rows="4"></textarea>
                         </div>
                         <div className="mb-4 mt-2">
-                            <label className="my-1 me-2" htmlFor="couts">Coût estimatif</label>
+                            <label className="my-1 me-2" htmlFor="couts">{t('Coût estimatif')}</label>
                             <input type="number" className="form-control" id="couts" value={project.couts} onChange={handleChange}/>
                         </div>
                     </div>
@@ -227,7 +227,7 @@ const EditProject = () => {
             {step === 2 && (
                 <form className="container">
                     <div className="d-block mt-4 mb-md-0">
-                        <p className="mb-4">Autres informations.</p>
+                        <p className="mb-4">{t('Autres informations')}.</p>
                         <div className="row container">
                             {maturites.map(maturite => (
                                 <div className="form-check col-lg-4 col-sm-6" key={maturite.id}>
@@ -240,7 +240,7 @@ const EditProject = () => {
                         </div>
 
                         {(type === 'mature' || type === 'encours') && <>
-                            <p className="mb-4">Elémentts de maturité.</p>
+                            <p className="mb-4">{t('Elémentts de maturité')}.</p>
                             <div className="row container">
                                 {elements.map(elt => (
                                     <div className="form-check col-lg-4 col-sm-6" key={elt.id}>
@@ -261,7 +261,7 @@ const EditProject = () => {
                                     </div>
                                 ))}
                             </div>
-                            <p className="mb-4">Financement.</p>
+                            <p className="mb-4">{t('Financement')}.</p>
                             <div className="row container">
                                 {financements.map(financement => (
                                     <div className="form-check col-lg-4 col-sm-6" key={financement.id}>
@@ -275,7 +275,7 @@ const EditProject = () => {
                         </>}
 
                         {(type === 'idee') && <>
-                            <p className="mb-4">Financement.</p>
+                            <p className="mb-4">{t('Financement')}.</p>
                             <div className="row container">
                                 {financements.map(financement => (
                                     <div className="form-check col-lg-4 col-sm-6" key={financement.id}>

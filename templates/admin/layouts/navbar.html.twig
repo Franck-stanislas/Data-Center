@@ -39,7 +39,11 @@
             <li class="nav-item">
                 <a href="{{ path('app_index') }}" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">
-                        <img src="{{ asset('client/assets/images/logo/logo1.svg') }}" alt="BANQUE DE PROJETS">
+                         {% if app.request.locale == "fr"%}
+                             <img class="img-fluid" src="{{ asset('client/assets/images/logo/logoMin.svg') }}" alt="Logo">
+                                    {%else%}
+                             <img class="img-fluid" src="{{ asset('client/assets/images/logo/logoMinEn.svg') }}" alt="Logo">
+                         {%endif%}
                     </span>
 {#                    <span class="mt-1 ms-1 sidebar-text">BANQUE DE DONNEES</span>#}
                 </a>
@@ -88,7 +92,15 @@
                                 <span class="sidebar-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12"><path fill="white" d="M6.5 1.75a.75.75 0 0 0-1.5 0V5H1.75a.75.75 0 0 0 0 1.5H5v3.25a.75.75 0 0 0 1.5 0V6.5h3.25a.75.75 0 0 0 0-1.5H6.5V1.75Z"/></svg><path fill="white" d="M8 9a3 3 0 1 0 0-6a3 3 0 0 0 0 6Zm0 2a6 6 0 0 1 6 6H2a6 6 0 0 1 6-6Zm8-4a1 1 0 1 0-2 0v1h-1a1 1 0 1 0 0 2h1v1a1 1 0 1 0 2 0v-1h1a1 1 0 1 0 0-2h-1V7Z"/></svg>
                                 </span>
-                                <span class="sidebar-text">{%trans%}Nouveau{%endtrans%}</span>
+                                <span class="sidebar-text">{%trans%}Projet Communal{%endtrans%}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{path('app_regional_projects_create')}}">
+                                <span class="sidebar-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12"><path fill="white" d="M6.5 1.75a.75.75 0 0 0-1.5 0V5H1.75a.75.75 0 0 0 0 1.5H5v3.25a.75.75 0 0 0 1.5 0V6.5h3.25a.75.75 0 0 0 0-1.5H6.5V1.75Z"/></svg><path fill="white" d="M8 9a3 3 0 1 0 0-6a3 3 0 0 0 0 6Zm0 2a6 6 0 0 1 6 6H2a6 6 0 0 1 6-6Zm8-4a1 1 0 1 0-2 0v1h-1a1 1 0 1 0 0 2h1v1a1 1 0 1 0 2 0v-1h1a1 1 0 1 0 0-2h-1V7Z"/></svg>
+                                </span>
+                                <span class="sidebar-text">{%trans%}Projet Regional{%endtrans%}</span>
                             </a>
                         </li>
                         <li class="nav-item ">

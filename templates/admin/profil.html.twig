@@ -17,13 +17,13 @@
                                 <div class="col-md-6 mb-3">
                                     <div>
                                         <label for="first_name">{%trans%}Nom{%endtrans%}</label>
-                                        {{form_widget(form.first_name|trans )}}
+                                        {{form_widget(form.first_name )}}
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div>
                                         <label for="last_name">{%trans%}Prénom{%endtrans%}</label>
-                                        {{form_widget(form.last_name|trans )}}
+                                        {{form_widget(form.last_name )}}
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
 
                         <div class="mt-3">
                             <button class="btn btn-gray-800 mt-2 animate-up-2" type="submit">
-                                {{ button_label|default|trans('Enregistrer') }}
+                                {{ button_label|default('Enregistrer') }}
                             </button>
                         </div>
                     </div>

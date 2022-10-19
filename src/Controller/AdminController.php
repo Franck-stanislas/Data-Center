@@ -183,7 +183,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/financement/{id}', name:'projet_list_financement')]
+    #[Route('/financements/{id}', name:'projet_list_financement')]
     public function listProjectByFinancementParameter(FinancementRepository $financementRepository, Financement $financement, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository): Response
     {
         $projet = $projetRepository->findAllByFinancementParameter($financement);

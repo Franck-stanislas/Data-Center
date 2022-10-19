@@ -4,6 +4,7 @@ import Localisation from "./project/Localisation";
 import ProjectInfo from "./project/ProjectInfo";
 import OtherInfo from "./project/OtherInfo";
 import axios from "axios";
+import "./i18n";
 
 const App = () => {
 

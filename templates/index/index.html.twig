@@ -13,8 +13,13 @@
                         <!-- Start Hero Text -->
                         <div class="section-heading">
                             <h2 class="wow fadeInUp" data-wow-delay=".3s">{%trans%}BANQUE DE PROJETS DES COLLECTIVITES <br> TERRITORIALES DECENTRALISEES DU CAMEROUN A BESOIN DE FINANCEMENT{%endtrans%}</h2>
-                            <p class="wow fadeInUp" data-wow-delay=".5s">
-                                {%trans%}Plateforme d'enregistement et de publication des projets de developpement des collectivités territoriales <br> décentralisées  à l'endroit des potentiels investisseurs.{%endtrans%}
+                            <p class="wow fadeInUp" size="14px" data-wow-delay=".5s">
+                                {%trans%}La Banque des Projets est un outil interactif permettant l’accès à l’information sur les projets des Collectivités
+                                    Territoriales Décentralisées (CTD) de l’Etat du Cameroun. Elle traduit l’engagement du Gouvernement à
+                                    faire du développement local, un développement inclusif, qui admet la participation et la contribution de tous
+                                    au développement d’une CTD, dans une perspective citoyenne..{%endtrans%} <br>
+                                {%trans%} Application bilingue, son objectif est d’avoir une plateforme nourrie des projets des CTD à recherche de financements en faisant ressortir leur niveau de maturation. {%endtrans%}
+                                <br>
                             </p>
                         </div>
                         <!-- End Hero Text -->
@@ -111,8 +116,13 @@
                                                     <a href="{{ path('app_project_detail', {'id':projet.id}) }}">{{ projet.institule }}</a>
                                                 </h3>
                                                 <ul class="info-list">
-                                                    <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville}}</a></li>
-                                                    <li><a href="javascript:void(0)"> {%trans%}Region {%endtrans%}: {{projet.arrondissement.departement.region.nom}} CMR</a></li>
+                                                    {% if projet.arrondissement%}
+                                                        <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville}}</a></li>
+                                                        <li><a href="javascript:void(0)"> {%trans%}Region {%endtrans%}: {{projet.arrondissement.departement.region.nom}} CMR</a></li>
+                                                    {%else%}
+                                                        <li><a href="javascript:void(0)"> Projet régionale de:</a></li>
+                                                        <li><a href="javascript:void(0)"> <i class="lni lni-map-marker"></i> {{projet.region.nom}} CMR</a></li>
+                                                    {% endif %}
                                                 </ul>
                                             </div>
                                             <div class="bottom-content">
@@ -188,6 +198,7 @@
                         <span class="serial">04</span>
                         <h3>{%trans%}Acceder à un projet{%endtrans%}</h3>
                         <p>{%trans%} Cliquer sur un projet pour pouvoir avoir les informations relatives à ce dernier{%endtrans%}</p>
+
                     </div>
                     <!-- End Single Work -->
                 </div>

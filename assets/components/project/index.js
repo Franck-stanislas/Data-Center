@@ -4,10 +4,18 @@ import {Stepper} from "@mantine/core";
 import Localisation from "./Localisation";
 import ProjectInfo from "./ProjectInfo";
 import OtherInfo from "./OtherInfo";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import RegionalProjectList from "../RegionalProjectList";
+import { useTranslation } from 'react-i18next';
 
 const Project = () => {
     const [step, setStep] = useState(0);
     const [project, setProject] = useState({});
+
+    const { t, i18n } = useTranslation();
+    const changeLanguage = lng => {
+        i18n.changeLanguage(lng);
+    };
 
     const save = () => {
         alert("save");
@@ -22,7 +30,7 @@ const Project = () => {
 
     return (
         <>
-            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div className="py-4">
                 <div className="d-block mb-4 mb-md-0">
                     <nav aria-label="breadcrumb" className="d-none d-md-inline-block">
                         <ol className="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -35,11 +43,29 @@ const Project = () => {
                                     </svg>
                                 </a>
                             </li>
-                            <li className="breadcrumb-item active" aria-current="page">Ajout projet</li>
+                            <li className="breadcrumb-item"><a href="">{t('Projets')}</a></li>
+                            <li className="breadcrumb-item active" aria-current="page">{t('Ajout projet')}</li>
                         </ol>
                     </nav>
-                    <h2 className="h4">Nouveau projet</h2>
-                    <p className="mb-0">Suivez ces etapes.</p>
+                    <div className="d-flex justify-content-between w-100 flex-wrap">
+                        <div className="mb-3 mb-lg-0">
+                            <h1 className="h4">{t('Nouveau projet')}</h1>
+                            <p className="mb-0">{t('Suivez ces etapes')}.</p>
+                        </div>
+                        <div>
+
+                            <a href={"/admin/projects/regional"}
+                               className="btn btn-outline-gray-600 d-inline-flex align-items-center">
+                                <svg className="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                {t('Ajouter un Projet de Conseil régional')}
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <Stepper active={step} breakpoint="lg" onStepClick={setStep}>

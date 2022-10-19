@@ -2,3 +2,6 @@
     height: 100vh !important;
     width: 100vh !important;
 }
+.markercluster-map {
+    height: 90vh;
+}

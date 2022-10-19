@@ -81,10 +81,26 @@ class IndexController extends AbstractController
         return $this->render('index/list-projects.html.twig');
     }
 
+    #[Route('/regional-projects', name: 'app_regional_projects_list')]
+    public function regionalProjets(): Response
+    {
+        return $this->render('index/regional-list-projects.html.twig');
+    }
+
+    #[Route('/communal-projects', name: 'app_arron_project_list')]
+    public function arrondissementProjets(): Response
+    {
+        return $this->render('index/communal-list-projects.html.twig');
+    }
+
     #[Route('/projet/{id}/details', name: 'app_project_detail', methods: ['GET'])]
     public function detailProject(Projet $projet, CategorieRepository $categorieRepository, UsersRepository $usersRepository): Response
     {
-        $mapUrl = 'https://maps.google.com/maps?q='. urlencode($projet->getArrondissement()->getVille() . ', Cameroon') . '&t=&z=13&ie=UTF8&iwloc=&output=embed';
+        if ($projet->getArrondissement()){
+            $mapUrl = 'https://maps.google.com/maps?q='. urlencode($projet->getArrondissement()->getVille() . ', Cameroon') . '&t=&z=13&ie=UTF8&iwloc=&output=embed';
+        }else{
+            $mapUrl = 'https://maps.google.com/maps?q='. urlencode($projet->getRegion()->getVille() . ', Cameroon') . '&t=&z=13&ie=UTF8&iwloc=&output=embed';
+        }
         return $this->render('index/detail-project.html.twig', [
             'projet' => $projet,
             'categories' => $categorieRepository->findOneByProjet($projet),
@@ -101,7 +117,7 @@ class IndexController extends AbstractController
 
         $categorie = $paginator->paginate(
             $categories,
-            $request->query->getInt('page', 1),9
+            $request->query->getInt('page', 1),18
         ) ;
         return $this->render('index/category.html.twig', compact('categorie', 'categorieCount'));
     }
@@ -114,7 +130,7 @@ class IndexController extends AbstractController
 
         $projets = $paginator->paginate(
             $projet,
-            $request->query->getInt('page', 1),9
+            $request->query->getInt('page', 1),30
         ) ;
 
         return $this->render('index/category-project.html.twig', [

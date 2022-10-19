@@ -120,6 +120,7 @@ class RegionController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $projet = new Projet();
         $projet->setArrondissement($arrondissementRepository->find($data['arrondissement']));
+        $projet->setRegion(null);
         $projet->setSecteur($categorieRepository->find($data['secteur']));
         $projet->setCouts($data['couts']);
         $projet->setResultats($data['resultats']);
@@ -147,6 +148,46 @@ class RegionController extends AbstractController
         $this->redirectToRoute('admin');
         return $this->json("ok", 200);
     }
+
+
+    #[Route('/project/save_region', name: 'project_region_save', methods: ['POST'])]
+    public function saveRegionProject( ProjetRepository $projectRepository, ArrondissementRepository $arrondissementRepository, CategorieRepository $categorieRepository, StatutRepository $statutRepository,
+                                 MaturiteRepository       $maturiteRepository, FinancementRepository $financementRepository,
+                                 EltMaturiteRepository    $eltMaturiteRepository, RegionRepository $regionRepository, Security $security, Request $request): Response
+    {
+        // get data of request
+        $data = json_decode($request->getContent(), true);
+        $projet = new Projet();
+        $projet->setArrondissement(null);
+        $projet->setRegion($regionRepository->find($data['region']));
+        $projet->setSecteur($categorieRepository->find($data['secteur']));
+        $projet->setCouts($data['couts']);
+        $projet->setResultats($data['resultats']);
+        $projet->setObjectifs($data['objectifs']);
+        $projet->setInstitule($data['institule']);
+        $projet->setCaracteristique($data['caracteristique']);
+        $projet->setMarche($data['marche']);
+        $projet->setSupply($data['supply']);
+        $projet->setAtouts($data['atouts']);
+        $projet->setValeurAjouter($data['valeur_ajouter']);
+        $projet->setEligibilite($data['eligibilite']);
+        $projet->setMaturite($maturiteRepository->find($data['maturite']));
+        $projet->setStatut($statutRepository->find($data['status']));
+        $projet->setUser($security->getUser());
+        foreach ($data['financements'] as $financement) {
+            $projet->addFinancement($financementRepository->find($financement));
+        }
+        foreach ($data['eltsMaturite'] as $maturite) {
+            $projet->addEltsMaturite($eltMaturiteRepository->find($maturite));
+        }
+        // save project
+        $projectRepository->add($projet, true);
+        $message  = $this->translation->trans('Projet enregistré');
+        $this->flashy->success($message);
+        $this->redirectToRoute('admin');
+        return $this->json("ok", 200);
+    }
+
 
     #[Route('/project/edit', name: 'project_api_edit', methods: ['POST'])]
     public function editProject(

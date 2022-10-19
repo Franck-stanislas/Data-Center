@@ -18,7 +18,7 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
  *
  * @method Projet|null find($id, $lockMode = null, $lockVersion = null)
  * @method Projet|null findOneBy(array $criteria, array $orderBy = null)
-// * @method Projet[]    findAll()
+ * @method Projet[]    findAll()
  * @method Projet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ProjetRepository extends ServiceEntityRepository
@@ -46,10 +46,30 @@ class ProjetRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAll(){
+//    public function findAll(){
+//        return $this->createQueryBuilder('projet')
+////            ->where('projet.etat = :etats')
+////            ->setParameter('etats', false)
+//            ->getQuery()
+//            ->getResult()
+//            ;
+//    }
+
+    public function findAllByArron(){
         return $this->createQueryBuilder('projet')
-            ->where('projet.etat = :etats')
-            ->setParameter('etats', false)
+            ->select('projet')
+            ->join('projet.arrondissement', 'a')
+            ->where('projet.region IS NULL')
+//            ->andWhere('projet.etat = :etats')
+//            ->setParameter('etats', false)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findAllByRegion(){
+        return $this->createQueryBuilder('projet')
+            ->where('projet.arrondissement IS NULL')
             ->getQuery()
             ->getResult()
             ;
@@ -131,16 +151,29 @@ class ProjetRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    // find count projet by commune on maps
+    public function findCountProjetsByCommuneApi(): array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('p.institule as institule, p.couts as couts, p.objectifs as objectifs, COUNT(p.id) as count, a.nom as arrondissement, a.ville as ville, a.lat as lat, a.lon as lon, s.nom_categorie as secteur, m.nom_maturite as maturite')
+            ->join('p.arrondissement', 'a')
+             ->join("p.secteur", 's')
+            ->join("p.maturite", "m")
+            ->groupBy('p.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
     // find  projet with all region
     public function findProjetsWithRegionApi(): array
     {
         $query = $this->createQueryBuilder('p')
-            ->select('p , a.nom as arrondissement, d.nom as departement, r.nom as region')
-            ->join('p.secteur', 's')
-            ->join('p.arrondissement', 'a')
-            ->join('a.departement', 'd')
-            ->join('d.region', 'r')
-
+            ->select('p.institule as institule, p.couts as couts, p.objectifs as objectifs, COUNT(p.id) as count, r.nom as region, r.ville as ville, r.lat as lat, r.lon as lon, s.nom_categorie as secteur, m.nom_maturite as maturite')
+            ->join('p.region', 'r')
+            ->join("p.secteur", 's')
+            ->join("p.maturite", "m")
+            ->groupBy('p.id')
 //            ->groupBy('a.id')
             ->getQuery();
 
@@ -151,12 +184,12 @@ class ProjetRepository extends ServiceEntityRepository
     public function findCountProjetsByMaturiteApi(): array
     {
         $query = $this->createQueryBuilder('p')
-            ->select('COUNT(p.id) as count, m.maturite as maturite, a.nom as arrondissement, d.nom as departement, r.nom as region, r.lat as lat, r.lon as lon')
+            ->select('COUNT(p.id) as count, m.nom_maturite as maturite, a.nom as arrondissement, d.nom as departement, r.nom as region, r.lat as lat, r.lon as lon')
             ->join('p.arrondissement', 'a')
             ->join('a.departement', 'd')
-            ->join('d.region', 'r')
+            ->join('p.region', 'r')
             ->join('p.maturite', 'm')
-            ->groupBy('a.id')
+            ->groupBy('p.id')
             ->getQuery();
 
         return $query->getResult();
@@ -200,9 +233,10 @@ class ProjetRepository extends ServiceEntityRepository
         }
         if($region) {
             $query
-                ->join('p.arrondissement', 'arrondissement')
-                ->join('arrondissement.departement', 'departement')
-                ->join('departement.region', 'region')
+                ->join('p.region', 'r')
+                ->leftJoin('p.arrondissement', 'arrondissement')
+                ->leftJoin('arrondissement.departement', 'departement')
+                ->leftJoin('departement.region', 'region')
                 ->andWhere('region.id = (:rId)')
                 ->setParameter('rId', $region);
             if($departement) {
@@ -221,7 +255,6 @@ class ProjetRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
-
 
     /**
      * Recupere les projets en lien avec la recherche

@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{{ path('app_index') }}">{%trans%}Home{%endtrans%}</a></li>
-                        <li>{%trans%}Detail du projet{%endtrans%} {{ projet.institule }}</li>
+                        <li> {{ projet.institule }}</li>
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,10 @@
                             <main id="gallery">
                                 <div class="main-img">
                                     {% for categorie in categories %}
-                                        <img src="{{vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_medium')}}" id="current" alt="{{projet.secteur.imageName}}" width="auto" height="auto">
+{#                                        <img src="{{ (categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('image/placeholder.png')) }}" alt="{{ categorie.imageName }}" class="thumbnail" height="200" width="200">#}
+
+{#                                        <img src="{{( vich_uploader_asset(categorie, 'imageFile') | imagine_filter('squared_thumbnail_medium'))}}" id="current" alt="{{projet.secteur.imageName}}" width="auto" height="auto">#}
+                                        <img src="{{(categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('image/placeholder.png')) | imagine_filter('squared_thumbnail_medium')}}" id="current" alt="{{projet.secteur.imageName}}" width="auto" height="auto">
                                     {% endfor%}
                                 </div>
 {#                                <div class="images">#}
@@ -48,8 +51,12 @@
                             <h2 class="title">{{ projet.institule }}</h2>
                             <p class="location">
                                 <i class="lni lni-map-marker"></i>
-                                <a href="javascript:void(0)" class="me-5">{{ projet.arrondissement.ville }}</a>
-                                <a href="javascript:void(0)">{%trans%}Region{%endtrans%} : {{ projet.arrondissement.departement.region.nom }} CMR</a>
+                                {%if projet.arrondissement%}
+                                    <a href="javascript:void(0)" class="me-5">{{ projet.arrondissement.ville }}</a>
+                                    <a href="javascript:void(0)">{%trans%}Region{%endtrans%} : {{ projet.arrondissement.departement.region.nom }} CMR</a>
+                                {%else %}
+                                    <a href="javascript:void(0)">{%trans%}Region{%endtrans%} : {{ projet.region.nom }} CMR</a>
+                                {%endif%}
                             </p>
                             <span>{%trans%}Estimation du cout{%endtrans%}</span><br>
                             <h3 class="price">

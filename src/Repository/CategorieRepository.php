@@ -51,8 +51,30 @@ class CategorieRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findAllByArronWithProjectsCount(): array {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.id, c.nom_categorie, COUNT(p.id) AS projetCount')
+            ->leftJoin('c.projet', 'p')
+            ->where('p.region IS NULL')
+            ->groupBy('c.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function findAllByRegionWithProjectsCount(): array {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.id, c.nom_categorie, COUNT(p.id) AS projetCount')
+            ->leftJoin('c.projet', 'p')
+            ->where('p.arrondissement IS NULL')
+            ->groupBy('c.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
     public function findAllByMaturitesWithProjectsCount(array $maturites): array {
-        if(empty($maturites)) return $this->findAllWithProjectsCount();
+        if(empty($maturites)) return $this->findAllByArronWithProjectsCount();
 
         $query = $this->createQueryBuilder('c')
             ->select('c.id, c.nom_categorie, COUNT(p.id) AS projetCount')

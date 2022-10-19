@@ -31,9 +31,16 @@ class Region
     #[ORM\Column(type: 'float', nullable: true)]
     private $lon;
 
+    #[ORM\OneToMany(mappedBy: 'region', targetEntity: Projet::class), Ignore]
+    private $projets;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $ville;
+
     public function __construct()
     {
         $this->departements = new ArrayCollection();
+        $this->projets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,6 +122,48 @@ class Region
     public function setLon(?float $lon): self
     {
         $this->lon = $lon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjets(): Collection
+    {
+        return $this->projets;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projets->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getRegion() === $this) {
+                $projet->setRegion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

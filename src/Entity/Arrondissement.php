@@ -30,6 +30,12 @@ class Arrondissement
     #[ORM\OneToMany(mappedBy: 'arrondissement', targetEntity: Projet::class), Ignore]
     private $projets;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $lat;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $lon;
+
     public function __construct()
     {
         $this->projets = new ArrayCollection();
@@ -103,6 +109,30 @@ class Arrondissement
                 $projet->setArrondissement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLon(): ?float
+    {
+        return $this->lon;
+    }
+
+    public function setLon(?float $lon): self
+    {
+        $this->lon = $lon;
 
         return $this;
     }
