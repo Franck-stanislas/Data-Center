@@ -120,7 +120,7 @@
                                                         <li><a href="javascript:void(0)"><i class="lni lni-map-marker"></i> {{ projet.arrondissement.ville}}</a></li>
                                                         <li><a href="javascript:void(0)"> {%trans%}Region {%endtrans%}: {{projet.arrondissement.departement.region.nom}} CMR</a></li>
                                                     {%else%}
-                                                        <li><a href="javascript:void(0)"> Projet régionale de:</a></li>
+                                                        <li><a href="javascript:void(0)">{%trans%} Projet régionale de {%endtrans%}:</a></li>
                                                         <li><a href="javascript:void(0)"> <i class="lni lni-map-marker"></i> {{projet.region.nom}} CMR</a></li>
                                                     {% endif %}
                                                 </ul>

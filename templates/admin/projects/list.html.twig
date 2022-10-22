@@ -14,13 +14,13 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item"><a href="">{%trans%}Projets{%endtrans%}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{%trans%}Liste{%endtrans%}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{%trans%}Liste des projets communaux{%endtrans%}</li>
                 </ol>
             </nav>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">{%trans%} Liste des projets {%endtrans%}</h1>
+                    <h1 class="h4">{%trans%} Liste des projets communaux{%endtrans%}</h1>
                 </div>
                 <div>
                     <a href="{{ path('app_projects_create') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">
@@ -45,13 +45,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ statut.nom|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
                                                 <h3 class="mb-1">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
@@ -71,13 +71,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ statut.nom|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
                                                 <h3 class="mb-1">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
@@ -97,13 +97,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ statut.nom|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
                                                 <h3 class="mb-1">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
@@ -127,13 +127,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -153,13 +153,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -179,13 +179,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -205,13 +205,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -231,13 +231,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -282,66 +282,70 @@
                                 <tr>
                                     <td><a href="#" class="text-primary fw-bold">{{ projet.id}}</a> </td>
                                     <td>
-                                        {{ projet.arrondissement.ville|trans}}
+                                        {%if projet.arrondissement%}
+                                            {{ projet.arrondissement.ville}}
+                                        {%else%}
+                                            {{projet.region.ville}}
+                                        {%endif%}
                                     </td>
                                     <td>
                                         <a href="{{ path('project_edit', {id: projet.id}) }}" class="text-secondary fw-bold">
-                                        {{ projet.institule|trans }}
+                                        {{ projet.institule }}
                                         </a>
                                     </td>
                                     <td>
-                                        {{ projet.secteur.nomCategorie|trans }}
+                                        {{ projet.secteur.nomCategorie }}
                                     </td>
                                     <td >
-                                        {{ projet.objectifs|trans [:50]}}
+                                        {{ projet.objectifs [:50]}}
 
                                     </td>
                                     <td >
-                                        {{ projet.caracteristique|trans [:50]}}
+                                        {{ projet.caracteristique [:50]}}
                                     </td>
                                     <td >
-                                        {{ projet.marche|trans }}
+                                        {{ projet.marche }}
                                     </td>
                                     <td >
-                                        {{ projet.supply|trans}}
+                                        {{ projet.supply}}
                                     </td>
                                     <td >
-                                        {{ projet.atouts|trans [:50]}}
+                                        {{ projet.atouts [:50]}}
                                     </td>
                                     <td >
-                                        {{ projet.resultats|trans [:50]}}
+                                        {{ projet.resultats [:50]}}
 
                                     </td>
                                     <td>
                                         {{ projet.couts }}
                                     </td>
                                     <td >
-                                        {{ projet.valeurAjouter|trans [:50]}}
+                                        {{ projet.valeurAjouter [:50]}}
                                     </td>
                                     <td >
-                                        {{ projet.eligibilite|trans [:50]}}
+                                        {{ projet.eligibilite [:50]}}
                                     </td>
                                     <td>
-                                        {{ projet.maturite.nomMaturite|trans }}
+                                        {{ projet.maturite.nomMaturite }}
                                     </td>
                                     <td>
                                         <ul>
                                             {% for elt in projet.eltsMaturite %}
-                                                <li>{{ elt.nom|trans }}</li>
+                                                <li>{{ elt.nom }}</li>
                                             {%endfor%}
                                         </ul>
 
                                     </td>
                                     <td>
                                         {% if projet.statut%}
-                                            {{ projet.statut.nom|trans }}
+                                            {{ projet.statut.nom }}
                                         {%endif%}
                                     </td>
                                     <td>
                                         <ol>
                                             {% for financement in projet.financement %}
                                                 <li>
-                                                    {{ financement.nomFinancement|trans }}
+                                                    {{ financement.nomFinancement }}
                                                 </li>
                                             {% endfor%}
                                         </ol>

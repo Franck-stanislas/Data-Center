@@ -4,13 +4,13 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Nom </label>
+                    <label for="first_name">{%trans%}Nom{%endtrans%} </label>
                     {{form_widget(form.first_name )}}
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Prénom</label>
+                    <label for="first_name">{%trans%}Prénom{%endtrans%}</label>
                     {{form_widget(form.last_name )}}
                 </div>
             </div>
@@ -18,13 +18,13 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Email </label>
+                    <label for="first_name">{%trans%}Email{%endtrans%} </label>
                     {{form_widget(form.email )}}
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Téléphone</label>
+                    <label for="first_name">{%trans%}Téléphone{%endtrans%}</label>
                     {{form_widget(form.phone )}}
                 </div>
             </div>
@@ -32,13 +32,13 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Rôles d'utilisateur </label>
+                    <label for="first_name">{%trans%}Rôles d'utilisateur{%endtrans%} </label>
                     {{form_widget(form.roles )}}
                 </div>
             </div>
             <div class="col-md-6 mb-3">
                 <div>
-                    <label for="first_name">Image</label>
+                    <label for="first_name">{%trans%}Image{%endtrans%}</label>
                     {{form_widget(form.image )}}
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 {{ button_label|default('Mettre à jour') }}
             </button>
             <a href="{{ path('utilisateurs') }} " class="btn btn-gray-800 mt-2 animate-up-2">
-                <i class='bx bx-arrow-back me-1'></i> Retour à la liste
+                <i class='bx bx-arrow-back me-1'></i> {%trans%}Retour à la liste{%endtrans%}
             </a>
 
         </div>

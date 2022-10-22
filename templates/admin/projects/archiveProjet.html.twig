@@ -56,66 +56,66 @@
                                 <tr>
                                     <td><a href="#" class="text-primary fw-bold">{{ projet.id}}</a> </td>
                                     <td>
-                                        {{ projet.arrondissement.ville|trans}}
+                                        {{ projet.arrondissement.ville}}
                                     </td>
                                     <td>
                                         <a href="{{ path('project_edit', {id: projet.id}) }}" class="text-secondary fw-bold">
-                                            {{ projet.institule|trans }}
+                                            {{ projet.institule }}
                                         </a>
                                     </td>
                                     <td>
-                                        {{ projet.secteur.nomCategorie|trans }}
+                                        {{ projet.secteur.nomCategorie }}
                                     </td>
                                     <td >
-                                        {{ projet.objectifs|trans [:50]}}
+                                        {{ projet.objectifs [:50]}}
 
                                     </td>
                                     <td >
-                                        {{ projet.caracteristique|trans [:50]}}
+                                        {{ projet.caracteristique [:50]}}
                                     </td>
                                     <td >
-                                        {{ projet.marche|trans }}
+                                        {{ projet.marche }}
                                     </td>
                                     <td >
-                                        {{ projet.supply|trans}}
+                                        {{ projet.supply}}
                                     </td>
                                     <td >
-                                        {{ projet.atouts|trans [:50]}}
+                                        {{ projet.atouts [:50]}}
                                     </td>
                                     <td >
-                                        {{ projet.resultats|trans [:50]}}
+                                        {{ projet.resultats [:50]}}
 
                                     </td>
                                     <td>
-                                        {{ projet.couts|trans }}
+                                        {{ projet.couts }}
                                     </td>
                                     <td >
-                                        {{ projet.valeurAjouter|trans [:50]}}
+                                        {{ projet.valeurAjouter [:50]}}
                                     </td>
                                     <td >
-                                        {{ projet.eligibilite|trans [:50]}}
+                                        {{ projet.eligibilite [:50]}}
                                     </td>
                                     <td>
-                                        {{ projet.maturite.nomMaturite|trans }}
+                                        {{ projet.maturite.nomMaturite }}
                                     </td>
                                     <td>
                                         <ul>
                                             {% for elt in projet.eltsMaturite %}
-                                                <li>{{ elt.nom|trans }}</li>
+                                                <li>{{ elt.nom }}</li>
                                             {%endfor%}
                                         </ul>
 
                                     </td>
                                     <td>
                                         {% if projet.statut%}
-                                            {{ projet.statut.nom|trans }}
+                                            {{ projet.statut.nom }}
                                         {%endif%}
                                     </td>
                                     <td>
                                         <ol>
                                             {% for financement in projet.financement %}
                                                 <li>
-                                                    {{ financement.nomFinancement|trans }}
+                                                    {{ financement.nomFinancement }}
                                                 </li>
                                             {% endfor%}
                                         </ol>

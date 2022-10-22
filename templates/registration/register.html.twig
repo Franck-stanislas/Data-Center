@@ -20,7 +20,7 @@
                                   d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
                                   clip-rule="evenodd"></path>
                         </svg>
-                        Retour à l'accueil
+                        {%trans%}Retour à l'accueil{%endtrans%}
                     </a>
                 </p>
                 <div class="row justify-content-center form-bg-image">
@@ -46,13 +46,13 @@
                             {% endif %}
 
                             <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">Création de compte </h1>
+                                <h1 class="mb-0 h3">{%trans%}Création de compte{%endtrans%} </h1>
                             </div>
 
                             {{ form_start(registrationForm) }}
                             <!-- Form -->
                             <div class="form-group mb-4">
-                                <label for="email"> Email</label>
+                                <label for="email"> {%trans%}Email{%endtrans%}</label>
                                 <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <svg class="icon icon-xs text-gray-600" fill="currentColor"
@@ -112,13 +112,13 @@
                                 </div>
                             </div>
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-gray-800">S'inscrire</button>
+                                <button type="submit" class="btn btn-gray-800">{%trans%}S'inscrire{%endtrans%}</button>
                             </div>
                             {{ form_end(registrationForm) }}
                             <div class="d-flex justify-content-center align-items-center mt-4">
                                 <span class="fw-normal">
-                                    Vous avez déjà un compte?
-                                    <a href="{{ path('login') }}" class="fw-bold">Connectez vous ici</a>
+                                    {%trans%}Vous avez déjà un compte?{%endtrans%}
+                                    <a href="{{ path('login') }}" class="fw-bold">{%trans%}Connectez vous ici{%endtrans%}</a>
                                 </span>
                             </div>
                         </div>

@@ -17,7 +17,7 @@ const Carte = () => {
     }
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/by-region')
+            axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/by-region')
             .then(async response => {
                 if (response.data) {
                     setRegions(response.data);
@@ -73,6 +73,10 @@ const Carte = () => {
                                     <b> <i className="lni lni-invest-monitor"></i>  Couts: </b> {commune.couts} FCFA
                                </span>
                            </div>
+                            {/*<div className="text-center">*/}
+                            {/*    <a href={"/projet/"+commune.id+"/details"} type="button"*/}
+                            {/*    className="btn btn-primary" tabIndex="0">View project profile</a>*/}
+                            {/*</div>*/}
                         </Popup>
                     </Marker>
                 ))}

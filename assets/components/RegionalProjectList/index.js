@@ -34,12 +34,12 @@ const RegionalProjectList = () => {
     };
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/projects/get-allByRegion')
+        axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/get-allByRegion')
             .then(response => {
                 setProjets(response.data.projets);
                 setMaturites(response.data.maturites);
                 setCategories(response.data.categories);
-
+                setRegions(response.data.regions);
                 setTotalCount(response.data.totalCount);
                 setTotalPages(response.data.totalPages);
                 setCurrentPage(response.data.currentPage);
@@ -132,7 +132,7 @@ const RegionalProjectList = () => {
 
     useEffect(() => {
         if (!isFirstLoad) {
-            axios.post('https://127.0.0.1:8000/api/projects/region-filters', {
+            axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/region-filters', {
                 page: currentPage,
                 activesMaturites,
                 activesCategories,
@@ -214,7 +214,7 @@ const RegionalProjectList = () => {
                         </div>
                         <div className="col-lg-6 col-md-6 col-12">
                             <ul className="breadcrumb-nav">
-                                <li><a href="/">{t('Home')}</a></li>
+                                <li><a href="/">{t('Accueil')}</a></li>
                                 <li>{t('Liste des projets')}</li>
                             </ul>
                         </div>
@@ -222,10 +222,10 @@ const RegionalProjectList = () => {
                 </div>
             </div>
 
-            <header className="App-header">
-                <button className="btn" onClick={() => changeLanguage('en')}>english</button>
-                <button className="btn" onClick={() => changeLanguage('fr')}>french</button>
-            </header>
+            {/*<header className="App-header">*/}
+            {/*    <button className="btn" onClick={() => changeLanguage('en')}>english</button>*/}
+            {/*    <button className="btn" onClick={() => changeLanguage('fr')}>french</button>*/}
+            {/*</header>*/}
 
             <section className="category-page section">
                 <div className="container">
@@ -303,10 +303,10 @@ const RegionalProjectList = () => {
                                                                         <a href={"/projet/"+projet.id+"/details"}>{projet.institule}</a>
                                                                     </h3>
 
-                                                                    <ul className="info-list">
-                                                                        <li><a href="javascript:void(0)"> Projet régionale de:</a></li>
-                                                                        <li><a href="javascript:void(0)"> <i className="lni lni-map-marker"></i> {projet.region.nom} CMR</a></li>
-                                                                    </ul>
+                                                                    <p className="location">
+                                                                        <span>Projet régionale de: </span>
+                                                                        <a href="javascript:void(0)"> <i className="lni lni-map-marker"></i>{projet.region.nom} CMR</a>
+                                                                    </p>
 
                                                                     <ul className="info">
                                                                         <span>{t('Estimation du cout')}</span><br/>

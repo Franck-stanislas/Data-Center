@@ -200,7 +200,7 @@ const ProjectList = () => {
                         </div>
                         <div className="col-lg-6 col-md-6 col-12">
                             <ul className="breadcrumb-nav">
-                                <li><a href="/">{t('Home')}</a></li>
+                                <li><a href="/">{t('Accueil')}</a></li>
                                 <li>{t('Liste des projets')}</li>
                             </ul>
                         </div>
@@ -208,10 +208,10 @@ const ProjectList = () => {
                 </div>
             </div>
 
-            <header className="App-header">
-                <button className="btn" onClick={() => changeLanguage('en')}>english</button>
-                <button className="btn" onClick={() => changeLanguage('fr')}>french</button>
-            </header>
+            {/*<header className="App-header">*/}
+            {/*    <button className="btn" onClick={() => changeLanguage('en')}>english</button>*/}
+            {/*    <button className="btn" onClick={() => changeLanguage('fr')}>french</button>*/}
+            {/*</header>*/}
 
             <section className="category-page section">
                 <div className="container">

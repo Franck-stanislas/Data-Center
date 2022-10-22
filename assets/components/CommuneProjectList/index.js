@@ -35,7 +35,7 @@ const CommuneProjectList = () => {
     useEffect(() => {
         axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/get-allByArron')
             .then(response => {
-                setProjets(response.data.products);
+                setProjets(response.data.projets);
                 setMaturites(response.data.maturites);
                 setCategories(response.data.categories);
                 setTotalCount(response.data.totalCount);
@@ -128,7 +128,7 @@ const CommuneProjectList = () => {
                 region, departement, arrondissement
             })
                 .then(response => {
-                    setProjets(response.data.products);
+                    setProjets(response.data.projets);
                     setTotalPages(response.data.totalPages);
                     setCategories(response.data.categories);
                     setMaturites(response.data.maturites);
@@ -200,7 +200,7 @@ const CommuneProjectList = () => {
                         </div>
                         <div className="col-lg-6 col-md-6 col-12">
                             <ul className="breadcrumb-nav">
-                                <li><a href="/">{t('Home')}</a></li>
+                                <li><a href="/">{t('Accueil')}</a></li>
                                 <li>{t('Liste des projets')}</li>
                             </ul>
                         </div>
@@ -208,10 +208,10 @@ const CommuneProjectList = () => {
                 </div>
             </div>
 
-            <header className="App-header">
-                <button className="btn" onClick={() => changeLanguage('en')}>english</button>
-                <button className="btn" onClick={() => changeLanguage('fr')}>french</button>
-            </header>
+            {/*<header className="App-header">*/}
+            {/*    <button className="btn" onClick={() => changeLanguage('en')}>english</button>*/}
+            {/*    <button className="btn" onClick={() => changeLanguage('fr')}>french</button>*/}
+            {/*</header>*/}
 
             <section className="category-page section">
                 <div className="container">

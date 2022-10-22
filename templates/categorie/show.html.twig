@@ -8,21 +8,21 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>{%trans%}Id{%endtrans%}</th>
                 <td> {{ categorie.id }} </td>
             </tr>
             <tr>
-                <th>Nom_categorie</th>
+                <th>{%trans%}Nom de la categorie{%endtrans%}</th>
                 <td>{{ categorie.nomCategorie|trans }}</td>
             </tr>
             <tr>
-                <th>ImageName</th>
+                <th>{%trans%}Image{%endtrans%}</th>
                 <td>
                     <img src="{{ vich_uploader_asset(categorie) | imagine_filter('squared_thumbnail_small') }}" alt="{{ categorie.nomCategorie }}" width="50" height="50">
                 </td>
             </tr>
             <tr>
-                <th>Icone</th>
+                <th>{%trans%}Icone{%endtrans%}</th>
                 <td>
                     <img src="{{ vich_uploader_asset(categorie, 'iconeFile') | imagine_filter('squared_thumbnail_small') }}" alt="{{ categorie.iconeName }}" width="50" height="50">
                 </td>

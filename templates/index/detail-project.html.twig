@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="{{ path('app_index') }}">{%trans%}Home{%endtrans%}</a></li>
+                        <li><a href="{{ path('app_index') }}">{%trans%}Accueil{%endtrans%}</a></li>
                         <li> {{ projet.institule }}</li>
                     </ul>
                 </div>
@@ -101,43 +101,43 @@
 
                         <div class="single-block description">
                             <h3>{%trans%}Description{%endtrans%}</h3>
-                            <p>
-                                {{ projet.objectifs|trans}}
+                            <p class="text-start lni-text-align-justify">
+                                {{ projet.objectifs}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>{%trans%}Caractéristique de l'activité{%endtrans%}</h3>
-                            <p class="text-start">
-                                {{ projet.caracteristique|trans}}
+                            <p class="text-start lni-text-align-justify">
+                                {{ projet.caracteristique}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>{%trans%}Marché cibles{%endtrans%}</h3>
-                            <p class="text-start">
-                                {{ projet.marche|trans}}
+                            <p class="text-start lni-text-align-justify">
+                                {{ projet.marche}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>{%trans%}Supply Chain{%endtrans%}</h3>
-                            <p class="text-start">
-                                {{ projet.supply|trans}}
+                            <p class="text-start lni-text-align-justify">
+                                {{ projet.supply}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>{%trans%}Facteurs et atouts géographiques de production{%endtrans%}</h3>
-                            <p class="text-start">
-                                {{ projet.atouts|trans}}
+                            <p class="text-start lni-text-align-justify">
+                                {{ projet.atouts}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>{%trans%}Position sur le complexe des chaines de valeur ajoutée{%endtrans%}</h3>
-                            <p class="text-start">
-                                {{ projet.valeurAjouter|trans}}
+                            <p class="text-start lni-text-align-justify">
+                                {{ projet.valeurAjouter}}
                             </p>
                         </div>
 
@@ -146,15 +146,15 @@
                                 arrangement de l’environnement
                                 institutionnel{%endtrans%}
                             </h3>
-                            <p class="text-start">
-                                {{ projet.eligibilite|trans}}
+                            <p class="text-start lni-text-align-justify">
+                                {{ projet.eligibilite}}
                             </p>
                         </div>
 
                         <div class="single-block description">
                             <h3>{%trans%}Impact économique{%endtrans%}</h3>
                             <p class="text-start">
-                                {{ projet.resultats|trans}}
+                                {{ projet.resultats}}
                             </p>
                         </div>
 
@@ -165,7 +165,7 @@
                                 {% if projet.eltsMaturite|length > 0%}
                                     <span class="mb-2">{%trans%}Elements de maturite disponibles{%endtrans%}</span> <br>
                                     {% for elt in projet.eltsMaturite%}
-                                        <li><a href="javascript:void(0)">{{ elt.nom|trans }}</a></li>
+                                        <li><a href="javascript:void(0)">{{ elt.nom }}</a></li>
                                     {% endfor%}
                                 {% else%}
                                     <li> <span class="">{%trans%}Aucunes informations pour le moment{%endtrans%}</span></li>

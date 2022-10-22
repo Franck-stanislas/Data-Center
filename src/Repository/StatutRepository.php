@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Region;
 use App\Entity\Statut;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -45,6 +46,16 @@ class StatutRepository extends ServiceEntityRepository
             ->join('p.user', 'u')
             ->where('u.id = :userId')
             ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllByRegion(Region $region)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.projet', 'p')
+            ->where('p.region = :region')
+            ->setParameter('region', $region)
             ->getQuery()
             ->getResult();
     }

@@ -39,8 +39,9 @@ class AdminController extends AbstractController
         $user = $security->getUser();
 
         if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
-            $projet = $projetRepository->findAll();
+            $projet = $projetRepository->findAllByArron();
             $projetArchives = $projetRepository->findAllByEtat();
+            $projetregional = $projetRepository->findAllByRegion();
         } else {
             $projet = $projetRepository->findByUser($user->getId());
         }
@@ -74,6 +75,7 @@ class AdminController extends AbstractController
         return $this->render('admin/index.html.twig',[
             'projets' => $projet,
             'archives' =>$projetArchives,
+            'regional' =>$projetregional,
             'users' => $usersRepository->findAll(),
             'statuts' => $statutRepository->findAll(),
             'countByRegion' => $regions,
@@ -105,12 +107,12 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/projets', name:'projet_list')]
+    #[Route('/projets-communal', name:'projet_list')]
     public function listProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
     {
         $user = $security->getUser();
         if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
-            $projet = $projetRepository->findAll();
+            $projet = $projetRepository->findAllByArron();
             $status = $statutRepository->findAll();
             $financements = $financementRepository->findAll();
         } else {
@@ -127,6 +129,30 @@ class AdminController extends AbstractController
             'financements' => $financements
         ]);
     }
+
+    #[Route('/projets-regional', name:'projet_list_regional')]
+    public function regionalProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAllByRegion();
+            $status = $statutRepository->findAll();
+            $financements = $financementRepository->findAll();
+        } else {
+            $projet = $projetRepository->findByUser($user->getId());
+            $status = $statutRepository->findByUser($user->getId());
+            $financements = $financementRepository->findByUser($user->getId());
+        }
+
+//        dd($projetRepository->findAll());
+        return $this->render('admin/projects/regional-list.html.twig',[
+            'projets' => $projet,
+            'users' => $usersRepository->findAll(),
+            'statuts' => $status,
+            'financements' => $financements
+        ]);
+    }
+
 
     #[Route('/projets-archives', name:'projet_archives')]
     public function archiveProject(ProjetRepository $projetRepository, UsersRepository $usersRepository, Security $security): Response

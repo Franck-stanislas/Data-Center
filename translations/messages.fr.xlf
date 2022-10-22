@@ -827,6 +827,156 @@
         <source>Déconnexion</source>
         <target>Déconnexion</target>
       </trans-unit>
+      <trans-unit id="EUU5nAx" resname="Projet Communal">
+        <source>Projet Communal</source>
+        <target>Projet Communal</target>
+      </trans-unit>
+      <trans-unit id="8Ci8EzG" resname="Projet Regional">
+        <source>Projet Regional</source>
+        <target>Projet Regional</target>
+      </trans-unit>
+      <trans-unit id="BbiNGPw" resname="Edit user">
+        <source>Edit user</source>
+        <target>Edit user</target>
+      </trans-unit>
+      <trans-unit id="CcfZVBs" resname="Modifier un utilisateur">
+        <source>Modifier un utilisateur</source>
+        <target>Modifier un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="o4hxLxb" resname="Rôles d'utilisateur">
+        <source>Rôles d'utilisateur</source>
+        <target>Rôles d'utilisateur</target>
+      </trans-unit>
+      <trans-unit id="gLT7ogn" resname="Choisir une Image">
+        <source>Choisir une Image</source>
+        <target>Choisir une Image</target>
+      </trans-unit>
+      <trans-unit id="3MRggP." resname="JPG, GIF ou PNG. Taille max de 800K">
+        <source>JPG, GIF ou PNG. Taille max de 800K</source>
+        <target>JPG, GIF ou PNG. Taille max de 800K</target>
+      </trans-unit>
+      <trans-unit id="NGdqgWZ" resname="Liste des utilisateurs">
+        <source>Liste des utilisateurs</source>
+        <target>Liste des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="ch5bKau" resname="Utilisateur">
+        <source>Utilisateur</source>
+        <target>Utilisateur</target>
+      </trans-unit>
+      <trans-unit id="gQ0Qzhj" resname="Ajouter un utilisateur">
+        <source>Ajouter un utilisateur</source>
+        <target>Ajouter un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="t8_nMCO" resname="Prenom">
+        <source>Prenom</source>
+        <target>Prenom</target>
+      </trans-unit>
+      <trans-unit id="FHNqLrn" resname="Role">
+        <source>Role</source>
+        <target>Role</target>
+      </trans-unit>
+      <trans-unit id="yo6CbZw" resname="Avatar">
+        <source>Avatar</source>
+        <target>Avatar</target>
+      </trans-unit>
+      <trans-unit id="53Az_YO" resname="Administrateur">
+        <source>Administrateur</source>
+        <target>Administrateur</target>
+      </trans-unit>
+      <trans-unit id="S_L5UEC" resname="Aucun utilisateur enregistré">
+        <source>Aucun utilisateur enregistré</source>
+        <target>Aucun utilisateur enregistré</target>
+      </trans-unit>
+      <trans-unit id="MSnrBcx" resname="CTD">
+        <source>CTD</source>
+        <target>CTD</target>
+      </trans-unit>
+      <trans-unit id="YQxl2EU" resname="Regions">
+        <source>Regions</source>
+        <target>Regions</target>
+      </trans-unit>
+      <trans-unit id="PmMcIIE" resname="Communes">
+        <source>Communes</source>
+        <target>Communes</target>
+      </trans-unit>
+      <trans-unit id="EhVukhv" resname="Id">
+        <source>Id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="QRoR.7J" resname="Nom de la categorie">
+        <source>Nom de la categorie</source>
+        <target>Nom de la categorie</target>
+      </trans-unit>
+      <trans-unit id="ifQ0ZwQ" resname="Source de  financement">
+        <source>Source de  financement</source>
+        <target>Source de financement</target>
+      </trans-unit>
+      <trans-unit id="Lfyn_mK" resname="Nom du financement">
+        <source>Nom du financement</source>
+        <target>Nom du financement</target>
+      </trans-unit>
+      <trans-unit id="4ch9ola" resname="Liste de secteurs">
+        <source>Liste de secteurs</source>
+        <target>Liste de secteurs</target>
+      </trans-unit>
+      <trans-unit id="ObjSWrW" resname="secteurs trouvés">
+        <source>secteurs trouvés</source>
+        <target>secteurs trouvés</target>
+      </trans-unit>
+      <trans-unit id="_T7BFEu" resname="La Banque des Projets est un outil interactif permettant l’accès à l’information sur les projets des Collectivités&#10;                                    Territoriales Décentralisées (CTD) de l’Etat du Cameroun. Elle traduit l’engagement du Gouvernement à&#10;                                    faire du développement local, un développement inclusif, qui admet la participation et la contribution de tous&#10;                                    au développement d’une CTD, dans une perspective citoyenne..">
+        <source>La Banque des Projets est un outil interactif permettant l’accès à l’information sur les projets des Collectivités
+                                    Territoriales Décentralisées (CTD) de l’Etat du Cameroun. Elle traduit l’engagement du Gouvernement à
+                                    faire du développement local, un développement inclusif, qui admet la participation et la contribution de tous
+                                    au développement d’une CTD, dans une perspective citoyenne..</source>
+        <target>La Banque des Projets est un outil interactif permettant l’accès à l’information sur les projets des Collectivités
+                                    Territoriales Décentralisées (CTD) de l’Etat du Cameroun. Elle traduit l’engagement du Gouvernement à
+                                    faire du développement local, un développement inclusif, qui admet la participation et la contribution de tous
+                                    au développement d’une CTD, dans une perspective citoyenne..</target>
+      </trans-unit>
+      <trans-unit id="mxABkVO" resname="Application bilingue, son objectif est d’avoir une plateforme nourrie des projets des CTD à recherche de financements en faisant ressortir leur niveau de maturation.">
+        <source>Application bilingue, son objectif est d’avoir une plateforme nourrie des projets des CTD à recherche de financements en faisant ressortir leur niveau de maturation.</source>
+        <target>Application bilingue, son objectif est d’avoir une plateforme nourrie des projets des CTD à recherche de financements en faisant ressortir leur niveau de maturation.</target>
+      </trans-unit>
+      <trans-unit id="cmuU45r" resname="Projet régionale de">
+        <source>Projet régionale de</source>
+        <target>Projet régionale de</target>
+      </trans-unit>
+      <trans-unit id="j5_bCOw" resname="Retour à l'accueil">
+        <source>Retour à l'accueil</source>
+        <target>Retour à l'accueil</target>
+      </trans-unit>
+      <trans-unit id="XLvw3F7" resname="Création de compte">
+        <source>Création de compte</source>
+        <target>Création de compte</target>
+      </trans-unit>
+      <trans-unit id="PCX0_17" resname="S'inscrire">
+        <source>S'inscrire</source>
+        <target>S'inscrire</target>
+      </trans-unit>
+      <trans-unit id="nWfeCHL" resname="Vous avez déjà un compte?">
+        <source>Vous avez déjà un compte?</source>
+        <target>Vous avez déjà un compte?</target>
+      </trans-unit>
+      <trans-unit id="K09Oyqm" resname="Connectez vous ici">
+        <source>Connectez vous ici</source>
+        <target>Connectez vous ici</target>
+      </trans-unit>
+      <trans-unit id="0X3LIzy" resname="Projets communals">
+        <source>Projets communals</source>
+        <target>Projets communals</target>
+      </trans-unit>
+      <trans-unit id="OJzyxbZ" resname="Projet de conseil régional">
+        <source>Projet de conseil régional</source>
+        <target>Projet de conseil régional</target>
+      </trans-unit>
+      <trans-unit id="6DLaDzB" resname="Liste des projets communaux">
+        <source>Liste des projets communaux</source>
+        <target>Liste des projets communaux</target>
+      </trans-unit>
+      <trans-unit id="P4tSs2c" resname="Liste des projets de conseil regional">
+        <source>Liste des projets de conseil regional</source>
+        <target>Liste des projets de conseil regional</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
