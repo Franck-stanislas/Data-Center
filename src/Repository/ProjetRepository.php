@@ -155,7 +155,7 @@ class ProjetRepository extends ServiceEntityRepository
     public function findCountProjetsByCommuneApi(): array
     {
         $query = $this->createQueryBuilder('p')
-            ->select('p.institule as institule, p.couts as couts, p.objectifs as objectifs, COUNT(p.id) as count, a.nom as arrondissement, a.ville as ville, a.lat as lat, a.lon as lon, s.nom_categorie as secteur, m.nom_maturite as maturite')
+            ->select('p.institule as institule, p.couts as couts, p.objectifs as objectifs, COUNT(p.id) as count, a.nom as commune, a.ville as ville, a.lat as lat, a.lon as lon, s.nom_categorie as secteur, m.nom_maturite as maturite')
             ->join('p.arrondissement', 'a')
              ->join("p.secteur", 's')
             ->join("p.maturite", "m")

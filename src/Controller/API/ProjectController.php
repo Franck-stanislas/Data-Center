@@ -187,7 +187,7 @@ class ProjectController extends AbstractController
     #[Route('/by-region', name: 'api_projects_region', methods: ['GET'])]
     public function getProjectsCountByRegion(ProjetRepository $projetRepository, RegionRepository $regionRepository): Response {
         $projectsByArrondissements = $projetRepository->findProjetsWithRegionApi();
-        $allRegions = array_map(function ($region) {
+        /*$allRegions = array_map(function ($region) {
             return $region->getNom();
         }, $regionRepository->findAll());
 
@@ -237,68 +237,16 @@ class ProjectController extends AbstractController
             if (!isset($regions[$region])) {
                 $regions[$region]["count"] = 0;
             }
-        }
+        }*/
 
-        return $this->json($regions);
+        return $this->json($projectsByArrondissements);
     }
     
     #[Route('/by-commune', name: 'api_projects_commune', methods: ['GET'])]
     public function getProjectsCountByCommune(ProjetRepository $projetRepository, ArrondissementRepository $arrondissementRepository, RegionRepository $regionRepository): Response {
         $projectsByCommune = $projetRepository->findCountProjetsByCommuneApi();
-        //dd($projectsByCommune);
-        $allCommune = array_map(function ($commune) {
-            return $commune->getVille();
-        }, $arrondissementRepository->findAll());
 
-        $communes = [];
-        foreach ($projectsByCommune as $project) {
-            // count projects by region
-            $commune = $project['arrondissement'];
-            $count = $project['count'];
-            $ville = $project['ville'];
-            $institule = $project['institule'];
-            $objectifs =$project['objectifs'];
-            $couts = $project['couts'];
-            $secteur = $project['secteur'];
-            $maturite = $project['maturite'];
-            $lat = $project['lat'];
-            $lon = $project['lon'];
-
-            if (!isset($communes[$commune])) {
-                $communes[$commune] = [
-                    "count" => $count,
-                    "ville" => $ville,
-                    "institule" => $institule,
-                    "objectifs" => $objectifs,
-                    "couts" => $couts,
-                    "secteur" => $secteur,
-                    "maturite" => $maturite,
-                    "lat" => $lat,
-                    "lon" => $lon,
-                    "commune" => $commune
-                ];
-            } else {
-                $communes[$commune] = [
-                    "count" => $communes[$commune]["count"] + $count,
-                    "ville" => $ville,
-                    "institule" => $institule,
-                    "objectifs" => $objectifs,
-                    "couts" => $couts,
-                    "secteur" => $secteur,
-                    "maturite" => $maturite,
-                    "lat" => $lat,
-                    "lon" => $lon,
-                    "commune" => $commune
-                ];
-            }
-        }
-        foreach ($allCommune as $commune) {
-            if (!isset($communes[$commune])) {
-                $communes[$commune]["count"] = 0;
-            }
-        }
-
-        return $this->json($communes);
+        return $this->json($projectsByCommune);
     }
 
     #[Route('/by-maturite', name: 'api_projects_maturite', methods: ['GET'])]
