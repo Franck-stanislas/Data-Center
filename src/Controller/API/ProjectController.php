@@ -19,9 +19,9 @@ class ProjectController extends AbstractController
 {
     #[Route('/get-all', name: 'api_all_projects', methods: ['GET', 'POST'])]
     public function all(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
-        MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
+        MaturiteRepository $maturiteRepository, RegionRepository $regionRepository, PaginatorInterface $paginator): Response
     {
-        $projet = $projetRepository->findAll();
+        $projet = $projetRepository->findAllByApprouve();
         $projets = $paginator->paginate(
             $projet,
             1,
@@ -34,7 +34,8 @@ class ProjectController extends AbstractController
             "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
             "projets" => $projets->getItems(),
             "categories" => $categorieRepository->findAllWithProjectsCount(),
-            "maturites" => $maturiteRepository->findAllWithProjetsCount()
+            "maturites" => $maturiteRepository->findAllWithProjetsCount(),
+            "pregions" => $regionRepository->findAllWithProjetsCount()
         ], 200);
     }
 
@@ -42,7 +43,7 @@ class ProjectController extends AbstractController
     public function allArron(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
                         MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
     {
-        $projet = $projetRepository->findAllByArron();
+        $projet = $projetRepository->findAllApprouvByArron();
         $projets = $paginator->paginate(
             $projet,
             1,
@@ -64,7 +65,7 @@ class ProjectController extends AbstractController
     public function allRegion(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
                         MaturiteRepository $maturiteRepository, RegionRepository $regionRepository, PaginatorInterface $paginator): Response
     {
-        $projet = $projetRepository->findAllByRegion();
+        $projet = $projetRepository->findAllApprouvByRegion();
         $projets = $paginator->paginate(
             $projet,
             1,
@@ -85,9 +86,9 @@ class ProjectController extends AbstractController
 
     #[Route('/filters', name: 'api_filters_projects', methods: ['POST'])]
     public function filterProjects(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
-        MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
+        MaturiteRepository $maturiteRepository, RegionRepository $regionRepository, PaginatorInterface $paginator): Response
     {
-        $projet = $projetRepository->findAll();
+        $projet = $projetRepository->findAllByApprouve();
         $projets = $paginator->paginate(
             $projet,
             1,
@@ -98,10 +99,12 @@ class ProjectController extends AbstractController
             $projet = $projetRepository->findAllByFilters(
                 $data['activesMaturites'],
                 $data['activesCategories'],
+                $data['activesPregions'],
                 $data['search'],
                 (int) $data['region'] ?: null,
                 (int) $data['departement'] ?: null,
-                (int) $data['arrondissement'] ?: null
+                (int) $data['arrondissement'] ?: null,
+                $data['isArrondissementProjectList'],
             );
 
             $projets = $paginator->paginate(
@@ -116,18 +119,19 @@ class ProjectController extends AbstractController
             "currentPage" => $projets->getCurrentPageNumber(),
             "numItemsPerPage" => $projets->getItemNumberPerPage(),
             "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
-            "products" => $projets->getItems(),
+            "projets" => $projets->getItems(),
             "categories" => $categorieRepository->findAllByMaturitesWithProjectsCount($data['activesMaturites']),
-            "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories'])
+            "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories']),
+            "pregions" => $regionRepository->findAllByRegionsWithProjetsCount($data['activesPregions'])
         ], 200);
     }
 
 
-    #[Route('/region-filters', name: 'api_filters_projects', methods: ['GET', 'POST'])]
-    public function RegionFilterProjects(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
-                                   RegionRepository $regionRepository, MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
+    #[Route('/commune-filters', name: 'api_commune_filters_projects', methods: ['POST'])]
+    public function CommuneFilterProjects(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
+                                   MaturiteRepository $maturiteRepository, RegionRepository $regionRepository, PaginatorInterface $paginator): Response
     {
-        $projet = $projetRepository->findAll();
+        $projet = $projetRepository->findAllApprouvByArron();
         $projets = $paginator->paginate(
             $projet,
             1,
@@ -135,13 +139,53 @@ class ProjectController extends AbstractController
         );
         $data = json_decode($request->getContent(), true);
         if(!empty($data)) {
-            $projet = $projetRepository->findAllByFilters(
+            $projet = $projetRepository->findAllByCommuneFilters(
                 $data['activesMaturites'],
                 $data['activesCategories'],
                 $data['search'],
-                $data['activesRegions'],
+                (int) $data['region'] ?: null,
                 (int) $data['departement'] ?: null,
-                (int) $data['arrondissement'] ?: null
+                (int) $data['arrondissement'] ?: null,
+                $data['isArrondissementProjectList'],
+            );
+
+            $projets = $paginator->paginate(
+                $projet,
+                $data['page'] ?: 1,
+                30
+            );
+        }
+
+        return $this->json([
+            "totalCount" => count($projet),
+            "currentPage" => $projets->getCurrentPageNumber(),
+            "numItemsPerPage" => $projets->getItemNumberPerPage(),
+            "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
+            "projets" => $projets->getItems(),
+            "categories" => $categorieRepository->findAllByMaturitesWithProjectsCount($data['activesMaturites']),
+            "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories']),
+//            "pregions" => $regionRepository->findAllWithProjetsCount($data['activesRegions'])
+        ], 200);
+    }
+
+
+
+    #[Route('/region-filters', name: 'api_filters_region_projects', methods: ['POST'])]
+    public function RegionFilterProjects(Request $request, ProjetRepository $projetRepository, CategorieRepository $categorieRepository,
+                                   RegionRepository $regionRepository, MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
+    {
+        $projet = $projetRepository->findAllApprouvByRegion();
+        $projets = $paginator->paginate(
+            $projet,
+            1,
+            30
+        );
+        $data = json_decode($request->getContent(), true);
+        if(!empty($data)) {
+            $projet = $projetRepository->findAllByRegionsFilters(
+                $data['activesCategories'],
+                $data['search'],
+                $data['activesRegions'],
             );
             $projets = $paginator->paginate(
                 $projet,
@@ -156,29 +200,70 @@ class ProjectController extends AbstractController
             "currentPage" => $projets->getCurrentPageNumber(),
             "numItemsPerPage" => $projets->getItemNumberPerPage(),
             "totalPages" => ceil($projets->getTotalItemCount() / $projets->getItemNumberPerPage()),
-            "products" => $projets->getItems(),
-            "categories" => $categorieRepository->findAllByArronWithProjectsCount(),
+            "projets" => $projets->getItems(),
+            "categories" => $categorieRepository->findAllByRegionWithProjectsCount(),
 //            "maturites" => $maturiteRepository->findAllByCategoriesWithProjetsCount($data['activesCategories']),
             "regions" => $regionRepository->findAllWithProjetsCount($data['activesRegions'])
         ], 200);
     }
 
 
-
     #[Route('/print-projects', name: 'api_print_projects', methods: ['POST'])]
     public function printProjects(Request $request, ProjetRepository $projetRepository): Response
     {
-        $projet = $projetRepository->findAll();
+        $projet = $projetRepository->findAllByApprouve();
         $data = json_decode($request->getContent(), true);
         if(!empty($data)) {
             $projet = $projetRepository->findAllByFilters(
                 $data['activesMaturites'],
                 $data['activesCategories'],
+                $data['activesPregions'],
                 $data['search'],
                 (int) $data['region'] ?: null,
                 (int) $data['departement'] ?: null,
-                (int) $data['arrondissement'] ?: null
+                (int) $data['arrondissement'] ?: null,
+                $data['isArrondissementProjectList']
             );
+            return $this->json($projet, 200);
+        }
+
+        return $this->json($projet, 200);
+    }
+
+    #[Route('/print-communal-projects', name: 'api_print_communal_projects', methods: ['POST'])]
+    public function printCommunalProjects(Request $request, ProjetRepository $projetRepository): Response
+    {
+        $projet = $projetRepository->findAllApprouvByArron();
+        $data = json_decode($request->getContent(), true);
+        if(!empty($data)) {
+            $projet = $projetRepository->findAllByCommuneFilters(
+                $data['activesMaturites'],
+                $data['activesCategories'],
+                $data['search'],
+                (int) $data['region'] ?: null,
+                (int) $data['departement'] ?: null,
+                (int) $data['arrondissement'] ?: null,
+                $data['isArrondissementProjectList'],
+            );
+            return $this->json($projet, 200);
+        }
+
+        return $this->json($projet, 200);
+    }
+
+
+    #[Route('/print-regional-projects', name: 'api_print_regional_projects', methods: ['POST'])]
+    public function printRegionalProjects(Request $request, ProjetRepository $projetRepository): Response
+    {
+        $projet = $projetRepository->findAllApprouvByRegion();
+        $data = json_decode($request->getContent(), true);
+        if(!empty($data)) {
+            $projet = $projetRepository->findAllByRegionsFilters(
+                $data['activesCategories'],
+                $data['search'],
+                $data['activesRegions']
+            );
+            return $this->json($projet, 200);
         }
 
         return $this->json($projet, 200);
@@ -187,57 +272,6 @@ class ProjectController extends AbstractController
     #[Route('/by-region', name: 'api_projects_region', methods: ['GET'])]
     public function getProjectsCountByRegion(ProjetRepository $projetRepository, RegionRepository $regionRepository): Response {
         $projectsByArrondissements = $projetRepository->findProjetsWithRegionApi();
-        /*$allRegions = array_map(function ($region) {
-            return $region->getNom();
-        }, $regionRepository->findAll());
-
-        $regions = [];
-        foreach ($projectsByArrondissements as $project) {
-            // count projects by region
-            $region = $project['region'];
-            $count = $project['count'];
-            $ville = $project['ville'];
-            $institule = $project['institule'];
-            $objectifs =$project['objectifs'];
-            $couts = $project['couts'];
-            $secteur = $project['secteur'];
-            $maturite = $project['maturite'];
-            $lat = $project['lat'];
-            $lon = $project['lon'];
-
-            if (!isset($regions[$region])) {
-                $regions[$region] = [
-                    "count" => $count,
-                    "ville" => $ville,
-                    "institule" => $institule,
-                    "objectifs" => $objectifs,
-                    "couts" => $couts,
-                    "secteur" => $secteur,
-                    "maturite" => $maturite,
-                    "lat" => $lat,
-                    "lon" => $lon,
-                    "region" => $region
-                ];
-            } else {
-                $regions[$region] = [
-                    "count" => $regions[$region]["count"] + $count,
-                    "ville" => $ville,
-                    "institule" => $institule,
-                    "objectifs" => $objectifs,
-                    "couts" => $couts,
-                    "secteur" => $secteur,
-                    "maturite" => $maturite,
-                    "lat" => $lat,
-                    "lon" => $lon,
-                    "region" => $region
-                ];
-            }
-        }
-        foreach ($allRegions as $region) {
-            if (!isset($regions[$region])) {
-                $regions[$region]["count"] = 0;
-            }
-        }*/
 
         return $this->json($projectsByArrondissements);
     }

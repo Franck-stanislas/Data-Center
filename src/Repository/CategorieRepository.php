@@ -41,10 +41,20 @@ class CategorieRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllByApprouv() {
+        return $this->createQueryBuilder('categorie')
+            ->select('categorie.id, categorie.nom_categorie, categorie.imageName, categorie.iconeName, COUNT(projet.id) AS projetCount')
+            ->leftJoin('categorie.projet', 'projet', 'WITH', 'categorie.id = projet.secteur AND  projet.approuver = true')
+            ->groupBy('categorie.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function findAllWithProjectsCount(): array {
         $query = $this->createQueryBuilder('c')
             ->select('c.id, c.nom_categorie, COUNT(p.id) AS projetCount')
-            ->leftJoin('c.projet', 'p')
+            ->leftJoin('c.projet', 'p', 'WITH', 'p.approuver = true')
             ->groupBy('c.id')
             ->getQuery();
 
@@ -54,8 +64,7 @@ class CategorieRepository extends ServiceEntityRepository
     public function findAllByArronWithProjectsCount(): array {
         $query = $this->createQueryBuilder('c')
             ->select('c.id, c.nom_categorie, COUNT(p.id) AS projetCount')
-            ->leftJoin('c.projet', 'p')
-            ->where('p.region IS NULL')
+            ->leftJoin('c.projet', 'p', 'WITH', 'p.region IS NULL AND p.approuver = true')
             ->groupBy('c.id')
             ->getQuery();
 
@@ -65,8 +74,7 @@ class CategorieRepository extends ServiceEntityRepository
     public function findAllByRegionWithProjectsCount(): array {
         $query = $this->createQueryBuilder('c')
             ->select('c.id, c.nom_categorie, COUNT(p.id) AS projetCount')
-            ->leftJoin('c.projet', 'p')
-            ->where('p.arrondissement IS NULL')
+            ->leftJoin('c.projet', 'p', 'WITH', 'p.arrondissement IS NULL AND p.approuver = true')
             ->groupBy('c.id')
             ->getQuery();
 

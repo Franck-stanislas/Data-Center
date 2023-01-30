@@ -40,9 +40,21 @@ class StatutRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByUser($userId) {
+    // Find all approuv projects by statut
+    public function findAllByApprouv(): array
+    {
+        $query = $this->createQueryBuilder('s')
+            ->select('s.id, s.nom,  COUNT(p.id) AS projetCount')
+            ->leftJoin('s.projet', 'p', 'WITH', 's.id = p.statut AND p.approuver = true')
+            ->groupBy('s.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function findByUserApprouv($userId) {
         return $this->createQueryBuilder('s')
-            ->join('s.projet', 'p')
+            ->leftJoin('s.projet', 'p', 'WITH', 's.id = p.statut AND p.approuver = true')
             ->join('p.user', 'u')
             ->where('u.id = :userId')
             ->setParameter('userId', $userId)

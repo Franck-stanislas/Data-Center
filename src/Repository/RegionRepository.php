@@ -44,7 +44,7 @@ class RegionRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('r')
             ->select('r.id, r.nom, COUNT(p.id) AS projetCount')
-            ->leftJoin('r.projets', 'p')
+            ->leftJoin('r.projets', 'p', 'WITH', 'p.approuver = true')
             ->groupBy('r.id')
             ->getQuery();
 

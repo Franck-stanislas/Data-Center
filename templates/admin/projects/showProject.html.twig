@@ -1,0 +1,301 @@
+{% extends 'admin/admin.base.html.twig' %}
+
+{% block title %}Detail projet-{{projet.id}}{% endblock %}
+
+{% block body %}
+    <main class="content">
+
+        {{ include ('admin/layouts/admin.menu.html.twig') }}
+        {{include('admin/layouts/navbar.html.twig')}}
+        <div class="py-4">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="{{path('admin')}}">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{{path('projet_list')}}">{%trans%}Projets{%endtrans%}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{%trans%} Projet {%endtrans%}- {{projet.institule}} </li>
+                </ol>
+            </nav>
+
+{#            <div class="d-flex justify-content-between w-100 flex-wrap">#}
+{#                <div class="mb-3 mb-lg-0">#}
+{#                    <h1 class="h4">{%trans%} Detail du projet de {%endtrans%} : {{projet.institule}} </h1>#}
+{#                </div>#}
+{#                <div>#}
+{#                    <a href="{{ path('app_projects_create') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">#}
+{#                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>#}
+{#                        {%trans%}Ajouter un projet{%endtrans%}#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+
+        <div class="card border-0 px-5 shadow mb-4">
+            <article class="">
+                <div class="mw-100 rounded-top overflow-hidden">
+                    <img src="{{ (projet.secteur.imageName? vich_uploader_asset(projet.secteur, 'imageFile') : asset('image/placeholder.png')) }}" alt="{{ projet.secteur.iconeName}}" class="w-100">
+                </div>
+
+                <h1 class="h5 pl-3 pt-3 text-secondary text-center"> {{projet.institule}}</h1>
+
+                <p class="pb-3 text-center text-muted justify-content-between">
+                    {% if projet.arrondissement %}
+                        <small class="px-5"> <strong>Projet communal de :</strong> {{projet.arrondissement ? projet.arrondissement.ville : 'Aucun'}}</small>
+                    {% else%}
+                        <small class="px-5"> <strong>Projet regional de :</strong> {{projet.maturite ? projet.maturite.nomMaturite : 'Aucun'}}</small>
+                    {%endif%}
+                </p>
+
+                <p class="px-4 pb-3 text-muted justify-content-between">
+                    <small class="px-4"> <strong>Category :</strong> {{projet.secteur ? projet.secteur.nomCategorie : 'Aucun'}}</small>
+                    <small class="px-4"> <strong>Maturity :</strong> {{projet.maturite ? projet.maturite.nomMaturite : 'Aucun'}}</small>
+                    <small class="px-4"> <strong>Status :</strong> {{projet.statut ? projet.statut.nom : 'Aucun'}}</small>
+                </p>
+
+{#                <p class="pl-3 pb-3 text-muted">#}
+{#                    <small> Submitted by {{projet.user.firstName}}</small>#}
+{#                </p>#}
+
+                <p class="pl-3 pr-3 text-break">
+                    <h6 class="ml-5">Objectifs</h6>
+                    {{projet.objectifs ? projet.objectifs : 'Aucune information'}}
+                </p>
+
+                <p class="pl-3 pr-3 text-break">
+                    <h6 class="ml-5">Résultats</h6>
+                    {{projet.resultats ? projet.resultats : 'Aucune information'}}
+                </p>
+
+                <p class="pl-3 pr-3 text-break">
+                    <h6 class="ml-5">Couts</h6>
+                    {{projet.couts}} XFA
+                </p>
+
+                <p class="pl-3 pr-3 text-break">
+                <h6 class="ml-5">Caracteristique</h6>
+                {{projet.caracteristique ? projet.caracteristique : 'Aucune information'}}
+                </p>
+
+                <p class="pl-3 pr-3 text-break">
+                    <h6 class="ml-5">Marché cible</h6>
+                    {{projet.marche ? projet.marche : 'Aucune information'}}
+                </p>
+
+                <p class="pl-3 pr-3 text-break">
+                <h6 class="ml-5">Supply Chain</h6>
+                {{projet.supply ? projet.supply : 'Aucune information'}}
+                </p>
+
+                <p class="pl-3 pr-3 text-break">
+                <h6 class="ml-5">Chaine de valeur</h6>
+                {{projet.valeurAjouter ? projet.valeurAjouter : 'Aucune information'}}
+                </p>
+
+                <p class="pl-3 pr-3 text-break">
+                <h6 class="ml-5">Eligibilité</h6>
+                {{projet.eligibilite ? projet.eligibilite : 'Aucune inforamtion'}}
+                </p>
+
+                <div class="pl-3 pb-3 justify-content-around">
+                    {% if projet.approuver == false%}
+                        <a href="{{ path('app_projet_approuve',  {'id': projet.id} ) }}" class="btn btn-primary align-right">Approuver</a>
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Rejeter</button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Commentaire</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="{{ path('app_projet_reject', {'id': projet.id}) }}">
+                                        <input type="hidden" name="_token" value="{{csrf_token( 'project_rejected')}}">
+                                        <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Message:</label>
+                                            <textarea class="form-control" id="message-text" name="comments"></textarea>
+                                        </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+
+                </div>
+            </article>
+{#                <table class="table">#}
+{#                    <tbody>#}
+{#                    <tr>#}
+{#                        <th>Id</th>#}
+{#                        <td>{{ projet.id }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Institule</th>#}
+{#                        <td>{{ projet.institule }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Objectifs</th>#}
+{#                        <td>{{ projet.objectifs }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Resultats</th>#}
+{#                        <td>{{ projet.resultats }}</td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <th>Couts</th>#}
+{#                        <td>{{ projet.couts }}</td>#}
+{#                    </tr>#}
+{#                    </tbody>#}
+{#                </table>#}
+
+{#                <a href="{{ path('projet_list') }}">back to list</a>#}
+
+{#                <a href="{{ path('project_edit', {'id': projet.id}) }}">edit</a>#}
+{#                <div class="table-responsive">#}
+{#                    <table class="table table-centered table-nowrap mb-0 rounded" id="myTable">#}
+{#                        <thead class="thead-light">#}
+{#                        <tr>#}
+{#                            <th class="border-0 rounded-start">#</th>#}
+{#                            <th class="border-0">{%trans%}Ville {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Intitulé {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Secteur {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%}Objectifs {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%}Caractéristique {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%} Marchés cibles{%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%} Supply Chain{%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%} Facteurs et atouts géographique {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%}Résultat attendus {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Couts estimatif {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%} Valeur ajoutées{%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%}Eligibilité au bénéfice {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%}Maturité du projet {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%}Eléments de maturation {%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0">{%trans%} Statut du projet{%endtrans%}</th>#}
+{#                            #}{#                            <th class="border-0 ">{%trans%}Financement {%endtrans%}</th>#}
+{#                            <th class="border-0 rounded-end">{%trans%}Actions {%endtrans%}</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        {% if projets|length > 0 %}#}
+{#                            {% for projet in projets %}#}
+{#                                <!-- Item -->#}
+{#                                <tr>#}
+{#                                    <td><a href="#" class="text-primary fw-bold">{{ projet.id}}</a> </td>#}
+{#                                    <td>#}
+{#                                        {%if projet.arrondissement%}#}
+{#                                            {{ projet.arrondissement.ville}}#}
+{#                                        {%else%}#}
+{#                                            {{projet.region.ville}}#}
+{#                                        {%endif%}#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        <a href="{{ path('project_edit', {id: projet.id}) }}" class="text-secondary fw-bold">#}
+{#                                            {{ projet.institule }}#}
+{#                                        </a>#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        {{ projet.secteur.nomCategorie }}#}
+{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.objectifs [:50]}}#}
+
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.caracteristique [:50]}}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.marche }}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.supply}}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.atouts [:50]}}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.resultats [:50]}}#}
+
+{#                                    #}{#                                    </td>#}
+{#                                    <td>#}
+{#                                        {{ projet.couts }}#}
+{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.valeurAjouter [:50]}}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td >#}
+{#                                    #}{#                                        {{ projet.eligibilite [:50]}}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td>#}
+{#                                    #}{#                                        {{ projet.maturite.nomMaturite }}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td>#}
+{#                                    #}{#                                        <ul>#}
+{#                                    #}{#                                            {% for elt in projet.eltsMaturite %}#}
+{#                                    #}{#                                                <li>{{ elt.nom }}</li>#}
+{#                                    #}{#                                            {%endfor%}#}
+{#                                    #}{#                                        </ul>#}
+
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td>#}
+{#                                    #}{#                                        {% if projet.statut%}#}
+{#                                    #}{#                                            {{ projet.statut.nom }}#}
+{#                                    #}{#                                        {%endif%}#}
+{#                                    #}{#                                    </td>#}
+{#                                    #}{#                                    <td>#}
+{#                                    #}{#                                        <ol>#}
+{#                                    #}{#                                            {% for financement in projet.financement %}#}
+{#                                    #}{#                                                <li>#}
+{#                                    #}{#                                                    {{ financement.nomFinancement }}#}
+{#                                    #}{#                                                </li>#}
+{#                                    #}{#                                            {% endfor%}#}
+{#                                    #}{#                                        </ol>#}
+{#                                    #}{#                                    </td>#}
+{#                                    <td>#}
+{#                                        <a href="{{path('app_projet_archive',  {'id': projet.id} )}}">#}
+{#                                            <span class="sidebar-icon">#}
+{#                                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1zm2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936V5zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2zM14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1v1.997z"/></svg>#}
+{#                                                <i class="lni lni-archive lni-25"></i>#}
+{#                                            </span>#}
+{#                                        </a>#}
+{#                                        <span class="me-2">#}
+{#                                            {{ include('projects/_delete_form.html.twig') }}#}
+{#                                        </span>#}
+{#                                        <a href="{{path('app_project_show', {'id': projet.id})}}">#}
+{#                                            <span><i class="lni lni-eye"></i></span>#}
+{#                                        </a>#}
+{#                                        #}{#                                        <i class="lni lni-pencil"></i>#}
+
+{#                                    </td>#}
+{#                                </tr>#}
+{#                                <!-- End of Item -->#}
+{#                            {% endfor %}#}
+{#                        {% else%}#}
+{#                            <tr>#}
+{#                                <td colspan="9" class="text-center text-danger">{%trans%}Aucun projet enregistré{%endtrans%}</td>#}
+{#                            </tr>#}
+{#                        {% endif%}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{#                </div>#}
+            </div>
+        </div>
+
+        {{include('admin/layouts/footer.html.twig')}}
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#exampleModal').modal(options)
+    </script>
+{%endblock%}

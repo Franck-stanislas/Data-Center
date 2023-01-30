@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
+import {BASE_URL} from "../../constants";
 const EditOtherInfo = ({project, ...props}) => {
     const [statuts, setStatuts] = useState([]);
     const [maturites, setMaturites] = useState([]);
@@ -37,7 +38,7 @@ const EditOtherInfo = ({project, ...props}) => {
 
     const handleChangeMaturite = (e) => {
         const [id, type] = e.target.value.split('-');
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/elts`)
+        axios.get(`${BASE_URL}/api/maturite/${id}/elts`)
             .then(response => {
                 setElements(response.data);
             })
@@ -45,7 +46,7 @@ const EditOtherInfo = ({project, ...props}) => {
                 console.log(error);
             });
 
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/financements`)
+        axios.get(`${BASE_URL}/api/maturite/${id}/financements`)
             .then(response => {
                 setFinancements(response.data);
             })
@@ -64,7 +65,7 @@ const EditOtherInfo = ({project, ...props}) => {
     }, [infos])
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/status')
+        axios.get(BASE_URL+'/api/status')
             .then(response => {
                 setStatuts(response.data);
             })
@@ -74,7 +75,7 @@ const EditOtherInfo = ({project, ...props}) => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/maturite')
+        axios.get(BASE_URL+'/api/maturite')
             .then(response => {
                 setMaturites(response.data);
             })

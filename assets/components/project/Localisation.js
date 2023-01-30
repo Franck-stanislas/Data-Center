@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
+import {BASE_URL} from "../../constants";
 const Localisation = ({setProject}) => {
     const [regions, setRegions] = useState([]);
 
@@ -10,7 +11,7 @@ const Localisation = ({setProject}) => {
     const { t, i18n } = useTranslation();
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/regions')
+        axios.get(BASE_URL+'/api/regions')
             .then(response => {
                 setRegions(response.data);
             })
@@ -21,7 +22,7 @@ const Localisation = ({setProject}) => {
 
     const handleRegionChange = (event) => {
         const value = event.target.value;
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/regions/${value}/departements`)
+        axios.get(`${BASE_URL}/api/regions/${value}/departements`)
             .then(response => {
                 setDepartements(response.data);
             })
@@ -32,7 +33,7 @@ const Localisation = ({setProject}) => {
 
     const handleDepartementChange = (event) => {
         const value = event.target.value;
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/departements/${value}/arrondissements`)
+        axios.get(`${BASE_URL}/api/departements/${value}/arrondissements`)
             .then(response => {
                 setArrondissements(response.data);
             })

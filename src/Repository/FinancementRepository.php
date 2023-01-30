@@ -39,9 +39,19 @@ class FinancementRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByUser($userId) {
+    public function findAllByApprouv() {
         return $this->createQueryBuilder('f')
-            ->join('f.projets', 'p')
+            ->select('f.id, f.nom_financement, COUNT(projet.id) AS projetCount')
+            ->join('f.projets', 'projet', 'WITH', 'f.id = projet.financement AND  projet.approuver = true')
+            ->groupBy('f.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByUserApprouv($userId) {
+        return $this->createQueryBuilder('f')
+            ->leftJoin('f.projets', 'p', 'WITH', 'f.id = p.financement AND p.approuver = true')
             ->join('p.user', 'u')
             ->where('u.id = :userId')
             ->setParameter('userId', $userId)

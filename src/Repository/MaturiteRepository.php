@@ -39,12 +39,26 @@ class MaturiteRepository extends ServiceEntityRepository
         }
     }
 
+    // Find all approuv projects by maturity
+    public function findAllByApprouv(): array
+    {
+        $query = $this->createQueryBuilder('m')
+            ->select('m.id, m.nom_maturite, COUNT(p.id) AS projetCount')
+            ->leftJoin('m.projet', 'p')
+            ->where('p.approuver = :approuv')
+            ->setParameter('approuv',  true)
+            ->groupBy('m.id')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
     // return name and count relation with all maturite
     public function findAllWithProjetsCount(): array
     {
         $query = $this->createQueryBuilder('m')
             ->select('m.id, m.nom_maturite, COUNT(p.id) AS projetCount')
-            ->leftJoin('m.projet', 'p')
+            ->leftJoin('m.projet', 'p', 'WITH', 'p.approuver = true')
             ->groupBy('m.id')
             ->getQuery();
 

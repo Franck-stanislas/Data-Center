@@ -1,146 +1,37 @@
 {% extends 'admin/admin.base.html.twig' %}
 
-{% block title 'Tableau d\'administration ' %}
-
 {% block body %}
     <main class="content">
 
-        {% include 'admin/layouts/admin.menu.html.twig' %}
-
+        {{ include ('admin/layouts/admin.menu.html.twig') }}
         {{include('admin/layouts/navbar.html.twig')}}
 
-        <div class="py-5">
-            <div class="d-flex justify-content-between w-100 flex-wrap">
-                <div class="mb-3 mb-lg-0 dropdown">
-                    <button class="btn btn-gray-800 d-inline-flex align-items-center me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                        Nouvelle tache
-                    </button>
-
-                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                        {% if is_granted('ROLE_SUPER_ADMIN') %}
-                            <a class="dropdown-item d-flex align-items-center" href="{{path('new_user')}}">
-                                <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
-                                {%trans%}Nouvel utilisateur{%endtrans%}
-                            </a>
-                        {% endif%}
-                        <a class="dropdown-item d-flex align-items-center" href="{{path('app_projects_create')}}">
-                            <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>
-                            {%trans%}Nouveau projet{%endtrans%}
+        <div class="py-4">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="{{path('admin')}}">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{{path('projet_list')}}">{%trans%}Projets{%endtrans%}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{%trans%}Liste des projets communaux{%endtrans%}</li>
+                </ol>
+            </nav>
 
-                    </div>
-
+            <div class="d-flex justify-content-between w-100 flex-wrap">
+                <div class="mb-3 mb-lg-0">
+                    <h1 class="h4">{%trans%} Liste des projets communaux{%endtrans%}</h1>
+                </div>
+                <div>
+                    <a href="{{ path('app_projects_create') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">
+                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        {%trans%}Ajouter un projet{%endtrans%}
+                    </a>
                 </div>
             </div>
         </div>
         <div class="row">
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <div class="row d-block d-xl-flex align-items-center">
-                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                    <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
-                                        <a href="{{path('utilisateurs')}}">
-                                            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-                                        </a>
-                                    </div>
-                                    <div class="d-sm-none">
-                                        <h2 class="h5">
-                                            <a href="{{path('utilisateurs')}}">{%trans%}Compte utilisateur{%endtrans%}</a>
-                                        </h2>
-                                        <h3 class="fw-extrabold mb-1">{{ users|length }}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-7 px-xl-0">
-                                    <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0">
-                                            <a href="{{path('utilisateurs')}}">{%trans%}Compte utilisateur{%endtrans%}</a>
-                                        </h2>
-                                        <h3 class="fw-extrabold mb-2">{{ users|length }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <div class="row d-block d-xl-flex align-items-center">
-                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                    <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
-                                        <a href="{{path('projet_archives')}}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="4em" height="4em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1zm2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936V5zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2zM14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1v1.997z"/></svg>
-                                        </a>
-                                    </div>
-                                    <div class="d-sm-none">
-                                        <h2 class="fw-extrabold h5">{%trans%}Projets archivés{%endtrans%}</h2>
-                                        <h3 class="mb-1">{{archives|length}}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-7 px-xl-0">
-                                    <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0">{%trans%}Projets archivés{%endtrans%}</h2>
-                                        <h3 class="fw-extrabold mb-2">{{archives|length}}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <div class="row d-block d-xl-flex align-items-center">
-                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                    <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                                        <a href="{{path('projet_approuv_list')}}">
-                                            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                        </a>
-                                    </div>
-                                    <div class="d-sm-none">
-                                        <h2 class="fw-extrabold h5"> {%trans%}Nombre de projet{%endtrans%}</h2>
-                                        <h3 class="mb-1">{{ projets|length }}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-7 px-xl-0">
-                                    <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projets approuvés{%endtrans%} </h2>
-                                        <h3 class="fw-extrabold mb-2">{{ projets|length }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <div class="row d-block d-xl-flex align-items-center">
-                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                    <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                                        <a href="{{path('project_list')}}">
-                                            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                        </a>
-                                    </div>
-                                    <div class="d-sm-none">
-                                        <h2 class="fw-extrabold h5"> {%trans%}Projet en attente d'approbation{%endtrans%}</h2>
-                                        <h3 class="mb-1">{{ attente|length }}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-7 px-xl-0">
-                                    <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projet en attente d'approbation{%endtrans%} </h2>
-                                        <h3 class="fw-extrabold mb-2">{{ attente|length }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 {% for statut in statuts %}
                     {% if statut.id ==1%}
                         <div class="col-12 col-sm-6 col-xl-4 mb-4">
@@ -154,14 +45,14 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ statut.nom|trans }}</h2>
-                                                <h3 class="mb-1">{{ statut.projetCount }}</h3>
+                                                <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
+                                                <h3 class="mb-1">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom|trans }}</h2>
-                                                <h3 class="fw-extrabold mb-2">{{ statut.projetCount }}</h3>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -180,14 +71,14 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ statut.nom|trans }}</h2>
-                                                <h3 class="mb-1">{{ statut.projetCount }}</h3>
+                                                <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
+                                                <h3 class="mb-1">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom|trans }}</h2>
-                                                <h3 class="fw-extrabold mb-2">{{ statut.projetCount }}</h3>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -206,14 +97,14 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ statut.nom|trans }}</h2>
-                                                <h3 class="mb-1">{{ statut.projetCount }}</h3>
+                                                <h2 class="fw-extrabold h5">{{ statut.nom }}</h2>
+                                                <h3 class="mb-1">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom|trans }}</h2>
-                                                <h3 class="fw-extrabold mb-2">{{ statut.projetCount }}</h3>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ statut.nom }}</h2>
+                                                <h3 class="fw-extrabold mb-2">{{ statut.projet.count }}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -236,13 +127,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -262,13 +153,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -288,13 +179,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -314,13 +205,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -340,13 +231,13 @@
                                                 </a>
                                             </div>
                                             <div class="d-sm-none">
-                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="fw-extrabold h5">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="mb-1">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-7 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement|trans }}</h2>
+                                                <h2 class="h6 text-gray-400 mb-0">{{ financement.nomFinancement }}</h2>
                                                 <h3 class="fw-extrabold mb-2">{{ financement.projets.count}}</h3>
                                             </div>
                                         </div>
@@ -356,113 +247,9 @@
                         </div>
                     {% endif%}
                 {% endfor%}
-            {%else%}
-                <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <div class="row d-block d-xl-flex align-items-center">
-                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                    <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
-                                        <a href="{{path('projet_archives')}}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="4em" height="4em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1zm2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936V5zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2zM14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1v1.997z"/></svg>
-                                        </a>
-                                    </div>
-                                    <div class="d-sm-none">
-                                        <h2 class="fw-extrabold h5">{%trans%}Projets archivés{%endtrans%}</h2>
-                                        <h3 class="mb-1">{{archives|length}}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-7 px-xl-0">
-                                    <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0">{%trans%}Projets archivés{%endtrans%}</h2>
-                                        <h3 class="fw-extrabold mb-2">{{archives|length}}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <div class="row d-block d-xl-flex align-items-center">
-                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                    <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                                        <a href="{{path('projet_list')}}">
-                                            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                        </a>
-                                    </div>
-                                    <div class="d-sm-none">
-                                        <h2 class="fw-extrabold h5"> {%trans%}Nombre de projet{%endtrans%}</h2>
-                                        <h3 class="mb-1">{{ projets|length }}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-7 px-xl-0">
-                                    <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projets communals{%endtrans%} </h2>
-                                        <h3 class="fw-extrabold mb-2">{{ projets|length }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <div class="row d-block d-xl-flex align-items-center">
-                                <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                    <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                                        <a href="{{path('projet_list_regional')}}">
-                                            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                        </a>
-                                    </div>
-                                    <div class="d-sm-none">
-                                        <h2 class="fw-extrabold h5"> {%trans%}Projet de conseil régional{%endtrans%}</h2>
-                                        <h3 class="mb-1">{{ regional|length }}</h3>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-7 px-xl-0">
-                                    <div class="d-none d-sm-block">
-                                        <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projet de conseil régional{%endtrans%} </h2>
-                                        <h3 class="fw-extrabold mb-2">{{ regional|length }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif%}
-
-{#            Diagramme#}
-            <div class="col-12 mb-4">
-                <div class="card bg-yellow-100 border-0 shadow">
-                    <div class="card-header d-sm-flex flex-row align-items-center flex-0">
-                        <div class="d-block mb-3 mb-sm-0">
-                            <div class="fs-5 fw-extrabold mb-2">{%trans%}Projet par region{%endtrans%}</div>
-{#                            <h2 class="fs-3 fw-extrabold">10,567%</h2>#}
-                        </div>
-                        <div class="d-flex ms-auto">
-                            <a href="#" class="btn btn-secondary text-dark btn-sm me-2">{%trans%}Mois{%endtrans%}</a>
-                            <a href="#" class="btn btn-dark btn-sm me-3">{%trans%}Années{%endtrans%}</a>
-                        </div>
-                    </div>
-                    <div class="card-body p-2">
-                        <div class="ct-chart-projects-mounths ct-double-octave ct-series-g" data-countByRegions="{{ countByRegion | json_encode() }}"></div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="card border-0 shadow mb-4">
-            <div class="card-header">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <h2 class="fs-5 fw-bold mb-0">{%trans%}Projets enregistrés{%endtrans%}</h2>
-                    </div>
-
-                </div>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-centered table-nowrap mb-0 rounded" id="myTable">
@@ -471,9 +258,21 @@
                             <th class="border-0 rounded-start">#</th>
                             <th class="border-0">{%trans%}Ville {%endtrans%}</th>
                             <th class="border-0">{%trans%}Intitulé {%endtrans%}</th>
-                            <th class="border-0">{%trans%} Secteur{%endtrans%}</th>
-                            <th class="border-0">{%trans%} Couts estimatif{%endtrans%}</th>
-                            <th class="border-0 rounded-end">{%trans%} Actions{%endtrans%}</th>
+                            <th class="border-0">{%trans%}Secteur {%endtrans%}</th>
+{#                            <th class="border-0">{%trans%}Objectifs {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Caractéristique {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%} Marchés cibles{%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%} Supply Chain{%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%} Facteurs et atouts géographique {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Résultat attendus {%endtrans%}</th>#}
+                            <th class="border-0">{%trans%}Couts estimatif {%endtrans%}</th>
+{#                            <th class="border-0">{%trans%} Valeur ajoutées{%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Eligibilité au bénéfice {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Maturité du projet {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%}Eléments de maturation {%endtrans%}</th>#}
+{#                            <th class="border-0">{%trans%} Statut du projet{%endtrans%}</th>#}
+{#                            <th class="border-0 ">{%trans%}Financement {%endtrans%}</th>#}
+                            <th class="border-0 rounded-end">{%trans%}Actions {%endtrans%}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -484,20 +283,73 @@
                                     <td><a href="#" class="text-primary fw-bold">{{ projet.id}}</a> </td>
                                     <td>
                                         {%if projet.arrondissement%}
-                                            {{ projet.arrondissement.ville|trans}}
+                                            {{ projet.arrondissement.ville}}
                                         {%else%}
                                             {{projet.region.ville}}
                                         {%endif%}
                                     </td>
                                     <td>
-                                        {{ projet.institule|trans }}
+                                        <a href="{{ path('project_edit', {id: projet.id}) }}" class="text-secondary fw-bold">
+                                        {{ projet.institule }}
+                                        </a>
                                     </td>
                                     <td>
-                                        {{ projet.secteur.nomCategorie|trans }}
+                                        {{ projet.secteur.nomCategorie }}
                                     </td>
+{#                                    <td >#}
+{#                                        {{ projet.objectifs [:50]}}#}
+
+{#                                    </td>#}
+{#                                    <td >#}
+{#                                        {{ projet.caracteristique [:50]}}#}
+{#                                    </td>#}
+{#                                    <td >#}
+{#                                        {{ projet.marche }}#}
+{#                                    </td>#}
+{#                                    <td >#}
+{#                                        {{ projet.supply}}#}
+{#                                    </td>#}
+{#                                    <td >#}
+{#                                        {{ projet.atouts [:50]}}#}
+{#                                    </td>#}
+{#                                    <td >#}
+{#                                        {{ projet.resultats [:50]}}#}
+
+{#                                    </td>#}
                                     <td>
                                         {{ projet.couts }}
                                     </td>
+{#                                    <td >#}
+{#                                        {{ projet.valeurAjouter [:50]}}#}
+{#                                    </td>#}
+{#                                    <td >#}
+{#                                        {{ projet.eligibilite [:50]}}#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        {{ projet.maturite.nomMaturite }}#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        <ul>#}
+{#                                            {% for elt in projet.eltsMaturite %}#}
+{#                                                <li>{{ elt.nom }}</li>#}
+{#                                            {%endfor%}#}
+{#                                        </ul>#}
+
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        {% if projet.statut%}#}
+{#                                            {{ projet.statut.nom }}#}
+{#                                        {%endif%}#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        <ol>#}
+{#                                            {% for financement in projet.financement %}#}
+{#                                                <li>#}
+{#                                                    {{ financement.nomFinancement }}#}
+{#                                                </li>#}
+{#                                            {% endfor%}#}
+{#                                        </ol>#}
+{#                                    </td>#}
                                     <td>
                                         <a href="{{path('app_projet_archive',  {'id': projet.id} )}}">
                                             <span class="sidebar-icon">
@@ -511,7 +363,7 @@
                                         <a href="{{path('app_project_show', {'id': projet.id})}}">
                                             <span><i class="lni lni-eye"></i></span>
                                         </a>
-                                        {#                                        <i class="lni lni-pencil"></i>#}
+{#                                        <i class="lni lni-pencil"></i>#}
 
                                     </td>
                                 </tr>
@@ -527,7 +379,9 @@
                 </div>
             </div>
         </div>
-       {{include('admin/layouts/footer.html.twig')}}
+
+        {{include('admin/layouts/footer.html.twig')}}
     </main>
 {% endblock %}
+
 

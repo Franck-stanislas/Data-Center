@@ -977,6 +977,10 @@
         <source>Liste des projets de conseil regional</source>
         <target>Liste des projets de conseil regional</target>
       </trans-unit>
+      <trans-unit id="OhhkjVd" resname="connectés">
+        <source>connectés</source>
+        <target>connectés</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

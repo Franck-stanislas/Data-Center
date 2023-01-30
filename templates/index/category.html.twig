@@ -55,14 +55,14 @@
                                                     <div class="single-item-grid">
                                                         <div class="image">
                                                             <a href="{{ path('app_category_detail', {'id':categorie.id}) }}">
-    {#                                                            <img src="{{ asset('client/assets/images/items-grid/img1.jpg')}}" alt="#">#}
-{#                                                                <img src="{{vich_uploader_asset(categorie, 'imageFile')}}" width="200" height="200" alt="">#}
-                                                                <img src="{{ (categorie.imageName ? vich_uploader_asset(categorie, 'imageFile') : asset('image/placeholder.png')) }}" alt="{{ categorie.imageName }}" class="thumbnail" height="200" width="200">
+                                                                <img src="{{ (categorie.imageName ? vich_uploader_asset(categorie, 'imageFile', 'App\\Entity\\Categorie') : asset('image/placeholder.png')) }}" alt="{{ categorie.imageName }}" class="thumbnail" height="200" width="200">
+{#                                                                <img src="{{ vich_uploader_asset(categorie, 'imageFile', 'App\\Entity\\Categorie') }}" alt="{{ categorie.imageName }}">#}
+
                                                             </a>
                                                         </div>
                                                         <div class="content ">
                                                             <h3 class="title justify-content-between">
-                                                                <a href="{{ path('app_category_detail', {'id':categorie.id}) }}">{{ categorie.nomCategorie }}</a>
+                                                                <a href="{{ path('app_category_detail', {'id':categorie.id}) }}">{{ categorie.nom_categorie }}</a>
                                                                 <span class="text-right" style="display: inline-block;
                                                                 border: 1px solid #eee;
                                                                 font-size: 15px;
@@ -71,7 +71,7 @@
                                                                 border-radius: 4px;
                                                                 font-weight: 600">
 
-                                                                {{categorie.projet.count}}
+                                                                {{categorie.projetCount}}
                                                             </span>
                                                             </h3>
 
@@ -90,43 +90,6 @@
                                                     </div>
 
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-                                        <div class="row">
-                                            {% for categorie in row%}
-                                            <div class="col-lg-12 col-md-12 col-12">
-                                                <div class="single-item-grid">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-lg-5 col-md-7 col-12">
-                                                            <div class="image">
-                                                                <a href="#"><img src="{{(categorie.imageName ? vich_uploader_asset(categorie) : asset('uploads/categorie/placeholer.png')) | imagine_filter('squared_thumbnail_small')}}" alt="{{ categorie.imageName }}"></a>
-                                                                <i class=" cross-badge lni lni-bolt"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-7 col-md-5 col-12">
-                                                            <div class="content">
-                                                                <h3 class="title">
-                                                                    <a href="#">{{ categorie.nomCategorie }}</a>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-
-                                                <div class="pagination left">
-                                                    <ul class="pagination-list">
-                                                        {{ knp_pagination_render(categorie) }}
-                                                    </ul>
-                                                </div>
-
                                             </div>
                                         </div>
                                     </div>

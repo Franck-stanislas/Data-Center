@@ -5,11 +5,12 @@ import ProjectInfo from "./project/ProjectInfo";
 import OtherInfo from "./project/OtherInfo";
 import axios from "axios";
 import "./i18n";
+import {BASE_URL} from "../constants";
 
 const App = () => {
 
     const save = () => {
-        axios.post('https://banquedeprojet.minddevelonline.cm/api/project/save', project)
+        axios.post(BASE_URL+'/api/project/save', project)
             .then(res => {
                 console.log(res);
             })

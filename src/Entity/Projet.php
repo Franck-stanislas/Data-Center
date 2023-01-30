@@ -9,10 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Ignore;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
+use App\Entity\Traits\Timestampable;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet implements Translatable
 {
+    use Timestampable;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -93,6 +96,18 @@ class Projet implements Translatable
 
     #[ORM\ManyToOne(targetEntity: Region::class, inversedBy: 'projets')]
     private $region;
+
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $validated;
+
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $approuver;
+
+    #[ORM\Column(type: 'boolean')]
+    private $reject;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $commentaire;
 
     public function __construct()
     {
@@ -383,6 +398,54 @@ public function getRegion(): ?Region
 public function setRegion(?Region $region): self
 {
     $this->region = $region;
+
+    return $this;
+}
+
+public function isValidated(): ?bool
+{
+    return $this->validated;
+}
+
+public function setValidated(?bool $validated): self
+{
+    $this->validated = $validated;
+
+    return $this;
+}
+
+public function isApprouver(): ?bool
+{
+    return $this->approuver;
+}
+
+public function setApprouver(?bool $approuver): self
+{
+    $this->approuver = $approuver;
+
+    return $this;
+}
+
+public function isReject(): ?bool
+{
+    return $this->reject;
+}
+
+public function setReject(bool $reject): self
+{
+    $this->reject = $reject;
+
+    return $this;
+}
+
+public function getCommentaire(): ?string
+{
+    return $this->commentaire;
+}
+
+public function setCommentaire(?string $commentaire): self
+{
+    $this->commentaire = $commentaire;
 
     return $this;
 }

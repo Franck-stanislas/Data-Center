@@ -6,13 +6,14 @@ import ProjectInfo from "./ProjectInfo";
 import OtherInfo from "./OtherInfo";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import RegionalProjectList from "../RegionalProjectList";
+import {BASE_URL} from "../../constants";
 const ProjectRegional = () => {
     const [step, setStep] = useState(0);
     const [project, setProject] = useState({});
 
     const save = () => {
         alert("save");
-        axios.post('https://banquedeprojet.minddevelonline.cm/api/project/save_region', project)
+        axios.post(BASE_URL+'/api/project/save_region', project)
             .then(res => {
                 console.log(res);
             })

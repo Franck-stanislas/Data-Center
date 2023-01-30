@@ -125,7 +125,7 @@
 {#                                        {{ include('layout/financementNavbar.html.twig')}}#}
 
                                         <li class="nav-item">
-                                            <a class="{{ app.request.attributes.get('_route') == 'app_regional_projects_list' ? 'active' : '' }} dd-menu collapsed"
+                                            <a class="{{ (app.request.attributes.get('_route') == 'app_regional_projects_list' or app.request.attributes.get('_route') == 'app_arron_project_list') ? 'active' : '' }} dd-menu collapsed"
                                                href="javascript:void(0)"
                                                data-bs-toggle="collapse" data-bs-target="#ctd"
                                                aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -204,6 +204,13 @@
 {#                                                <li><a class="dropdown-item" href="#">Englais</a></li>#}
                                             </ul>
                                         </div>
+                                        <div class="login-button">
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ path('login') }}"><i class="lni lni-users"></i> {{app.user|length}} {%trans%}connectés{%endtrans%}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     {% else %}
                                         <div class="login-button">
                                             <ul>
@@ -216,6 +223,13 @@
                                                 </li>
                                             </ul>
                                         </div>
+                                        <div class="login-button">
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ path('login') }}"><i class="lni lni-users"></i> {{app.user|length}} {%trans%}connectés{%endtrans%}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     {% endif %}
                                 {% else %}
                                     <div class="login-button">
@@ -225,7 +239,6 @@
                                             </li>
                                         </ul>
                                     </div>
-
                                     <div class="dropdown">
                                         <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuButton1"
                                            data-bs-toggle="dropdown" aria-expanded="false" style="color:#f5821e">
@@ -240,6 +253,13 @@
                                                     </li>
                                                 {% endif%}
                                             {%endfor%}
+                                        </ul>
+                                    </div>
+                                    <div class="login-button">
+                                        <ul>
+                                            <li>
+                                                <a href="{{ path('login') }}"><i class="lni lni-users"></i> {{app.user|length}} {%trans%}connectés{%endtrans%}</a>
+                                            </li>
                                         </ul>
                                     </div>
 

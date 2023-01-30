@@ -4,6 +4,7 @@ import debounce from "lodash.debounce";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { useTranslation } from 'react-i18next';
+import {BASE_URL} from "../../constants";
 
 
 const CommuneProjectList = () => {
@@ -33,7 +34,7 @@ const CommuneProjectList = () => {
     };
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/get-allByArron')
+        axios.get(BASE_URL+'/api/projects/get-allByArron')
             .then(response => {
                 setProjets(response.data.projets);
                 setMaturites(response.data.maturites);
@@ -47,7 +48,7 @@ const CommuneProjectList = () => {
             .catch(error => {
                 console.log(error);
             });
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/regions')
+        axios.get(BASE_URL+'/api/regions')
             .then(response => {
                 setRegions(response.data);
             })
@@ -65,7 +66,7 @@ const CommuneProjectList = () => {
         const value = event.target.value;
         setRegion(value);
         setArrondissement(null)
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/regions/${value}/departements`)
+        axios.get(`${BASE_URL}/api/regions/${value}/departements`)
             .then(response => {
                 setDepartements(response.data);
             })
@@ -77,7 +78,7 @@ const CommuneProjectList = () => {
     const handleDepartementChange = (event) => {
         const value = event.target.value;
         setDepartement(value);
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/departements/${value}/arrondissements`)
+        axios.get(`${BASE_URL}/api/departements/${value}/arrondissements`)
             .then(response => {
                 setArrondissements(response.data);
             })
@@ -120,12 +121,13 @@ const CommuneProjectList = () => {
 
     useEffect(() => {
         if (!isFirstLoad) {
-            axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/filters', {
+            axios.post(BASE_URL+'/api/projects/commune-filters', {
                 page: currentPage,
                 activesMaturites,
                 activesCategories,
                 search,
-                region, departement, arrondissement
+                region, departement, arrondissement,
+                isArrondissementProjectList: true
             })
                 .then(response => {
                     setProjets(response.data.projets);
@@ -140,11 +142,12 @@ const CommuneProjectList = () => {
     }, [currentPage, activesMaturites, activesCategories, search, region, departement, arrondissement])
 
     const imprimerProjet = () => {
-        axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/print-projects', {
+        axios.post(BASE_URL+'/api/projects/print-communal-projects', {
             activesMaturites,
             activesCategories,
             search,
-            region, departement, arrondissement
+            region, departement, arrondissement,
+            isArrondissementProjectList: true
         })
             .then(response => {
                 const projets = response.data;
@@ -180,7 +183,7 @@ const CommuneProjectList = () => {
 
                     doc.text(title, marginLeft, 40);
                     doc.autoTable(content);
-                    doc.save("listeProjets.pdf")
+                    doc.save("projets-communaux.pdf")
                 }
             })
             .catch(error => {

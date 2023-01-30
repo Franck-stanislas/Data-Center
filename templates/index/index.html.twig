@@ -74,11 +74,11 @@
                                 <!-- Start Single Category -->
                                 <a href="{{ path('app_category_detail', {'id':categorie.id}) }}" class="single-cat">
                                     <div class="icon">
-                                        <img src="{{ vich_uploader_asset(categorie, 'iconeFile') }}" alt="{{ categorie.iconeName }}">
+                                        <img src="{{ vich_uploader_asset(categorie, 'iconeFile', 'App\\Entity\\Categorie') }}" alt="{{ categorie.imageName }}">
 
                                     </div>
-                                    <h3>{{ categorie.nomCategorie}}</h3>
-                                    <h5 class="total">{{ categorie.projet | length }}</h5>
+                                    <h3>{{ categorie.nom_categorie}}</h3>
+                                    <h5 class="total">{{ categorie.projetCount }}</h5>
                                 </a>
                                 <!-- End Single Category -->
                             {% endfor%}

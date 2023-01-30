@@ -3,6 +3,7 @@ import {MapContainer, Marker, Popup, TileLayer, Tooltip} from "react-leaflet";
 import './style.css';
 import axios from "axios";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import {BASE_URL} from "../../constants";
 
 const Carte = () => {
 
@@ -17,7 +18,7 @@ const Carte = () => {
     }
 
     useEffect(() => {
-            axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/by-region')
+            axios.get(BASE_URL+'/api/projects/by-region')
             .then(async response => {
                 if (response.data) {
                     setRegions(response.data);
@@ -28,7 +29,7 @@ const Carte = () => {
     }, []);
 
     useEffect(() => {
-            axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/by-commune')
+            axios.get(BASE_URL+'/api/projects/by-commune')
             .then(async response => {
                 if (response.data) {
                     setCommunes(response.data);
@@ -73,10 +74,10 @@ const Carte = () => {
                                     <b> <i className="lni lni-invest-monitor"></i>  Couts: </b> {commune.couts} FCFA
                                </span>
                            </div>
-                            {/*<div className="text-center">*/}
-                            {/*    <a href={"/projet/"+commune.id+"/details"} type="button"*/}
-                            {/*    className="btn btn-primary" tabIndex="0">View project profile</a>*/}
-                            {/*</div>*/}
+                            <div className="text-center">
+                                <a href={"/projet/"+commune.id+"/details"} type="button"
+                                className="btn btn-primary" tabIndex="0">View project profile</a>
+                            </div>
                         </Popup>
                     </Marker>
                 ))}
@@ -97,6 +98,10 @@ const Carte = () => {
                                     <b> <i className="lni lni-invest-monitor"></i>  Couts: </b> {region.couts} FCFA
                                </span>
                            </div>
+                            <div className="text-center">
+                                <a href={"/projet/"+region.id+"/details"} type="button"
+                                   className="btn btn-primary" tabIndex="0">View project profile</a>
+                            </div>
                         </Popup>
                     </Marker>
                 ))}

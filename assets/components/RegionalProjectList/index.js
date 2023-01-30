@@ -4,6 +4,7 @@ import debounce from "lodash.debounce";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { useTranslation } from 'react-i18next';
+import {BASE_URL} from "../../constants";
 
 
 const RegionalProjectList = () => {
@@ -34,24 +35,18 @@ const RegionalProjectList = () => {
     };
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/get-allByRegion')
+        axios.get(BASE_URL+'/api/projects/get-allByRegion')
             .then(response => {
                 setProjets(response.data.projets);
                 setMaturites(response.data.maturites);
                 setCategories(response.data.categories);
                 setRegions(response.data.regions);
+                console.log("rr", response.data.regions);
                 setTotalCount(response.data.totalCount);
                 setTotalPages(response.data.totalPages);
                 setCurrentPage(response.data.currentPage);
                 setNumItemsPerPage(response.data.numItemsPerPage);
                 setIsFirstLoad(false);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/regions')
-            .then(response => {
-                setRegions(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -63,46 +58,6 @@ const RegionalProjectList = () => {
         return () => {};
     }, [searchInput]);
 
-    const handleRegionChange = (event) => {
-        const value = event.target.value;
-        setRegion(value);
-        setArrondissement(null)
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/regions/${value}/departements`)
-            .then(response => {
-                setDepartements(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-    const handleDepartementChange = (event) => {
-        const value = event.target.value;
-        setDepartement(value);
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/departements/${value}/arrondissements`)
-            .then(response => {
-                setArrondissements(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-    const handleArrondissementChange = (event) => {
-        const value = event.target.value;
-        setArrondissement(value);
-    }
-
-
-    const handleChangeActiveMaturites = (idMaturite) => {
-        setActivesMaturites((prevState) => {
-            if (prevState.includes(idMaturite)) {
-                return prevState.filter(id => id !== idMaturite)
-            } else {
-                return [...prevState, idMaturite]
-            }
-        })
-    }
 
     const handleChangeActivesCategories = (idCategory) => {
         setActivesCategories((prevState) => {
@@ -132,28 +87,26 @@ const RegionalProjectList = () => {
 
     useEffect(() => {
         if (!isFirstLoad) {
-            axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/region-filters', {
+            axios.post(BASE_URL+'/api/projects/region-filters', {
                 page: currentPage,
-                activesMaturites,
                 activesCategories,
                 activesRegions,
-                search,
-                region, departement, arrondissement
+                search
             })
                 .then(response => {
                     setProjets(response.data.projets);
                     setTotalPages(response.data.totalPages);
                     setCategories(response.data.categories);
-                    setMaturites(response.data.maturites);
+                    setRegions(response.data.regions);
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
-    }, [currentPage, activesMaturites, activesCategories, activesRegions, search, region, departement, arrondissement])
+    }, [currentPage, activesCategories, activesRegions, search])
 
     const imprimerProjet = () => {
-        axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/print-projects', {
+        axios.post(BASE_URL+'/api/projects/print-regional-projects', {
             activesMaturites,
             activesCategories,
             activesRegions,
@@ -184,7 +137,7 @@ const RegionalProjectList = () => {
                     const title = "Liste des projets";
                     const headers = [["ID","NOM", "SECTEUR", "REGION", "COUTS", "MATURITE"]];
 
-                    const data = projectsToPrint.map(elt=> [elt.id, elt.nom, elt.secteur, /*elt.region,*/ elt.couts, elt.maturite]);
+                    const data = projectsToPrint.map(elt=> [elt.id, elt.nom, elt.secteur, elt.region, elt.couts, elt.maturite]);
 
                     let content = {
                         startY: 50,
@@ -194,7 +147,7 @@ const RegionalProjectList = () => {
 
                     doc.text(title, marginLeft, 40);
                     doc.autoTable(content);
-                    doc.save("listeProjets.pdf")
+                    doc.save("projets-regionaux.pdf")
                 }
             })
             .catch(error => {

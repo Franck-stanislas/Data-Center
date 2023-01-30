@@ -7,6 +7,7 @@ import OtherInfo from "./OtherInfo";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import RegionalProjectList from "../RegionalProjectList";
 import { useTranslation } from 'react-i18next';
+import {BASE_URL} from "../../constants";
 
 const Project = () => {
     const [step, setStep] = useState(0);
@@ -19,7 +20,7 @@ const Project = () => {
 
     const save = () => {
         alert("save");
-        axios.post('https://banquedeprojet.minddevelonline.cm/api/project/save', project)
+        axios.post(BASE_URL+'/api/project/save', project)
             .then(res => {
                 console.log(res);
             })

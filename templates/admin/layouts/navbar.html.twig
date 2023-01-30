@@ -108,7 +108,7 @@
                                 <span class="sidebar-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="white"><path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/><path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0a.5.5 0 0 1 1 0z"/></g></svg>
                                 </span>
-                                <span class="sidebar-text">{%trans%}Liste{%endtrans%}</span>
+                                <span class="sidebar-text">{%trans%}Projets non approuvés{%endtrans%}</span>
                             </a>
                         </li>
                     </ul>
@@ -364,6 +364,24 @@
                         <span class="sidebar-text">{%trans%}Projets Archivés{%endtrans%}</span>
                     </a>
             </li>
+
+                <li class="nav-item ">
+                    <a href="{{path('projet_approuv_list')}}" class="nav-link">
+                        <span class="sidebar-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1zm2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936V5zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2zM14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1v1.997z"/></svg>
+                        </span>
+                        <span class="sidebar-text">{%trans%}Projets Approuvés{%endtrans%}</span>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a href="{{path('rejected_project')}}" class="nav-link">
+                        <span class="sidebar-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20"><path fill="currentColor" d="M13.981 2H6.018s-.996 0-.996 1h9.955c0-1-.996-1-.996-1zm2.987 3c0-1-.995-1-.995-1H4.027s-.995 0-.995 1v1h13.936V5zm1.99 1l-.588-.592V7H1.63V5.408L1.041 6C.452 6.592.03 6.75.267 8c.236 1.246 1.379 8.076 1.549 9c.186 1.014 1.217 1 1.217 1h13.936s1.03.014 1.217-1c.17-.924 1.312-7.754 1.549-9c.235-1.25-.187-1.408-.777-2zM14 11.997c0 .554-.449 1.003-1.003 1.003H7.003A1.003 1.003 0 0 1 6 11.997V10h1v2h6v-2h1v1.997z"/></svg>
+                        </span>
+                        <span class="sidebar-text">{%trans%}Projets Rejetés{%endtrans%}</span>
+                    </a>
+                </li>
             {% endif%}
 
             <li role="separator" class="dropdown-divider mt-6 mb-3 border-gray-700"></li>

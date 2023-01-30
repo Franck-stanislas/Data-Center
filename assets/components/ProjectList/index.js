@@ -4,18 +4,21 @@ import debounce from "lodash.debounce";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { useTranslation } from 'react-i18next';
+import {BASE_URL} from "../../constants";
 
 
 const ProjectList = () => {
     const [projets, setProjets] = useState(null);
     const [maturites, setMaturites] = useState(null);
     const [categories, setCategories] = useState(null);
+    const [pregions, setPregions] = useState(null);
     const [totalCount, setTotalCount] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [numItemsPerPage, setNumItemsPerPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [activesMaturites, setActivesMaturites] = useState([]);
     const [activesCategories, setActivesCategories] = useState([]);
+    const [activesPregions, setActivesPregions] = useState([]);
     const [nbItemPagination, setNbItemPagination] = useState(2);
     const [isFirstLoad, setIsFirstLoad] = useState(true);
     const [searchInput, setSearchInput] = useState("");
@@ -33,11 +36,13 @@ const ProjectList = () => {
     };
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/projects/get-all')
+        axios.get(BASE_URL+'/api/projects/get-all')
             .then(response => {
-                setProjets(response.data.products);
+                setProjets(response.data.projets);
                 setMaturites(response.data.maturites);
                 setCategories(response.data.categories);
+                setPregions(response.data.pregions);
+                console.log("rr", response.data.pregions);
                 setTotalCount(response.data.totalCount);
                 setTotalPages(response.data.totalPages);
                 setCurrentPage(response.data.currentPage);
@@ -47,7 +52,7 @@ const ProjectList = () => {
             .catch(error => {
                 console.log(error);
             });
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/regions')
+        axios.get(BASE_URL+'/api/regions')
             .then(response => {
                 setRegions(response.data);
             })
@@ -65,7 +70,7 @@ const ProjectList = () => {
         const value = event.target.value;
         setRegion(value);
         setArrondissement(null)
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/regions/${value}/departements`)
+        axios.get(`${BASE_URL}/api/regions/${value}/departements`)
             .then(response => {
                 setDepartements(response.data);
             })
@@ -77,7 +82,7 @@ const ProjectList = () => {
     const handleDepartementChange = (event) => {
         const value = event.target.value;
         setDepartement(value);
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/departements/${value}/arrondissements`)
+        axios.get(`${BASE_URL}/api/departements/${value}/arrondissements`)
             .then(response => {
                 setArrondissements(response.data);
             })
@@ -112,6 +117,16 @@ const ProjectList = () => {
         })
     }
 
+    const handleChangeActivesRegions = (idRegion) => {
+        setActivesPregions((prevState) => {
+            if (prevState.includes(idRegion)) {
+                return prevState.filter(id => id !== idRegion)
+            } else {
+                return [...prevState, idRegion]
+            }
+        })
+    }
+
     const setSearchValue = useCallback(debounce(async (searchInput) => {
             setSearch(searchInput);
         }, 500),
@@ -120,31 +135,36 @@ const ProjectList = () => {
 
     useEffect(() => {
         if (!isFirstLoad) {
-            axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/filters', {
+            axios.post(BASE_URL+'/api/projects/filters', {
                 page: currentPage,
                 activesMaturites,
                 activesCategories,
+                activesPregions,
                 search,
-                region, departement, arrondissement
+                region, departement, arrondissement,
+                isArrondissementProjectList: false
             })
                 .then(response => {
-                    setProjets(response.data.products);
+                    setProjets(response.data.projets);
                     setTotalPages(response.data.totalPages);
                     setCategories(response.data.categories);
                     setMaturites(response.data.maturites);
+                    setPregions(response.data.pregions);
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
-    }, [currentPage, activesMaturites, activesCategories, search, region, departement, arrondissement])
+    }, [currentPage, activesMaturites, activesCategories, activesPregions, search, region, departement, arrondissement])
 
     const imprimerProjet = () => {
-        axios.post('https://banquedeprojet.minddevelonline.cm/api/projects/print-projects', {
+        axios.post(BASE_URL+'/api/projects/print-projects', {
             activesMaturites,
             activesCategories,
+            activesPregions,
             search,
-            region, departement, arrondissement
+            region, departement, arrondissement,
+            isArrondissementProjectList: false
         })
             .then(response => {
                 const projets = response.data;
@@ -153,7 +173,9 @@ const ProjectList = () => {
                         'id' : index+1,
                         'nom': project.institule,
                         'secteur': project.secteur.nomCategorie,
-                        'arrondissement': project.arrondissement.ville,
+                        'arrondissement': project.arrondissement ? project.arrondissement.ville : "",
+                        'ville': project.region ? project.region.ville : "",
+                        'region': project.region.nom,
                         'couts': project.couts,
                         'maturite': project.maturite.nom_maturite,
                     }));
@@ -168,9 +190,9 @@ const ProjectList = () => {
                     doc.setFontSize(15);
 
                     const title = "Liste des projets";
-                    const headers = [["ID","NOM", "SECTEUR", "ARRONDISSEMENT", "COUTS", "MATURITE"]];
+                    const headers = [["ID","NOM", "SECTEUR", "ARRONDISSEMENT", "VILLE", "REGION", "COUTS", "MATURITE"]];
 
-                    const data = projectsToPrint.map(elt=> [elt.id, elt.nom, elt.secteur, elt.arrondissement, elt.couts, elt.maturite]);
+                    const data = projectsToPrint.map(elt=> [elt.id, elt.nom, elt.secteur, elt.arrondissement, elt.ville, elt.region, elt.couts, elt.maturite]);
 
                     let content = {
                         startY: 50,
@@ -258,6 +280,17 @@ const ProjectList = () => {
                                 </div>
 
                                 <div className="single-widget">
+                                    <h3>{t('Conseil regional')}</h3>
+                                    <ul className="list" id="cat-filter">
+                                        {pregions && pregions.map((region) => (
+                                            <li key={region.id} onClick={() => handleChangeActivesRegions(region.id)}>
+                                                <a href="#" onClick={(e) => e.preventDefault()} style={{color: activesPregions.includes(region.id) ? "#f5821e" : "inherit"}}>{region.nom}<span>{region.projetCount}</span></a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                <div className="single-widget">
                                     <h3>{t('Tous les secteurs')}</h3>
                                     <ul className="list" id="cat-filter">
                                         {categories && categories.map((category) => (
@@ -328,7 +361,7 @@ const ProjectList = () => {
                                                                     <p className="location">
                                                                         <a href="javascript:void(0)">
                                                                             <i className="lni lni-map-marker"></i>
-                                                                            {projet.arrondissement.ville}
+                                                                            {projet.arrondissement ? projet.arrondissement.ville : projet.region.ville}
                                                                         </a>
                                                                     </p>
                                                                     <p className="location">

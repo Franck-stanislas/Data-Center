@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {BASE_URL} from "../../constants";
 
 const Localisation = ({setProject}) => {
 
@@ -9,7 +10,7 @@ const Localisation = ({setProject}) => {
     // const [arrondissements, setArrondissements] = useState([]);
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/regions')
+        axios.get(BASE_URL+'/api/regions')
             .then(response => {
                 setRegions(response.data);
             })

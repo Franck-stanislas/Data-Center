@@ -13,20 +13,21 @@
                             <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{%trans%}Liste des projets en attente d'approbation{%endtrans%}</li>
+                    <li class="breadcrumb-item"><a href="{{path('projet_list')}}">{%trans%}Projets{%endtrans%}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{%trans%}Liste des projets approuvés {%endtrans%}</li>
                 </ol>
             </nav>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">{%trans%} Liste des projets en attente d'approbation{%endtrans%}</h1>
+                    <h1 class="h4">{%trans%} Liste des projets approuvés {%endtrans%}</h1>
                 </div>
-                    <div>
-                        <a href="{{ path('app_projects_create') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">
-                            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                            {%trans%}Ajouter un projet{%endtrans%}
-                        </a>
-                    </div>
+{#                <div>#}
+{#                    <a href="{{ path('app_projects_create') }}" class="btn btn-outline-gray-600 d-inline-flex align-items-center">#}
+{#                        <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>#}
+{#                        {%trans%}Ajouter un projet{%endtrans%}#}
+{#                    </a>#}
+{#                </div>#}
             </div>
         </div>
         <div class="row">
@@ -36,18 +37,18 @@
                         <div class="row d-block d-xl-flex align-items-center">
                             <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                 <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                                    <a href="{{path('communal_projet_list')}}">
+                                    <a href="{{path('communal_approuv_list')}}">
                                         <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                                     </a>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5"> {%trans%}Projets communals{%endtrans%}</h2>
+                                    <h2 class="fw-extrabold h5"> {%trans%}Projet communal approuvé{%endtrans%}</h2>
                                     <h3 class="mb-1">{{ projets|length }}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-7 px-xl-0">
                                 <div class="d-none d-sm-block">
-                                    <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projets communals{%endtrans%} </h2>
+                                    <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projet communal approuvé {%endtrans%} </h2>
                                     <h3 class="fw-extrabold mb-2">{{ projets|length }}</h3>
                                 </div>
                             </div>
@@ -61,18 +62,18 @@
                         <div class="row d-block d-xl-flex align-items-center">
                             <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                 <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
-                                    <a href="{{path('projet_list_regional')}}">
+                                    <a href="{{path('projet_approuv_regional')}}">
                                         <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                                     </a>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5"> {%trans%}Projet de conseil régional{%endtrans%}</h2>
+                                    <h2 class="fw-extrabold h5"> {%trans%}Projet de conseil régional approuvé{%endtrans%}</h2>
                                     <h3 class="mb-1">{{ regional|length }}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-7 px-xl-0">
                                 <div class="d-none d-sm-block">
-                                    <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projet de conseil régional{%endtrans%} </h2>
+                                    <h2 class="h6 text-gray-400 mb-0"> {%trans%}Projet de conseil régional approuvé{%endtrans%} </h2>
                                     <h3 class="fw-extrabold mb-2">{{ regional|length }}</h3>
                                 </div>
                             </div>
@@ -91,14 +92,14 @@
                                     </a>
                                 </div>
                                 <div class="d-sm-none">
-                                    <h2 class="fw-extrabold h5">{%trans%}Projets Total{%endtrans%}</h2>
-                                    <h3 class="mb-1">{{totalProjet|length}}</h3>
+                                    <h2 class="fw-extrabold h5">{%trans%}Projets archivés{%endtrans%}</h2>
+                                    <h3 class="mb-1">{{archives|length}}</h3>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-7 px-xl-0">
                                 <div class="d-none d-sm-block">
-                                    <h2 class="h6 text-gray-400 mb-0">{%trans%}Projets total{%endtrans%}</h2>
-                                    <h3 class="fw-extrabold mb-2">{{totalProjet|length}}</h3>
+                                    <h2 class="h6 text-gray-400 mb-0">{%trans%}Projets archivés{%endtrans%}</h2>
+                                    <h3 class="fw-extrabold mb-2">{{archives|length}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -117,25 +118,25 @@
                             <th class="border-0">{%trans%}Ville {%endtrans%}</th>
                             <th class="border-0">{%trans%}Intitulé {%endtrans%}</th>
                             <th class="border-0">{%trans%}Secteur {%endtrans%}</th>
-{#                            <th class="border-0">{%trans%}Objectifs {%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%}Caractéristique {%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%} Marchés cibles{%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%} Supply Chain{%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%} Facteurs et atouts géographique {%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%}Résultat attendus {%endtrans%}</th>#}
+                            <th class="border-0">{%trans%}Objectifs {%endtrans%}</th>
+                            <th class="border-0">{%trans%}Caractéristique {%endtrans%}</th>
+                            <th class="border-0">{%trans%} Marchés cibles{%endtrans%}</th>
+                            <th class="border-0">{%trans%} Supply Chain{%endtrans%}</th>
+                            <th class="border-0">{%trans%} Facteurs et atouts géographique {%endtrans%}</th>
+                            <th class="border-0">{%trans%}Résultat attendus {%endtrans%}</th>
                             <th class="border-0">{%trans%}Couts estimatif {%endtrans%}</th>
-{#                            <th class="border-0">{%trans%} Valeur ajoutées{%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%}Eligibilité au bénéfice {%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%}Maturité du projet {%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%}Eléments de maturation {%endtrans%}</th>#}
-{#                            <th class="border-0">{%trans%} Statut du projet{%endtrans%}</th>#}
-{#                            <th class="border-0 ">{%trans%}Financement {%endtrans%}</th>#}
+                            <th class="border-0">{%trans%} Valeur ajoutées{%endtrans%}</th>
+                            <th class="border-0">{%trans%}Eligibilité au bénéfice {%endtrans%}</th>
+                            <th class="border-0">{%trans%}Maturité du projet {%endtrans%}</th>
+                            <th class="border-0">{%trans%}Eléments de maturation {%endtrans%}</th>
+                            <th class="border-0">{%trans%} Statut du projet{%endtrans%}</th>
+                            <th class="border-0 ">{%trans%}Financement {%endtrans%}</th>
                             <th class="border-0 rounded-end">{%trans%}Actions {%endtrans%}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% if totalProjet|length > 0 %}
-                            {% for projet in totalProjet %}
+                        {% if projets|length > 0 %}
+                            {% for projet in projets %}
                                 <!-- Item -->
                                 <tr>
                                     <td><a href="#" class="text-primary fw-bold">{{ projet.id}}</a> </td>
@@ -147,67 +148,68 @@
                                         {%endif%}
                                     </td>
                                     <td>
-                                        <a href="{{ path('project_edit', {id: projet.id}) }}" class="text-secondary fw-bold">
+{#                                        <a href="{{ path('project_edit', {id: projet.id}) }}" class="text-secondary fw-bold">#}
+{#                                        #}
+{#                                        </a>#}
                                         {{ projet.institule }}
-                                        </a>
                                     </td>
                                     <td>
                                         {{ projet.secteur.nomCategorie }}
                                     </td>
-{#                                    <td >#}
-{#                                        {{ projet.objectifs [:50]}}#}
+                                    <td >
+                                        {{ projet.objectifs [:50]}}
 
-{#                                    </td>#}
-{#                                    <td >#}
-{#                                        {{ projet.caracteristique [:50]}}#}
-{#                                    </td>#}
-{#                                    <td >#}
-{#                                        {{ projet.marche }}#}
-{#                                    </td>#}
-{#                                    <td >#}
-{#                                        {{ projet.supply}}#}
-{#                                    </td>#}
-{#                                    <td >#}
-{#                                        {{ projet.atouts [:50]}}#}
-{#                                    </td>#}
-{#                                    <td >#}
-{#                                        {{ projet.resultats [:50]}}#}
+                                    </td>
+                                    <td >
+                                        {{ projet.caracteristique [:50]}}
+                                    </td>
+                                    <td >
+                                        {{ projet.marche }}
+                                    </td>
+                                    <td >
+                                        {{ projet.supply}}
+                                    </td>
+                                    <td >
+                                        {{ projet.atouts [:50]}}
+                                    </td>
+                                    <td >
+                                        {{ projet.resultats [:50]}}
 
-{#                                    </td>#}
+                                    </td>
                                     <td>
                                         {{ projet.couts }}
                                     </td>
-{#                                    <td >#}
-{#                                        {{ projet.valeurAjouter [:50]}}#}
-{#                                    </td>#}
-{#                                    <td >#}
-{#                                        {{ projet.eligibilite [:50]}}#}
-{#                                    </td>#}
-{#                                    <td>#}
-{#                                        {{ projet.maturite.nomMaturite }}#}
-{#                                    </td>#}
-{#                                    <td>#}
-{#                                        <ul>#}
-{#                                            {% for elt in projet.eltsMaturite %}#}
-{#                                                <li>{{ elt.nom }}</li>#}
-{#                                            {%endfor%}#}
-{#                                        </ul>#}
+                                    <td >
+                                        {{ projet.valeurAjouter [:50]}}
+                                    </td>
+                                    <td >
+                                        {{ projet.eligibilite [:50]}}
+                                    </td>
+                                    <td>
+                                        {{ projet.maturite.nomMaturite }}
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            {% for elt in projet.eltsMaturite %}
+                                                <li>{{ elt.nom }}</li>
+                                            {%endfor%}
+                                        </ul>
 
-{#                                    </td>#}
-{#                                    <td>#}
-{#                                        {% if projet.statut%}#}
-{#                                            {{ projet.statut.nom }}#}
-{#                                        {%endif%}#}
-{#                                    </td>#}
-{#                                    <td>#}
-{#                                        <ol>#}
-{#                                            {% for financement in projet.financement %}#}
-{#                                                <li>#}
-{#                                                    {{ financement.nomFinancement }}#}
-{#                                                </li>#}
-{#                                            {% endfor%}#}
-{#                                        </ol>#}
-{#                                    </td>#}
+                                    </td>
+                                    <td>
+                                        {% if projet.statut%}
+                                            {{ projet.statut.nom }}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            {% for financement in projet.financement %}
+                                                <li>
+                                                    {{ financement.nomFinancement }}
+                                                </li>
+                                            {% endfor%}
+                                        </ol>
+                                    </td>
                                     <td>
                                         <a href="{{path('app_projet_archive',  {'id': projet.id} )}}">
                                             <span class="sidebar-icon">
@@ -218,9 +220,9 @@
                                         <span class="me-2">
                                             {{ include('projects/_delete_form.html.twig') }}
                                         </span>
-                                        <a href="{{path('app_project_show', {'id': projet.id})}}">
-                                            <span><i class="lni lni-eye"></i></span>
-                                        </a>
+{#                                        <a href="{{path('app_project_show', {'id': projet.id})}}">#}
+{#                                            <span><i class="lni lni-eye"></i></span>#}
+{#                                        </a>#}
 {#                                        <i class="lni lni-pencil"></i>#}
 
                                     </td>

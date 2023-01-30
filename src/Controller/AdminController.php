@@ -14,6 +14,8 @@ use App\Repository\ProjetRepository;
 use App\Repository\RegionRepository;
 use App\Repository\StatutRepository;
 use App\Repository\UsersRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,9 +41,9 @@ class AdminController extends AbstractController
         $user = $security->getUser();
 
         if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
-            $projet = $projetRepository->findAllByArron();
+            $projet = $projetRepository->findAllByApprouve();
             $projetArchives = $projetRepository->findAllByEtat();
-            $projetregional = $projetRepository->findAllByRegion();
+            $projetEnAttente = $projetRepository->findAllByEnAttente();
         } else {
             $projet = $projetRepository->findByUser($user->getId());
         }
@@ -75,9 +77,9 @@ class AdminController extends AbstractController
         return $this->render('admin/index.html.twig',[
             'projets' => $projet,
             'archives' =>$projetArchives,
-            'regional' =>$projetregional,
+            'attente' =>$projetEnAttente,
             'users' => $usersRepository->findAll(),
-            'statuts' => $statutRepository->findAll(),
+            'statuts' => $statutRepository->findAllByApprouv(),
             'countByRegion' => $regions,
             'financements' =>$financement->findAll()
         ]);
@@ -107,8 +109,95 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/projets-communal', name:'projet_list')]
+    #[Route('/projets', name:'projet_list')]
     public function listProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAllByArron();
+            $projetregional = $projetRepository->findAllByRegion();
+            $totalProjet = $projetRepository->findAll();
+            $status = $statutRepository->findAll();
+            $financements = $financementRepository->findAll();
+        } else {
+            $projet = $projetRepository->findByUser($user->getId());
+            $status = $statutRepository->findByUser($user->getId());
+            $financements = $financementRepository->findByUser($user->getId());
+        }
+
+//        dd($projetRepository->findAll());
+        return $this->render('admin/projects/list.html.twig',[
+            'projets' => $projet,
+            'regional' =>$projetregional,
+            'totalProjet' => $totalProjet,
+            'users' => $usersRepository->findAll(),
+            'statuts' => $status,
+            'financements' => $financements
+        ]);
+    }
+
+    #[Route('/projets-approuve', name:'projet_approuv_list')]
+    public function ApprouvProjectLIst(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAllByApprouve();
+            $projetregional = $projetRepository->findAllApprouvByRegion();
+            $projetArchives = $projetRepository->findAllByEtat();
+            $status = $statutRepository->findAllByApprouv();
+            $financements = $financementRepository->findAll();
+        } else {
+            $projet = $projetRepository->findByUserApprouvProject($user->getId());
+            $status = $statutRepository->findByUserApprouv($user->getId());
+            $financements = $financementRepository->findByUserApprouv($user->getId());
+        }
+
+
+        return $this->render('admin/projects/approuvProjectList.html.twig',[
+            'projets' => $projet,
+            'regional' =>$projetregional,
+            'archives' =>$projetArchives,
+            'users' => $usersRepository->findAll(),
+            'statuts' => $status,
+            'financements' => $financements
+        ]);
+    }
+
+
+    #[Route('/projet/{id}', name: 'app_project_show', methods: ['GET'])]
+    public function show(Projet $projet): Response
+    {
+        return $this->render('admin/projects/showProject.html.twig', [
+            'projet' => $projet,
+        ]);
+    }
+    #[Route('/projets-regional', name:'projet_list_regional')]
+    public function regionalProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAllByRegion();
+            $status = $statutRepository->findAllByApprouv();
+            $financements = $financementRepository->findAll();
+        } else {
+            $projet = $projetRepository->findByUser($user->getId());
+            $status = $statutRepository->findByUser($user->getId());
+            $financements = $financementRepository->findByUser($user->getId());
+        }
+
+//        dd($projetRepository->findAll());
+        return $this->render('admin/projects/regional-list.html.twig',[
+            'projets' => $projet,
+            'users' => $usersRepository->findAll(),
+            'statuts' => $status,
+            'financements' => $financements
+        ]);
+    }
+
+
+
+    #[Route('/projets-communal', name:'communal_projet_list')]
+    public function communalProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
     {
         $user = $security->getUser();
         if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
@@ -122,7 +211,7 @@ class AdminController extends AbstractController
         }
 
 //        dd($projetRepository->findAll());
-        return $this->render('admin/projects/list.html.twig',[
+        return $this->render('admin/projects/communalProject.html.twig',[
             'projets' => $projet,
             'users' => $usersRepository->findAll(),
             'statuts' => $status,
@@ -130,22 +219,47 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/projets-regional', name:'projet_list_regional')]
-    public function regionalProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
+    #[Route('/regional-approuv', name:'projet_approuv_regional')]
+    public function regionalApprouvProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
     {
         $user = $security->getUser();
         if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
-            $projet = $projetRepository->findAllByRegion();
-            $status = $statutRepository->findAll();
+            $projet = $projetRepository->findAllApprouvByRegion();
+            $status = $statutRepository->findAllByApprouv();
             $financements = $financementRepository->findAll();
         } else {
-            $projet = $projetRepository->findByUser($user->getId());
-            $status = $statutRepository->findByUser($user->getId());
-            $financements = $financementRepository->findByUser($user->getId());
+            $projet = $projetRepository->findByUserApprouvProject($user->getId());
+            $status = $statutRepository->findByUserApprouv($user->getId());
+            $financements = $financementRepository->findByUserApprouv($user->getId());
         }
 
 //        dd($projetRepository->findAll());
-        return $this->render('admin/projects/regional-list.html.twig',[
+        return $this->render('admin/projects/regionalApprouvList.html.twig',[
+            'projets' => $projet,
+            'users' => $usersRepository->findAll(),
+            'statuts' => $status,
+            'financements' => $financements
+        ]);
+    }
+
+
+
+    #[Route('/communal-approuv', name:'communal_approuv_list')]
+    public function communalApprouvProject(FinancementRepository $financementRepository, ProjetRepository $projetRepository, UsersRepository $usersRepository, StatutRepository $statutRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAllApprouvByArron();
+            $status = $statutRepository->findAllByApprouv();
+            $financements = $financementRepository->findAll();
+        } else {
+            $projet = $projetRepository->findByUserApprouvProject($user->getId());
+            $status = $statutRepository->findByUserApprouv($user->getId());
+            $financements = $financementRepository->findByUserApprouv($user->getId());
+        }
+
+//        dd($projetRepository->findAll());
+        return $this->render('admin/projects/communalProjectApprouv.html.twig',[
             'projets' => $projet,
             'users' => $usersRepository->findAll(),
             'statuts' => $status,
@@ -172,6 +286,23 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/rejected-projet', name:'rejected_project')]
+    public function rejectedProject(ProjetRepository $projetRepository, UsersRepository $usersRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+
+        if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+            $projet = $projetRepository->findAllByReject();
+        } else {
+            $projet = $projetRepository->findByUserRejectProject($user->getId());
+        }
+
+        return $this->render('admin/projects/rejectedProject.html.twig',[
+            'projets' => $projet,
+            'users' => $usersRepository->findAll(),
+        ]);
+    }
+
     #[Route('/projets/{id}', name: 'app_projet_delete', methods: ['POST'])]
     public function projetDelete(Request $request, Projet $projet, ProjetRepository $projetRepository): Response
     {
@@ -193,6 +324,40 @@ class AdminController extends AbstractController
        $projetRepository->add($projets, true);
        $message  = $this->translator->trans('Catégorie modifié');
        $this->flashy->success($message);
+
+        return $this->redirectToRoute('projet_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/approuve/{id<[0-9]+>}', name: 'app_projet_approuve', methods: ['GET'])]
+    public function approuveProjet(Request $request, Projet $projet, ProjetRepository $projetRepository): Response
+    {
+
+        $projet = $projet->setApprouver(1);
+        $projetRepository->add($projet, true);
+        $message  = $this->translator->trans('Projet approuver');
+        $this->flashy->success($message);
+
+        return $this->redirectToRoute('projet_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/reject/{id<[0-9]+>}', name: 'app_projet_reject', methods: ['POST'])]
+    public function rejectProjet(Request $request, Projet $projet, ProjetRepository $projetRepository, EntityManagerInterface $em): Response
+    {
+
+        if ($request->isMethod('POST')){
+            $data = $request->request->all();
+
+            if ($this->isCsrfTokenValid('project_rejected', $data['_token'])){
+                $projet->setReject(1);
+                $projet->setCommentaire($data['comments']);
+
+                $projetRepository->add($projet, true);
+
+            }
+            $message  = $this->translator->trans('Projet rejeter');
+            $this->flashy->success($message);
+        }
+
 
         return $this->redirectToRoute('projet_list', [], Response::HTTP_SEE_OTHER);
     }

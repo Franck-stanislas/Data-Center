@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
+import {BASE_URL} from "../../constants";
 
 const EditProjectInfo = ({project, ...props}) => {
     const [categories, setCategories] = useState([]);
@@ -16,7 +17,7 @@ const EditProjectInfo = ({project, ...props}) => {
     }, [project])*/
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/categories')
+        axios.get(BASE_URL+'/api/categories')
             .then(response => {
                 setCategories(response.data);
             })

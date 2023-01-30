@@ -26,7 +26,7 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(Request $request, CategorieRepository $categorieRepository, MaturiteRepository $maturiteRepository, ProjetRepository $projetRepository, PaginatorInterface $paginator): Response
     {
-        $projets = $projetRepository->findAllByIdDesc();
+        $projets = $projetRepository->findAllApprouveByIdDesc();
         $projet = $paginator->paginate(
             $projets,
             $request->query->getInt('page', 1),9
@@ -50,8 +50,8 @@ class IndexController extends AbstractController
         }
 
         return $this->render('index/index.html.twig', [
-            'categories' => $categorieRepository->findAll(),
-            'maturites' => $maturiteRepository->findAll(),
+            'categories' => $categorieRepository->findAllByApprouv(),
+            'maturites' => $maturiteRepository->findAllByApprouv(),
             'projets' => $projet,
             'form' => $form->createView()
         ]);
@@ -60,7 +60,7 @@ class IndexController extends AbstractController
     #[Route('/projets', name: 'app_project_list')]
     public function listProject(Request $request, CategorieRepository $categorieRepository, StatutRepository $statut, ProjetRepository $projetRepository, MaturiteRepository $maturiteRepository, PaginatorInterface $paginator): Response
     {
-        $projet = $projetRepository->findAll();
+        $projet = $projetRepository->findAllByApprouve();
 
         $projets = $paginator->paginate(
             $projet,
@@ -68,10 +68,10 @@ class IndexController extends AbstractController
         ) ;
 
         return $this->render('index/list-project.html.twig', [
-            'categories' => $categorieRepository->findAll(),
-            'statuts' => $statut->findAll(),
+            'categories' => $categorieRepository->findAllByApprouv(),
+            'statuts' => $statut->findAllByApprouv(),
             'projets' => $projets,
-            'maturites' => $maturiteRepository->findAll()
+            'maturites' => $maturiteRepository->findAllByApprouv()
         ]);
     }
 
@@ -112,7 +112,8 @@ class IndexController extends AbstractController
     #[Route('/category', name: 'app_project_category')]
     public function categoryProject(Request $request, CategorieRepository $categorieRepository, PaginatorInterface $paginator): Response
     {
-        $categories = $categorieRepository->findAll();
+        $categories = $categorieRepository->findAllByApprouv();
+//        dd($categories);
         $categorieCount = count($categories);
 
         $categorie = $paginator->paginate(

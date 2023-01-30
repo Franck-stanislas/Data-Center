@@ -6,6 +6,7 @@ import ProjectInfo from "./ProjectInfo";
 import OtherInfo from "./OtherInfo";
 import EditProjectInfo from "./EditProjectInfo";
 import EditOtherInfo from "./EditOtherInfo";
+import {BASE_URL} from "../../constants";
 
 const EditProject = () => {
     const [step, setStep] = useState(1);
@@ -18,7 +19,7 @@ const EditProject = () => {
     const [type, setType] = useState("");
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/status')
+        axios.get(BASE_URL+'/api/status')
             .then(response => {
                 setStatuts(response.data);
             })
@@ -28,7 +29,7 @@ const EditProject = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/maturite')
+        axios.get(BASE_URL+'/api/maturite')
             .then(response => {
                 setMaturites(response.data);
             })
@@ -45,7 +46,7 @@ const EditProject = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://banquedeprojet.minddevelonline.cm/api/categories')
+        axios.get(BASE_URL+'/api/categories')
             .then(response => {
                 setCategories(response.data);
             })
@@ -85,7 +86,7 @@ const EditProject = () => {
 
     const handleChangeMaturite = (e) => {
         const [id, type] = e.target.value.split('-');
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/elts`)
+        axios.get(`${BASE_URL}/api/maturite/${id}/elts`)
             .then(response => {
                 setElements(response.data);
             })
@@ -93,7 +94,7 @@ const EditProject = () => {
                 console.log(error);
             });
 
-        axios.get(`https://banquedeprojet.minddevelonline.cm/api/maturite/${id}/financements`)
+        axios.get(`${BASE_URL}/api/maturite/${id}/financements`)
             .then(response => {
                 setFinancements(response.data);
             })
@@ -109,7 +110,7 @@ const EditProject = () => {
 
 
     const edit = () => {
-        axios.post('https://banquedeprojet.minddevelonline.cm/api/project/edit', project)
+        axios.post(BASE_URL+'/api/project/edit', project)
             .then(res => {
                 console.log(res);
             })
